@@ -6,7 +6,7 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   defaultCommandTimeout: 7000,
   e2e: {
-    baseUrl: 'https://qatest.site',
+    baseUrl: 'https://ci.qatest.site',
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
