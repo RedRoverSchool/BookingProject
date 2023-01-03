@@ -27,7 +27,8 @@ jobs:
       run: npm ci
 
     - name: Write the cypress.env.json
-      run: echo '${{ secrets.LOGIN_CREDENTIALS }}' > cypress.env.json
+      run: |
+        echo '${{ secrets.LOGIN_CREDENTIALS }}' > cypress.env.json
 
     - name: Npx run
       run: npx cypress run --headless
