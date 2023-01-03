@@ -31,7 +31,8 @@ jobs:
         echo '${{ secrets.LOGIN_CREDENTIALS }}' > cypress.env.json
 
     - name: Npx run
-      run: npx cypress run --headless
+      run: npx cypress run --env userName=${{ secrets.LOGIN_CREDENTIALS.agent_login }},password=${{ secrets.LOGIN_CREDENTIALS.agent_password }}
+
 
     - name: Create test summary
       uses: test-summary/action@v1.0
