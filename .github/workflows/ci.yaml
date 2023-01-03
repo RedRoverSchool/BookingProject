@@ -31,7 +31,7 @@ jobs:
     #     echo '${{ secrets.LOGIN_CREDENTIALS }}' > cypress.env.json
 
     - name: Npx run
-      run: npx cypress run --config baseUrl="https://ci.qatest.site" --env login=${{ secrets.LOGIN }}, password=${{ secrets.PASSWORD }}
+      run: npx cypress run --config baseUrl="https://ci.qatest.site" --env login=${{ secrets.CYPRESS_LOGIN }}, password=${{ secrets.CYPRESS_PASSWORD }}
 
 
     - name: Create test summary
