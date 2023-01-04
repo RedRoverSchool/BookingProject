@@ -6,7 +6,7 @@ describe('Verify Register account and login', () => {
         cy.visit("/");
         cy.get('div.inner a.login').click();
         cy.get('#byemail div.col-sm-6 > input[data-check="email"]').type(Cypress.env('login'), {force: true});
-        cy.get('#byemail input[name="password"]').type(Cypress.env('password'), {force: true});
+        cy.get('#byemail input[name="password"]').type("12345678", {force: true});
         
         cy.get('#byemail input[value="SIGN IN"]').click();
     });
