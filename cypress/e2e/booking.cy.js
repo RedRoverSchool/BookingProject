@@ -2,47 +2,51 @@
 
 describe('Login page', () => {
 
-    const MANAGER = Cypress.env('manager')
-    const AGENT1 = Cypress.env('agent1')
-
-    // before(() => {
-    //   cy.visit('/');
-    //   cy.get('div.inner a.login').click();
-    //   cy.get('#byemail div.col-sm-6 > input[data-check="email"]').type(MANAGER.email, { force: true });
-    //   cy.get('#byemail input[name="password"]').type(MANAGER.password, { force: true });
-    //   cy.get('#byemail input[value="SIGN IN"]').click({ force: true });
-    //   cy.wait(5000)
-    //   cy.visit('/clean', { force: true });
-    //   // cy.get('nav a.sidebar-toggle').click({ force: true })
-    //   // cy.get('.form-inline input[type="password"]').type('2vG37863lb55');
-    //   // cy.contains('Clean TMS').click();
-    //   cy.get('#op-dropdown a.dropdown-toggle').click();
-    //   cy.get('div a[href="/logout/"]').click();
-    // })
+    const MANAGER = Cypress.env('manager');
+    const AGENT1 = Cypress.env('agent1');
+    const CLEAN = Cypress.env('clean');
+   
 
     before(() => {
-        cy.visit('/');
-        cy.get('div.inner a.login').click();
-        cy.get('#byemail div.col-sm-6 > input[data-check="email"]').type(AGENT1.email, { force: true });
-        cy.get('#byemail input[name="password"]').type(AGENT1.password, { force: true });
-        cy.get('#byemail input[value="SIGN IN"]').click();
-        // cy.intercept('POST', 'https://ci.qatest.site/booking/?get-layout').as('getLayout');
+      cy.visit('/');
+      cy.login(MANAGER.email, MANAGER.password);
+      
+      cy.wait(5000)
+      cy.visit(CLEAN.url, { force: true });
+      cy.get('nav a.sidebar-toggle').click({ force: true })
+      cy.get('.form-inline input[type="password"]').type(CLEAN.password);
+      cy.contains('Clean TMS').click();
+
+      cy.get('#op-dropdown a.dropdown-toggle').click();
+      cy.get('div a[href="/logout/"]').click();
     })
 
-    it('verify user can book a ticket', () => {
+    it('verify agent can book a ticket', () => {
+        let textId
+
+        cy.login(AGENT1.email, AGENT1.password);
+        cy.get('div.booking-header h1').should('include.text', 'Create booking');
+
+        // cy.intercept('POST', 'https://ci.qatest.site/booking/?get-layout').as('getLayout');
+
         cy.get('div.trip:nth-child(1)').click()
         cy.get('div.passenger-wrapper input[name="passenger-name[]"]').type('A')
-        cy.get('div.trip:nth-child(1)').click()
-        cy.wait(5000)
+        
         // cy.wait('@getLayout')
         cy.contains('Book tickets').click({ force: true });
 
-        cy.get('a[href="/orders/"]').click();
+        cy.get('.popup-content').should('be.visible');
+        cy.get('span.booking-tracker').then(($id) => {
+            textId = $id.text()
+            console.log(textId)
+        })
+
+        cy.get('a[href="/orders/"]').click({ force: true });
         cy.get('#reportrange').click();
         cy.get('li[data-range-key="Next 7 Days"]').click();
 
-        cy.get('#data tbody tr td:nth-child(2)', {timeout:5000}).then((arr) => {
-            expect(arr).to.have.length.of.at.least(1);
+        cy.get('#data tbody tr td:nth-child(2) div').then(($id) => {
+            expect($id.text()).to.be.equal(textId)
         })
     })
 })

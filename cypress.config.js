@@ -5,7 +5,7 @@ module.exports = defineConfig({
   viewportHeight: 1080,
   chromeWebSecurity: false,
   defaultCommandTimeout: 15000,
-  requestTimeout: 10000,
+  requestTimeout: 15000,
   e2e: {
     baseUrl: 'https://ci.qatest.site',
     setupNodeEvents(on, config) {
