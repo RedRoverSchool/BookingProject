@@ -1,4 +1,7 @@
 const { defineConfig } = require("cypress");
+const dotenvPlugin = require('cypress-dotenv');
+const path = require('path');
+
 
 module.exports = defineConfig({
   viewportWidth: 1920,
@@ -7,9 +10,10 @@ module.exports = defineConfig({
   defaultCommandTimeout: 15000,
   requestTimeout: 15000,
   e2e: {
-    baseUrl: 'https://ci.qatest.site',
+    baseUrl: 'https://qatest.site',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      config = dotenvPlugin(config, { path: path.join(__dirname, '.env') }, true);
+      return config;
     },
   },
   video: false,
