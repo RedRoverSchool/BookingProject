@@ -29,8 +29,9 @@ describe('Login page', () => {
 
         // cy.intercept('POST', 'https://ci.qatest.site/booking/?get-layout').as('getLayout');
 
-        cy.get('div.trip:nth-child(1)').click()
-        cy.get('div.passenger-wrapper input[name="passenger-name[]"]').type('A')
+        cy.get('div.trip:nth-child(1)').click();
+        cy.get('div.passenger-wrapper input[name="passenger-name[]"]').type('A');
+        cy.get('div.trip:nth-child(1)').click();
         
         // cy.wait('@getLayout')
         cy.contains('Book tickets').click({ force: true });
