@@ -32,8 +32,6 @@ jobs:
 
     - name: Npx run
       run: npx cypress run --config baseUrl="https://ci.qatest.site" 
-      # --env login=${{ secrets.CYPRESS_LOGIN }} password=${{ secrets.CYPRESS_PASSWORD }}
-
 
     - name: Create test summary
       uses: test-summary/action@v1.0
