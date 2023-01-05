@@ -24,7 +24,7 @@ describe('Login page', () => {
 
         cy.get('div.trip span.availability').each(($el) => {
             const statusText = $el.text();
-            if (statusText !== 'Overdue') {
+            if(statusText !== 'Overdue'){
                 cy.wrap($el).click();
                 return false;
             }
@@ -34,7 +34,7 @@ describe('Login page', () => {
 
         cy.get('div.trip span.availability').each(($el) => {
             const statusText = $el.text();
-            if (statusText !== 'Overdue') {
+            if(statusText !== 'Overdue'){
                 cy.wrap($el).click();
                 return false;
             }
