@@ -13,6 +13,7 @@ describe('Login page', () => {
         cy.wait(5000);
 
         cy.clean(CLEAN.url, CLEAN.password);
+        cy.logout();
     })
 
     it('verify agent can book a ticket', () => {
