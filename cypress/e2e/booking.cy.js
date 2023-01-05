@@ -38,10 +38,11 @@ describe('Login page', () => {
         cy.contains('Book tickets').click({ force: true });
 
         cy.get('a[href="/orders/"]').click();
-        cy.get('#reportrange').click({ force: true });
-        cy.get('li[data-range-key="Next 7 Days"]').click({ force: true });
+        cy.get('#reportrange').click();
+        cy.get('li[data-range-key="Next 7 Days"]').click();
 
-        cy.get('#data tbody tr td:nth-child(2)').then((arr) => {
+        cy.get('#data tbody tr td:nth-child(2)', {timeout:5000}).then((arr) => {
+
             expect(arr).to.have.length.of.at.least(1);
         })
     })
