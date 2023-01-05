@@ -1,6 +1,4 @@
 const { defineConfig } = require("cypress");
-const dotenvPlugin = require('cypress-dotenv');
-const path = require('path');
 
 
 module.exports = defineConfig({
@@ -12,8 +10,6 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'https://qatest.site',
     setupNodeEvents(on, config) {
-      config = dotenvPlugin(config, { path: path.join(__dirname, '.env') }, true);
-      return config;
     },
   },
   video: false,

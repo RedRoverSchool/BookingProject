@@ -35,4 +35,3 @@ reports
 cypress/downloads
 
 cypress.env.json
-.env

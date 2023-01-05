@@ -2,29 +2,24 @@
 
 describe('Login page', () => {
 
-    const MANAGER_EMAIL = Cypress.env('MANAGER_EMAIL');
-    const MANAGER_PASSWORD = Cypress.env('MANAGER_PASSWORD');
-    const CLEAN_ENDPOINT = Cypress.env('CLEAN_ENDPOINT');
-    const CLEAN_PASSWORD = Cypress.env('CLEAN_PASSWORD');
+    const MANAGER = Cypress.env('manager');
+    const CLEAN = Cypress.env('clean');
 
 
-    // before(() => {
-    //     cy.visit('https://ci.qatest.site');
-    //     cy.login(MANAGER_EMAIL, MANAGER_PASSWORD);
+    before(() => {
+        cy.visit('https://ci.qatest.site');
+        cy.login(MANAGER.email, MANAGER.password);
 
-    //     cy.wait(5000);
+        cy.wait(5000);
 
-    //     cy.clean(CLEAN_ENDPOINT, CLEAN_PASSWORD);
-    //     cy.logout();
-    // })
+        cy.clean(CLEAN.url, CLEAN.password);
+    })
 
     it('verify agent can book a ticket', () => {
         let expectedTextId;
         cy.visit('/')
-        cy.login("testUser2@ci.qatest.site", "12345678");
+        cy.login("testuser@qatest.site", "12345678");
         cy.get('div.booking-header h1').should('include.text', 'Create booking');
-
-        // cy.intercept('POST', 'https://ci.qatest.site/booking/?get-layout').as('getLayout');
 
         cy.get('div.trip span.availability').each(($el) => {
             const statusText = $el.text();
@@ -33,10 +28,17 @@ describe('Login page', () => {
                 return false;
             }
         })
-        cy.get('div.passenger-wrapper input[name="passenger-name[]"]').type('TestUser2');
-        
 
-        // cy.wait('@getLayout')
+        cy.get('div.passenger-wrapper input[name="passenger-name[]"]').type('TestUser2');
+
+        cy.get('div.trip span.availability').each(($el) => {
+            const statusText = $el.text();
+            if(statusText !== 'Overdue'){
+                cy.wrap($el).click();
+                return false;
+            }
+        })
+        
         cy.contains('Book tickets').click({ force: true });
 
         cy.get('.popup-content').should('be.visible');
