@@ -26,14 +26,8 @@ jobs:
     - name: Npm install
       run: npm ci
 
-    - name: Write the cypress.env.json
-      run: |
-        echo '${{ secrets.CYPRESS_LOGIN_CREDENTIALS }}' > ./cypress.env.json
-
     - name: Npx run
-      run: npx cypress run --config baseUrl="https://ci.qatest.site" 
-      # --env login=${{ secrets.CYPRESS_LOGIN }} password=${{ secrets.CYPRESS_PASSWORD }}
-
+      run: npx cypress run --headless
 
     - name: Create test summary
       uses: test-summary/action@v1.0
