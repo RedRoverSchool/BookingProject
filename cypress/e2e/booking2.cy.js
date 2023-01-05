@@ -3,7 +3,7 @@
 describe('Login page', () => {
 
     const MANAGER = Cypress.env('manager');
-    const AGENT1 = Cypress.env('agent1');
+    const AGENT2 = Cypress.env('agent2');
     const CLEAN = Cypress.env('clean');
 
 
@@ -20,7 +20,7 @@ describe('Login page', () => {
     it('verify agent can book a ticket', () => {
         let expectedTextId;
 
-        cy.login(AGENT1.email, AGENT1.password);
+        cy.login(AGENT2.email, AGENT2.password);
         cy.get('div.booking-header h1').should('include.text', 'Create booking');
 
         // cy.intercept('POST', 'https://ci.qatest.site/booking/?get-layout').as('getLayout');
