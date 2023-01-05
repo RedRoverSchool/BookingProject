@@ -30,3 +30,14 @@ Cypress.Commands.add('login', (email, password) => {
     cy.get('#byemail input[value="SIGN IN"]').click({ force: true });
 })
 
+Cypress.Commands.add('clean', (endpoint, password) => {
+    cy.visit(endpoint, { force: true });
+    cy.get('nav a.sidebar-toggle').click({ force: true })
+    cy.get('.form-inline input[type="password"]').type(password);
+    cy.contains('Clean TMS').click();
+})
+
+Cypress.Commands.add('logout', () => {
+    cy.get('#op-dropdown a.dropdown-toggle').click();
+    cy.get('div a[href="/logout/"]').click();
+})

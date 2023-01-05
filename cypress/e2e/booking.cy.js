@@ -12,13 +12,9 @@ describe('Login page', () => {
         cy.login(MANAGER.email, MANAGER.password);
 
         cy.wait(5000);
-        cy.visit(CLEAN.url, { force: true });
-        cy.get('nav a.sidebar-toggle').click({ force: true })
-        cy.get('.form-inline input[type="password"]').type(CLEAN.password);
-        cy.contains('Clean TMS').click();
 
-        cy.get('#op-dropdown a.dropdown-toggle').click();
-        cy.get('div a[href="/logout/"]').click();
+        cy.clean(CLEAN.url, CLEAN.password);
+        cy.logout();
     })
 
     it('verify agent can book a ticket', () => {
@@ -29,9 +25,14 @@ describe('Login page', () => {
 
         // cy.intercept('POST', 'https://ci.qatest.site/booking/?get-layout').as('getLayout');
 
-        cy.get('div.trip:nth-child(1)').click();
+        cy.get('div.trip span.availability').each(($el) => {
+            const statusText = $el.text();
+            if(statusText !== 'Overdue'){
+                cy.wrap($el).click();
+            }
+        })
         cy.get('div.passenger-wrapper input[name="passenger-name[]"]').type('A');
-        cy.get('div.trip:nth-child(1)').click();
+        
 
         // cy.wait('@getLayout')
         cy.contains('Book tickets').click({ force: true });
@@ -47,7 +48,7 @@ describe('Login page', () => {
         cy.wait(5000);
 
         cy.get('#data tbody tr td:nth-child(2) div').then(($id) => {
-            expect($id.text()).to.be.equal(expectedTextId)
+            expect($id.text()).to.be.equal(expectedTextId);
         })
     })
 })
