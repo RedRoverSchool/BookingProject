@@ -42,7 +42,6 @@ describe('Login page', () => {
         cy.get('li[data-range-key="Next 7 Days"]').click();
 
         cy.get('#data tbody tr td:nth-child(2)', {timeout:5000}).then((arr) => {
-
             expect(arr).to.have.length.of.at.least(1);
         })
     })
