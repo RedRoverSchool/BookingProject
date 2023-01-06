@@ -47,7 +47,7 @@ Cypress.Commands.add('cleanCiData', (emailManager, passwordManager, urlClean, pa
         cy.visit('https://ci.qatest.site');
         cy.login(emailManager, passwordManager);
 
-        cy.wait(5000);
+        cy.wait(3000);
 
         cy.clean(urlClean, passwordClean);
         cy.logout();
