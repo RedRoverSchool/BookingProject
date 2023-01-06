@@ -45,7 +45,7 @@ describe('Booking tickets', () => {
         cy.get('a[href="/orders/"]').click({ force: true });
         cy.get('#reportrange').click();
         cy.get('li[data-range-key="Next 7 Days"]').click();
-        cy.wait(5000);
+        // cy.wait(5000);
 
         cy.get('#data tbody tr td:nth-child(2) div').then(($id) => {
             expect($id.text()).to.be.equal(expectedTextId);
