@@ -5,17 +5,20 @@ describe('Login page', () => {
     const MANAGER = Cypress.env('manager');
     const AGENT = Cypress.env('agent');
     const CLEAN = Cypress.env('clean');
+    const CI = false;
 
-    before(() => {
-        cy.visit('https://ci.qatest.site');
-        cy.login(MANAGER.email, MANAGER.password);
+    if (CI) {
+        before(() => {
+            cy.visit('https://ci.qatest.site');
+            cy.login(MANAGER.email, MANAGER.password);
 
-        cy.wait(5000);
+            cy.wait(5000);
 
-        cy.clean(CLEAN.url, CLEAN.password);
-        cy.logout();
-    })
-
+            cy.clean(CLEAN.url, CLEAN.password);
+            cy.logout();
+        })
+    }
+    
     it('verify agent can book a ticket', () => {
         let expectedTextId;
         cy.visit('/')
@@ -24,7 +27,7 @@ describe('Login page', () => {
 
         cy.get('div.trip span.availability').each(($el) => {
             const statusText = $el.text();
-            if(statusText !== 'Overdue'){
+            if (statusText !== 'Overdue') {
                 cy.wrap($el).click();
                 return false;
             }
@@ -34,7 +37,7 @@ describe('Login page', () => {
 
         cy.get('div.trip span.availability').each(($el) => {
             const statusText = $el.text();
-            if(statusText !== 'Overdue'){
+            if (statusText !== 'Overdue') {
                 cy.wrap($el).click();
                 return false;
             }
