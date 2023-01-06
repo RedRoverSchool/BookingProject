@@ -41,3 +41,15 @@ Cypress.Commands.add('logout', () => {
     cy.get('#op-dropdown a.dropdown-toggle').click();
     cy.get('div a[href="/logout/"]').click();
 })
+
+Cypress.Commands.add('cleanCiData', (emailManager, passwordManager, urlClean, passwordClean, statusCi) => {
+    if (statusCi) {
+        cy.visit('https://ci.qatest.site');
+        cy.login(emailManager, passwordManager);
+
+        cy.wait(5000);
+
+        cy.clean(urlClean, passwordClean);
+        cy.logout();
+    }
+})
