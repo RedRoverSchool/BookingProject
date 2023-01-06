@@ -5,9 +5,9 @@ describe('Login page', () => {
     const MANAGER = Cypress.env('manager');
     const AGENT = Cypress.env('agent');
     const CLEAN = Cypress.env('clean');
-    const CI = false;
+    const CI = Cypress.env('CI');
 
-    if (CI) {
+    if (CI == true) {
         before(() => {
             cy.visit('https://ci.qatest.site');
             cy.login(MANAGER.email, MANAGER.password);
@@ -18,7 +18,7 @@ describe('Login page', () => {
             cy.logout();
         })
     }
-    
+
     it('verify agent can book a ticket', () => {
         let expectedTextId;
         cy.visit('/')
