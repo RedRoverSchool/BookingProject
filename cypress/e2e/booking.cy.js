@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+
+
 describe('Login page', () => {
 
     const MANAGER = Cypress.env('manager');
@@ -7,7 +9,7 @@ describe('Login page', () => {
     const CLEAN = Cypress.env('clean');
     const CI = Cypress.env('CI');
 
-    if (CI == true) {
+    if (CI) {
         before(() => {
             cy.visit('https://ci.qatest.site');
             cy.login(MANAGER.email, MANAGER.password);
