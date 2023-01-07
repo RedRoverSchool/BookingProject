@@ -4,11 +4,10 @@ describe('Booking tickets', () => {
 
     const MANAGER = Cypress.env('manager');
     const AGENT = Cypress.env('agent');
-    const CLEAN = Cypress.env('clean');
     const CI = Cypress.env('CI');
 
     beforeEach(() => {
-        cy.cleanCiData(MANAGER.email, MANAGER.password, CLEAN.url, CLEAN.password, CI)
+        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
     })
 
     it('verify agent can book a ticket', () => {
