@@ -11,7 +11,7 @@ Cypress.Commands.add('login', (email, password) => {
 Cypress.Commands.add('clean', () => {
     cy.visit(CLEAN.url, { force: true });
     cy.get('nav a.sidebar-toggle').click({ force: true })
-    cy.get('.form-inline input[type="password"]').type(CLEAN.password);
+    cy.get('.form-inline input[type="password"]').type(CLEAN.password, { force: true });
     cy.contains('Clean TMS').click();
 })
 
