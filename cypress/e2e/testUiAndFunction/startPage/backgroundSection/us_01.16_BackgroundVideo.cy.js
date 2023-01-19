@@ -3,12 +3,7 @@
 describe('Start Page', () => {
 
     beforeEach(function () {
-        /*cy.fixture('url').then(url => {
-            this.url = url;
-        });
-        cy.fixture('startPage').then(startPage => {
-            this.startPage = startPage;
-        });*/
+        
         cy.visit('/');
     });
 
