@@ -6,13 +6,19 @@ describe('Login', () => {
     const AGENT = Cypress.env('agent');
     const CI = Cypress.env('CI');
 
-    beforeEach(() => {
+    beforeEach(function () {
         cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
     })
 
-    it('verify agent can login', () => {
+    beforeEach(function () {
+        cy.fixture('createBookingPage/headers').then(header => {
+            this.header = header
+        })
+    })
+
+    it('verify agent can login', function () {
         cy.visit('/')
         cy.login(AGENT.email, AGENT.password);
-        cy.get('div.booking-header h1').should('include.text', 'Create booking');
+        cy.get('div.booking-header h1').should('include.text', this.header.mainHeaderPage);
     })
 })
