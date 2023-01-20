@@ -4,7 +4,8 @@ class StartPage {
     }
 
     loginPopupElements = {
-        getLoginByEmailTab : () => cy.get('[href="#byemail"]')
+        getLoginByEmailTab : () => cy.get('[href="#byemail"]'),
+        getEmailInput: () => cy.get('#byemail input[placeholder="Email"]')
     }
 
     clickLoginButton() {
