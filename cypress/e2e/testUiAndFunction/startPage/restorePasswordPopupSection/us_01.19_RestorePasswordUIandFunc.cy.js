@@ -3,27 +3,27 @@
 import StartPage from "../../../../pageObjects/StartPage.js";
 
 const startPage = new StartPage();
+const loginPopUp = new StartPage();
 
 describe('US_01.19 Restore password UI and functionality', () => {
 
     const AGENT = Cypress.env('agent');
 
     beforeEach(function () {
-        cy.fixture('startPage/dataStartPage').then(startPage => {
-            this.startPage = startPage;
+        cy.fixture('startPage/alert').then(alert => {
+            this.alert = alert;
         });
         cy.visit('/');
+        startPage.clickLoginBtn();
+        loginPopUp.clickForgotYourPasswordLink();
     });
 
     it('AT_01.19.01 Verify message after input an existing email in the "Email" input field and clicking on the "RESTORE" button', function () {
-        startPage.clickLoginBtn();
-        startPage.clickForgotYourPasswordLink();
-        startPage.enterEmail(AGENT.email);
-        startPage.clickRestoreBtn();
-        startPage
-            .elements
+        loginPopUp.enterEmail(AGENT.email);
+        loginPopUp.clickRestoreBtn();
+        loginPopUp
             .getMessageAlert()
             .should('be.visible')
-            .and('have.text', this.startPage.restorePopUp.alertMessage);
+            .and('have.text', this.alert.alertMessage);
     });
 });
