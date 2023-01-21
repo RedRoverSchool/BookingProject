@@ -1,5 +1,6 @@
-export default class StartPage {
-    
+export class StartPage {
+    //Elements
+
     getLoginButton = () => cy.get(".login")
 
     //Methods
@@ -9,7 +10,9 @@ export default class StartPage {
     }
 }
 
- export class LoginPopup extends StartPage {
+ export class LoginPopup {
+    //Elements
+    
     getLoginByEmailTab = () => cy.get('[href="#byemail"]')
 
 
