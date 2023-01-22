@@ -1,15 +1,45 @@
-class StartPage {
-    startPageElements = {
-        getLoginButton : () => cy.get(".login")
-    }
+export class StartPage {
+    //Elements
 
-    loginPopupElements = {
-        getLoginByEmailTab : () => cy.get('[href="#byemail"]'),
-        getEmailInput: () => cy.get('#byemail input[placeholder="Email"]')
-    }
+    getLoginButton = () => cy.get(".login")
 
+    //Methods
+    
     clickLoginButton() {
-        this.startPageElements.getLoginButton().click()
+        this.getLoginButton().click()
     }
 }
-export default StartPage;
+
+export class LoginPopup {
+    //Elements
+    
+    getLoginByEmailTab = () => cy.get('[href="#byemail"]');
+    getForgotYourPasswordLink = () => cy.get('#loginModal .pull-right a');
+    getEmailInput = () => cy.get('#byemail input[placeholder="Email"]');
+
+
+    // Methods
+
+    clickForgotYourPasswordLink() {
+        this.getForgotYourPasswordLink().click();
+    };
+}
+
+export class RestorePopup {
+    //Elements
+    
+    getEmailInput = () => cy.get('#restoreModal input[placeholder="Email"]');
+    getRestoreButton = () => cy.get('#restoreModal input[type="submit"]');
+    getMessageAlert = () => cy.get('#restoreModal div.alert');
+
+
+    // Methods
+
+    enterEmail(agentEmail) {
+        this.getEmailInput().type(agentEmail, { force: true });
+    };
+
+    clickRestoreButton() {
+        this.getRestoreButton().click();
+    };
+}
