@@ -17,13 +17,13 @@ describe('US_01.19 Restore password UI and functionality', () => {
             this.alert = alert;
         });
         cy.visit('/');
-        startPage.clickLoginBtn();
+        startPage.clickLoginButton();
         loginPopup.clickForgotYourPasswordLink();
     });
 
     it('AT_01.19.01 Verify message after input an existing email in the "Email" input field and clicking on the "RESTORE" button', function () {
         restorePopup.enterEmail(AGENT.email);
-        restorePopup.clickRestoreBtn();
+        restorePopup.clickRestoreButton();
         restorePopup
             .getMessageAlert()
             .should('be.visible')

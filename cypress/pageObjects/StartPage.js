@@ -28,7 +28,7 @@ export class RestorePopup {
     //Elements
     
     getEmailInput = () => cy.get('#restoreModal input[placeholder="Email"]');
-    getRestoreBtn = () => cy.get('#restoreModal input[type="submit"]');
+    getRestoreButton = () => cy.get('#restoreModal input[type="submit"]');
     getMessageAlert = () => cy.get('#restoreModal div.alert');
 
 
@@ -38,7 +38,7 @@ export class RestorePopup {
         this.getEmailInput().type(agentEmail, { force: true });
     };
 
-    clickRestoreBtn() {
-        this.getRestoreBtn().click();
+    clickRestoreButton() {
+        this.getRestoreButton().click();
     };
 }

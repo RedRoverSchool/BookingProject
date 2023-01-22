@@ -9,7 +9,7 @@ const loginPopup = new LoginPopup();
 describe('US_01.05 | Login By Email Tab UI', () => {
     beforeEach(() => {
         cy.visit('/')
-        startPage.clickLoginBtn()
+        startPage.clickLoginButton()
     });
 
     it('AT_01.05.01 | Insure By Email tab is visible', () => {
