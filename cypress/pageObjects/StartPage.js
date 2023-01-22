@@ -2,6 +2,7 @@ export class StartPage {
     //Elements
 
     getLoginButton = () => cy.get(".login")
+    getBackgroungVideo = () => cy.get('video')
 
     //Methods
     
