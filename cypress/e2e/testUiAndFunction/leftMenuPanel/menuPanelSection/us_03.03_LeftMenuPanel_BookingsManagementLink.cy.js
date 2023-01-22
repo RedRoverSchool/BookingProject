@@ -15,6 +15,6 @@ describe('US_03.03 Left Menu Panel > Bookings management link', () => {
     it('AT_03.03.01 Verify the "Bookings management" icon is visible', () => {
         cy.login(AGENT.email, AGENT.password);
 
-        leftMenuPanel.elements.getBookingManagement().should('be.visible')
+        leftMenuPanel.getBookingManagement().should('be.visible')
     });
 });

@@ -1,3 +1,11 @@
 {
-    "emailInputField": "Email"
+    "registrationPopup": {
+        "yourName": "John Doe",
+        "companyName": "TestCo",
+        "email": "JohnDoe@qatest.site",
+        "phoneNumber": "+16508904545"
+    },
+    "loginPopup": {
+        "emailInputField": "Email"
+    }
 }

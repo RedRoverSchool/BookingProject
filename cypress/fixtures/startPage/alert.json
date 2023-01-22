@@ -1,3 +1,4 @@
 {
-    "alertMessage": "Please check your email with the password restore instructions"
+    "alertMessage": "Please check your email with the password restore instructions",
+    "registerEmptyName": "Please enter your name"
 }

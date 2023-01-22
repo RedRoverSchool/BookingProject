@@ -23,6 +23,6 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         loginPopup
             .getEmailInput()
             .should('be.visible')
-            .and('have.attr', 'placeholder', this.inputField.emailInputField);
+            .and('have.attr', 'placeholder', this.inputField.loginPopup.emailInputField);
     });
 })
