@@ -8,8 +8,8 @@ const loginPopup = new LoginPopup();
 
 describe('US_01.05 | Login By Email Tab UI', () => {
     beforeEach(function () {
-        cy.fixture('startPage/dataStartPage').then(startPage => {
-            this.startPage = startPage;
+        cy.fixture('startPage/inputField').then(inputField => {
+            this.inputField = inputField;
         });
         cy.visit('/');
         startPage.clickLoginButton();
@@ -23,6 +23,6 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         loginPopup
             .getEmailInput()
             .should('be.visible')
-            .and('have.attr', 'placeholder', this.startPage.loginByEmailPopUp.emailInpuField);
+            .and('have.attr', 'placeholder', this.inputField.emailInputField);
     });
 })
