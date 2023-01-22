@@ -1,9 +1,12 @@
 /// <reference types="cypress"/>
 
-import StartPage from "../../../../pageObjects/StartPage.js";
+import {StartPage} from "../../../../pageObjects/StartPage.js";
+import {LoginPopup} from "../../../../pageObjects/StartPage.js";
+import {RestorePopup} from "../../../../pageObjects/StartPage.js";
 
 const startPage = new StartPage();
-const loginPopUp = new StartPage();
+const loginPopup = new LoginPopup();
+const restorePopup = new RestorePopup();
 
 describe('US_01.19 Restore password UI and functionality', () => {
 
@@ -15,13 +18,13 @@ describe('US_01.19 Restore password UI and functionality', () => {
         });
         cy.visit('/');
         startPage.clickLoginBtn();
-        loginPopUp.clickForgotYourPasswordLink();
+        loginPopup.clickForgotYourPasswordLink();
     });
 
     it('AT_01.19.01 Verify message after input an existing email in the "Email" input field and clicking on the "RESTORE" button', function () {
-        loginPopUp.enterEmail(AGENT.email);
-        loginPopUp.clickRestoreBtn();
-        loginPopUp
+        restorePopup.enterEmail(AGENT.email);
+        restorePopup.clickRestoreBtn();
+        restorePopup
             .getMessageAlert()
             .should('be.visible')
             .and('have.text', this.alert.alertMessage);
