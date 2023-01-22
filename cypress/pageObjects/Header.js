@@ -1,4 +1,4 @@
-export class Header {
+class Header {
 //Elements
 
     getBurgerMenu = () => cy.get('.navbar > [href="#"]');
@@ -19,3 +19,4 @@ export class Header {
         this.getLogoImg().click();
     }
 }
+export default Header;
