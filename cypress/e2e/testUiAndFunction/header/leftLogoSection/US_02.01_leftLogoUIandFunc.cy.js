@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { Header } from "../../../../pageObjects/Header.js";
+import Header from "../../../../pageObjects/Header.js";
 
 const header = new Header();
 
