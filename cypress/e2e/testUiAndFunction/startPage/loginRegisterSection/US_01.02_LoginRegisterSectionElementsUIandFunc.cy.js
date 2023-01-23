@@ -11,6 +11,10 @@ describe('US_01.02 | Login-register section elements UI and functionality', () =
             this.links = links;
         });
 
+        cy.fixture('startPage/buttons').then(buttons => {
+            this.buttons = buttons;
+        });
+
 		cy.visit('/')
 	});
 
@@ -20,4 +24,8 @@ describe('US_01.02 | Login-register section elements UI and functionality', () =
         .should('be.visible')
         .and('have.text', this.links.registerAccountNowEnglishText);
     });
+
+    it('AT.01.02.03 | Login button has text “Login“', function () {
+        startPage.getLoginButton().should('have.text', this.buttons.loginBtnText)
+    })
 })
