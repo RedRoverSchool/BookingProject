@@ -1,11 +1,11 @@
 /// <reference types="Cypress" />
 
 import LeftMenuPanel from "../../../../pageObjects/LeftMenuPanel";
-import BookingsListPage from "../../../../pageObjects/BookingsListPage"
+import CreateBookingPage from "../../../../pageObjects/CreateBookingPage";
 
 
 const leftMenuPanel = new LeftMenuPanel();
-const bookingsListPage = new BookingsListPage();
+const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
@@ -17,6 +17,6 @@ describe('US_04.08 | Calendar-selection block UI and functionality week view', (
     });
 
     it('AT_04.08.03 | Verify that Label is present for week view', () => {
-        bookingsListPage.getCalendarLabel().should('be.visible');
+       createBookingPage.getCalendarLabel().should('be.visible');
     });
 });
