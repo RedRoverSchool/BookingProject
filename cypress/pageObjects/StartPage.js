@@ -3,6 +3,7 @@ export class StartPage {
 
     getLoginButton = () => cy.get(".login")
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
+    getThaiFlagIcon = () => cy.get('.th')
 
     //Methods
     
@@ -12,6 +13,10 @@ export class StartPage {
 
     clickRegisterAccountLink() {
         this.getRegisterAccountLink().click()
+    }
+
+    clickThaiFlagIcon() {
+        this.getThaiFlagIcon().click()
     }
 }
 
