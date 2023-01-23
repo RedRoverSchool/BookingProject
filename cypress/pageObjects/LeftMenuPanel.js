@@ -13,6 +13,8 @@ class LeftMenuPanel {
     getContactUsNameLink = () => cy.get('[href="/helpdesk/"] span');    
 
     //Methods  
-
+    clickBookingLink() {
+        this.getBookingIсonLink().click();
+    }
 }
 export default LeftMenuPanel;
