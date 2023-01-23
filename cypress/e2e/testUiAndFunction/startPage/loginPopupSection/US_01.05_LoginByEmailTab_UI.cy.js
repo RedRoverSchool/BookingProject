@@ -25,4 +25,12 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .should('be.visible')
             .and('have.attr', 'placeholder', this.inputField.loginPopup.emailInputField);
     });
-})
+
+    it('AT_01.05.04 | Login by email tab UI > Insure Password label has text "Password"', () => {
+        loginPopup
+            .getPasswordLabel()
+            .should('be.visible')
+            .and('have.text', 'Password')
+    })
+});
+
