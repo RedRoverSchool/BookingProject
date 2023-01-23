@@ -1,6 +1,10 @@
 {
     "labelPassword": {
         "text": "Password"    
+    },
+    "labelEmail": {
+        "color": "rgb(153, 153, 153)" 
     }
 
 }
+
