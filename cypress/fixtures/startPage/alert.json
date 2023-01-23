@@ -4,6 +4,7 @@
     },
     "registerPopupErrorMessage": {
         "emptyNameField": "Please enter your name",
-        "emptyCompanyField": "Please enter your company name"
+        "emptyCompanyField": "Please enter your company name",
+        "emptyEmailField": "Please enter valid email"
     }
 }

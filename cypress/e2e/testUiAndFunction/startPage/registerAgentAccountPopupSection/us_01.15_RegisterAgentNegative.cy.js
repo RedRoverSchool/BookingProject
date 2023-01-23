@@ -42,4 +42,15 @@ describe('US_01.15 | Register Agent Negative', function () {
             .and('have.text', this.alert.registerPopupErrorMessage.emptyCompanyField)
     });
 
+    it('AT_01.15.03 | Error message is displayed when trying to register without email', function() {
+        registerPopup.enterName(this.inputField.registrationPopup.yourName)
+        registerPopup.enterCompanyName(this.inputField.registrationPopup.companyName)
+        registerPopup.enterPhoneNumber(this.inputField.registrationPopup.phoneNumber)
+        registerPopup.clickRegisterButton()
+        registerPopup
+            .getErrorMessage()
+            .should('be.visible')
+            .and('have.text', this.alert.registerPopupErrorMessage.emptyEmailField)
+    });
+
 });
