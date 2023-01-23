@@ -6,7 +6,7 @@ const header = new Header();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_02.01 | Left Logo UI and functionality', () => { 
+describe('US_02.01 | Left Logo UI and functionality', function() { 
     beforeEach(function() {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
