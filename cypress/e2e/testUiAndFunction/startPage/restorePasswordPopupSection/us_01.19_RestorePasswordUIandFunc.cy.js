@@ -27,6 +27,6 @@ describe('US_01.19 Restore password UI and functionality', () => {
         restorePopup
             .getMessageAlert()
             .should('be.visible')
-            .and('have.text', this.alert.alertMessage);
+            .and('have.text', this.alert.restorePasswordPopup.alertMessage);
     });
 });

@@ -1,5 +1,7 @@
 {
-    "alertMessage": "Please check your email with the password restore instructions",
+    "restorePasswordPopup": {
+        "alertMessage": "Please check your email with the password restore instructions"
+    },
     "registerPopupErrorMessage": {
         "emptyNameField": "Please enter your name"
     }
