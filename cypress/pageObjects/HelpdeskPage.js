@@ -1,6 +1,6 @@
 class HelpdeskPage {
-    elements = {
+    //elements 
 
-    }
+    // methods
 }
 export default HelpdeskPage;
