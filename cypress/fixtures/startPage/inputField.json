@@ -1,8 +1,8 @@
 {
     "registrationPopup": {
-        "yourName": "John Doe",
+        "yourName": "Rick Grimes",
         "companyName": "TestCo",
-        "email": "JohnDoe@qatest.site",
+        "email": "RickGrimes@qatest.site",
         "phoneNumber": "+16508904545"
     },
     "loginPopup": {

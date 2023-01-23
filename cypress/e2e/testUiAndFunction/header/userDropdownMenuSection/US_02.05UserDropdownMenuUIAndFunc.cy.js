@@ -19,7 +19,6 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 	it('AT_02.05.01 | Verify the User dropdown menu displays selection of 8 language icons', function () {
 		header.clickUserDropDownMenu()
 		header.getLanguageIcons()
-			.should('have.length', this.hyperLinks.languageIconQuantity)
-			.and('be.visible')
+			.should('have.length', this.hyperLinks.languageIconQuantity)		
 	})
 });

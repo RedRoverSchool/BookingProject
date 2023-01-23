@@ -2,7 +2,8 @@
     "header_Login_Popup": {
         "text": "Enter",
         "color": "rgb(102, 102, 102)",
-        "font_size": "30px"
+        "font_size": "30px",
+        "headerText": "Enter QA Test OP"
     }
 
 }

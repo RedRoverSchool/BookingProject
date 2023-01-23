@@ -11,6 +11,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         cy.fixture('startPage/inputField').then(inputField => {
             this.inputField = inputField;
         });
+        cy.fixture('startPage/label').then(label => {
+            this.label = label
+        });
+
         cy.visit('/');
         startPage.clickLoginButton();
     });
@@ -25,4 +29,11 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .should('be.visible')
             .and('have.attr', 'placeholder', this.inputField.loginPopup.emailInputField);
     });
-})
+
+    it('AT_01.05.04 | Insure Password label has text "Password"', function() {
+        loginPopup
+            .getPasswordLabel()
+            .should('be.visible')
+            .and('have.text', this.label.labelPassword.text)
+    })
+});

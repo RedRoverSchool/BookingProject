@@ -5,6 +5,7 @@ class Header {
     getUserDropDownMenu = () => cy.get('.dropdown.user.user-menu');
     getLanguageIcons = () => cy.get('.user-header .user-lang-selection li');
     getLogoImg = () => cy.get('.logo-mini > img');
+    getCloseBtn = () => cy.get('div[style="padding: 15px;"] .close');
     getContactUsIcon = () => cy.get('.sidebar-menu > :nth-child(4) > a');
     
 // methods
@@ -18,6 +19,10 @@ class Header {
 
     clickLogoImg() {
         this.getLogoImg().click();
+    }
+    
+     clickCloseBtn() {
+        this.getCloseBtn().click();
     }
 
     clickContactUsIcon() {

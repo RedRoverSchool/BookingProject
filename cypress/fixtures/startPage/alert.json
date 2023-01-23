@@ -1,4 +1,9 @@
 {
-    "alertMessage": "Please check your email with the password restore instructions",
-    "registerEmptyName": "Please enter your name"
+    "restorePasswordPopup": {
+        "alertMessage": "Please check your email with the password restore instructions"
+    },
+    "registerPopupErrorMessage": {
+        "emptyNameField": "Please enter your name",
+        "emptyCompanyField": "Please enter your company name"
+    }
 }
