@@ -6,12 +6,22 @@ const startPage = new StartPage();
 
 describe('US_01.01 | Start page > Multilanguage section elements UI and functionality', () => {
     beforeEach(function () {
-        cy.visit('/')        
+        cy.fixture('startPage/buttons').then(buttons => {
+            this.buttons = buttons;
+        });
+        cy.visit('/')
     });
 
     it('AT_01.01.03 | Start page > Multilanguage Section > Thailand flag icon is visible', function () {
         startPage
         .getThailandFlagIcon()
         .should('be.visible');
-    });    
+    }); 
+    
+    it('AT_01.01.06 | Start page > Multilanguage section > Britain flag icon is clickable and changing language to English', function () {
+        startPage.clickThailandFlagIcon();
+        startPage.getLoginButton().should('include.text', this.buttons.thLoginBtnText);
+        startPage.clickUKFlagIcon();
+        startPage.getLoginButton().should('include.text', this.buttons.loginBtnText);
+    });
 })

@@ -2,12 +2,10 @@ export class StartPage {
     //Elements
 
     getLoginButton = () => cy.get(".login")
-
-   
-
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
     getBackgroungVideo = () => cy.get('video')
-    getThailandFlagIcon = () => cy.get('.th')
+    getThailandFlagIcon = () => cy.get('a[href="/th"]')
+    getUKFlagIcon = () => cy.get('a[href="/en"]')
 
     //Methods
     
@@ -17,6 +15,14 @@ export class StartPage {
 
     clickRegisterAccountLink() {
         this.getRegisterAccountLink().click()
+    }
+    
+    clickThailandFlagIcon() {
+        this.getThailandFlagIcon().click()
+    }
+
+    clickUKFlagIcon() {
+        this.getUKFlagIcon().click()
     }
 }
 
