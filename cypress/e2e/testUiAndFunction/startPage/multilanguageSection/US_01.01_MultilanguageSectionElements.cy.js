@@ -24,4 +24,8 @@ describe('US_01.01 | Multilanguage section elements UI and functionality', () =>
         startPage.clickUKFlagIcon();
         startPage.getLoginButton().should('include.text', this.buttons.loginBtnText);
     });
-})
+
+    it('AT_01.01.01 | Verify Russia flag icon is visible', function () {
+        startPage.getRussiaFlagIcon().should('be.visible');
+    });
+});
