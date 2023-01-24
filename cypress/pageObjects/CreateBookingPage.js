@@ -7,7 +7,8 @@ class CreateBookingPage {
     getCalendarDaySelectionWrapper = () => cy.get('.col-lg-12.calendar-day-selection-wrapper .day-wrapper');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
     getLabelCalendarWeek = () => cy.get('.calendar-week-selection-wrapper #calendar-week');
-    
+    getLabelPassengerDetails = () => cy.get('.passenger-wrapper div.title label');
+
     // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
