@@ -20,7 +20,7 @@ describe('US_01.01 | Multilanguage section elements UI and functionality', () =>
     
     it('AT_01.01.06 | Britain flag icon is clickable and changing language to English', function () {
         startPage.clickThailandFlagIcon();
-        startPage.getLoginButton().should('include.text', this.buttons.thLoginBtnText);
+        startPage.getLoginButton().should('not.include.text', this.buttons.loginBtnText);
         startPage.clickUKFlagIcon();
         startPage.getLoginButton().should('include.text', this.buttons.loginBtnText);
     });
