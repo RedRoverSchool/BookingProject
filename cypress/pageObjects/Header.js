@@ -6,6 +6,7 @@ class Header {
     getLanguageIcons = () => cy.get('.user-header .user-lang-selection li');
     getLogoImg = () => cy.get('.logo-mini > img');
     getCloseBtn = () => cy.get('div[style="padding: 15px;"] .close');
+    getFlagIconEn = () => cy.get('a[href="/lang?l=en"');
     
 // methods
     clickBurgerMenu() {
