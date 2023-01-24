@@ -4,7 +4,7 @@ import { StartPage } from "../../../../pageObjects/StartPage";
 
 const startPage = new StartPage();
 
-describe('US_01.01 | Start page > Multilanguage section elements UI and functionality', () => {
+describe('US_01.01 | Multilanguage section elements UI and functionality', () => {
     beforeEach(function () {
         cy.fixture('startPage/buttons').then(buttons => {
             this.buttons = buttons;
