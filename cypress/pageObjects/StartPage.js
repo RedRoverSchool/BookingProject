@@ -2,11 +2,10 @@ export class StartPage {
     //Elements
 
     getLoginButton = () => cy.get(".login")
-
-   
-
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
     getBackgroungVideo = () => cy.get('video')
+    getThailandFlagIcon = () => cy.get('a[href="/th"]')
+    getUKFlagIcon = () => cy.get('a[href="/en"]')
     getModalBackdrop = () => cy.get('.modal-backdrop')
 
     //Methods
@@ -17,6 +16,14 @@ export class StartPage {
 
     clickRegisterAccountLink() {
         this.getRegisterAccountLink().click()
+    }
+    
+    clickThailandFlagIcon() {
+        this.getThailandFlagIcon().click()
+    }
+
+    clickUKFlagIcon() {
+        this.getUKFlagIcon().click()
     }
 }
 
@@ -32,13 +39,13 @@ export class LoginPopup {
     getEmailLabel = () => cy.get('#loginModal .tab-content #byemail form div label').first();
     getPasswordInput = () => cy.get('#byemail input[name="password"]');
     getSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
-    getMessageAlert = () => cy.get('div.alert');    
+    getMessageAlert = () => cy.get('div.alert');
 
 
     // Methods
 
     clickForgotYourPasswordLink() {
-        this.getForgotYourPasswordLink().click();
+        this.getForgotYourPasswordLink().click({force: true});
     };
     clickSignInButton() {
         this.getSignInButton().click();
@@ -51,6 +58,7 @@ export class RestorePopup {
     getEmailInput = () => cy.get('#restoreModal input[placeholder="Email"]');
     getRestoreButton = () => cy.get('#restoreModal input[type="submit"]');
     getMessageAlert = () => cy.get('#restoreModal div.alert');
+    getRestorePasswordHeader = () => cy.get('#restoreModal h2');
     getCloseButton = () => cy.get('div#restoreModal .modal-header .close');
     getRestorePopup = () => cy.get('div#restoreModal');
 
@@ -79,6 +87,7 @@ export class RegisterPopup {
     getEmailInputField = () => cy.get('input[placeholder="You will get your password by email"]')
     getPhoneInputField = () => cy.get('input[name="phone"]')
     getErrorMessage = () => cy.get('#registerModal .help-block.error')
+    getRegisterAgentAccountHeader = () => cy.get('#registerModal h2')
 
     // Methods
 

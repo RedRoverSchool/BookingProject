@@ -1,5 +1,4 @@
 class BookingsListPage {
-    elements = {
-    }
+    getBookingListHeader  = () => cy.get('.page-title');
 }
 export default BookingsListPage;

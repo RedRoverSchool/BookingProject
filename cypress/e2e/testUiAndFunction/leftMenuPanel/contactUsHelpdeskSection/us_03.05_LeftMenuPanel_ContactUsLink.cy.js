@@ -16,9 +16,15 @@ describe('US_03.05 | Contact us link', () => {
         cy.login(AGENT.email, AGENT.password);
     });
 
-    it('AT_03.05.01 | Sidebar has "Contact us" text, () =>', function () {
+    it('AT_03.05.01 | Sidebar has "Contact us" text, () => ', function() {
         leftMenuPanel
             .getContactUsNameLink()
             .should('have.text', this.link.contactUsLink) 
+    })
+
+    it('AT_03.05.02 |"Contact us" icon is visible', () => {  
+        leftMenuPanel
+            .getContactUsIсonLink()
+            .should('be.visible')
     })
 })
