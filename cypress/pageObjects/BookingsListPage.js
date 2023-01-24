@@ -1,4 +1,5 @@
 class BookingsListPage {
+    getBookingListHeader = () => cy.get('.page-title');
     getPrintButton = () => cy.get('.row .btn-print');
 
     clickPrintButton() {
