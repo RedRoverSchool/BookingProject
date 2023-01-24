@@ -14,5 +14,8 @@ class LeftMenuPanel {
 
     //Methods  
 
+    clickBookingManagementIconLink() {
+        this.getBookingManagementIсonLink().click();
+    };
 }
 export default LeftMenuPanel;
