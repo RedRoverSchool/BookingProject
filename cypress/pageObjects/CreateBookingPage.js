@@ -30,3 +30,8 @@ export class DepartureOnSection {
         this.getFirstTripCard().click()
     };
 };
+
+export class CreateBookingHeader {
+    //Elements
+   getCreateBookingHeader = () => cy.get('div h1');
+};
