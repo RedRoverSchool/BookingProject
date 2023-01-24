@@ -21,4 +21,11 @@ describe('US_01.02 | Login register section elements', () => {
         startPage.clickLoginButton();
         loginPopup.getHeaderText().should('include.text', this.headers.header_Login_Popup.text)
     });
+
+    it('AT_01.02.04 | Logo exists and visible', function () {
+        startPage.getLogo()
+            .should('be.visible')
+            .and('have.attr','src')
+            .and('include','logo-main.png')
+    });    
 })
