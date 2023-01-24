@@ -13,7 +13,7 @@ describe('US_05.06 Print Button UI and functionality', () => {
     beforeEach(function () {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
-        leftMenuPanel.clickBookingManagementIconLink();
+        leftMenuPanel.clickGetBookingManagementIconLink();
     });
 
     it('AT_05.06.01 Verify that the "Print" button is displayed', () => {  
