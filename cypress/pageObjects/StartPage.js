@@ -28,6 +28,10 @@ export class LoginPopup {
     getHeaderTextElement = () => cy.get('.text-center');
     getPasswordLabel = () => cy.get('#byemail div:nth-last-of-type(2) label');
     getHeaderText = () => cy.get('div[style*="padding: 15"] :nth-child(2)');
+    getEmailLabel = () => cy.get('#loginModal .tab-content #byemail form div label').first();
+    getPasswordInput = () => cy.get('#byemail input[name="password"]');
+    getSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
+    getMessageAlert = () => cy.get('div.alert');    
 
 
     // Methods
@@ -35,6 +39,9 @@ export class LoginPopup {
     clickForgotYourPasswordLink() {
         this.getForgotYourPasswordLink().click();
     };
+    clickSignInButton() {
+        this.getSignInButton().click();
+    };    
 }
 
 export class RestorePopup {

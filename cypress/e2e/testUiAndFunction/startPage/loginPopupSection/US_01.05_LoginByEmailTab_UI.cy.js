@@ -36,4 +36,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .should('be.visible')
             .and('have.text', this.label.labelPassword.text)
     })
+
+    it('AT_01.05.05 | Start page > Login by email tab UI > Color of Email label', function () {
+        loginPopup
+            .getEmailLabel()
+            .should('have.css','color', this.label.labelEmail.color)
+    });
 });
