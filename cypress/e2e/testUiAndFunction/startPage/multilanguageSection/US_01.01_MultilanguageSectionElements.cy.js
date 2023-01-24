@@ -16,7 +16,5 @@ describe('US_01.01 | Start page > Multilanguage section elements UI and function
         startPage
         .getThailandFlagIcon()
         .should('be.visible');
-    });
-
-    
+    });    
 })
