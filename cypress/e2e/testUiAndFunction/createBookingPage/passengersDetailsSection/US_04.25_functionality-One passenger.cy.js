@@ -17,13 +17,12 @@ describe('US_04.25 | Passengers details functionality - One passenger', () => {
 
     it('AT_04.25.01 | Verify the opportunity to fill main passengers name in "Passenger name" input field', function () {
        createBookingPage.clickCalendarNextButton()
-       cy.wait(4000)
+       cy.wait(5000)
        createBookingPage.clickFirstTripCard()
-       cy.wait(2000)
+       cy.wait(3000)
 
-       createBookingPage.getMainPassengerField()
-            .type(this.passengers.main_passenger.name)
-            .should('have.value', this.passengers.main_passenger.name)          
+       createBookingPage.typeIntoMainPassengerNameField(this.passengers.main_passenger.name)
+
+       createBookingPage.getMainPassengerNameField().should('have.value', this.passengers.main_passenger.name)  
     });
 })
-
