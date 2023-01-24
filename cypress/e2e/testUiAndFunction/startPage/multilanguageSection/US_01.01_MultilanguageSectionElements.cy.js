@@ -12,7 +12,7 @@ describe('US_01.01 | Multilanguage section elements UI and functionality', () =>
         cy.visit('/')
     });
 
-    it('AT_01.01.03 | Start page > Multilanguage Section > Thailand flag icon is visible', function () {
+    it('AT_01.01.06 | Britain flag icon is clickable and changing language to English', function () {
         startPage
         .getThailandFlagIcon()
         .should('be.visible');
