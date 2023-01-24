@@ -7,6 +7,7 @@ export class StartPage {
     getThailandFlagIcon = () => cy.get('a[href="/th"]')
     getUKFlagIcon = () => cy.get('a[href="/en"]')
     getRussiaFlagIcon = () => cy.get('a[href="/ru"]')
+    getLogo = () => cy.get('.logo')
     getModalBackdrop = () => cy.get('.modal-backdrop')
 
     //Methods
