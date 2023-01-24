@@ -21,7 +21,7 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		header.getLanguageIcons()
 			.should('have.length', this.hyperLinks.languageIconQuantity)		
 	})
-	it.only('AT__02.05.02 |Verify UK flag" icon is displayed and clickable', function () {
+	it('AT_02.05.02 |Verify UK flag" icon is displayed and clickable', function () {
 		header.clickUserDropDownMenu()
 		header.getFlagIconEn()
 			.should('be.visible')		
