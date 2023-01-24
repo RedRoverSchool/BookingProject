@@ -7,6 +7,7 @@ export class StartPage {
 
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
     getBackgroungVideo = () => cy.get('video')
+    getModalBackdrop = () => cy.get('.modal-backdrop')
 
     //Methods
     
@@ -50,6 +51,8 @@ export class RestorePopup {
     getEmailInput = () => cy.get('#restoreModal input[placeholder="Email"]');
     getRestoreButton = () => cy.get('#restoreModal input[type="submit"]');
     getMessageAlert = () => cy.get('#restoreModal div.alert');
+    getCloseButton = () => cy.get('div#restoreModal .modal-header .close');
+    getRestorePopup = () => cy.get('div#restoreModal');
 
 
     // Methods
@@ -61,6 +64,10 @@ export class RestorePopup {
     clickRestoreButton() {
         this.getRestoreButton().click();
     };
+
+    clickCloseButton(){
+        this.getCloseButton().click()
+    }
 }
 
 export class RegisterPopup {
