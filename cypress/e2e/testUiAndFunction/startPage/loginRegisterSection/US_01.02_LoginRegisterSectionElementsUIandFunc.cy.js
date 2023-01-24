@@ -14,7 +14,9 @@ describe('US_01.02 | Login-register section elements UI and functionality', () =
         cy.fixture('startPage/buttons').then(buttons => {
             this.buttons = buttons;
         });
-
+        cy.fixture('startPage/img').then(img => {
+            this.img = img;
+        });   
 		cy.visit('/')
 	});
 
@@ -28,4 +30,12 @@ describe('US_01.02 | Login-register section elements UI and functionality', () =
     it('AT.01.02.03 | Login button has text “Login“', function () {
         startPage.getLoginButton().should('have.text', this.buttons.loginBtnText)
     })
+
+    it('AT_01.02.04 | Logo exists and visible', function () {
+        startPage.getLogo()
+            .should('be.visible')
+            .and('have.attr', 'src')
+            .and('include', this.img.logoFileName)
+    });  
+
 })
