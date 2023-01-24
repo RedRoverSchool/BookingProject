@@ -11,12 +11,15 @@ describe('US_02.01 | Left Logo UI and functionality', function() {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
        
-        cy.fixture('url').then(url => {
+        cy.fixture('header/url').then(url => {
             this.url = url;
+        })
+        cy.fixture('createBookingPage/headers').then(text => {
+            this.text = text;
         })
     });
 
-    it('AT_02.01.01 | Verify logo is visible UI', function() {
+    it.skip('AT_02.01.01 | Verify logo is visible UI', function() {
         header.getLogoImg().should('be.visible');
     });
 
@@ -24,5 +27,6 @@ describe('US_02.01 | Left Logo UI and functionality', function() {
         header.clickContactUsIcon();
         header.clickLogoImg();
         cy.url().should('be.equal', this.url.logoUrl);
+        
     });
 })

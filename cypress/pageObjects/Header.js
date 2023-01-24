@@ -21,7 +21,7 @@ class Header {
         this.getLogoImg().click();
     }
     
-     clickCloseBtn() {
+    clickCloseBtn() {
         this.getCloseBtn().click();
     }
 
