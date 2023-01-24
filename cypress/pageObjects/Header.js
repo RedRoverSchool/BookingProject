@@ -9,7 +9,8 @@ class Header {
     getFlagIconEn = () => cy.get('a[href="/lang?l=en"');
     getContactUsIcon = () => cy.get('.sidebar-menu > :nth-child(4) > a');
     getFlagIconEn = () => cy.get('a[href="/lang?l=en"');
-    
+    getEnvelopeIcon = () => cy.get('[href="/helpdesk"]');
+
 // methods
     clickBurgerMenu() {
         this.getBurgerMenu().click();
