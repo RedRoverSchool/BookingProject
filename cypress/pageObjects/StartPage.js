@@ -7,6 +7,7 @@ export class StartPage {
 
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
     getBackgroungVideo = () => cy.get('video')
+    getThailandFlagIcon = () => cy.get('.th')
 
     //Methods
     
