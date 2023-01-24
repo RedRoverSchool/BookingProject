@@ -8,7 +8,7 @@ const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 const restorePopup = new RestorePopup();
 
-describe('US_01.17 Restore password Header elements UI and functionality', () => {
+describe('US_01.17 | Header elements', () => {
 
     const AGENT = Cypress.env('agent');
 
