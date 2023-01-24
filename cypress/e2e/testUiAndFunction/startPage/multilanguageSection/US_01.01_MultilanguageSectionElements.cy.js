@@ -5,7 +5,6 @@ import { StartPage } from "../../../../pageObjects/StartPage";
 const startPage = new StartPage();
 
 describe('US_01.01 | Start page > Multilanguage section elements UI and functionality', () => {
-
     beforeEach(function () {
         cy.visit('/')        
     });
