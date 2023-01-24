@@ -10,19 +10,12 @@ const restorePopup = new RestorePopup();
 
 describe('US_01.17 | Header elements', () => {
 
-    const AGENT = Cypress.env('agent');
-
-    beforeEach(function () {
-        cy.fixture('startPage/alert').then(alert => {
-            this.alert = alert;
-        });
+    it('AT_01.17.01 Verify `X` button is visible, clickable and closing Popup', function () {
         cy.visit('/');
         startPage.clickLoginButton();
         loginPopup.clickForgotYourPasswordLink();
         restorePopup.getRestorePopup().should('be.visible')
-    });
-
-    it('AT_01.17.01 Verify `X` button is visible, clickable and closing Popup', function () {
+        
         restorePopup.getCloseButton().should('be.visible')
         restorePopup.clickCloseButton()
         restorePopup.getRestorePopup().should('be.not.visible')
