@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-import {StartPage} from "../../../../pageObjects/StartPage";
-import {LoginPopup} from "../../../../pageObjects/StartPage";
-import {RegisterPopup} from "../../../../pageObjects/StartPage";
-import {RestorePopup} from "../../../../pageObjects/StartPage";
+import {StartPage} from "../../../pageObjects/StartPage";
+import {LoginPopup} from "../../../pageObjects/StartPage";
+import {RegisterPopup} from "../../../pageObjects/StartPage";
+import {RestorePopup} from "../../../pageObjects/StartPage";
 
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();

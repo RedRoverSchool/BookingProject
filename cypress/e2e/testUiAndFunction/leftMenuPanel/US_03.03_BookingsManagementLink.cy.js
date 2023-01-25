@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
-import LeftMenuPanel from "../../../../pageObjects/LeftMenuPanel";
-import BookingsListPage from "../../../../pageObjects/BookingsListPage";
+import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
+import BookingsListPage from "../../../pageObjects/BookingsListPage";
 
 const leftMenuPanel = new LeftMenuPanel();
 const bookingsListPage = new BookingsListPage();
