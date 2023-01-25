@@ -13,16 +13,23 @@ describe('US_04.25 | Passengers details functionality - One passenger', () => {
         })
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
+
+        //Precondition
+        createBookingPage.clickCalendarNextButton()
+        cy.wait(5000)
+        createBookingPage.clickFirstTripCard()
+        cy.wait(2000)
     })
 
     it('AT_04.25.01 | Verify the opportunity to fill main passengers name in "Passenger name" input field', function () {
-       createBookingPage.clickCalendarNextButton()
-       cy.wait(5000)
-       createBookingPage.clickFirstTripCard()
-       cy.wait(3000)
+        createBookingPage.typeIntoMainPassengerNameField(this.passengers.main_passenger.name)
 
-       createBookingPage.typeIntoMainPassengerNameField(this.passengers.main_passenger.name)
+        createBookingPage.getMainPassengerNameField().should('have.value', this.passengers.main_passenger.name)  
+    });
 
-       createBookingPage.getMainPassengerNameField().should('have.value', this.passengers.main_passenger.name)  
+    it('AT_04.25.02 | Verify the opportunity to fill main passengers phone in "Phone number" input field', function () {
+        createBookingPage.typeIntoMainPassengerPhoneField(this.passengers.main_passenger.phone)
+
+        createBookingPage.getMainPassengerPhoneField().should('have.value', this.passengers.main_passenger.phone)
     });
 })

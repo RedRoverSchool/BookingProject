@@ -1,6 +1,7 @@
 class CreateBookingPage {
     //Elements
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
+    getMainPassengerPhoneField = () => cy.get('.iti #passenger-phone');
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
     getFirstTripCard = () => cy.get('div .trip:first-child');
     getCreateBookingHeader = () => cy.get('div h1');
@@ -23,6 +24,10 @@ class CreateBookingPage {
 
     typeIntoMainPassengerNameField(name) {
         this.getMainPassengerNameField().type(name)
+    };
+
+    typeIntoMainPassengerPhoneField(phone) {
+        this.getMainPassengerPhoneField().type(phone)
     };
 
     clickMonthBtn() {
