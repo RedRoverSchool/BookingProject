@@ -1,0 +1,12 @@
+{
+    "buttons": {
+        "printButtonName": " Print",
+        "printButtonIcon": "fa fa-print fa-fw"
+    },
+    "headers": {
+        "bookingListHeader": "Bookings list"
+    },
+    "url": {
+        "header": "value"
+    }
+}

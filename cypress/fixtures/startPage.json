@@ -1,0 +1,51 @@
+{
+    "alert": {
+        "restorePasswordPopup": {
+            "alertMessage": "Please check your email with the password restore instructions"
+        },
+        "registerPopupErrorMessage": {
+            "emptyNameField": "Please enter your name",
+            "emptyCompanyField": "Please enter your company name",
+            "emptyEmailField": "Please enter valid email"
+        },
+        "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password"
+    },
+    "buttons": {
+        "loginBtnText": "login",
+        "thLoginBtnText": "เข้าสู่ระบบ"
+    },
+    "headers": {
+        "header_Login_Popup": {
+            "text": "Enter",
+            "color": "rgb(102, 102, 102)",
+            "font_size": "30px",
+            "headerText": "Enter QA Test OP"
+        }
+    },
+    "img": {
+        "logoFileName": "logo-main.png"
+    },
+    "inputField": {
+        "registrationPopup": {
+            "yourName": "Rick Grimes",
+            "companyName": "TestCo",
+            "email": "RickGrimes@qatest.site",
+            "phoneNumber": "+16508904545",
+            "invaildEmail": "a-g@ent---1@test.site"
+        },
+        "loginPopup": {
+            "emailInputField": "Email"
+        }
+    },
+    "label": {
+        "labelPassword": {
+            "text": "Password"
+        },
+        "labelEmail": {
+            "color": "rgb(153, 153, 153)"
+        }
+    },
+    "links": {
+        "registerAccountNowEnglishText": "Register account now"
+    }
+}
