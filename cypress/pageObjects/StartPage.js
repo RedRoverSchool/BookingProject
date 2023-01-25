@@ -6,6 +6,7 @@ export class StartPage {
     getBackgroungVideo = () => cy.get('video')
     getThailandFlagIcon = () => cy.get('a[href="/th"]')
     getUKFlagIcon = () => cy.get('a[href="/en"]')
+    getRussiaFlagIcon = () => cy.get('a[href="/ru"]')
 
     //Methods
     
