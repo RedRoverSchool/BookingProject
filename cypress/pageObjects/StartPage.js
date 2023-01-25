@@ -62,7 +62,7 @@ export class RestorePopup {
     getMessageAlert = () => cy.get('#restoreModal div.alert');
     getRestorePasswordHeader = () => cy.get('#restoreModal h2');
     getCloseButton = () => cy.get('div#restoreModal .modal-header .close');
-
+    getRestorePopup = () => cy.get('div#restoreModal')
 
     // Methods
 
