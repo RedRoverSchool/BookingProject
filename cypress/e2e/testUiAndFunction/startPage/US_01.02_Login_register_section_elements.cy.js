@@ -9,8 +9,8 @@ const loginPopup = new LoginPopup();
 describe('US_01.02 | Login register section elements', () => {
 
     beforeEach(function () {
-        cy.fixture('startPage/headers').then(headers => {
-            this.headers = headers;
+        cy.fixture('startPage').then(startPage => {
+            this.startPage = startPage;
         });
         cy.visit('/')
     });
@@ -19,6 +19,6 @@ describe('US_01.02 | Login register section elements', () => {
 
         startPage.getLoginButton().should('be.visible');
         startPage.clickLoginButton();
-        loginPopup.getHeaderText().should('include.text', this.headers.header_Login_Popup.text)
+        loginPopup.getHeaderText().should('include.text', this.startPage.headers.header_Login_Popup.text)
     });
 })

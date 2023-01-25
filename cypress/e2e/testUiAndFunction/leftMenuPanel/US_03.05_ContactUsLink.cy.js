@@ -11,11 +11,11 @@ describe('US_03.05 | Contact us link', () => {
     const AGENT = Cypress.env('agent');
     
     beforeEach(function () {
-        cy.fixture('leftMenuPanel/menuLinks').then(link => {
-            this.link = link;
+        cy.fixture('leftMenuPanel').then(leftMenuPanel => {
+            this.leftMenuPanel = leftMenuPanel;
         });
-        cy.fixture('helpdeskPage/headers').then(header => {
-            this.header = header;
+        cy.fixture('helpdeskPage').then(helpdeskPage => {
+            this.helpdeskPage = helpdeskPage;
         });
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
@@ -24,7 +24,7 @@ describe('US_03.05 | Contact us link', () => {
     it('AT_03.05.01 | Sidebar has "Contact us" text, () => ', function() {
         leftMenuPanel
             .getContactUsNameLink()
-            .should('have.text', this.link.contactUsLink) 
+            .should('have.text', this.leftMenuPanel.menuLinks.contactUsLink) 
     })
 
     it('AT_03.05.02 |"Contact us" icon is visible', () =>  {  
@@ -38,6 +38,6 @@ describe('US_03.05 | Contact us link', () => {
         
         helpdeskPage
             .getHelpdeskHeader()
-            .should('include.text', this.header.mainHeaderPage ) 
+            .should('include.text', this.helpdeskPage.headers.mainHeaderPage ) 
     })
 })
