@@ -38,5 +38,4 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 .and('have.value', parseInt(passengersAmount));
             })
     });    
-
 })

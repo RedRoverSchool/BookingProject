@@ -37,5 +37,4 @@ describe('US_01.02 | Login-register section elements UI and functionality', () =
             .and('have.attr', 'src')
             .and('include', this.img.logoFileName)
     });  
-
 })

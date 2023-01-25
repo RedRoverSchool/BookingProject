@@ -30,5 +30,4 @@ describe('US_01.07 | Login by email tab negative', () => {
             .should("be.visible")
             .and('have.text',this.alert.loginPopupMessageAlert);
         });
-
 });
