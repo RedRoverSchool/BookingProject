@@ -15,8 +15,8 @@ class CreateBookingPage {
     getFridayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(5)');
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
-    getDepartoreStationDropdown = () => cy.get('#select2-departure-container');
-    getListDepartoreStation = () => cy.get('.select2-results .select2-results__option');
+    getDepartureStationDropdown = () => cy.get('#select2-departure-container');
+    getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
     
     // Methods
     clickCalendarNextButton() {
@@ -51,8 +51,8 @@ class CreateBookingPage {
         this.getFridayButton().click();
     }
 
-    clickDepartoreStationDropdown() {
-        this.getDepartoreStationDropdown().click()
+    clickDepartureStationDropdown() {
+        this.getDepartureStationDropdown().click()
     };
 }
 export default CreateBookingPage;

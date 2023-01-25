@@ -19,13 +19,13 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
     });
 
     it('AT_04.06.01 | Verify that the Departure station dropdown menu displays required list of stations', function () {
-        createBookingPage.clickDepartoreStationDropdown()
+        createBookingPage.clickDepartureStationDropdown()
 
-        createBookingPage.getListDepartoreStation()
-            .should('have.length', this.dropdowns.departure_station.stations_number)            
-        createBookingPage.getListDepartoreStation().each(($el, i) => {
+        createBookingPage.getListDepartureStation()
+            .should('have.length', this.dropdowns.departureStation.stationsNumber)            
+        createBookingPage.getListDepartureStation().each(($el, i) => {
             cy.wrap($el).should('be.visible')
-            expect($el.text()).to.be.equal(this.dropdowns.departure_station.stations_names[i])
+            expect($el.text()).to.be.equal(this.dropdowns.departureStation.stationsNames[i])
         })
     });
 })
