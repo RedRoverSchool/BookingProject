@@ -1,6 +1,4 @@
 class HelpdeskPage {
-    elements = {
-
-    }
+    getHelpdeskHeader = () => cy.get('.page-title');
 }
 export default HelpdeskPage;

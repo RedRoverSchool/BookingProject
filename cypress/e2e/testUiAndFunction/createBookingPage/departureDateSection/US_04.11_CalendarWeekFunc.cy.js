@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import  CreateBookingPage from "../../../../pageObjects/CreateBookingPage";
+import CreateBookingPage from "../../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
