@@ -8,8 +8,8 @@ const loginPopup = new LoginPopup();
 
 describe('US_01.07 | Login by email tab negative', () => {
     beforeEach(function () {
-        cy.fixture('startPage/alert').then(alert => {
-            this.alert = alert;
+        cy.fixture('startPage').then(startPage => {
+            this.startPage = startPage;
         });
         cy.visit('/');
         startPage.clickLoginButton();
@@ -28,6 +28,6 @@ describe('US_01.07 | Login by email tab negative', () => {
             .clickSignInButton();
         loginPopup.getMessageAlert()
             .should("be.visible")
-            .and('have.text',this.alert.loginPopupMessageAlert);
+            .and('have.text',this.startPage.alert.loginPopupMessageAlert);
         });
 });

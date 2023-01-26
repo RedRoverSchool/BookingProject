@@ -11,8 +11,8 @@ describe('US_05.06 Print Button UI and functionality', () => {
     const AGENT = Cypress.env('agent');
 
     beforeEach(function () {
-        cy.fixture('bookingsListPage/buttons').then(button => {
-            this.button = button;
+        cy.fixture('bookingsListPage').then(bookingsListPage => {
+            this.bookingsListPage = bookingsListPage;
         });
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
@@ -26,9 +26,9 @@ describe('US_05.06 Print Button UI and functionality', () => {
     it('AT_05.06.02 Verify that the "Print" button has the text "Print" and an icon', function () { 
         bookingsListPage
             .getPrintButton()
-            .should('have.text', this.button.printButtonName)
+            .should('have.text', this.bookingsListPage.buttons.printButtonName)
         bookingsListPage
             .getPrintButtonIcon()
-            .should('have.attr', 'class', this.button.printButtonIcon)
+            .should('have.attr', 'class', this.bookingsListPage.buttons.printButtonIcon)
     });
 })

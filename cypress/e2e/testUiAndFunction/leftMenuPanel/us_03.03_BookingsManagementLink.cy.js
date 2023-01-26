@@ -11,11 +11,11 @@ describe('US_03.03 Bookings management link', () => {
     const AGENT = Cypress.env('agent');
 
     beforeEach(function () {
-        cy.fixture('leftMenuPanel/menuLinks').then(link => {
-            this.link = link;
+        cy.fixture('leftMenuPanel').then(leftMenuPanel => {
+            this.leftMenuPanel = leftMenuPanel;
         });
-        cy.fixture('bookingsListPage/headers').then(header => {
-            this.header = header;
+        cy.fixture('bookingsListPage').then(bookingsListPage => {
+            this.bookingsListPage = bookingsListPage;
         });
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
@@ -28,13 +28,13 @@ describe('US_03.03 Bookings management link', () => {
     it('AT_03.03.02 Verify the Sidebar has text "Booking management" ', function () {
         leftMenuPanel
             .getBookingManagementNameLink()
-            .should('include.text', this.link.bookingsManagementLink)
+            .should('include.text', this.leftMenuPanel.menuLinks.bookingsManagementLink)
     });
 
     it('AT__03.03.03 Verify Clicking "Booking management" opening the page with heading "Booking list"', function () {
         leftMenuPanel.clickGetBookingManagementIconLink() 
             
         bookingsListPage.getBookingListHeader()
-            .should('include.text', this.header.bookingListHeader)
+            .should('include.text', this.bookingsListPage.headers.bookingListHeader)
     });
 });
