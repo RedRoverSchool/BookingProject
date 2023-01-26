@@ -8,11 +8,8 @@ const loginPopup = new LoginPopup();
 
 describe('US_01.05 | Login By Email Tab UI', () => {
     beforeEach(function () {
-        cy.fixture('startPage/inputField').then(inputField => {
-            this.inputField = inputField;
-        });
-        cy.fixture('startPage/label').then(label => {
-            this.label = label
+        cy.fixture('startPage').then(startPage => {
+            this.startPage = startPage;
         });
 
         cy.visit('/');
@@ -27,19 +24,19 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         loginPopup
             .getEmailInput()
             .should('be.visible')
-            .and('have.attr', 'placeholder', this.inputField.loginPopup.emailInputField);
+            .and('have.attr', 'placeholder', this.startPage.inputField.loginPopup.emailInputField);
     });
 
     it('AT_01.05.04 | Insure Password label has text "Password"', function() {
         loginPopup
             .getPasswordLabel()
             .should('be.visible')
-            .and('have.text', this.label.labelPassword.text)
+            .and('have.text', this.startPage.label.labelPassword.text)
     })
 
     it('AT_01.05.05 | Color of Email label', function () {
         loginPopup
             .getEmailLabel()
-            .should('have.css','color', this.label.labelEmail.color)
+            .should('have.css','color', this.startPage.label.labelEmail.color)
     });
 });

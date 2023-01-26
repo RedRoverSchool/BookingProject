@@ -13,8 +13,8 @@ describe('US_01.19 Restore password UI and functionality', () => {
     const AGENT = Cypress.env('agent');
 
     beforeEach(function () {
-        cy.fixture('startPage/alert').then(alert => {
-            this.alert = alert;
+        cy.fixture('startPage').then(startPage => {
+            this.startPage = startPage;
         });
         cy.visit('/');
         startPage.clickLoginButton();
@@ -27,6 +27,6 @@ describe('US_01.19 Restore password UI and functionality', () => {
         restorePopup
             .getMessageAlert()
             .should('be.visible')
-            .and('have.text', this.alert.restorePasswordPopup.alertMessage);
+            .and('have.text', this.startPage.alert.restorePasswordPopup.alertMessage);
     });
 });

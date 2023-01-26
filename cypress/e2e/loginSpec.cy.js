@@ -11,14 +11,14 @@ describe('Login', () => {
     })
 
     beforeEach(function () {
-        cy.fixture('createBookingPage/headers').then(header => {
-            this.header = header
+        cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage
         })
     })
 
     it('verify agent can login', function () {
         cy.visit('/')
         cy.login(AGENT.email, AGENT.password);
-        cy.get('div.booking-header h1').should('include.text', this.header.mainHeaderPage);
+        cy.get('div.booking-header h1').should('include.text', this.createBookingPage.headers.mainHeaderPage);
     })
 })

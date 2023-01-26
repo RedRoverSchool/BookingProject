@@ -1,0 +1,27 @@
+{
+    "dropdowns": {
+        "departureStation": {
+            "stationsNumber": 8,
+            "stationsNames": [
+                "Ao Por Pier",
+                "Ayutthaya",
+                "Bangkok Khao San",
+                "Chiang Mai Bus Terminal 1",
+                "Chonburi",
+                "Naka Island",
+                "Phuket Town",
+                "Rassada Pier"
+            ]
+        }
+    },
+    "headers": {
+        "mainHeaderPage": "Create booking"
+    },
+    "inputField": {
+        "main_passenger": {
+            "name": "Stephan",
+            "phone": "291234567",
+            "email": "hello@test.plus"
+        }
+    }
+}
