@@ -93,6 +93,7 @@ export class RegisterPopup {
     getPhoneInputField = () => cy.get('input[name="phone"]')
     getErrorMessage = () => cy.get('#registerModal .help-block.error')
     getRegisterAgentAccountHeader = () => cy.get('#registerModal h2')
+    getForgotYourPasswordLink = () => cy.get('#registerModal .pull-right a')
 
     // Methods
 
@@ -115,4 +116,8 @@ export class RegisterPopup {
     enterPhoneNumber(phone) {
         this.getPhoneInputField().clear().type(phone, {force:true})
     }
+
+    clickForgotYourPasswordLink() {
+        this.getForgotYourPasswordLink().click({force: true});
+    };
 }
