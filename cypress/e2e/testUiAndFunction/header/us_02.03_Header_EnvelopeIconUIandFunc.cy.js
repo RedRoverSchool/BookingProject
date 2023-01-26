@@ -17,7 +17,6 @@ describe('US_02.03 Header Envelope icon UI and functionality', () => {
          cy.fixture('helpdeskPage/filter').then(filter => {
             this.filter = filter;
          });
-
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
     });
