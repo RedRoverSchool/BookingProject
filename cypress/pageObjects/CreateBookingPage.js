@@ -17,6 +17,7 @@ class CreateBookingPage {
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
     getDepartureStationDropdown = () => cy.get('#select2-departure-container');
     getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
+    getWeekButton = () => cy.get('button.calendar-view-week');
     
     // Methods
     clickCalendarNextButton() {
