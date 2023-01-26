@@ -69,4 +69,14 @@ describe('US_01.15 | Register Agent Negative', function () {
             .should('be.visible')
             .and('have.text', this.startPage.alert.registerPopupErrorMessage.emptyEmailField)
     });
+
+    it('AT_01.15.04 | Error message is displayed when trying to register without phone number', function() {
+        registerPopup.enterName(randomFullName)
+        registerPopup.enterCompanyName(randomCompanyName)
+        registerPopup.enterEmail(randomEmail)
+        registerPopup.clickRegisterButton()
+        registerPopup.getErrorMessage()
+                     .should('be.visible')
+                     .and('have.text', this.startPage.alert.registerPopupErrorMessage.emptyPhoneField)
+    });
 })

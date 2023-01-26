@@ -6,7 +6,8 @@
         "registerPopupErrorMessage": {
             "emptyNameField": "Please enter your name",
             "emptyCompanyField": "Please enter your company name",
-            "emptyEmailField": "Please enter valid email"
+            "emptyEmailField": "Please enter valid email",
+            "emptyPhoneField": "Please enter your phone number"
         },
         "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password"
     },
