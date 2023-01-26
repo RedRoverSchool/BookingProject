@@ -12,11 +12,10 @@ describe('US_02.03 Header Envelope icon UI and functionality', () => {
     beforeEach(function () {
         cy.fixture('helpdeskPage/headers').then(header => {
             this.header = header;
-         });
-
+         })
          cy.fixture('helpdeskPage/filter').then(filter => {
             this.filter = filter;
-         });
+         })
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
     });
