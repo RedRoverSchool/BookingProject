@@ -3,7 +3,8 @@
         "yourName": "Rick Grimes",
         "companyName": "TestCo",
         "email": "RickGrimes@qatest.site",
-        "phoneNumber": "+16508904545"
+        "phoneNumber": "+16508904545",
+        "invaildEmail": "a-g@ent---1@test.site"
     },
     "loginPopup": {
         "emailInputField": "Email"
