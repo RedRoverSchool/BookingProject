@@ -4,6 +4,7 @@ class CreateBookingPage {
     getMainPassengerPhoneField = () => cy.get('.iti #passenger-phone');
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
     getFirstTripCard = () => cy.get('div .trip:first-child');
+    getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getCreateBookingHeader = () => cy.get('div h1');
     getCalendarDays = () => cy.get('.col-lg-12.calendar-day-selection-wrapper > .day-wrapper');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
@@ -15,6 +16,7 @@ class CreateBookingPage {
     getFridayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(5)');
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
+    getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
     getDepartureStationDropdown = () => cy.get('#select2-departure-container');
     getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
     getWeekButton = () => cy.get('button.calendar-view-week');

@@ -13,11 +13,12 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)        
     });
 
-    it('AT_04.28.02 | "Seat selection dropdown" is visible and displays the number of passengers, selected in the "Passengers details dropdown"', () => {
+    it('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', () => {
         
         createBookingPage.clickCalendarNextButton()
         cy.wait(5000)
         createBookingPage.clickFridayButton()
+        cy.wait(2000)
         createBookingPage.clickFirstTripCard()
 
         createBookingPage.getPassengersDetailsDropdown().then(($el) => {
