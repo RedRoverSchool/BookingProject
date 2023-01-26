@@ -5,6 +5,7 @@ export class StartPage {
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
     getBackgroungVideo = () => cy.get('video')
     getLogo = () => cy.get('.logo')
+    getTextLoginButton = () => cy.get('.btn.btn-default')
 
     //Flag icons
     
