@@ -31,5 +31,9 @@ class Header {
     clickContactUsIcon() {
         this.getContactUsIcon().click();
     }
+
+    clickEnvelopeIcon() {
+        this.getEnvelopeIcon().click();
+    }
 }
 export default Header;
