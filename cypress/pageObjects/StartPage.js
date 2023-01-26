@@ -46,6 +46,7 @@ export class LoginPopup {
     getPasswordInput = () => cy.get('#byemail input[name="password"]');
     getSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
     getMessageAlert = () => cy.get('div.alert');
+    getEmailLabel = () => cy.get('#byemail > .form-horizontal > :nth-child(3) > .col-sm-4');
 
 
     // Methods

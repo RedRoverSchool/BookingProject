@@ -42,7 +42,8 @@
             "text": "Password"
         },
         "labelEmail": {
-            "color": "rgb(153, 153, 153)"
+            "color": "rgb(153, 153, 153)",
+            "text": "Email"
         }
     },
     "links": {
