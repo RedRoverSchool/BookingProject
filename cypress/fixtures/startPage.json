@@ -35,6 +35,11 @@
             "emailInputField": "Email"
         }
     },
+    "inputField": {
+        "loginPopup": {
+            "passwordInputField": "Password"
+        }
+    },
     "label": {
         "labelPassword": {
             "text": "Password"

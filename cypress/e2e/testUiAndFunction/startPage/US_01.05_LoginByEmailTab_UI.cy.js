@@ -20,7 +20,7 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         loginPopup.getLoginByEmailTab().should('be.visible')
     });
 
-    it('AT_01.05.03 | Verify the agent is able to see Email input field and it has text "Email"', function () {
+    it.only('AT_01.05.03 | Verify the agent is able to see Email input field and it has text "Email"', function () {
         loginPopup
             .getEmailInput()
             .should('be.visible')
@@ -44,5 +44,12 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         loginPopup
         .getEmailLabel()
         .should('have.text', this.startPage.label.labelEmail.text)
+    });
+
+    it('AT_01.05.07 | Verify the Password input field and it has text "Password"', function ()  {
+        loginPopup
+            .getPasswordInput()
+            .should('be.visible')
+            .and('have.attr', 'placeholder', this.startPage.inputField.loginPopup.passwordInputField);
     });
 });
