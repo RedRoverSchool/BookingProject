@@ -9,7 +9,7 @@ const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_04.08 | Calendar-selection block UI and functionality week view', () => {
+describe('US_04.08 | Calendar-selection block UI and functionality week/month view', () => {
     before(() => {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
@@ -19,14 +19,9 @@ describe('US_04.08 | Calendar-selection block UI and functionality week view', (
     it('AT_04.08.03 | Verify that Label is present for week view', () => {
        createBookingPage.getLabelCalendar().should('be.visible');
     });
-});
 
-describe('US_04.08 | Calendar-selection block UI and functionality month view', () => {
-     before(() => {
-         createBookingPage.clickMonthBtn();
-     });
- 
     it('AT_04.08.01 | Verify that Label is present for month view', () => {
+        createBookingPage.clickMonthBtn();
         createBookingPage.getLabelCalendar().should('be.visible')
     });
  });
