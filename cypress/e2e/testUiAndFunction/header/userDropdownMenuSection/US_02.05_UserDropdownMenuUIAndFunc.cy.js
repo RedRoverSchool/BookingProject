@@ -27,4 +27,10 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		header.getFlagIconEn()
 			.should('be.visible')		
 	})
+
+	it('AT_02.05.04 |Verify UK flag  icon is clickable', function () {
+		header.clickUserDropDownMenu()
+		header.getFlagIconEn()
+			.should('be.visible')		
+	})
 });
