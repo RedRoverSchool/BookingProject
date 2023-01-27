@@ -79,4 +79,17 @@ describe('US_01.15 | Register Agent Negative', function () {
                      .should('be.visible')
                      .and('have.text', this.startPage.alert.registerPopupErrorMessage.emptyPhoneField)
     });
+
+    it('AT_01.15.07 | Error message is displayed when trying to register  with previously used email', function() {
+        registerPopup.enterName(randomFullName)
+        registerPopup.enterCompanyName(randomCompanyName)
+        registerPopup.enterEmail(this.startPage.data.previouslyUsedEmail)
+        registerPopup.enterPhoneNumber(randomPhoneNumber)
+        registerPopup.clickRegisterButton()
+        registerPopup
+            .getErrorMessage()
+            .should('be.visible')
+            .and('have.text', this.startPage.alert.registerPopupErrorMessage.emailIsPreviouslyUsed)
+    });
+
 })
