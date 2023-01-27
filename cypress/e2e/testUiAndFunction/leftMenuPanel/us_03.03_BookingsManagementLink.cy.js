@@ -22,17 +22,17 @@ describe('US_03.03 Bookings management link', () => {
     });
 
     it('AT_03.03.01 Verify the "Bookings management" icon is visible', () => {  
-        leftMenuPanel.getBookingManagement().should('be.visible')
+        leftMenuPanel.getBookingManagementIcon().should('be.visible')
     });
 
     it('AT_03.03.02 Verify the Sidebar has text "Booking management" ', function () {
         leftMenuPanel
-            .getBookingManagementNameLink()
+            .getBookingManagementMenuLink()
             .should('include.text', this.leftMenuPanel.menuLinks.bookingsManagementLink)
     });
 
     it('AT__03.03.03 Verify Clicking "Booking management" opening the page with heading "Booking list"', function () {
-        leftMenuPanel.clickGetBookingManagementIconLink() 
+        leftMenuPanel.clickBookingManagementIcon() 
             
         bookingsListPage.getBookingListHeader()
             .should('include.text', this.bookingsListPage.headers.bookingListHeader)

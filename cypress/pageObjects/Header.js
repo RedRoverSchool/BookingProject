@@ -7,6 +7,7 @@ class Header {
     getLogoImg = () => cy.get('.logo-mini > img');
     getCloseBtn = () => cy.get('div[style="padding: 15px;"] .close');
     getFlagIconEn = () => cy.get('a[href="/lang?l=en"');
+    getEnvelopeIcon = () => cy.get('[href="/helpdesk"]');
     getContactUsIcon = () => cy.get('.sidebar-menu > :nth-child(4) > a');
     getFlagIconEn = () => cy.get('a[href="/lang?l=en"]');
     getEnvelopeIcon = () => cy.get('[href="/helpdesk"]'); 
@@ -28,8 +29,7 @@ class Header {
     clickCloseBtn() {
         this.getCloseBtn().click();
     }
-
-    clickContactUsIcon() {
+     clickContactUsIcon() {
         this.getContactUsIcon().click();
     }
 

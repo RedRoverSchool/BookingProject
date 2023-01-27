@@ -36,6 +36,9 @@
     },
     "unavailableDayField": {
         "cursor": "not-allowed"
+    },
+    "class": {
+        "unavailableClass": "unavailable"
     }
     
 }

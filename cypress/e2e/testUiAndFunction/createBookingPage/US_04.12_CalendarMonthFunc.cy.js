@@ -1,6 +1,6 @@
 /// <reference types = "Cypress" />
 
-import CreateBookingPage from "../../../pageObjects/CreateBookingPage.js";
+import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -10,10 +10,14 @@ describe('US_04.12 | Calendar month functionality', () => {
 	before(() => {
 		cy.visit('/');
 		cy.login(AGENT.email, AGENT.password)
+		createBookingPage.clickMonthBtn()
 	});
 
-	beforeEach(() => {
-		createBookingPage.clickMonthBtn();
+	beforeEach(function () {
+		
+		cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        })
 	});
 
 	it('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
@@ -49,4 +53,17 @@ describe('US_04.12 | Calendar month functionality', () => {
 				})
 		})
 	})
-});
+
+	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
+		let date = new Date() 
+        let fullDateThailand = date.toLocaleString('en-GB', { day: 'numeric' , month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' })
+        let currentDateThailand = +fullDateThailand.slice(0, 2)
+		let currentMonthAndYear = fullDateThailand.slice(3)
+		createBookingPage.getMonthDropdown().select(currentMonthAndYear)
+		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
+            if($el.text() < currentDateThailand){
+                expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
+            }          
+		})		
+	})
+})
