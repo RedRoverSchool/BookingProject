@@ -20,6 +20,8 @@ class CreateBookingPage {
     getDepartureStationDropdown = () => cy.get('#select2-departure-container');
     getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
     getWeekButton = () => cy.get('button.calendar-view-week');
+    getArrivalStationDropdown = () => cy.get('#select2-destination-container');
+    getArrivalStationList = () => cy.get('.select2-results .select2-results__options');
     
     // Methods
     clickCalendarNextButton() {
@@ -56,6 +58,10 @@ class CreateBookingPage {
 
     clickDepartureStationDropdown() {
         this.getDepartureStationDropdown().click()
+    };
+
+    clickArrivalStationDropdown() {
+        this.getArrivalStationDropdown().click()
     };
 }
 export default CreateBookingPage;
