@@ -18,38 +18,38 @@ describe('US_02.02 header burger menu functionality', () => {
     })
 
     it('AT_02.02.01 Link names on the left side panel revealed after clicking on the burger menu', function () {
-        leftMenuPanel.getBookingNameLink().should('not.be.visible')
-        leftMenuPanel.getBookingManagementNameLink().should('not.be.visible');
-        leftMenuPanel.getAccountManagementNameLink().should('not.be.visible');
-        leftMenuPanel.getContactUsNameLink().should('not.be.visible');
+        leftMenuPanel.getBookingMenuLink().should('not.be.visible')
+        leftMenuPanel.getBookingManagementMenuLink().should('not.be.visible');
+        leftMenuPanel.getAccountManagementMenuLink().should('not.be.visible');
+        leftMenuPanel.getContactUsMenuLink().should('not.be.visible');
         header.clickBurgerMenu();
 
-        leftMenuPanel.getBookingNameLink().should('be.visible')
+        leftMenuPanel.getBookingMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[0]);
-        leftMenuPanel.getBookingManagementNameLink().should('be.visible')
+        leftMenuPanel.getBookingManagementMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[1]);
-        leftMenuPanel.getAccountManagementNameLink().should('be.visible')
+        leftMenuPanel.getAccountManagementMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[2]);
-        leftMenuPanel.getContactUsNameLink().should('be.visible')
+        leftMenuPanel.getContactUsMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[3]);
     })
 
     it('AT_02.02.02 Link names on the left side panel are closed after the second click on the burger menu', function () {
         header.clickBurgerMenu();
-        leftMenuPanel.getBookingNameLink().should('be.visible')
+        leftMenuPanel.getBookingMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[0]);
-        leftMenuPanel.getBookingManagementNameLink().should('be.visible')
+        leftMenuPanel.getBookingManagementMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[1]);
-        leftMenuPanel.getAccountManagementNameLink().should('be.visible')
+        leftMenuPanel.getAccountManagementMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[2]);
-        leftMenuPanel.getContactUsNameLink().should('be.visible')
+        leftMenuPanel.getContactUsMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[3]);
 
         header.clickBurgerMenu();
 
-        leftMenuPanel.getBookingNameLink().should('not.be.visible')
-        leftMenuPanel.getBookingManagementNameLink().should('not.be.visible');
-        leftMenuPanel.getAccountManagementNameLink().should('not.be.visible');
-        leftMenuPanel.getContactUsNameLink().should('not.be.visible');
+        leftMenuPanel.getBookingMenuLink().should('not.be.visible')
+        leftMenuPanel.getBookingManagementMenuLink().should('not.be.visible');
+        leftMenuPanel.getAccountManagementMenuLink().should('not.be.visible');
+        leftMenuPanel.getContactUsMenuLink().should('not.be.visible');
     })
 })

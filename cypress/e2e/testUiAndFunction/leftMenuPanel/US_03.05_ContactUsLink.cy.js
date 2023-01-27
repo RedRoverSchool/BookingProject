@@ -23,18 +23,18 @@ describe('US_03.05 | Contact us link', () => {
 
     it('AT_03.05.01 | Sidebar has "Contact us" text, () => ', function() {
         leftMenuPanel
-            .getContactUsNameLink()
+            .getContactUsMenuLink()
             .should('have.text', this.leftMenuPanel.menuLinks.contactUsLink) 
     })
 
     it('AT_03.05.02 |"Contact us" icon is visible', () =>  {  
         leftMenuPanel
-            .getContactUsIсonLink()
+            .getContactUsIcon()
             .should('be.visible')
     })
 
     it('AT_03.05.03 |Clicking "Contact us" opening Helpdesk page with a header "Helpdesk", () => ', function() {  
-        leftMenuPanel.clickGetContactUsIсonLink()
+        leftMenuPanel.clickContactUsIcon()
         
         helpdeskPage
             .getHelpdeskHeader()
