@@ -41,12 +41,10 @@ describe('US_04.09 | Calendar available days week UI', () => {
 				
 				expect($el).to.have.css('color', this
 					.createBookingPage
-					.departureDate
 					.selectedDayField
 					.color);
 				expect($el).to.have.css('background-color', this
 					.createBookingPage
-					.departureDate
 					.selectedDayField
 					.backgroundColor);	
 			};

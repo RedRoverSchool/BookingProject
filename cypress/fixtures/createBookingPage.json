@@ -24,10 +24,8 @@
             "email": "hello@test.plus"
         }
     },
-    "departureDate": {
         "selectedDayField": {
             "backgroundColor":"rgb(0, 166, 90)",
             "color": "rgb(255, 255, 255)"
         }
-    }
 }
