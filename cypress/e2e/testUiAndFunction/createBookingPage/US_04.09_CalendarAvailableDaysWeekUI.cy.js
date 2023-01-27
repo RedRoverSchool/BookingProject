@@ -8,10 +8,13 @@ describe('US_04.09 | Calendar available days week UI', () => {
 
 	const AGENT = Cypress.env('agent');
 
-	beforeEach(function () {
-		cy.visit('/')
+	before(() => {
+		cy.visit('/');
 		cy.login(AGENT.email, AGENT.password)
+	});
 
+	beforeEach(function () {
+	
 		cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
