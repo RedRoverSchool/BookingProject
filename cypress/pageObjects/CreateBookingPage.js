@@ -11,8 +11,8 @@ class CreateBookingPage {
     getLabelCalendar = () => cy.get('div #calendar-week');
     getLabelPassengerDetails = () => cy.get('.passenger-wrapper div.title label');
     getMonthBtn = () => cy.get('.calendar-view-wrapper .calendar-view-month');
-    getMonthDropdownList = () => cy.get('.calendar-month-wrapper .form-control option');
-    getMonthDropdown = () => cy.get('.col-lg-12 .calendar-month-wrapper');
+    getMonthDropdownList = () => cy.get('select[name="calendar_month"] option');
+    getMonthDropdown = () => cy.get('select[name="calendar_month"]');
     getFridayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(5)');
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
@@ -42,8 +42,8 @@ class CreateBookingPage {
         this.getMonthBtn().click({ forse: true });
     }
 
-    selectMonthDropdownList() {
-        this.getMonthDropdownList().select(0);
+    selectMonthDropdownList_1() {
+        this.getMonthDropdownList().select(1);
     }
 
     clickMonthDropdown() {

@@ -27,4 +27,14 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
             .invoke('text')
             .should('eq', thailandCurrentMonthAndYear)
     })
+
+    it('AT_04.13.03 | Verify that the label of the Month dropdown displays the month selected from the Month dropdown menu', function () {
+        createBookingPage.getMonthDropdown()
+            .select(2)
+            .invoke('val')
+            .then(
+                selectedMonth => createBookingPage.getMonthDropdown()
+                    .should('have.value', selectedMonth)
+            )
+    })
 })
