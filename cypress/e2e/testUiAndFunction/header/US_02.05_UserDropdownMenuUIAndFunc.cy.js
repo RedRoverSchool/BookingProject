@@ -28,9 +28,8 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 	})
 	
 	it('AT_02.05.02 |Verify UK flag" icon is displayed', function () {
-		
 		header.getFlagIconEn()
-			.should('be.visible')		
+		.should('be.visible')		
 	})
 
 	it('AT_02.05.04 |Verify UK flag  icon is clickable', function () {
