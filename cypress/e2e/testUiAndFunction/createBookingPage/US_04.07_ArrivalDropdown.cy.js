@@ -19,7 +19,6 @@ describe('US_04.07_Arrival Dropdown UI and functionality ', () => {
 
     it('AT_04.07.01 | Verify the Arrival station Dropdown Menu is clickable and opens up the dropdown menu', function () {
         createBookingPage.clickArrivalStationDropdown()
-
         createBookingPage.getArrivalStationList().should('be.visible')
     });
 })
