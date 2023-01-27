@@ -20,3 +20,16 @@ describe('US_04.08 | Calendar-selection block UI and functionality week view', (
        createBookingPage.getLabelCalendar().should('be.visible');
     });
 });
+
+describe('US_04.08 | Calendar-selection block UI and functionality month view', () => {
+    before(() => {
+        cy.visit('/');
+        cy.login(AGENT.email, AGENT.password);
+        leftMenuPanel.clickBookingIcon();
+        createBookingPage.clickMonthBtn();
+    });
+ 
+    it('AT_04.08.01 | Verify that Label is present for month view', () => {
+        createBookingPage.getLabelCalendar().should('be.visible')
+    });
+ });
