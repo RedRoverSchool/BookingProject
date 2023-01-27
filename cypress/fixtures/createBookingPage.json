@@ -12,6 +12,10 @@
                 "Phuket Town",
                 "Rassada Pier"
             ]
+        },
+        "seatSelection": {
+            "onePassenger": "1 passenger",
+            "passengers": "passengers"
         }
     },
     "headers": {
