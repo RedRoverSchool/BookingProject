@@ -46,11 +46,10 @@ export class LoginPopup {
     getHeaderTextElement = () => cy.get('.text-center');
     getPasswordLabel = () => cy.get('#byemail div:nth-last-of-type(2) label');
     getHeaderText = () => cy.get('div[style*="padding: 15"] :nth-child(2)');
-    getEmailLabel = () => cy.get('#loginModal .tab-content #byemail form div label').first();
+    getEmailLabel = () => cy.get('#byemail :nth-child(3) label');
     getPasswordInput = () => cy.get('#byemail input[name="password"]');
     getSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
     getMessageAlert = () => cy.get('div.alert');
-    getEmailLabel = () => cy.get('#byemail > .form-horizontal > :nth-child(3) > .col-sm-4');
 
 
     // Methods
