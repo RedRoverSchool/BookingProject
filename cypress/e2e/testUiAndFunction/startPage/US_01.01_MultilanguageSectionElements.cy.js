@@ -32,4 +32,9 @@ describe('US_01.01 | Multilanguage section elements UI and functionality', () =>
     it('AT_01.01.01 | Verify Russia flag icon is visible', function () {
         startPage.getRussiaFlagIcon().should('be.visible');
     });
+
+    it('AT_01.01.02 | Verify Russia flag icon: clickable / changing language to Russian', function () {
+        startPage.clickRussiaFlagIcon();
+        startPage.getLoginButton().should('have.text', this.startPage.buttons.rusLoginBtnText);
+    });
 });

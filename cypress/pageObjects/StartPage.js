@@ -31,6 +31,10 @@ export class StartPage {
     clickUKFlagIcon() {
         this.getUKFlagIcon().click()
     }
+
+    clickRussiaFlagIcon() {
+        this.getRussiaFlagIcon().click()
+    }
 }
 
 export class LoginPopup {
