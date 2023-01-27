@@ -3,6 +3,7 @@ class CreateBookingPage {
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
     getMainPassengerPhoneField = () => cy.get('.iti #passenger-phone');
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
+    getCalendarPrevButton = () => cy.get('button.calendar-week-prev');
     getFirstTripCard = () => cy.get('div .trip:first-child');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getCreateBookingHeader = () => cy.get('div h1');
@@ -20,11 +21,18 @@ class CreateBookingPage {
     getDepartureStationDropdown = () => cy.get('#select2-departure-container');
     getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
     getWeekButton = () => cy.get('button.calendar-view-week');
+    getArrivalStationDropdown = () => cy.get('#select2-destination-container');
+    getArrivalStationList = () => cy.get('.select2-results .select2-results__options');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
+
     
     // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
+    };
+
+    clickCalendarPrevButton() {
+        this.getCalendarPrevButton().click()
     };
 
     clickFirstTripCard() {
@@ -57,6 +65,10 @@ class CreateBookingPage {
 
     clickDepartureStationDropdown() {
         this.getDepartureStationDropdown().click()
+    };
+
+    clickArrivalStationDropdown() {
+        this.getArrivalStationDropdown().click()
     };
 }
 export default CreateBookingPage;

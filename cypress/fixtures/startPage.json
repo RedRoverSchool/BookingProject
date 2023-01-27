@@ -15,7 +15,8 @@
         "loginBtnText": "login",
         "thLoginBtnText": "เข้าสู่ระบบ",
         "loginBtnTextColor": "rgb(0, 128, 0)",
-        "rusLoginBtnText": "Войти"
+        "rusLoginBtnText": "Войти",
+        "signInBtnTextColor": "rgb(108, 205, 102)" 
     },
     "headers": {
         "header_Login_Popup": {
