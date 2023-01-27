@@ -25,25 +25,25 @@ describe('US_02.02 header burger menu functionality', () => {
         header.clickBurgerMenu();
 
         leftMenuPanel.getBookingNameLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.headers.leftsideMenuPanelLinkNames[0]);
+            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[0]);
         leftMenuPanel.getBookingManagementNameLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.headers.leftsideMenuPanelLinkNames[1]);
+            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[1]);
         leftMenuPanel.getAccountManagementNameLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.headers.leftsideMenuPanelLinkNames[2]);
+            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[2]);
         leftMenuPanel.getContactUsNameLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.headers.leftsideMenuPanelLinkNames[3]);
+            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[3]);
     })
 
     it('AT_02.02.02 Link names on the left side panel are closed after the second click on the burger menu', function () {
         header.clickBurgerMenu();
         leftMenuPanel.getBookingNameLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.headers.leftsideMenuPanelLinkNames[0]);
+            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[0]);
         leftMenuPanel.getBookingManagementNameLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.headers.leftsideMenuPanelLinkNames[1]);
+            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[1]);
         leftMenuPanel.getAccountManagementNameLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.headers.leftsideMenuPanelLinkNames[2]);
+            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[2]);
         leftMenuPanel.getContactUsNameLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.headers.leftsideMenuPanelLinkNames[3]);
+            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[3]);
 
         header.clickBurgerMenu();
 
