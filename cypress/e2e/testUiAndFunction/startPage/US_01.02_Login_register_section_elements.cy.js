@@ -19,6 +19,6 @@ describe('US_01.02 | Login register section elements', () => {
 
         startPage.getLoginButton().should('be.visible');
         startPage.clickLoginButton();
-        loginPopup.getHeaderText().should('include.text', this.startPage.headers.header_Login_Popup.text)
+        loginPopup.getLoginPopupHeader().should('include.text', this.startPage.headers.header_Login_Popup.text)
     });
 })
