@@ -50,6 +50,8 @@ export class LoginPopup {
     getPasswordInput = () => cy.get('#byemail input[name="password"]');
     getSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
     getMessageAlert = () => cy.get('div.alert');
+    getLoginByPhoneNumberTab = () => cy.get('[href="#byphone"]');
+    getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) label');
 
 
     // Methods
@@ -59,7 +61,10 @@ export class LoginPopup {
     };
     clickSignInButton() {
         this.getSignInButton().click();
-    };    
+    };
+    clickLoginByPhoneNumberTab() {
+        this.getLoginByPhoneNumberTab().click();
+    }    
 }
 
 export class RestorePopup {
