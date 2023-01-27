@@ -24,8 +24,11 @@
             "email": "hello@test.plus"
         }
     },
-        "selectedDayField": {
-            "backgroundColor":"rgb(0, 166, 90)",
-            "color": "rgb(255, 255, 255)"
-        }
+    "selectedDayField": {
+        "backgroundColor":"rgb(0, 166, 90)",
+        "color": "rgb(255, 255, 255)"
+    },
+    "unavailableDayField": {
+        "cursor": "not-allowed"
+    }
 }

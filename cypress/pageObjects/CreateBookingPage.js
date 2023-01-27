@@ -3,6 +3,7 @@ class CreateBookingPage {
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
     getMainPassengerPhoneField = () => cy.get('.iti #passenger-phone');
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
+    getCalendarPrevButton = () => cy.get('button.calendar-week-prev');
     getFirstTripCard = () => cy.get('div .trip:first-child');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getCreateBookingHeader = () => cy.get('div h1');
@@ -24,6 +25,10 @@ class CreateBookingPage {
     // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
+    };
+
+    clickCalendarPrevButton() {
+        this.getCalendarPrevButton().click()
     };
 
     clickFirstTripCard() {

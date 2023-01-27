@@ -8,9 +8,18 @@ describe('US_04.11 | Calendar week functionality', () => {
 
 	const AGENT = Cypress.env('agent');
 
-	beforeEach(function () {
-		cy.visit('/')
+	before(() => {
+		cy.visit('/');
 		cy.login(AGENT.email, AGENT.password)
+		
+		 //Precondition
+		createBookingPage.getWeekButton().should('have.class', 'selected');
+	});
+
+	beforeEach(function () {
+		cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        })
 	});
 
 	it('AT_04.11.01|Verify that you can click on last date field if it has not expired', function() {
@@ -39,4 +48,15 @@ describe('US_04.11 | Calendar week functionality', () => {
 			})
 		})
 	})
+
+	it('AT_04.11.03|Verify that if the date has expired, then the field with it is not clickable', function() {
+		
+		createBookingPage.clickCalendarPrevButton;
+		createBookingPage.getCalendarDays().each(($el) => {
+			if($el.hasClass('unavailable')){
+
+				expect($el).to.have.css('cursor', 'not-allowed');
+			}
+		})
+	});
 });
