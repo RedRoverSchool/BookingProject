@@ -1,8 +1,10 @@
 /// <reference types="Cypress" />
 
+import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import Header from "../../../pageObjects/Header";
 
 const header = new Header();
+const createBookingPage = new CreateBookingPage();
 
 describe('US_02.05 | User dropdown menu UI and functionality', () => {
 
@@ -11,6 +13,9 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 	beforeEach(function () {
 		cy.fixture('header').then(header => {
 			this.header = header
+		})
+		cy.fixture('createBookingPage').then(createBookingPage => {
+			this.createBookingPage = createBookingPage
 		})
 		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
@@ -30,7 +35,11 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 
 	it('AT_02.05.04 |Verify UK flag  icon is clickable', function () {
 		header.clickUserDropDownMenu()
-		header.getFlagIconEn()
-			.should('be.visible')		
+		header.clickFlagIconTh()
+		createBookingPage.getPhoneNumberInputFild().should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
+		header.clickUserDropDownMenu()
+		header.clickFlagIconEn()
+		createBookingPage.getPhoneNumberInputFild().should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberEn)
+		
 	})
 });

@@ -21,7 +21,10 @@
         "main_passenger": {
             "name": "Stephan",
             "phone": "291234567",
-            "email": "hello@test.plus"
+            "email": "hello@test.plus",
+            "placeholderPhoneNumberTh": "เบอร์โทรศัพท์",
+            "placeholderPhoneNumberEn": "Phone number"
         }
     }
+    
 }
