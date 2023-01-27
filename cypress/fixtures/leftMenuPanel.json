@@ -1,0 +1,15 @@
+{
+    "headers": {
+        "header": "value"
+    },
+    "menuLinks": {
+        "leftsideMenuPanelLinkNames": [
+            "Booking",
+            "Bookings management",
+            "Account management",
+            "Contact us"
+        ],
+        "bookingsManagementLink": "Bookings management",
+        "contactUsLink": "Contact us"
+    }
+}
