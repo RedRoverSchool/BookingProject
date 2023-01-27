@@ -39,4 +39,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .getEmailLabel()
             .should('have.css','color', this.startPage.label.labelEmail.color)
     });
+
+    it('AT_01.05.02 | Insure Email label text is "Email"', function () {
+        loginPopup
+        .getEmailLabel()
+        .should('have.text', this.startPage.label.labelEmail.text)
+    });
 });

@@ -6,13 +6,16 @@
         "registerPopupErrorMessage": {
             "emptyNameField": "Please enter your name",
             "emptyCompanyField": "Please enter your company name",
-            "emptyEmailField": "Please enter valid email"
+            "emptyEmailField": "Please enter valid email",
+            "emptyPhoneField": "Please enter your phone number"
         },
         "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password"
     },
     "buttons": {
         "loginBtnText": "login",
-        "thLoginBtnText": "เข้าสู่ระบบ"
+        "thLoginBtnText": "เข้าสู่ระบบ",
+        "loginBtnTextColor": "rgb(0, 128, 0)",
+        "rusLoginBtnText": "Войти"
     },
     "headers": {
         "header_Login_Popup": {
@@ -26,13 +29,6 @@
         "logoFileName": "logo-main.png"
     },
     "inputField": {
-        "registrationPopup": {
-            "yourName": "Rick Grimes",
-            "companyName": "TestCo",
-            "email": "RickGrimes@qatest.site",
-            "phoneNumber": "+16508904545",
-            "invaildEmail": "a-g@ent---1@test.site"
-        },
         "loginPopup": {
             "emailInputField": "Email"
         }
@@ -42,7 +38,8 @@
             "text": "Password"
         },
         "labelEmail": {
-            "color": "rgb(153, 153, 153)"
+            "color": "rgb(153, 153, 153)",
+            "text": "Email"
         }
     },
     "links": {
