@@ -32,11 +32,7 @@
     },
     "inputField": {
         "loginPopup": {
-            "emailInputField": "Email"
-        }
-    },
-    "inputField": {
-        "loginPopup": {
+            "emailInputField": "Email",
             "passwordInputField": "Password"
         }
     },

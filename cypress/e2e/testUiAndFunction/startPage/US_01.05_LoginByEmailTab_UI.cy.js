@@ -20,7 +20,7 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         loginPopup.getLoginByEmailTab().should('be.visible')
     });
 
-    it.only('AT_01.05.03 | Verify the agent is able to see Email input field and it has text "Email"', function () {
+    it('AT_01.05.03 | Verify the agent is able to see Email input field and it has text "Email"', function () {
         loginPopup
             .getEmailInput()
             .should('be.visible')
