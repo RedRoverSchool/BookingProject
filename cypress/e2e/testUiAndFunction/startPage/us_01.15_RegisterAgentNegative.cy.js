@@ -13,6 +13,10 @@ const randomEmail = faker.internet.email(randomFirstName, randomLastName, 'qates
 const randomInvalidEmail = faker.internet.email('a-g@ent', '-@-12', '--@qatest.site');
 const randomPhoneNumber = faker.phone.number('+66#########');
 const randomCompanyName = faker.company.name();
+const randomAlpha = faker.random.alpha();
+const randomNumeric = faker.random.numeric();
+const randomInvalidCompanyName = `${randomAlpha + randomNumeric}`;
+
 
 describe('US_01.15 | Register Agent Negative', function () {
 
@@ -92,4 +96,15 @@ describe('US_01.15 | Register Agent Negative', function () {
             .and('have.text', this.startPage.alert.registerPopupErrorMessage.emailIsPreviouslyUsed)
     });
 
+    it('AT_01.15.08 | Error message is displayed when trying to register with invalid company name (1 letter and 1 number without space , example: "A1")', function() {
+        registerPopup.enterName(randomFullName)
+        registerPopup.enterCompanyName(randomInvalidCompanyName)
+        registerPopup.enterEmail(randomEmail)
+        registerPopup.enterPhoneNumber(randomPhoneNumber)
+        registerPopup.clickRegisterButton()
+        registerPopup
+                .getErrorMessage()
+                .should('be.visible')
+                .and('have.text', this.startPage.alert.registerPopupErrorMessage.emptyCompanyField)
+    });
 })
