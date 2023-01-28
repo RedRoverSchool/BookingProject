@@ -20,7 +20,7 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
 
     it('AT_04.13.02 | Verify the first option of the Month dropdown menu has the current month and the current year', function () {
         const current = new Date()
-        const thailandCurrentMonthAndYear = new Date(current).toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
+        const thailandCurrentMonthAndYear = current.toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
         createBookingPage.getMonthDropdownList()
             .eq(0)
             .invoke('text')
