@@ -6,13 +6,19 @@
         "registerPopupErrorMessage": {
             "emptyNameField": "Please enter your name",
             "emptyCompanyField": "Please enter your company name",
-            "emptyEmailField": "Please enter valid email"
+            "emptyEmailField": "Please enter valid email",
+            "emptyPhoneField": "Please enter your phone number",
+            "emailIsPreviouslyUsed": "This Email is not allowed to use current website",
+            "nameFieldSpecialCharacters": "Use latin letters, numbers and spaces"
         },
         "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password"
     },
     "buttons": {
         "loginBtnText": "login",
-        "thLoginBtnText": "เข้าสู่ระบบ"
+        "thLoginBtnText": "เข้าสู่ระบบ",
+        "loginBtnTextColor": "rgb(0, 128, 0)",
+        "rusLoginBtnText": "Войти",
+        "signInBtnTextColor": "rgb(108, 205, 102)" 
     },
     "headers": {
         "header_Login_Popup": {
@@ -20,21 +26,16 @@
             "color": "rgb(102, 102, 102)",
             "font_size": "30px",
             "headerText": "Enter QA Test OP"
-        }
+        },
+        "registerAgentAccount": "Register agent account"
     },
     "img": {
         "logoFileName": "logo-main.png"
     },
     "inputField": {
-        "registrationPopup": {
-            "yourName": "Rick Grimes",
-            "companyName": "TestCo",
-            "email": "RickGrimes@qatest.site",
-            "phoneNumber": "+16508904545",
-            "invaildEmail": "a-g@ent---1@test.site"
-        },
         "loginPopup": {
-            "emailInputField": "Email"
+            "emailInputField": "Email",
+            "passwordInputField": "Password"
         }
     },
     "label": {
@@ -42,10 +43,16 @@
             "text": "Password"
         },
         "labelEmail": {
-            "color": "rgb(153, 153, 153)"
+            "color": "rgb(153, 153, 153)",
+            "text": "Email"
         }
     },
     "links": {
         "registerAccountNowEnglishText": "Register account now"
+    },
+    "data": {
+        "previouslyUsedEmail": "testAgent6@qatest.site",
+        "specialCharacters": "#!@#$%"
     }
+
 }

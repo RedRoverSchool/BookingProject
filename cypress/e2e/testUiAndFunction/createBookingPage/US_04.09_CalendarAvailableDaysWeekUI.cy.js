@@ -8,9 +8,19 @@ describe('US_04.09 | Calendar available days week UI', () => {
 
 	const AGENT = Cypress.env('agent');
 
-	beforeEach(function () {
-		cy.visit('/')
+	before(() => {
+		cy.visit('/');
 		cy.login(AGENT.email, AGENT.password)
+	});
+
+	beforeEach(function () {
+	
+		cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        })
+
+		 //Precondition
+		createBookingPage.getWeekButton().should('have.class', 'selected');
 	});
 
 	it('AT_04.09.01 | Verify calendar-day-selection-wrapper starts and ends with same dates as label calendar week', function () {
@@ -26,4 +36,21 @@ describe('US_04.09 | Calendar available days week UI', () => {
 			})
 		})
 	})
+
+	it('AT_04.09.02|Verify that the active field has background color #00a65a and text color #FFFFFF', function() {
+		
+		createBookingPage.getCalendarDays().each(($el) => {
+			if($el.hasClass('selected')){
+				
+				expect($el).to.have.css('color', this
+					.createBookingPage
+					.selectedDayField
+					.color);
+				expect($el).to.have.css('background-color', this
+					.createBookingPage
+					.selectedDayField
+					.backgroundColor);	
+			};
+		});
+	});
 });

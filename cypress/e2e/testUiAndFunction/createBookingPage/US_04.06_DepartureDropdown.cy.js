@@ -28,4 +28,5 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
             expect($el.text()).to.be.equal(this.createBookingPage.dropdowns.departureStation.stationsNames[i])
         })
     });
+
 })

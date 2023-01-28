@@ -31,6 +31,10 @@ export class StartPage {
     clickUKFlagIcon() {
         this.getUKFlagIcon().click()
     }
+
+    clickRussiaFlagIcon() {
+        this.getRussiaFlagIcon().click()
+    }
 }
 
 export class LoginPopup {
@@ -39,13 +43,15 @@ export class LoginPopup {
     getLoginByEmailTab = () => cy.get('[href="#byemail"]');
     getForgotYourPasswordLink = () => cy.get('#loginModal .pull-right a');
     getEmailInput = () => cy.get('#byemail input[placeholder="Email"]');
-    getHeaderTextElement = () => cy.get('.text-center');
     getPasswordLabel = () => cy.get('#byemail div:nth-last-of-type(2) label');
-    getHeaderText = () => cy.get('div[style*="padding: 15"] :nth-child(2)');
-    getEmailLabel = () => cy.get('#loginModal .tab-content #byemail form div label').first();
+    getLoginPopupHeader = () => cy.get('#loginModal h2');
+    getEmailLabel = () => cy.get('#byemail :nth-child(3) label');
     getPasswordInput = () => cy.get('#byemail input[name="password"]');
     getSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
     getMessageAlert = () => cy.get('div.alert');
+    getLoginByPhoneNumberTab = () => cy.get('[href="#byphone"]');
+    getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) label');
+    getCloseBtn = () => cy.get('#loginModal .close');
 
 
     // Methods
@@ -53,9 +59,18 @@ export class LoginPopup {
     clickForgotYourPasswordLink() {
         this.getForgotYourPasswordLink().click({force: true});
     };
+
     clickSignInButton() {
         this.getSignInButton().click();
-    };    
+    };
+
+    clickLoginByPhoneNumberTab() {
+        this.getLoginByPhoneNumberTab().click();
+    };
+
+    clickCloseBtn() {
+        this.getCloseBtn().click();
+    }; 
 }
 
 export class RestorePopup {
@@ -66,7 +81,8 @@ export class RestorePopup {
     getMessageAlert = () => cy.get('#restoreModal div.alert');
     getRestorePasswordHeader = () => cy.get('#restoreModal h2');
     getCloseButton = () => cy.get('div#restoreModal .modal-header .close');
-    getRestorePopup = () => cy.get('div#restoreModal')
+    getRestorePopup = () => cy.get('div#restoreModal');
+    getRegisterLink = () => cy.get('.form-horizontal .modal-footer .pull-left a');
 
     // Methods
 
@@ -80,6 +96,10 @@ export class RestorePopup {
 
     clickCloseButton(){
         this.getCloseButton().click()
+    };
+
+    clickRegisterLink(){
+        this.getRegisterLink().click();
     }
 }
 
@@ -93,6 +113,7 @@ export class RegisterPopup {
     getPhoneInputField = () => cy.get('input[name="phone"]')
     getErrorMessage = () => cy.get('#registerModal .help-block.error')
     getRegisterAgentAccountHeader = () => cy.get('#registerModal h2')
+    getForgotYourPasswordLink = () => cy.get('#registerModal .pull-right a')
 
     // Methods
 
@@ -115,4 +136,8 @@ export class RegisterPopup {
     enterPhoneNumber(phone) {
         this.getPhoneInputField().clear().type(phone, {force:true})
     }
+
+    clickForgotYourPasswordLink() {
+        this.getForgotYourPasswordLink().click({force: true});
+    };
 }

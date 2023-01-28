@@ -12,6 +12,10 @@
                 "Phuket Town",
                 "Rassada Pier"
             ]
+        },
+        "seatSelection": {
+            "onePassenger": "1 passenger",
+            "passengers": "passengers"
         }
     },
     "headers": {
@@ -21,7 +25,23 @@
         "main_passenger": {
             "name": "Stephan",
             "phone": "291234567",
-            "email": "hello@test.plus"
+            "email": "hello@test.plus",
+            "placeholderPhoneNumberTh": "เบอร์โทรศัพท์",
+            "placeholderPhoneNumberEn": "Phone number"
         }
+    },
+    "selectedDayField": {
+        "backgroundColor":"rgb(0, 166, 90)",
+        "color": "rgb(255, 255, 255)"
+    },
+    "unavailableDayField": {
+        "cursor": "not-allowed"
+    },
+    "class": {
+        "unavailableClass": "unavailable"
+    },
+    "seatSelectionTable": {
+        "selectedSeatColor": "rgb(157, 208, 157)"        
     }
+    
 }
