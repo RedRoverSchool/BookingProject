@@ -39,6 +39,9 @@
     },
     "class": {
         "unavailableClass": "unavailable"
+    },
+    "seatSelectionTable": {
+        "selectedSeatColor": "rgb(157, 208, 157)"        
     }
     
 }
