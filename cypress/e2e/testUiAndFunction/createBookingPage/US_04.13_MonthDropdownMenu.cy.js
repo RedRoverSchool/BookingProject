@@ -39,8 +39,6 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
     })
 
     it('AT_04.13.04 | Verify month dropdown menu has 13 consecutive months and year options starting from current month and year', function () {
-        arrayOfConsetutiveMonths()
-
         createBookingPage.getMonthDropdownList().each(($el, i) => {
             expect($el.text()).to.deep.eq(arrayOfConsetutiveMonths()[i])
         })
