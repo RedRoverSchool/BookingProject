@@ -36,4 +36,24 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
                     .should('have.value', selectedMonth)
             )
     })
+
+    it('AT_04.13.04 | Verify month dropdown menu has 13 consecutive months and year options starting from current month and year', function () {
+        let arrayOfConsecutiveMonths = []
+        let count = 0
+        let i = 0
+        while (i <= 12) {
+            const current = new Date()
+            const month = new Date(current.setMonth(current.getMonth() + `${count}`))
+                .toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
+            arrayOfConsecutiveMonths.push(month)
+            count++
+            i++
+        }
+
+        let arrayOfConsecutiveMonthsShortMonthsNames = arrayOfConsecutiveMonths.map(el => el.split(" ")[0].slice(0, 3) + " " + el.split(" ")[1])
+
+        createBookingPage.getMonthDropdownList().each(($el, i) => {
+            expect($el.text()).to.deep.eq(arrayOfConsecutiveMonthsShortMonthsNames[i])
+        })
+    })
 })
