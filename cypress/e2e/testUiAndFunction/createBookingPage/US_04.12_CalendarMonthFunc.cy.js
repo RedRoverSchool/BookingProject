@@ -29,7 +29,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 			let indexOfMonths = Math.floor(Math.random() * arrayOfMonths.length)
 			let chosenMonthAndYear = arrayOfMonths[indexOfMonths]
 
-			createBookingPage.getMonthDropdown().select(chosenMonthAndYear)
+			createBookingPage.getMonthDropdownSelect().select(chosenMonthAndYear)
 			createBookingPage
 				.getCalendarDays()
 				.not('.unavailable')
@@ -59,7 +59,7 @@ describe('US_04.12 | Calendar month functionality', () => {
         let fullDateThailand = date.toLocaleString('en-GB', { day: 'numeric' , month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' })
         let currentDateThailand = +fullDateThailand.slice(0, 2)
 		let currentMonthAndYear = fullDateThailand.slice(3)
-		createBookingPage.getMonthDropdown().select(currentMonthAndYear)
+		createBookingPage.getMonthDropdownSelect().select(currentMonthAndYear)
 		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
             if($el.text() < currentDateThailand){
                 expect($el).to.have.class(this.createBookingPage.class.unavailableClass)

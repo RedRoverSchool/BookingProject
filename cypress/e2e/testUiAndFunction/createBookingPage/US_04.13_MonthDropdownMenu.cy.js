@@ -7,14 +7,13 @@ const createBookingPage = new CreateBookingPage();
 describe('US_04.13 | Create booking page > Departure date > Month dropdown UI and functionality', () => {
     const AGENT = Cypress.env('agent');
 
-    beforeEach(function () {
+    before(function () {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
         createBookingPage.clickMonthBtn();
     })
 
     it('AT_04.13.01 | Month dropdown menu (to the left of the Week button) is visible and has 13 months for selection', () => {
-        createBookingPage.clickMonthDropdown();
         createBookingPage.getMonthDropdownList().should('be.visible')
             .and('have.length', 13);
     })
@@ -29,11 +28,11 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
     })
 
     it('AT_04.13.03 | Verify that the label of the Month dropdown displays the month selected from the Month dropdown menu', function () {
-        createBookingPage.getMonthDropdown()
+        createBookingPage.getMonthDropdownSelect()
             .select(2)
             .invoke('val')
             .then(
-                selectedMonth => createBookingPage.getMonthDropdown()
+                selectedMonth => createBookingPage.getMonthDropdownSelect()
                     .should('have.value', selectedMonth)
             )
     })

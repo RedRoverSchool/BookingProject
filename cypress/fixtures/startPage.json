@@ -8,7 +8,8 @@
             "emptyCompanyField": "Please enter your company name",
             "emptyEmailField": "Please enter valid email",
             "emptyPhoneField": "Please enter your phone number",
-            "emailIsPreviouslyUsed": "This Email is not allowed to use current website"
+            "emailIsPreviouslyUsed": "This Email is not allowed to use current website",
+            "nameFieldSpecialCharacters": "Use latin letters, numbers and spaces"
         },
         "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password"
     },
@@ -50,7 +51,8 @@
         "registerAccountNowEnglishText": "Register account now"
     },
     "data": {
-        "previouslyUsedEmail": "testAgent6@qatest.site"
+        "previouslyUsedEmail": "testAgent6@qatest.site",
+        "specialCharacters": "#!@#$%"
     }
 
 }
