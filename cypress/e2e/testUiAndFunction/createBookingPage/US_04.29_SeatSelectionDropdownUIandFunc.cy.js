@@ -33,7 +33,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
             createBookingPage.getSeatSelectionDropdownList().then(($el) => {
                 const passengersAmountArray = $el
                     .toArray()
-                    .map(el => parseInt(el.innerText.split('\n')))
+                    .map(el => parseInt(el.innerText))
 
                 const passengersAmountAvailable = passengersAmountArray[passengersAmountArray.length - 1]
     
@@ -47,10 +47,8 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         createBookingPage.getSeatSelectionDropdownList().then(($el) => {
             const passengersArray = $el
                 .toArray()
-                .map(el => el.innerText.split('\n'))
-                .join(',')
-                .split(',')
-
+                .map(el => el.innerText)
+                
             if (passengersArray[0] == this.createBookingPage.dropdowns.seatSelection.onePassenger) {
                 for (let i = passengersArray.length - 1; i > 0; i--) {
                     expect(passengersArray[i])
@@ -58,6 +56,34 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
                 }
                 expect(passengersArray[0]).to.equal(this.createBookingPage.dropdowns.seatSelection.onePassenger)
             }
+        })
+    });
+
+    it('AT_04.29.03 | When selecting the required amount of passengers the corresponding number of seats in the "Seats table" will be rgb(157, 208, 157) color', function() {
+        
+        createBookingPage.getSeatSelectionDropdownList().then(($el) => {
+            const passengersArray = $el
+                .toArray()
+                .map(el => el.innerText)
+    
+            const indexArr = Math.floor(Math.random() * passengersArray.length) 
+            const passengersAmount = passengersArray[indexArr]
+             
+            createBookingPage.getSeatSelectionDropdown()
+                .select(passengersAmount)
+                .should('have.value', parseInt(passengersAmount))
+
+            createBookingPage.getSelectedSeats().then(($cell) => {
+                expect($cell).to.have.css('background-color', this.createBookingPage.seatSelectionTable.selectedSeatColor)
+
+                const selectedSeatsArr = $cell
+                    .toArray()
+                    .map(el => el.innerText)
+ 
+                const selectedSeats = selectedSeatsArr.length
+
+            expect(selectedSeats).to.equal(parseInt(passengersAmount))   
+            })
         })
     });
 })

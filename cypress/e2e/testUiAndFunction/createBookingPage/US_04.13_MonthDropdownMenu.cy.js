@@ -38,6 +38,18 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
             )
     })
 
+    it('AT_04.13.05 | Verify that the calendar label (between arrows) displays the month selected from the dropdown menu', function () {
+        createBookingPage.getMonthDropdownList()
+            .eq(3)
+            .invoke('text')
+            .then(($el) => {
+                const selectedMonthAndYear = $el;
+                createBookingPage.getMonthDropdownSelect().select(3);
+
+                createBookingPage.getLabelCalendar().should('have.text', selectedMonthAndYear)
+            })
+    })
+
     it('AT_04.13.04 | Verify month dropdown menu has 13 consecutive months and year options starting from current month and year', function () {
         createBookingPage.getMonthDropdownList().each(($el, i) => {
             expect($el.text()).to.deep.eq(arrayOfConsetutiveMonths()[i])
