@@ -1,11 +1,13 @@
 /// <reference types="Cypress" />
 
-import { StartPage, LoginPopup } from "../../../pageObjects/StartPage";
+import { StartPage, LoginPopup, RegisterPopup } from "../../../pageObjects/StartPage";
 
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
+const registerPopup = new RegisterPopup();
 
-describe('US_01.02 | Login-register section elements UI and functionality', () => {
+
+describe('US_01.02 | Login-register section elements UI and functionality | Login only', () => {
 
     before(() => {
         cy.visit('/');
@@ -16,13 +18,6 @@ describe('US_01.02 | Login-register section elements UI and functionality', () =
             this.startPage= startPage;
         }); 
 	});
-
-    it('AT_01.02.01 | Verify Link "Register account now": visible and have text "Register account now"', function () {
-        startPage
-            .getRegisterAccountLink()
-            .should('be.visible')
-            .and('have.text', this.startPage.links.registerAccountNowEnglishText);
-    });
 
     it('AT.01.02.03 | Login button has text “Login“', function () {
         startPage
@@ -51,4 +46,32 @@ describe('US_01.02 | Login-register section elements UI and functionality', () =
             .getLoginPopupHeader()
             .should('include.text', this.startPage.headers.header_Login_Popup.text)
     });
-})
+});
+/*
+    Login and registration tests are separated to avoid going to the "/" before each test.
+*/
+describe('US_01.02 | Login-register section elements UI and functionality | Registration only', () => {
+
+    before(() => {
+        cy.visit('/');
+    });
+    
+    beforeEach(function () {
+        cy.fixture('startPage').then(startPage => {
+            this.startPage= startPage;
+        }); 
+	});
+
+    it('AT_01.02.01 | Verify Link "Register account now": visible and have text "Register account now"', function () {
+        startPage
+            .getRegisterAccountLink()
+            .should('be.visible')
+            .and('have.text', this.startPage.links.registerAccountNowEnglishText);
+    });
+
+    it('AT_01.02.05 | Verify Link "Register account now" is visible, clickable and opens registration pop up', function() {
+        startPage.clickRegisterAccountLink()
+        registerPopup.getRegisterAgentAccountHeader().should('have.text', this.startPage.headers.registerAgentAccount);
+    });
+
+});
