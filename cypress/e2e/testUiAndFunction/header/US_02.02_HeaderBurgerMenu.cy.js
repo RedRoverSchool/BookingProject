@@ -9,7 +9,7 @@ const leftMenuPanel = new LeftMenuPanel();
 describe('US_02.02 header burger menu functionality', () => {
     const AGENT = Cypress.env('agent');
 
-    beforeEach(function () {
+    before(function () {
         cy.fixture('leftMenuPanel').then(leftMenuPanel => {
             this.leftMenuPanel = leftMenuPanel;
         })
@@ -17,8 +17,8 @@ describe('US_02.02 header burger menu functionality', () => {
         cy.login(AGENT.email, AGENT.password);
     })
 
-    it('AT_02.02.01 Link names on the left side panel revealed after clicking on the burger menu', function () {
-        leftMenuPanel.getBookingMenuLink().should('not.be.visible')
+    it('AT_02.02.01 Link names on the left side panel reveal after clicking on the burger menu, after second clicking on the burger menu the link names become hidden', function () {
+        leftMenuPanel.getBookingMenuLink().should('not.be.visible');
         leftMenuPanel.getBookingManagementMenuLink().should('not.be.visible');
         leftMenuPanel.getAccountManagementMenuLink().should('not.be.visible');
         leftMenuPanel.getContactUsMenuLink().should('not.be.visible');
@@ -32,24 +32,12 @@ describe('US_02.02 header burger menu functionality', () => {
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[2]);
         leftMenuPanel.getContactUsMenuLink().should('be.visible')
             .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[3]);
-    })
-
-    it('AT_02.02.02 Link names on the left side panel are closed after the second click on the burger menu', function () {
-        header.clickBurgerMenu();
-        leftMenuPanel.getBookingMenuLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[0]);
-        leftMenuPanel.getBookingManagementMenuLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[1]);
-        leftMenuPanel.getAccountManagementMenuLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[2]);
-        leftMenuPanel.getContactUsMenuLink().should('be.visible')
-            .and('have.text', this.leftMenuPanel.menuLinks.leftsideMenuPanelLinkNames[3]);
 
         header.clickBurgerMenu();
-
+        
         leftMenuPanel.getBookingMenuLink().should('not.be.visible')
         leftMenuPanel.getBookingManagementMenuLink().should('not.be.visible');
         leftMenuPanel.getAccountManagementMenuLink().should('not.be.visible');
         leftMenuPanel.getContactUsMenuLink().should('not.be.visible');
-    })
+    })    
 })
