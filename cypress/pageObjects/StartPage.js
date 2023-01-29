@@ -47,11 +47,16 @@ export class LoginPopup {
     getLoginPopupHeader = () => cy.get('#loginModal h2');
     getEmailLabel = () => cy.get('#byemail :nth-child(3) label');
     getPasswordInput = () => cy.get('#byemail input[name="password"]');
-    getSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
+    getByEmailSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
     getMessageAlert = () => cy.get('div.alert');
     getLoginByPhoneNumberTab = () => cy.get('[href="#byphone"]');
     getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) label');
     getCloseBtn = () => cy.get('#loginModal .close');
+    getCountryCodeInput = () => cy.get('#byphone [name="phone1"]');
+    getPhoneNumberInput = () => cy.get('#byphone [name="phone2"]');
+    getRequestCodeButton = () => cy.get('#byphone [value="REQUEST CODE"]');
+    getCodeFromSmsInput = () => cy.get('#step2 [name="code"]');
+    getByPhoneSignInButton = () => cy.get('#step2 [value="SIGN IN"]');
 
 
     // Methods
@@ -60,8 +65,8 @@ export class LoginPopup {
         this.getForgotYourPasswordLink().click({force: true});
     };
 
-    clickSignInButton() {
-        this.getSignInButton().click();
+    clickByEmailSignInButton() {
+        this.getByEmailSignInButton().click();
     };
 
     clickLoginByPhoneNumberTab() {
@@ -70,7 +75,27 @@ export class LoginPopup {
 
     clickCloseBtn() {
         this.getCloseBtn().click();
-    }; 
+    };
+
+    enterCountryCode(countryCode) {
+        this.getCountryCodeInput().type(countryCode, { force: true });
+    };
+
+    enterPhoneNumber(phoneNumber) {
+        this.getPhoneNumberInput().type(phoneNumber, { force: true });
+    };
+
+    clickRequestCodeButton() {
+        this.getRequestCodeButton().click();
+    };
+
+    enterCodeFromSms(code) {
+        this.getCodeFromSmsInput().type(code, { force: true });
+    };
+
+    clickByPhoneSignInButton() {
+        this.getByPhoneSignInButton().click();
+    };
 }
 
 export class RestorePopup {

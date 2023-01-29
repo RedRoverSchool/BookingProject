@@ -25,7 +25,7 @@ describe('US_01.07 | Login by email tab negative', () => {
             .clear()
             .should ('not.have.value');
         loginPopup
-            .clickSignInButton();
+            .clickByEmailSignInButton();
         loginPopup.getMessageAlert()
             .should("be.visible")
             .and('have.text',this.startPage.alert.loginPopupMessageAlert);
