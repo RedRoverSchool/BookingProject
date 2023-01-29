@@ -31,7 +31,7 @@ describe('US_01.09 | Login by phone number tab functionality', () => {
 
         cy.wait('@login').then(({response}) => {
             let body = JSON.parse(response.body);
-            loginPopup.enterCodeFromSms(body.sms.text.substr(-4));
+            loginPopup.enterCodeFromSms(body.sms.text.substr(11));
             loginPopup.clickByPhoneSignInButton();
         });
         
