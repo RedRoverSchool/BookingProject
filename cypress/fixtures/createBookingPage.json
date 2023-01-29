@@ -34,6 +34,11 @@
         "backgroundColor":"rgb(0, 166, 90)",
         "color": "rgb(255, 255, 255)"
     },
+
+    "notSelectedDayField": {
+        "colorNumbers": "rgb(51, 51, 51)"
+    },
+
     "unavailableDayField": {
         "cursor": "not-allowed"
     },
