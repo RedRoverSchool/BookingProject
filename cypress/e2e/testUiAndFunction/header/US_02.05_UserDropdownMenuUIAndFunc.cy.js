@@ -43,4 +43,9 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		header.getFlagIconTh()
 		.should('be.visible')	
 	})
+
+	it('AT_02.05.06 | Verify TH flag icon is clickable', function () {
+		header.clickFlagIconTh()
+		createBookingPage.getPhoneNumberInputFild().should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
+	})
 })
