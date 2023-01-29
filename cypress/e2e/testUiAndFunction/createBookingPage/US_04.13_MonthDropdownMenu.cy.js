@@ -36,4 +36,16 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
                     .should('have.value', selectedMonth)
             )
     })
+
+    it('AT_04.13.05 | Verify that the calendar label (between arrows) displays the month selected from the dropdown menu', function () {
+        createBookingPage.getMonthDropdownList()
+            .eq(3)
+            .invoke('text')
+            .then(($el) => {
+                const selectedMonthAndYear = $el;
+                createBookingPage.getMonthDropdownSelect().select(3);
+
+                createBookingPage.getLabelCalendar().should('have.text', selectedMonthAndYear)
+            })
+    })
 })
