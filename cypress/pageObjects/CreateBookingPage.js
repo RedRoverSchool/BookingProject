@@ -24,10 +24,12 @@ class CreateBookingPage {
     getArrivalStationDropdown = () => cy.get('#select2-destination-container');
     getArrivalStationList = () => cy.get('.select2-results .select2-results__options');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
-    getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');
+    getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');    
+    getFareTypeDropdown = () => cy.get('[id^=select2-passenger-fare]');
+    getFareTypeDropdownList = () => cy.get('label [name="passenger-fare[]"] option');
 
     
-    // Methods
+    // Methods                
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
     };
@@ -62,6 +64,10 @@ class CreateBookingPage {
 
     clickArrivalStationDropdown() {
         this.getArrivalStationDropdown().click()
+    };    
+
+    clickFareTypeDropdown() {
+        this.getFareTypeDropdown().click()
     };
 }
-export default CreateBookingPage;
+export default CreateBookingPage; 
