@@ -35,7 +35,8 @@
     "inputField": {
         "loginPopup": {
             "emailInputField": "Email",
-            "passwordInputField": "Password"
+            "passwordInputField": "Password",
+            "phoneNumberPlaceholder": "1234567"
         }
     },
     "label": {
@@ -54,5 +55,4 @@
         "previouslyUsedEmail": "testAgent6@qatest.site",
         "specialCharacters": "#!@#$%"
     }
-
 }
