@@ -27,7 +27,9 @@ class CreateBookingPage {
     getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)')
     getLabelMainPassenger  = () => cy.get('div.passenger-row > label')
-    
+    getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row')
+
+   
     // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()

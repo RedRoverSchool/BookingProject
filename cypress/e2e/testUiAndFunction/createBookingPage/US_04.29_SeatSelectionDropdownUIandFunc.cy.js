@@ -85,5 +85,26 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
             expect(selectedSeats).to.equal(parseInt(passengersAmount))   
             })
         })
-    });
+    })
+
+    it('AT_04.29.04 | The number of passengers in "Seat selection dropdown" is equal the number of passengers is displayed in the "Passengers details dropdown".', function() {
+        createBookingPage.getSeatSelectionDropdownList().then(($el) => {
+           let arrayOfSeats = $el
+               .toArray()
+               .map(el => el.innerText.split('\n'))
+
+           let indexOfSeat = Math.floor(Math.random() * arrayOfSeats.length)
+           let amountOfPass = arrayOfSeats[indexOfSeat]
+
+           createBookingPage.getSeatSelectionDropdown().select(amountOfPass)
+
+           createBookingPage.getAmountOfChosenPass().then(($el) => {
+            let amountOfChoosenPass = $el
+                .toArray()
+                .map(el => el.innerText)
+
+            expect(parseInt(amountOfPass)).to.eq(amountOfChoosenPass.length)
+           })
+        }) 
+    })
 })
