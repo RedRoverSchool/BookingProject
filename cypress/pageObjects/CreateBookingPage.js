@@ -27,6 +27,7 @@ class CreateBookingPage {
     getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');    
     getFareTypeDropdown = () => cy.get('[id^=select2-passenger-fare]');
     getFareTypeDropdownList = () => cy.get('label [name="passenger-fare[]"] option');
+    getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
 
     
     // Methods                

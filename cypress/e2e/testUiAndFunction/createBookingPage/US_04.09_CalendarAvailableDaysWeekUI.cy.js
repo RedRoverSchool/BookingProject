@@ -53,4 +53,12 @@ describe('US_04.09 | Calendar available days week UI', () => {
 			};
 		});
 	});
+
+	it('AT_04.09.03 | In all inactive fields the number has the color #333333', function() {
+		createBookingPage.getCalendarDays().each($el => {
+			if(!$el.hasClass('selected')) {
+				expect($el).to.have.css('color', this.createBookingPage.notSelectedDayField.colorNumbers)
+			}
+		})
+	});
 });
