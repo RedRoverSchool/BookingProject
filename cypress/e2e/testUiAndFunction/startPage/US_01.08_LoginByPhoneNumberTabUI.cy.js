@@ -29,7 +29,7 @@ describe('US_01.08 | Login by phone number tab UI', () => {
             .and('have.attr', 'placeholder', this.startPage.inputField.loginPopup.phoneNumberPlaceholder)
     });
 
-    it('AT_01.08.02 |  Verify Country code label has placeholder - "66" ', function () {
+    it('AT_01.08.02 | Verify Country code label has placeholder - "66" ', function () {
         loginPopup
             .getCountryCodeInput()
             .should('be.visible')
