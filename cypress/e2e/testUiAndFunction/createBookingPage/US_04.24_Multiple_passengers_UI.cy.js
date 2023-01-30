@@ -19,7 +19,9 @@ describe('US_04.24 | Multiple passengers UI', () => {
         cy.login(AGENT.email, AGENT.password)
         
         createBookingPage.clickCalendarNextButton();
-        createBookingPage.clickFridayButton();        
+        cy.wait(5000);
+        createBookingPage.clickFridayButton();
+        cy.wait(2000); 
         createBookingPage.clickFirstTripCard();
     });
     
