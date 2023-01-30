@@ -127,5 +127,5 @@ describe('US_01.15 | Register Agent Negative', function () {
             .getErrorMessage()
             .should('be.visible')
             .and('have.text', this.startPage.alert.registerPopupErrorMessage.emptyPhoneField )
-    });
+    })
 })
