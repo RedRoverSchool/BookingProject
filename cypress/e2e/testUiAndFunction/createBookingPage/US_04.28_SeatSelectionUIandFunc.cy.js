@@ -45,7 +45,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     }); 
     
     it('AT_04.28.06 | In the "Seats table" the seats numbers in the horizontal row start with number of row in order followed by a letter in alphabetical order (1A, 1B, 1C, 2A, 2B, 2C etc.)', function() {
-        createBookingPage.getRowsSetsSeatSection().then($el => {
+        createBookingPage.getRowsSeatsSeatSection().then($el => {
             const seats = $el.toArray().map(el => el.innerText.split('\t'))
 
             for(let i = 0; i < seats.length; i++) {
