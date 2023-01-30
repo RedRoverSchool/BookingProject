@@ -2,11 +2,9 @@
 
 import {StartPage} from "../../../pageObjects/StartPage";
 import {RegisterPopup} from "../../../pageObjects/StartPage";
-//import {RestorePopup} from "../../../pageObjects/StartPage";
 
 const startPage = new StartPage();
 const registerPopup = new RegisterPopup();
-//const restorePopup = new RestorePopup();
 
 describe('US_01.11 | Header elements', () => {
 
