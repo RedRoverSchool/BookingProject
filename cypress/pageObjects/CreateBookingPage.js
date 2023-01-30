@@ -26,7 +26,7 @@ class CreateBookingPage {
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
     getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)')
-
+    getLabelMainPassenger  = () => cy.get('div.passenger-row > label')
     
     // Methods
     clickCalendarNextButton() {
