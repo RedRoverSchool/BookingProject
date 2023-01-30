@@ -25,7 +25,8 @@ class CreateBookingPage {
     getArrivalStationList = () => cy.get('.select2-results .select2-results__options');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
     getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');
-
+    getArrivalSearchField = () => cy.get('.select2-search__field');
+    
     
     // Methods
     clickCalendarNextButton() {
