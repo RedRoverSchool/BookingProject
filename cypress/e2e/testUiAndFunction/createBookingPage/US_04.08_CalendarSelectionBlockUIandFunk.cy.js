@@ -43,7 +43,7 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
 
     it('AT_04.08.05 | Verify previous arrow button switches weeks in descending order from 3 weeks ahead', () => {
         createBookingPage.clickMonthBtn()
-        
+
         let n = 3
         for (let i = 1; i <= n; i++) {
             createBookingPage.clickCalendarNextButton();
@@ -69,9 +69,9 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
                 mondayWeeksAhead.setDate(mondayWeeksAhead.getDate() - 6);
                
                 createBookingPage.getLabelCalendar().then(($el) => {
-                    expect($el.text()).to.deep.eq(previousWeekMonday[i] + ' - ' + previousWeekSunday[i]);
+                    expect($el.text()).to.eq(previousWeekMonday[i] + ' - ' + previousWeekSunday[i]);
                 });
             }
-        });    
-    })
+        });
+    });
  });
