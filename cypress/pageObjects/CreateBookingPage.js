@@ -13,7 +13,7 @@ class CreateBookingPage {
     getLabelPassengerDetails = () => cy.get('.passenger-wrapper div.title label');
     getMonthBtn = () => cy.get('.calendar-view-wrapper .calendar-view-month');
     getMonthDropdownList = () => cy.get('select[name="calendar_month"] option');
-    getMonthDropdownSelect = () => cy.get('select[name="calendar_month"]');   
+    getMonthDropdownSelect = () => cy.get('select[name="calendar_month"]');
     getFridayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(5)');
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
@@ -28,9 +28,12 @@ class CreateBookingPage {
     getFareTypeDropdown = () => cy.get('[id^=select2-passenger-fare]');
     getFareTypeDropdownList = () => cy.get('label [name="passenger-fare[]"] option');
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
-
+    getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
+    getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
+    getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
+     
     
-    // Methods                
+    // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
     };

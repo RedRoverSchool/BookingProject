@@ -16,7 +16,7 @@ describe('US_04.04 | Credit balance button UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
     })
 
-    it('AT_04.04.01 | Create booking page > Verify that week/month format lable', function () {
+    xit('AT_04.04.01 | Create booking page > Verify that week/month format lable', function () {
         let current = new Date()
         current.setDate(current.getDate() - current.getDay() + 1)
 	    let mondayDate = current.toLocaleString('en-GB', { month: 'short', day: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })

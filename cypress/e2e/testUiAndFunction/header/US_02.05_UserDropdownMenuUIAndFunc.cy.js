@@ -16,6 +16,7 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		cy.fixture('createBookingPage').then(createBookingPage => {
 			this.createBookingPage = createBookingPage
 		})
+		
 		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
 		header.clickUserDropDownMenu()
@@ -53,5 +54,16 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		header.clickFlagIconTh()
 		createBookingPage.getPhoneNumberInputFild().should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
 	})
-});
 
+	it('AT_02.05.14 | Verify the "Vietnamese flag" icon is displayed', function () {
+		header.getFlagIconViet()
+		.should('be.visible')
+	})
+
+	it('AT_02.05.15 | Verify the "Vietnamese flag" icon is clickable', function () {
+		header.clickFlagIconViet()
+		createBookingPage
+		.getEmailInputField()
+		.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderEmailViet)
+	})
+});
