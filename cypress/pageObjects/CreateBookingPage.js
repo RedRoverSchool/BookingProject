@@ -24,13 +24,15 @@ class CreateBookingPage {
     getArrivalStationDropdown = () => cy.get('#select2-destination-container');
     getArrivalStationList = () => cy.get('.select2-results .select2-results__options');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
-    getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');
+    getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');    
+    getFareTypeDropdown = () => cy.get('[id^=select2-passenger-fare]');
+    getFareTypeDropdownList = () => cy.get('label [name="passenger-fare[]"] option');
+    getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
-    getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)')
-    getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row')
-
-
+    getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
+     
+    
     // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
@@ -66,6 +68,10 @@ class CreateBookingPage {
 
     clickArrivalStationDropdown() {
         this.getArrivalStationDropdown().click()
+    };    
+
+    clickFareTypeDropdown() {
+        this.getFareTypeDropdown().click()
     };
 }
-export default CreateBookingPage;
+export default CreateBookingPage; 
