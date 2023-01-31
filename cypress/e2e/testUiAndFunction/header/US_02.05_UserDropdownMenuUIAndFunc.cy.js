@@ -67,7 +67,7 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderEmailViet)
 	})
 
-	it('AT_02.05.07| Verify "User dropdown menu" has "Sign out" button', function () {
+	it('AT_02.05.07 | Verify "User dropdown menu" has "Sign out" button', function () {
 		header.getSignOutBtn()
 		.should('be.visible')
 		.should('have.text', this.header.userDropDownMenu.signOutBtn)
