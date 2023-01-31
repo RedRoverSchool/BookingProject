@@ -36,7 +36,8 @@
         "loginPopup": {
             "emailInputField": "Email",
             "passwordInputField": "Password",
-            "phoneNumberPlaceholder": "1234567"
+            "phoneNumberPlaceholder": "1234567",
+            "countryCode": "66"
         }
     },
     "label": {
@@ -46,6 +47,9 @@
         "labelEmail": {
             "color": "rgb(153, 153, 153)",
             "text": "Email"
+        },
+        "labelCountryCode": {
+            "color": "rgb(170, 170, 170)"
         }
     },
     "links": {

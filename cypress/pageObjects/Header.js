@@ -33,5 +33,9 @@ class Header {
     clickEnvelopeIcon() {
         this.getEnvelopeIcon().click();
     }
+
+    clickFlagIconViet() {
+        this.getFlagIconViet().click();
+    }
 }
 export default Header;

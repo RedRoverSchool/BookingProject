@@ -16,6 +16,7 @@ const randomCompanyName = faker.company.name();
 const randomAlpha = faker.random.alpha();
 const randomNumeric = faker.random.numeric();
 const randomInvalidCompanyName = `${randomAlpha + randomNumeric}`;
+const randomInvalidPhoneNumber = faker.random.alphaNumeric(12);
 
 
 describe('US_01.15 | Register Agent Negative', function () {
@@ -115,4 +116,16 @@ describe('US_01.15 | Register Agent Negative', function () {
             .should('be.visible')
             .and('contain', this.startPage.alert.registerPopupErrorMessage.nameFieldSpecialCharacters)
     });
+
+    it('AT_01.15.10 | Error message is displayed when trying to register with invalid phone number (letters and numbers without space , example: "212eee5550000")', function () {
+        registerPopup.enterName(randomFullName)
+        registerPopup.enterCompanyName(randomCompanyName)
+        registerPopup.enterEmail(randomEmail)
+        registerPopup.enterPhoneNumber(randomInvalidPhoneNumber)
+        registerPopup.clickRegisterButton()
+        registerPopup
+            .getErrorMessage()
+            .should('be.visible')
+            .and('have.text', this.startPage.alert.registerPopupErrorMessage.emptyPhoneField )
+    })
 })

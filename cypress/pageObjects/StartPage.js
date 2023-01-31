@@ -53,6 +53,8 @@ export class LoginPopup {
     getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) label');
     getCloseBtn = () => cy.get('#loginModal .close');
     getPhoneNumberInputField = () => cy.get('input[name="phone2"]');
+    getCountryCodeInput = () => cy.get('.phonecode');
+    getCountryCodeLabel = () => cy.get('div[class="col-sm-2 col-xs-4"] label');
 
 
     // Methods
