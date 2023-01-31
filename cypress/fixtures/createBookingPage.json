@@ -1,4 +1,6 @@
 {
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+
     "dropdowns": {
         "departureStation": {
             "stationsNumber": 8,
@@ -27,7 +29,8 @@
             "phone": "291234567",
             "email": "hello@test.plus",
             "placeholderPhoneNumberTh": "เบอร์โทรศัพท์",
-            "placeholderPhoneNumberEn": "Phone number"
+            "placeholderPhoneNumberEn": "Phone number",
+            "placeholderEmailViet": "|Email|"
         }
     },
     "selectedDayField": {
