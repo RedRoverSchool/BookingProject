@@ -29,9 +29,12 @@ class CreateBookingPage {
     getFareTypeDropdown = () => cy.get('[id^=select2-passenger-fare]');
     getFareTypeDropdownList = () => cy.get('label [name="passenger-fare[]"] option');
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
-    getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
-    getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
+    getEmailInputField = () => cy.get(':nth-child(4) > .form-control');  
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
+    getBookTicketsBtn = () =>cy.get('.btn-book[onclick="bookTicket();"]');
+    getCloseBtnBookingDetails = () => cy.get('.close-button');
+    getAvailableSeatsSeatSelection = () => cy.get('td.available');
+
      
     
     // Methods
@@ -73,6 +76,14 @@ class CreateBookingPage {
 
     clickFareTypeDropdown() {
         this.getFareTypeDropdown().click()
+    };
+
+    clickBookTicketsBtn() {
+        this.getBookTicketsBtn().click()
+    };
+
+    clickCloseBtnBookingDetails() {
+        this.getCloseBtnBookingDetails().click()
     };
 }
 export default CreateBookingPage; 

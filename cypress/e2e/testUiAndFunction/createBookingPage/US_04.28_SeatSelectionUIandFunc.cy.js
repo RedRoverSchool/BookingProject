@@ -77,5 +77,23 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 })
         })
         
-    })
+    });
+
+    it('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {
+        createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+        createBookingPage.clickBookTicketsBtn()
+        createBookingPage.clickCloseBtnBookingDetails()
+        createBookingPage.clickFirstTripCard()
+
+        let availableSeatsSeatSelection
+        createBookingPage.getAvailableSeatsSeatSelection().then($el => {
+            availableSeatsSeatSelection = $el.toArray().map(el => el.innerText).length            
+        })
+
+        createBookingPage.getTicketsAvailableFirstTripCard().then($el => {
+            let availableSeatsSelectedTrip = $el.text()
+            
+            expect(availableSeatsSeatSelection).to.eq(+availableSeatsSelectedTrip)        
+        })    
+    });
 });
