@@ -35,4 +35,10 @@ describe('US_01.08 | Login by phone number tab UI', () => {
             .should('be.visible')
             .and('have.attr', 'placeholder', this.startPage.inputField.loginPopup.countryCode)
     });
+
+    it('AT_01.08.04 | Verify "Country code" label has color - #aaa', function () {
+        loginPopup
+        .getCountryCodeLabel()
+        .should('have.css','color', this.startPage.label.labelCountryCode.color)
+    });
 });

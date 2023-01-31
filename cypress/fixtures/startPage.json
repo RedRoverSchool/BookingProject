@@ -47,6 +47,9 @@
         "labelEmail": {
             "color": "rgb(153, 153, 153)",
             "text": "Email"
+        },
+        "labelCountryCode": {
+            "color": "rgb(170, 170, 170)"
         }
     },
     "links": {

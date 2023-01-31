@@ -14,7 +14,9 @@ class Header {
     getFlagIconCn = () => cy.get('a[href="/lang?l=cn"]');
     getFlagIconVi = () => cy.get('a[href="/lang?l=vi"]');
     getFlagIconTh = () => cy.get('a[href="/lang?l=th"]');
-    
+    getFlagIconViet = () => cy.get('a[href="/lang?l=vi"]');
+    getSignOutBtn = () => cy.get('[href="/logout/"]');
+
 
 // methods
     clickBurgerMenu() {
@@ -35,6 +37,10 @@ class Header {
 
     clickFlagIconEn() {
         this.getFlagIconEn().click();
+    }
+
+    clickFlagIconViet() {
+        this.getFlagIconViet().click();
     }
 }
 export default Header;

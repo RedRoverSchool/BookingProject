@@ -10,6 +10,7 @@ class LeftMenuPanel {
     getAccountManagementMenuLink = () => cy.get('[href="/account/"] span');
     getContactUsIcon = () => cy.get('[href="/helpdesk/"] i');
     getContactUsMenuLink = () => cy.get('[href="/helpdesk/"] span');    
+    getAccountManagementLeftIcon = () => cy.get('i.fa.fa-fw.fa-usd');
 
     //Methods  
     clickBookingManagementIcon() {

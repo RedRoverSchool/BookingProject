@@ -1,12 +1,25 @@
 {
     "buttons": {
         "printButtonName": " Print",
-        "printButtonIcon": "fa fa-print fa-fw"
+        "printButtonIcon": "fa fa-print fa-fw",
+        "excelButtonName": " Excel",
+        "excelButtonIcon": "fa fa-file-excel-o fa-fw"
     },
     "headers": {
         "bookingListHeader": "Bookings list"
     },
     "url": {
         "header": "value"
+    },
+    "inputFields": {
+        "searchPlaceholder": "Search",
+        "bookingIdPlaceholder": "Booking ID",
+        "statusPlaceholder": "Status",
+        "routeText": "Route",
+        "vehicleText": "Vehicle"
+    },
+    "links": {
+        "filterClear": "Clear"
     }
+  
 }
