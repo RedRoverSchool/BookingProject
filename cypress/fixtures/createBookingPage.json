@@ -15,6 +15,16 @@
                 "Rassada Pier"
             ]
         },
+
+        "fareType": {
+            "faretypesNumber": 3,
+            "fareTypesNames": [
+                "Adult",
+                "Child",
+                "Elder"
+            ]
+        },
+
         "seatSelection": {
             "onePassenger": "1 passenger",
             "passengers": "passengers"

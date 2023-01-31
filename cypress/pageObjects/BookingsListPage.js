@@ -3,8 +3,9 @@ class BookingsListPage {
     getBookingListHeader = () => cy.get('.page-title');
     getPrintButton = () => cy.get('.row .btn-print');
     getPrintButtonIcon = () => cy.get('.row .btn-print i');
-    getSearchField = () => cy.get('div #filterSearchQuery');
-    getSearchInput = () => cy.get('.pull-left input[placeholder="Search"]');
+    getExcelButton = () => cy.get('.row .btn-excel');
+    getExcelButtonIcon = () => cy.get('.row .btn-excel i');
+    getSearchField = () => cy.get('.pull-left input[placeholder="Search"]');
     getBookingIdField = () => cy.get('div #filterTracker');
     getStatusField = () => cy.get('.selection [placeholder="Status"]');
     getRouteField = () => cy.get('div #select2-filterRoute-container');

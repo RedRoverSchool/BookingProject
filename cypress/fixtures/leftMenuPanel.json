@@ -11,6 +11,7 @@
         ],
         "bookingsManagementLink": "Bookings management",
         "contactUsLink": "Contact us",
-        "bookingLink": "Booking"
+        "bookingLink": "Booking",
+        "accountLink": "Account management"
     }
 }

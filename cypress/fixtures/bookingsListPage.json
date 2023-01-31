@@ -1,7 +1,9 @@
 {
     "buttons": {
         "printButtonName": " Print",
-        "printButtonIcon": "fa fa-print fa-fw"
+        "printButtonIcon": "fa fa-print fa-fw",
+        "excelButtonName": " Excel",
+        "excelButtonIcon": "fa fa-file-excel-o fa-fw"
     },
     "headers": {
         "bookingListHeader": "Bookings list"
