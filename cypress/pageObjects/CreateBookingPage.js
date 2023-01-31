@@ -32,7 +32,7 @@ class CreateBookingPage {
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
-     
+    getLabelMainPassenger  = () => cy.get('div.passenger-row > label') 
     
     // Methods
     clickCalendarNextButton() {
