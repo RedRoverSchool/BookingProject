@@ -81,8 +81,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
     it('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {
         createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
-        createBookingPage.clickBookTicketsBtn()
-        createBookingPage.clickCloseBtnBookingDetails()
+        createBookingPage.clickBookTicketsBtn()        
         createBookingPage.clickFirstTripCard()
 
         let availableSeatsSeatSelection
