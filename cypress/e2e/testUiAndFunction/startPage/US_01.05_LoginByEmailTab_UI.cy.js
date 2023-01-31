@@ -52,4 +52,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .should('be.visible')
             .and('have.attr', 'placeholder', this.startPage.inputField.loginPopup.passwordInputField);
     });
+
+    it('AT_01.05.09 | Verify SIGN IN button has text "SIGN IN"', function() {
+        loginPopup
+            .getSignInButton()
+            .should('have.value', this.startPage.buttons.signInBtnText)
+    })
 });
