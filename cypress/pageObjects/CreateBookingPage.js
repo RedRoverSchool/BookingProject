@@ -32,8 +32,8 @@ class CreateBookingPage {
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');  
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getBookTicketsBtn = () =>cy.get('.btn-book[onclick="bookTicket();"]');
-    getCloseBtnBookingDetails = () => cy.get('.close-button');
-    getAvailableSeatsSeatSelection = () => cy.get('.popup-content .close-button');
+    getCloseBtnBookingDetails = () => cy.get('.popup-content .close-button');
+    getAvailableSeatsSeatSelection = () => cy.get('td.available');
     getLabelMainPassenger  = () => cy.get('div.passenger-row > label') 
 
     
