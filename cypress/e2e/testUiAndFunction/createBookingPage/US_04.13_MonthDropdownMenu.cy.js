@@ -55,4 +55,20 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
             expect($el.text()).to.deep.eq(arrayOfConsetutiveMonths()[i])
         })
     })
+
+    it('AT_04.13.06 | Verify that the month that is shown in the "Departure on" section displays the month selected from the dropdown menu', function () {
+        createBookingPage.getMonthDropdownList().then($el => {
+            let arrayOfMonth = $el.toArray().map(el => el.innerText);
+            let indexOfMonth = Math.floor(Math.random() * arrayOfMonth.length);
+            if (indexOfMonth == 0) {
+                indexOfMonth++;
+            }
+            let selectedMonthAndYear = arrayOfMonth[indexOfMonth];
+
+            createBookingPage.getMonthDropdownSelect().select(indexOfMonth);
+
+            createBookingPage.getLabelDepartureOnDate()
+                .should('contain.text', selectedMonthAndYear);
+        })
+    })    
 })
