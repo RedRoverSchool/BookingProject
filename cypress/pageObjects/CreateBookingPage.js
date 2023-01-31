@@ -34,8 +34,8 @@ class CreateBookingPage {
     getBookTicketsBtn = () =>cy.get('.btn-book[onclick="bookTicket();"]');
     getCloseBtnBookingDetails = () => cy.get('.popup-content .close-button');
     getAvailableSeatsSeatSelection = () => cy.get('td.available');
+    getLabelMainPassenger  = () => cy.get('div.passenger-row > label') 
 
-     
     
     // Methods
     clickCalendarNextButton() {
