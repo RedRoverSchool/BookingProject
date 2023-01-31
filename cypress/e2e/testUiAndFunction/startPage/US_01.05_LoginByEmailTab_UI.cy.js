@@ -57,5 +57,5 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         loginPopup
             .getSignInButton()
             .should('have.value', this.startPage.buttons.signInBtnText)
-    })
+    });
 });
