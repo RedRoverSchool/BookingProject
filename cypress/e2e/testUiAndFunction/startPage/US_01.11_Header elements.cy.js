@@ -9,7 +9,7 @@ const registerPopup = new RegisterPopup();
 describe('US_01.11 | Header elements', () => {
 
     beforeEach(function () {
-		cy.visit('/');
+	cy.visit('/');
         startPage.clickRegisterAccountLink();
 	});
 
