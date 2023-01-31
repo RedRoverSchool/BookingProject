@@ -36,7 +36,7 @@ class CreateBookingPage {
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
     getReservationTicketButton = () => cy.get('.btn-reserve-tickets');
      
-        // Methods    
+    // Methods    
 
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
