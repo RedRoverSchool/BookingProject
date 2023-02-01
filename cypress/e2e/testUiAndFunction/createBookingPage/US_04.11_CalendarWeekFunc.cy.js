@@ -59,4 +59,12 @@ describe('US_04.11 | Calendar week functionality', () => {
 			}
 		})
 	});
+
+	it('AT_04.11.04|Verify that when you hover the cursor over any valid date, the cursor sign appears', function() {
+		
+		createBookingPage.getCalendarDays().not('.unavailable').each(($el) => {
+			
+			expect($el).to.have.css('cursor',this.createBookingPage.validDayField.cursor);
+		});
+	});
 });

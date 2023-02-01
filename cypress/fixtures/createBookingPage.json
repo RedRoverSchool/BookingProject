@@ -52,6 +52,10 @@
         "colorNumbers": "rgb(51, 51, 51)"
     },
 
+    "validDayField": {
+        "cursor": "pointer"
+    },
+
     "unavailableDayField": {
         "cursor": "not-allowed"
     },
