@@ -31,7 +31,9 @@ class CreateBookingPage {
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');  
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
-    getBookTicketsBtn = () =>cy.get('.btn-book[onclick="bookTicket();"]');
+    getBookTicketsBtn = () => cy.get('.btn-book[onclick="bookTicket();"]');
+    getReserveTicketsArrow = () => cy.get('.btn-group .dropdown-toggle');
+    getReserveTicketsBtn = () => cy.get('.btn-reserve-tickets');
     getCloseBtnBookingDetails = () => cy.get('.popup-content .close-button');
     getAvailableSeatsSeatSelection = () => cy.get('td.available');
     getLabelMainPassenger  = () => cy.get('div.passenger-row > label') 
@@ -80,6 +82,11 @@ class CreateBookingPage {
 
     clickBookTicketsBtn() {
         this.getBookTicketsBtn().click()
+    };
+
+    clickReserveTicketsBtn() {
+        this.getReserveTicketsArrow().click()
+        this.getReserveTicketsBtn().click()
     };
 
     clickCloseBtnBookingDetails() {

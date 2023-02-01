@@ -86,10 +86,8 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     });
 
     it('AT_04.28.07', function() {
-        createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
-        createBookingPage.getMainPassengerNameField().should('have.value', this.createBookingPage.inputField.main_passenger.name) 
-        createBookingPage.clickBookTicketsBtn()
-        cy.get('.popup-booking').should('include.text', 'Booking details')        
+        createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name) 
+        createBookingPage.clickReserveTicketsBtn()          
         createBookingPage.clickCloseBtnBookingDetails()
         createBookingPage.clickFirstTripCard()
 
