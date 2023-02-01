@@ -50,7 +50,8 @@
             "text": "Email"
         },
         "labelCountryCode": {
-            "color": "rgb(170, 170, 170)"
+            "color": "rgb(170, 170, 170)",
+            "font_size": "10px"
         }
     },
     "links": {
