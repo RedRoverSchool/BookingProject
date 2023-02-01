@@ -34,6 +34,8 @@ class CreateBookingPage {
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getLabelMainPassenger  = () => cy.get('div.passenger-row > label')
     getMainPassengerSelectedSeatByDefault = () => cy.get('div[class="col-lg-12 passenger-row"] span[class="seat-number"]')
+    getTripCardLabel = () => cy.get('div .availability')
+    getTripCard = () => cy.get('div .trip')
     
     // Methods
     clickCalendarNextButton() {
@@ -75,5 +77,9 @@ class CreateBookingPage {
     clickFareTypeDropdown() {
         this.getFareTypeDropdown().click()
     };
+
+    clickAvailableTripCard() {
+        this.getAvailableTripCard().click()
+    }
 }
 export default CreateBookingPage; 

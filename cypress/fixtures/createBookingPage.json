@@ -60,6 +60,11 @@
     },
     "seatSelectionTable": {
         "selectedSeatColor": "rgb(157, 208, 157)"        
+    },
+    "tripCardLabelName": {
+        "availableLabel": " tickets available",
+        "overdueLabel": "Overdue",
+        "inactiveLabel":  "Inactive"
     }
     
 }
