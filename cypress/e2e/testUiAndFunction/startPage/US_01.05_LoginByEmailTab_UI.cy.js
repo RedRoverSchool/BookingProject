@@ -58,4 +58,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .getSignInButton()
             .should('have.value', this.startPage.buttons.signInBtnText)
     });
+
+    it('AT_01.05.06 | Verify SIGN IN button has color - #6CCD66', function () {
+        loginPopup
+            .getSignInButton()
+            .should('have.css', 'color', this.startPage.buttons.signInBtnTextColor);
+    });
 });
