@@ -51,11 +51,11 @@ describe('US_04.11 | Calendar week functionality', () => {
 
 	it('AT_04.11.03|Verify that if the date has expired, then the field with it is not clickable', function() {
 		
-		createBookingPage.clickCalendarPrevButton;
+		createBookingPage.clickCalendarPrevButton();
 		createBookingPage.getCalendarDays().each(($el) => {
 			if($el.hasClass('unavailable')){
 
-				expect($el).to.have.css('cursor', 'not-allowed');
+				expect($el).to.have.css('cursor',this.createBookingPage.unavailableDayField.cursor);
 			}
 		})
 	});
