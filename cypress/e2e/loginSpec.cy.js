@@ -1,10 +1,16 @@
 /// <reference types="Cypress" />
 
-describe('Login', () => {
+
+describe('Booking', () => {
 
     const MANAGER = Cypress.env('manager');
     const AGENT = Cypress.env('agent');
     const CI = Cypress.env('CI');
+
+    before (function () {
+        cy.visit('/')
+        cy.login(AGENT.email, AGENT.password);
+    })
 
     beforeEach(function () {
         cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
@@ -16,9 +22,39 @@ describe('Login', () => {
         })
     })
 
-    it('verify agent can login', function () {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password);
+    it('verify agent can book a ticket', function () {
+        let expectedTextId;
         cy.get('div.booking-header h1').should('include.text', this.createBookingPage.headers.mainHeaderPage);
+        cy.get('div.trip').should('be.visible')
+        cy.wait(3000)
+
+        cy.get('div.trip').each(($el) => {
+            const statusText = $el.text();
+            if (statusText !== 'Overdue') {
+                cy.wrap($el).click();
+                return false;
+            }
+        })
+
+        cy.get('div .passenger-wrapper div.title >label').should('be.visible').and('include.text', 'Passengers details')
+        cy.get('div.layout-wrapper div.title label').should('be.visible').and('include.text', 'Seat selection')
+
+        cy.get('div.passenger-wrapper input[name="passenger-name[]"]').type('TestUser1');
+        cy.get('div.passenger-row select[name="passenger-fare[]"]').select('child', {force: true});
+
+        cy.contains('Book tickets').click({ force: true });
+
+        cy.get('.popup-content').should('be.visible');
+        cy.get('span.booking-tracker').then(($id) => {
+            expectedTextId = $id.text();
+        })
+
+        cy.get('a[href="/orders/"]').click({ force: true });
+        cy.get('#reportrange').click();
+        cy.get('li[data-range-key="Next 7 Days"]').click();
+
+        cy.get('#data tbody tr td:nth-child(2) div').then(($id) => {
+            expect($id.text()).to.contain(expectedTextId);
+        })
     })
 })
