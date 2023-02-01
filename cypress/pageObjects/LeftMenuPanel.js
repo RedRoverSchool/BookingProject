@@ -1,29 +1,28 @@
 class LeftMenuPanel {
-    getMainElements = () => cy.get('.main-sidebar i');
-    getBookingManagement = () => cy.get('a[href="/orders/"] i');
-    getMainElementsNames = () => cy.get('.main-sidebar span');
+    getMainElementsIcon = () => cy.get('.main-sidebar i');
+    getMainElementsMenuLink = () => cy.get('.main-sidebar span');
 
-    getBookingIсonLink = () => cy.get('[href="/booking/"]');
-    getBookingNameLink = () => cy.get('[href="/booking/"] span');
-    getBookingManagementIсonLink = () => cy.get('[href="/orders/"]');
-    getBookingManagementNameLink = () => cy.get('[href="/orders/"] span');
-    getAccountManagementIсonLink = () => cy.get('[href="/account/"]');
-    getAccountManagementNameLink = () => cy.get('[href="/account/"] span');
-    getContactUsIсonLink = () => cy.get('[href="/helpdesk/"]');
-    getContactUsNameLink = () => cy.get('[href="/helpdesk/"] span');    
+    getBookingIcon = () => cy.get('[href="/booking/"] i');
+    getBookingMenuLink = () => cy.get('[href="/booking/"] span');
+    getBookingManagementIcon = () => cy.get('[href="/orders/"] i');
+    getBookingManagementMenuLink = () => cy.get('[href="/orders/"] span');
+    getAccountManagementIcon = () => cy.get('[href="/account/"] i');
+    getAccountManagementMenuLink = () => cy.get('[href="/account/"] span');
+    getContactUsIcon = () => cy.get('[href="/helpdesk/"] i');
+    getContactUsMenuLink = () => cy.get('[href="/helpdesk/"] span');    
+    getAccountManagementLeftIcon = () => cy.get('i.fa.fa-fw.fa-usd');
 
     //Methods  
-    clickGetBookingManagementIconLink() {
-        this.getBookingManagementIсonLink().click()
+    clickBookingManagementIcon() {
+        this.getBookingManagementIcon().click()
     }
 
-    clickGetContactUsIсonLink() {
-        this.getContactUsIсonLink().click()
+    clickContactUsIcon() {
+        this.getContactUsIcon().click()
     }
 
     clickBookingIcon() {
-        this.getBookingIсonLink().click()
+        this.getBookingIcon().click()
     }
-
 }
 export default LeftMenuPanel;

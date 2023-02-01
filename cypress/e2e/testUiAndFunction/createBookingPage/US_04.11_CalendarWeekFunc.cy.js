@@ -8,9 +8,18 @@ describe('US_04.11 | Calendar week functionality', () => {
 
 	const AGENT = Cypress.env('agent');
 
-	beforeEach(function () {
-		cy.visit('/')
+	before(() => {
+		cy.visit('/');
 		cy.login(AGENT.email, AGENT.password)
+		
+		 //Precondition
+		createBookingPage.getWeekButton().should('have.class', 'selected');
+	});
+
+	beforeEach(function () {
+		cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        })
 	});
 
 	it('AT_04.11.01|Verify that you can click on last date field if it has not expired', function() {
@@ -28,7 +37,7 @@ describe('US_04.11 | Calendar week functionality', () => {
 
 	it('AT_04.11.02 | Verify chosen date, current month and year are displayed in the Departure on section', function () {
 		const current = new Date()
-		const thailandCurrentMonthAndYear = new Date(current).toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
+		const thailandCurrentMonthAndYear = current.toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
 
 		createBookingPage.getCalendarDays().not('.unavailable').first().click().then(($date) => {
 			let dateChosen = $date.text()
@@ -39,4 +48,15 @@ describe('US_04.11 | Calendar week functionality', () => {
 			})
 		})
 	})
+
+	it('AT_04.11.03|Verify that if the date has expired, then the field with it is not clickable', function() {
+		
+		createBookingPage.clickCalendarPrevButton;
+		createBookingPage.getCalendarDays().each(($el) => {
+			if($el.hasClass('unavailable')){
+
+				expect($el).to.have.css('cursor', 'not-allowed');
+			}
+		})
+	});
 });

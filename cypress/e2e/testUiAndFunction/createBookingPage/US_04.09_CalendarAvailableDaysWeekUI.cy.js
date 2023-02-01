@@ -8,9 +8,18 @@ describe('US_04.09 | Calendar available days week UI', () => {
 
 	const AGENT = Cypress.env('agent');
 
-	beforeEach(function () {
-		cy.visit('/')
+	before(() => {
+		cy.visit('/');
 		cy.login(AGENT.email, AGENT.password)
+	});
+
+	beforeEach(function () {
+	
+		cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        })
+
+		 //Precondition
 		createBookingPage.getWeekButton().should('have.class', 'selected');
 	});
 
@@ -33,10 +42,23 @@ describe('US_04.09 | Calendar available days week UI', () => {
 		createBookingPage.getCalendarDays().each(($el) => {
 			if($el.hasClass('selected')){
 				
-				expect($el).to.have.css('color','rgb(255, 255, 255)')
-				expect($el).to.have.css('background-color','rgb(0, 166, 90)')	
+				expect($el).to.have.css('color', this
+					.createBookingPage
+					.selectedDayField
+					.color);
+				expect($el).to.have.css('background-color', this
+					.createBookingPage
+					.selectedDayField
+					.backgroundColor);	
+			};
+		});
+	});
+
+	it('AT_04.09.03 | In all inactive fields the number has the color #333333', function() {
+		createBookingPage.getCalendarDays().each($el => {
+			if(!$el.hasClass('selected')) {
+				expect($el).to.have.css('color', this.createBookingPage.notSelectedDayField.colorNumbers)
 			}
-		
 		})
-	})
+	});
 });

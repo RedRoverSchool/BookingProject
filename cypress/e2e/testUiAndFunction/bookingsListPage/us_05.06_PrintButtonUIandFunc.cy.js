@@ -16,7 +16,7 @@ describe('US_05.06 Print Button UI and functionality', () => {
         });
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
-        leftMenuPanel.clickGetBookingManagementIconLink();
+        leftMenuPanel.clickBookingManagementIcon();
     });
 
     it('AT_05.06.01 Verify that the "Print" button is displayed', () => {  

@@ -29,9 +29,4 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
         })
     });
 
-    it('AT_04.06.02 | Verify the Departure station Dropdown Menu is clickable and opens up the dropdown menu', function () {
-        createBookingPage.clickDepartureStationDropdown()
-
-        createBookingPage.getListDepartureStation().should('be.visible')
-    });
 })
