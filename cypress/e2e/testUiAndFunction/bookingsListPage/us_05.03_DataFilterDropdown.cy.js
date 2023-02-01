@@ -18,4 +18,8 @@ describe('US_05.03 Date filter UI', () => {
         cy.login(AGENT.email, AGENT.password);
         leftMenuPanel.clickGetBookingManagementIconLink();
     });
+    
+    it('AT_05.03.01 Verify that the "filterDateType" dropdown is displayed', function() {  
+        bookingsListPage.getFilterDateTypeDropdown().should('be.visible')
+    });
 })
