@@ -79,7 +79,7 @@ class CreateBookingPage {
     };
 
     clickBookTicketsBtn() {
-        this.getBookTicketsBtn().dblclick()
+        this.getBookTicketsBtn().click()
     };
 
     clickCloseBtnBookingDetails() {
