@@ -3,20 +3,20 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
+const AGENT = Cypress.env('agent');
 
 describe('US_04.28 | Seat selection UI and functionality', () => {
-
-    const AGENT = Cypress.env('agent');
     
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
+    });
 
+    before(() => {
         cy.visit('/')
         cy.login(AGENT.email, AGENT.password)
         
-        //Precondition                
         createBookingPage.clickCalendarNextButton()
         cy.wait(5000)
         createBookingPage.clickFridayButton()
@@ -76,6 +76,46 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     })
                 })
         })
+    });
+});
+
+//This describe for trip "Bangkok Khao San - Chonburi"
+
+describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Chonburi" trip)', () => {
+    
+    before(function() {
+        cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        })
+
+        cy.visit('/')
+        cy.login(AGENT.email, AGENT.password)
+    });
+
+    it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
         
-    })
+        createBookingPage.getDepartureStationSelectionDropdown()
+            .select('Bangkok Khao San', {force: true})
+        createBookingPage.getDepartureStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[2])    
+        
+        createBookingPage.getArrivalStationSelectionDropdown()
+            .select('Chonburi', {force: true})
+        createBookingPage.getArrivalStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])     
+        
+        createBookingPage.clickCalendarNextButton()
+        cy.wait(5000)
+        createBookingPage.clickSaturdayButton()
+        cy.wait(2000)
+        createBookingPage.clickFirstTripCard()
+        createBookingPage.getFirstTripCard()
+            .should('include.text', 'VIP bus 24')
+
+        createBookingPage.getDriverSeat()
+            .should('be.visible')
+            .and('have.text', this.createBookingPage.seatSelectionTable.driverSeatText)
+            .and('have.css', 'border')
+            .and('match', /dashed/)
+    });
 });

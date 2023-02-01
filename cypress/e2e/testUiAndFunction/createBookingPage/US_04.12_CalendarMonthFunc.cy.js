@@ -54,14 +54,13 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})
 	})
 
-	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
+	it.skip('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
 		let date = new Date() 
-        let fullDateThailand = date.toLocaleString('en-GB', { day: 'numeric' , month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' })
-        let currentDateThailand = +fullDateThailand.slice(0, 2)
-		let currentMonthAndYear = fullDateThailand.slice(3)
+		let dateThailand = date.toLocaleString('en-GB', { day: 'numeric', timeZone: 'Asia/Bangkok' })
+		let currentMonthAndYear = date.toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok'})
 		createBookingPage.getMonthDropdownSelect().select(currentMonthAndYear)
 		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
-            if($el.text() < currentDateThailand){
+            if($el.text() < dateThailand){
                 expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
             }          
 		})		

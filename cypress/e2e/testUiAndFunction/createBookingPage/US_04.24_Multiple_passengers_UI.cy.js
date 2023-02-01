@@ -35,4 +35,10 @@ describe('US_04.24 | Multiple passengers UI', () => {
         expect($el.text()).to.be.equal(this.createBookingPage.dropdowns.fareType.fareTypesNames[i])
         });
     });
+
+    it('AT_04.24.02 | Verify that Fare type dropdown menu by default has title Adult', function () {
+        createBookingPage.getFareTypeDropdown()
+            .should('have.attr','title')
+                .and('equal', this.createBookingPage.dropdowns.fareType.fareTypesNames[0])
+    })
 });    
