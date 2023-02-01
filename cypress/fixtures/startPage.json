@@ -18,7 +18,8 @@
         "thLoginBtnText": "เข้าสู่ระบบ",
         "loginBtnTextColor": "rgb(0, 128, 0)",
         "rusLoginBtnText": "Войти",
-        "signInBtnTextColor": "rgb(108, 205, 102)" 
+        "signInBtnTextColor": "rgb(108, 205, 102)",
+        "signInBtnText": "SIGN IN"
     },
     "headers": {
         "header_Login_Popup": {
@@ -35,7 +36,9 @@
     "inputField": {
         "loginPopup": {
             "emailInputField": "Email",
-            "passwordInputField": "Password"
+            "passwordInputField": "Password",
+            "phoneNumberPlaceholder": "1234567",
+            "countryCode": "66"
         }
     },
     "label": {
@@ -45,6 +48,9 @@
         "labelEmail": {
             "color": "rgb(153, 153, 153)",
             "text": "Email"
+        },
+        "labelCountryCode": {
+            "color": "rgb(170, 170, 170)"
         }
     },
     "links": {

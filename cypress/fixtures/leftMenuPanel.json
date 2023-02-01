@@ -10,6 +10,8 @@
             "Contact us"
         ],
         "bookingsManagementLink": "Bookings management",
-        "contactUsLink": "Contact us"
+        "contactUsLink": "Contact us",
+        "bookingLink": "Booking",
+        "accountLink": "Account management"
     }
 }
