@@ -16,6 +16,16 @@
             ]
         },
 
+        "arrivalStation": {
+            "stationsNumber": 4,
+            "stationsNames": [
+                "Ayutthaya",
+                "Chiang Mai Bus Terminal 1",
+                "Chonburi",
+                "Phuket Town"
+            ]
+        },
+
         "fareType": {
             "faretypesNumber": 3,
             "fareTypesNames": [
@@ -63,7 +73,8 @@
         "unavailableClass": "unavailable"
     },
     "seatSelectionTable": {
-        "selectedSeatColor": "rgb(157, 208, 157)"        
+        "selectedSeatColor": "rgb(157, 208, 157)",
+        "driverSeatText": "Driver"                
     }
     
 }
