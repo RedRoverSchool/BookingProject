@@ -8,5 +8,31 @@
     },
     "url": {
         "header": "value"
+    },
+    
+    "dropdowns": {
+        "DateType": {
+            "filterDateType": 2,
+            "filterDateTypeOption": [
+                "By departure date",
+                "By purchase date"
+            ],
+            "calendar fa fa-calendar": {
+            "calendarRanges": 10,
+            "calendarDataRangeKey": [
+                "Today",
+                 "Tomorrow",
+                 "Yesterday",
+                 "Next 7 Days",
+                 "Last 7 Days",
+                 "Last 30 Days",
+                  "Next Month",
+                 "This Month",
+                 "Last Month",
+                 "Custom Range"
+                ]
+            }
+
+        }
     }
 }
