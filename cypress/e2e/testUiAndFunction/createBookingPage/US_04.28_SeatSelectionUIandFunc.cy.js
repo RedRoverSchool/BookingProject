@@ -4,9 +4,15 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
+const MANAGER = Cypress.env('manager');
+const AGENT = Cypress.env('agent');
+const CI = Cypress.env('CI');
+
 describe('US_04.28 | Seat selection UI and functionality', () => {
 
-    const AGENT = Cypress.env('agent');
+    beforeEach(function () {
+        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
+    })    
     
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {

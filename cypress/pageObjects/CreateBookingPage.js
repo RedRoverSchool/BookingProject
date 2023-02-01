@@ -79,7 +79,7 @@ class CreateBookingPage {
     };
 
     clickBookTicketsBtn() {
-        this.getBookTicketsBtn().click({ forse: true })
+        this.getBookTicketsBtn().trigger('click')
     };
 
     clickCloseBtnBookingDetails() {
