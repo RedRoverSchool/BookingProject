@@ -43,6 +43,11 @@
             "placeholderEmailViet": "|Email|"
         }
     },
+
+    "calendarMonth" : {
+        "colorText": "rgb(0, 166, 90)"
+    },
+
     "selectedDayField": {
         "backgroundColor":"rgb(0, 166, 90)",
         "color": "rgb(255, 255, 255)"

@@ -9,9 +9,19 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
     const AGENT = Cypress.env('agent');
 
     before(function () {
+        cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        })
+
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
         createBookingPage.clickMonthBtn();
+    })
+
+    beforeEach(function () {
+        cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        })
     })
 
     it('AT_04.13.01 | Month dropdown menu (to the left of the Week button) is visible and has 13 months for selection', () => {
@@ -38,6 +48,12 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
             )
     })
 
+    it('AT_04.13.04 | Verify month dropdown menu has 13 consecutive months and year options starting from current month and year', function () {
+        createBookingPage.getMonthDropdownList().each(($el, i) => {
+            expect($el.text()).to.eq(arrayOfConsetutiveMonths()[i])
+        })
+    })
+
     it('AT_04.13.05 | Verify that the calendar label (between arrows) displays the month selected from the dropdown menu', function () {
         createBookingPage.getMonthDropdownList()
             .eq(3)
@@ -48,12 +64,6 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
 
                 createBookingPage.getLabelCalendar().should('have.text', selectedMonthAndYear)
             })
-    })
-
-    it('AT_04.13.04 | Verify month dropdown menu has 13 consecutive months and year options starting from current month and year', function () {
-        createBookingPage.getMonthDropdownList().each(($el, i) => {
-            expect($el.text()).to.eq(arrayOfConsetutiveMonths()[i])
-        })
     })
 
     it('AT_04.13.06 | Verify that the month that is shown in the "Departure on" section displays the month selected from the dropdown menu', function () {
@@ -70,5 +80,11 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
             createBookingPage.getLabelDepartureOnDate()
                 .should('contain.text', selectedMonthAndYear);
         })
-    })    
+    })  
+    
+    it('AT_04.13.07 | Verify that all months in the Month dropdown menu have the color of their font #00a65a', function() {
+        createBookingPage.getMonthDropdownList().each($el => {
+            cy.wrap($el).should('have.css', 'color', this.createBookingPage.calendarMonth.colorText)
+        })
+    })
 })
