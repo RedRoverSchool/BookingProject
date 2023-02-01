@@ -58,4 +58,12 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .getSignInButton()
             .should('have.value', this.startPage.buttons.signInBtnText)
     });
+
+    it('AT_01.05.10 | Verify SIGN IN button is visible and clickable', function() {
+        loginPopup
+            .clickSignInButton()
+
+        loginPopup.getMessageAlert()
+            .should('have.text', this.startPage.alert.loginPopupMessageAlert)
+    });
 });
