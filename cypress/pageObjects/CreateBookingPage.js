@@ -50,6 +50,8 @@ class CreateBookingPage {
     getDriverSeat = () => cy.get('table.seats tr td[class="seat blocked"]');  
 
     //Total - Footer section                  
+    getReservationTicketArrow = () => cy.get('.btn-group .caret');
+    getReservationTicketButton = () => cy.get('.btn-reserve-tickets');
     
     // Methods
     clickCalendarNextButton() {
@@ -92,6 +94,12 @@ class CreateBookingPage {
         this.getFareTypeDropdown().click()
     };
 
-    
+    clickReservationTicketArrow() {
+        this.getReservationTicketArrow().click()
+    };
+
+    clickReservationTicketButton() {
+        this.getReservationTicketButton().click()
+    };
 }
 export default CreateBookingPage; 
