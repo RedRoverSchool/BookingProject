@@ -10,7 +10,6 @@ describe('US_04.30 | Summary UI', () => {
 	before(() => {
 		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
-		//cy.intercept('POST', '/qatest.site').as('postLogIn')
 		createBookingPage.clickCalendarNextButton()
 		createBookingPage.clickFridayButton()
 		cy.intercept('GET', '**/qatest.site/tools/ping/**').as('getTrip')
