@@ -7,11 +7,6 @@ describe('Booking', () => {
     const AGENT = Cypress.env('agent');
     const CI = Cypress.env('CI');
 
-    before (function () {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password);
-    })
-
     beforeEach(function () {
         cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
     })
@@ -24,7 +19,10 @@ describe('Booking', () => {
 
     it('verify agent can book a ticket', function () {
         let expectedTextId;
+        cy.visit('/')
+        cy.login(AGENT.email, AGENT.password);
         cy.get('div.booking-header h1').should('include.text', this.createBookingPage.headers.mainHeaderPage);
+        
         cy.get('div.trip').should('be.visible')
         cy.wait(3000)
 
