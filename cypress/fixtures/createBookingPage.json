@@ -60,7 +60,8 @@
 
     "selectedDayField": {
         "backgroundColor":"rgb(0, 166, 90)",
-        "color": "rgb(255, 255, 255)"
+        "color": "rgb(255, 255, 255)",
+        "quantity": "7"
     },
 
     "notSelectedDayField": {
