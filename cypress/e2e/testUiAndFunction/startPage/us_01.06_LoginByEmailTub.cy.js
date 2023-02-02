@@ -29,7 +29,7 @@ describe('US_01.06 | Login by email tub functionality', () => {
 
     it('AT_01.06.02 | Color of Sign In Button', function () {
         startPage.clickLoginButton();
-        loginPopup.getSignInButton().should('have.css','color', this.startPage.buttons.signInBtnTextColor)
+        loginPopup.getByEmailSignInButton().should('have.css','color', this.startPage.buttons.signInBtnTextColor)
     });
 });
 
