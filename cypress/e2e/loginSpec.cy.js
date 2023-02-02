@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
+import CreateBookingPage from "../pageObjects/CreateBookingPage";
 
+const createBookingPage = new CreateBookingPage();
 
 describe('Booking', () => {
 
@@ -22,9 +24,11 @@ describe('Booking', () => {
         cy.visit('/')
         cy.login(AGENT.email, AGENT.password);
         cy.get('div.booking-header h1').should('include.text', this.createBookingPage.headers.mainHeaderPage);
-        
+        createBookingPage.clickCalendarNextButton()
+		createBookingPage.clickFridayButton()
         cy.get('div.trip').should('be.visible')
-        cy.wait(3000)
+        cy.intercept('/tools/**').as('getTrip')
+		cy.wait('@getTrip')
 
         cy.get('div.trip').each(($el) => {
             const statusText = $el.text();
@@ -49,7 +53,7 @@ describe('Booking', () => {
 
         cy.get('a[href="/orders/"]').click({ force: true });
         cy.get('#reportrange').click();
-        cy.get('li[data-range-key="Next 7 Days"]').click();
+        cy.get('li[data-range-key="This Month"]').click();
 
         cy.get('#data tbody tr td:nth-child(2) div').then(($id) => {
             expect($id.text()).to.contain(expectedTextId);

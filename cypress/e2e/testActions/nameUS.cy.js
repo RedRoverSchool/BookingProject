@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import arrayOfConsetutiveMonths from "../../support/utilities/createArrayOfMonths";
 
 describe('Name your US', () => {
 
