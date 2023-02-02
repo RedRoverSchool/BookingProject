@@ -12,7 +12,7 @@ describe('US_04.30 | Summary UI', () => {
 		cy.login(AGENT.email, AGENT.password)
 		createBookingPage.clickCalendarNextButton()
 		createBookingPage.clickFridayButton()
-		cy.intercept('GET', '**/qatest.site/tools/ping/**').as('getTrip')
+		cy.intercept('**/qatest.site/tools/**').as('getTrip')
 		cy.wait('@getTrip')
 		createBookingPage.clickFirstTripCard()
 	});
