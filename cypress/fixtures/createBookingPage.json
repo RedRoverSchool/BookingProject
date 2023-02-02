@@ -80,6 +80,8 @@
     "seatSelectionTable": {
         "selectedSeatColor": "rgb(157, 208, 157)",
         "driverSeatText": "Driver"                
+    },
+    "placeholder":{
+        "name": "Passenger name"
     }
-    
 }

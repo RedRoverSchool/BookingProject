@@ -9,6 +9,7 @@ class CreateBookingPage {
     getArrivalStationList = () => cy.get('.select2-results .select2-results__options');
     getDepartureStationSelectionDropdown = () => cy.get('select[name="departure"]');
     getArrivalStationSelectionDropdown = () => cy.get('select[name="destination"]');
+    getArrivalSearchField = () => cy.get('.select2-search__field');
 
     //Departure date
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
@@ -26,6 +27,7 @@ class CreateBookingPage {
     getFirstTripCard = () => cy.get('div .trip:first-child');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
+    getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class')
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
@@ -41,13 +43,15 @@ class CreateBookingPage {
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getLabelMainPassenger  = () => cy.get('div.passenger-row > label');
-
+    getPlaceholderPassengerName = () => cy.get('input[placeholder="Passenger name"]')
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
     getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
     getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');    
-    getDriverSeat = () => cy.get('table.seats tr td[class="seat blocked"]');  
+    getDriverSeat = () => cy.get('table.seats tr td[class="seat blocked"]');
+    getAllSeatsSeatSelection = () => cy.get('.seat-chart .seats td');
+   
 
     //Total - Footer section                  
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
@@ -116,6 +120,16 @@ class CreateBookingPage {
             }
             return indexOfMonth;
         });
-    };    
+    };  
+    
+    selectNeedDepartureStation(nameStation) {
+        this.getCreateBookingHeader().click()
+        this.clickDepartureStationDropdown()
+        this.getListDepartureStation().each(($el) => {
+            if($el.text() == nameStation) {
+                cy.wrap($el).click()
+            }
+        })
+    };
 }
 export default CreateBookingPage; 
