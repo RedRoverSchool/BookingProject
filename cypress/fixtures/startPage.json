@@ -51,7 +51,8 @@
         },
         "labelCountryCode": {
             "color": "rgb(170, 170, 170)",
-            "font_size": "10px"
+            "font_size": "10px",
+            "text": "Country code"
         }
     },
     "links": {
@@ -59,6 +60,10 @@
     },
     "data": {
         "previouslyUsedEmail": "testAgent6@qatest.site",
-        "specialCharacters": "#!@#$%"
+        "specialCharacters": "#!@#$%",
+        "phoneNumber": {
+            "code": 66,
+            "number": 616161616
+        }
     }
 }
