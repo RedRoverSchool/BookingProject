@@ -18,7 +18,8 @@
         "thLoginBtnText": "เข้าสู่ระบบ",
         "loginBtnTextColor": "rgb(0, 128, 0)",
         "rusLoginBtnText": "Войти",
-        "signInBtnTextColor": "rgb(108, 205, 102)" 
+        "signInBtnTextColor": "rgb(108, 205, 102)",
+        "signInBtnText": "SIGN IN"
     },
     "headers": {
         "header_Login_Popup": {
@@ -49,7 +50,9 @@
             "text": "Email"
         },
         "labelCountryCode": {
-            "color": "rgb(170, 170, 170)"
+            "color": "rgb(170, 170, 170)",
+            "font_size": "10px",
+            "text": "Country code"
         }
     },
     "links": {
@@ -57,6 +60,10 @@
     },
     "data": {
         "previouslyUsedEmail": "testAgent6@qatest.site",
-        "specialCharacters": "#!@#$%"
+        "specialCharacters": "#!@#$%",
+        "phoneNumber": {
+            "code": 66,
+            "number": 616161616
+        }
     }
 }

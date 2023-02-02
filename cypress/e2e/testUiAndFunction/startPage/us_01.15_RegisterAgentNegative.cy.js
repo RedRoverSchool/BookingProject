@@ -128,4 +128,12 @@ describe('US_01.15 | Register Agent Negative', function () {
             .should('be.visible')
             .and('have.text', this.startPage.alert.registerPopupErrorMessage.emptyPhoneField )
     })
+
+    it('AT_01.15.09 | Error message is displayed when user attempts to register with special characters in `Company name` field', function() {
+        registerPopup.enterCompanyName(this.startPage.data.specialCharacters)
+        registerPopup
+            .getErrorMessage()
+            .should('be.visible')
+            .and('contain', this.startPage.alert.registerPopupErrorMessage.nameFieldSpecialCharacters)
+    });
 })
