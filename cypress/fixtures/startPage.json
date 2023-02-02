@@ -59,6 +59,10 @@
     },
     "data": {
         "previouslyUsedEmail": "testAgent6@qatest.site",
-        "specialCharacters": "#!@#$%"
+        "specialCharacters": "#!@#$%",
+        "phoneNumber": {
+            "code": 66,
+            "number": 616161616
+        }
     }
 }

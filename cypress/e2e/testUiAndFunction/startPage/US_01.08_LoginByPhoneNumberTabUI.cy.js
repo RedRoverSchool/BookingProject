@@ -24,7 +24,7 @@ describe('US_01.08 | Login by phone number tab UI', () => {
 
     it('AT_01.08.03 | Verify "Phone number" input field has placeholder `1234567`', function () {
         loginPopup
-            .getPhoneNumberInputField()
+            .getPhoneNumberInput()
             .should('be.visible')
             .and('have.attr', 'placeholder', this.startPage.inputField.loginPopup.phoneNumberPlaceholder)
     });

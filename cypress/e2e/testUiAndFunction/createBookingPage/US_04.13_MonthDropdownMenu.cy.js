@@ -51,15 +51,17 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
     })
 
     it('AT_04.13.05 | Verify that the calendar label (between arrows) displays the month selected from the dropdown menu', function () {
-        createBookingPage.getMonthDropdownList()
-            .eq(3)
-            .invoke('text')
-            .then(($el) => {
-                const selectedMonthAndYear = $el;
-                createBookingPage.getMonthDropdownSelect().select(3);
+
+        createBookingPage.getRandomIndexOfMonth().then($el => {
+            let indexOfMonth = $el;
+            createBookingPage.getMonthDropdownSelect().select(indexOfMonth);
+
+            createBookingPage.getMonthDropdownList().eq(indexOfMonth).then($el => {
+                let selectedMonthAndYear = $el.text();
 
                 createBookingPage.getLabelCalendar().should('have.text', selectedMonthAndYear)
             })
+        })
     })
 
     it('AT_04.13.06 | Verify that the month that is shown in the "Departure on" section displays the month selected from the dropdown menu', function () {
@@ -71,17 +73,14 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
             createBookingPage.getMonthDropdownList().eq(indexOfMonth).then($el => {
                 let selectedMonthAndYear = $el.text();
 
-                createBookingPage.getMonthDropdownList().eq(indexOfMonth).then($el => {
-                    let selectedMonthAndYear = $el.text();
+                createBookingPage.getLabelDepartureOnDate()
+                    .should('contain.text', selectedMonthAndYear);
 
-                    createBookingPage.getLabelDepartureOnDate()
-                        .should('contain.text', selectedMonthAndYear);
-                })
             })
         })
     })
 
-    it('AT_04.13.07 | Verify that all months in the Month dropdown menu have the color of their font #00a65a', function() {
+    it('AT_04.13.07 | Verify that all months in the Month dropdown menu have the color of their font #00a65a', function () {
         createBookingPage.getMonthDropdownList().each($el => {
             cy.wrap($el).should('have.css', 'color', this.createBookingPage.calendarMonth.colorText)
         })
