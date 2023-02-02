@@ -40,8 +40,9 @@ describe('US_AC.05 | Create reservation for 1 passenger', () => {
         createBookingPage.getMainPassengerFareTypeDropdownList().select('child', {force: true});
         createBookingPage.clickReservationTicketArrow();
         createBookingPage.clickReservationTicketButton();
-
-        cy.wait('@getTrip')
+        
+        cy.intercept('/tools/ping/**').as('getPopUp')
+        cy.wait('@getPopUp')
 
         bookingPopup.getConfirmTicketButton().should('be.visible');
         bookingPopup.getPassengerTitle().should('include.text', '(1)');
