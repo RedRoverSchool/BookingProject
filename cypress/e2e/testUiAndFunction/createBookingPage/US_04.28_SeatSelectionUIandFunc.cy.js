@@ -77,6 +77,19 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 })
         })
     });
+
+    it('AT_04.28.08 | The total number of seats in the "Seat selection" section is equal the total number of seats in the selected trip', function() {    
+        createBookingPage.getNumberAllSeatsFirstTripCard().then($el => {
+            let numberAllSeats = $el.text().match(/\d/g).join('')
+
+            createBookingPage.getAllSeatsSeatSelection().then($el => {
+                let allSeatsSeatSelection = $el.toArray().length  
+                
+                expect(+numberAllSeats).to.eql(+allSeatsSeatSelection)
+            })           
+        })        
+            
+    })
 });
 
 //This describe for trip "Bangkok Khao San - Chonburi"

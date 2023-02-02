@@ -27,6 +27,7 @@ class CreateBookingPage {
     getFirstTripCard = () => cy.get('div .trip:first-child');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
+    getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class')
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
@@ -46,7 +47,8 @@ class CreateBookingPage {
     getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
     getSelectedSeats = () => cy.get('table.seats tr td[class="seat selected"]');
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');    
-    getDriverSeat = () => cy.get('table.seats tr td[class="seat blocked"]');  
+    getDriverSeat = () => cy.get('table.seats tr td[class="seat blocked"]');
+    getAllSeatsSeatSelection = () => cy.get('.seat-chart .seats td');
    
 
     //Total - Footer section                  
