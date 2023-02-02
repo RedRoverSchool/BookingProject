@@ -24,11 +24,12 @@ describe('Booking', () => {
         cy.visit('/')
         cy.login(AGENT.email, AGENT.password);
         cy.get('div.booking-header h1').should('include.text', this.createBookingPage.headers.mainHeaderPage);
-        createBookingPage.clickCalendarNextButton()
-		createBookingPage.clickFridayButton()
-        cy.get('div.trip').should('be.visible')
-        cy.intercept('/tools/**').as('getTrip')
-		cy.wait('@getTrip')
+
+        createBookingPage.clickCalendarNextButton();
+		createBookingPage.clickFridayButton();
+
+        cy.intercept('/tools/**').as('getTrip');
+        cy.wait('@getTrip');
 
         cy.get('div.trip').each(($el) => {
             const statusText = $el.text();
@@ -45,6 +46,9 @@ describe('Booking', () => {
         cy.get('div.passenger-row select[name="passenger-fare[]"]').select('child', {force: true});
 
         cy.contains('Book tickets').click({ force: true });
+
+        cy.intercept('/tools/ping/**').as('getPopUp');
+        cy.wait('@getPopUp');
 
         cy.get('.popup-content').should('be.visible');
         cy.get('span.booking-tracker').then(($id) => {
