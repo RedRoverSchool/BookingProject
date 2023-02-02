@@ -2,22 +2,20 @@
 
 import CreateBookingPage from "../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../pageObjects/BookingPopup";
+import waitFor from "../../support/utilities/waitFor";
 
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
-
+const MANAGER = Cypress.env('manager');
 const AGENT = Cypress.env('agent');
+const CI = Cypress.env('CI');
 
-
-
-describe('US_AC.05 | Create reservation for 1 passenger', () => {
+describe('US_AC.05 | Create reservation for 1 passenger', () => {  
     
-    beforeEach(function() {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-        this.createBookingPage = createBookingPage;
-        })
-    });
-
+    before(function () {
+        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
+    })
+    
     before(function() {
         cy.visit('/')
         cy.login(AGENT.email, AGENT.password)
@@ -28,6 +26,12 @@ describe('US_AC.05 | Create reservation for 1 passenger', () => {
         cy.wait(5000);
         createBookingPage.clickFirstTripCard();
         waitFor(createBookingPage.getMainPassengerFareTypeDropdownList, 15000);
+    });
+
+    beforeEach(function() {
+        cy.fixture('createBookingPage').then(createBookingPage => {
+        this.createBookingPage = createBookingPage;
+        })
     });
     
     it('AT_AC.05.02| Create reservation for 1 passenger - Child', function () {
@@ -41,17 +45,6 @@ describe('US_AC.05 | Create reservation for 1 passenger', () => {
         bookingPopup.getConfirmTicketButton().should('be.visible');
         bookingPopup.getPassengerTitle().should('include.text', '(1)');
         bookingPopup.getPassengersList().should('have.length', 1);
-        bookingPopup.getOnePassengerTypeLabel().should('have.text', 'Child:');        
-       
+        bookingPopup.getOnePassengerTypeLabel().should('have.text', 'Child:');   
     });
-});    
-
-
-function waitFor(element, timeout) {
-    for(let i=0; i<timeout/500; i++) {
-        cy.wait(500);
-        if(element()) {
-            return;
-        }
-    }
-}
+});   
