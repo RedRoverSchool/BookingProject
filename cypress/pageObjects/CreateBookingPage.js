@@ -108,6 +108,16 @@ class CreateBookingPage {
             }
             return indexOfMonth;
         });
-    };    
+    };  
+    
+    selectNeedDepartureStation(nameStation) {
+        this.getCreateBookingHeader().click()
+        this.clickDepartureStationDropdown()
+        this.getListDepartureStation().each(($el) => {
+            if($el.text() == nameStation) {
+                cy.wrap($el).click()
+            }
+        })
+    };
 }
 export default CreateBookingPage; 
