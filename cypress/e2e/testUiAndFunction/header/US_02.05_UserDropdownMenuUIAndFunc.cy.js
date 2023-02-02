@@ -2,9 +2,11 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import Header from "../../../pageObjects/Header";
+import {StartPage} from "../../../pageObjects/StartPage";
 
 const header = new Header();
 const createBookingPage = new CreateBookingPage();
+const startPage = new StartPage();
 
 describe('US_02.05 | User dropdown menu UI and functionality', () => {
 	const AGENT = Cypress.env('agent');
@@ -92,4 +94,10 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
         header.getFlagIconCn()
             .should('be.visible')   
     });
+
+		it('AT_02.05.07| Verify "User dropdown menu" has "Sign out" button', function () {
+			header.clickSignOutBtn()
+			startPage.getLoginButton()
+			.should('be.visible')
+	});
 });

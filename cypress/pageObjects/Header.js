@@ -46,5 +46,9 @@ class Header {
     clickFlagIconViet() {
         this.getFlagIconViet().click();
     }
+
+    clickSignOutBtn() {
+        this.getSignOutBtn().click();
+    }
 }
 export default Header;
