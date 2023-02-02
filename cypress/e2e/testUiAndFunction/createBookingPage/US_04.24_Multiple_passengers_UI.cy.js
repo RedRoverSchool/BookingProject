@@ -27,7 +27,7 @@ describe('US_04.24 | Multiple passengers UI', () => {
     
     it('AT_04.24.01 | Verify that Fare type dropdown menu is visible and has three options: Adult, Child and Elder', function () {
         createBookingPage.clickFareTypeDropdown();
-        createBookingPage.getFareTypeDropdownList()
+        createBookingPage.getMainPassengerFareTypeDropdownListOptions().each(($el, i) => {
             .should('have.length', this.createBookingPage.dropdowns.fareType.faretypesNumber);
         
         createBookingPage.getFareTypeDropdownList().each(($el, i) => {
