@@ -9,7 +9,7 @@ const registerPopup = new RegisterPopup();
 describe('US_01.11 | Header elements', () => {
 
     beforeEach(function () {
-	cy.visit('/');
+	    cy.visit('/');
         startPage.clickRegisterAccountLink();
 	});
 
@@ -17,4 +17,8 @@ describe('US_01.11 | Header elements', () => {
         registerPopup.getRegisterAgentAccountHeader().should('be.visible');
     });
 
+    it('AT_01.11.02 | Verify the title `Register agent account` has rgb(102, 102, 102) color, and 30px font-size‌', () => {
+        registerPopup.getRegisterAgentAccountHeader().should('have.css','color', 'rgb(102, 102, 102)');
+        registerPopup.getRegisterAgentAccountHeader().should('have.css','font-size', '30px');
+    });
 });

@@ -42,9 +42,16 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         .should('have.css','color', this.startPage.label.labelCountryCode.color)
     });
 
-    it('AT_01.08.05 | Verify Country code label has font-size - 10px', function () {
+    it('AT_01.08.05 | Verify "Country code" label has font-size - 10px', function () {
         loginPopup
         .getCountryCodeLabel()
         .should('have.css','font-size', this.startPage.label.labelCountryCode.font_size)
+    });
+
+    it('AT_01.08.06 | Verify "Country code" label has text Country code', function () {
+        loginPopup
+        .getCountryCodeLabel()
+        .should('be.visible')
+        .and('contain', this.startPage.label.labelCountryCode.text)
     });
 });

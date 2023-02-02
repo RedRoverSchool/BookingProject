@@ -51,7 +51,8 @@
         },
         "labelCountryCode": {
             "color": "rgb(170, 170, 170)",
-            "font_size": "10px"
+            "font_size": "10px",
+            "text": "Country code"
         }
     },
     "links": {
