@@ -10,22 +10,22 @@ describe('US_04.30 | Summary UI', () => {
 	before(() => {
 		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
-
+		//cy.intercept('POST', '/qatest.site').as('postLogIn')
 		createBookingPage.clickCalendarNextButton()
-		cy.wait(5000)
 		createBookingPage.clickFridayButton()
-		cy.wait(2000)
+		cy.intercept('GET', '**/qatest.site/tools/ping/**').as('getTrip')
+		cy.wait('@getTrip')
 		createBookingPage.clickFirstTripCard()
 	});
 
-	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section', () => {
+	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section', () => {	
 		createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
 			let numberOfPassengersArray = $el
 				.toArray()
 				.map($el => $el.innerText)
 			
 			let index = Math.floor(Math.random() * numberOfPassengersArray.length)
-			
+
 			createBookingPage.getPassengersDetailsDropdown().select(index)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
