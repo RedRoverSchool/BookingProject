@@ -28,8 +28,6 @@ class CreateBookingPage {
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
     getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class')
-    getTripCardLabel = () => cy.get('div .availability')
-    getTripCard = () => cy.get('div .trip')
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');

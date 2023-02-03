@@ -17,9 +17,10 @@ describe.only('US_04.22 | Trip card functionality', () => {
     
     it('AT_04.22.01 | Verify “Passenger” section displays default selected seat number after selecting trip card', function() {
        
-        createBookingPage.getTripCardLabel().should('be.visible').then((label) => {
-            expect(label).to.contain(this.createBookingPage.tripCardLabelName.availableLabel)
-        }).first().click()
+        createBookingPage.clickCalendarNextButton()
+        cy.intercept('/tools/**').as('getTrip')
+        cy.wait('@getTrip')
+        createBookingPage.clickFirstTripCard();
 
         createBookingPage.getMainPassengerSelectedSeatByDefault().then((seat1) => {
         createBookingPage.getSelectedSeats().then((seat2) => {

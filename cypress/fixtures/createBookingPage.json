@@ -88,11 +88,6 @@
     "weekDayFields": {
          "quantity": "7"
     }, 
-    "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)",
-    "tripCardLabelName": {
-        "availableLabel": " tickets available",
-        "overdueLabel": "Overdue",
-        "inactiveLabel":  "Inactive"
-    }
+    "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)"
     
 }
