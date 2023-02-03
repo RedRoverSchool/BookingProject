@@ -82,7 +82,8 @@
         "driverSeatText": "Driver"                
     },
     "placeholder":{
-        "name": "Passenger name"
+        "name": "Passenger name",
+        "phone": "Phone number"
     },
 
     "weekDayFields": {
