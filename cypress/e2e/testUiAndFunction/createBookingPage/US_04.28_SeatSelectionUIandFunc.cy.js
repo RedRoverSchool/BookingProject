@@ -1,8 +1,10 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import BookingPopup from "../../../pageObjects/BookingPopup";
 
 const createBookingPage = new CreateBookingPage();
+const bookingPopup = new BookingPopup();
 const AGENT = Cypress.env('agent');
 
 describe('US_04.28 | Seat selection UI and functionality', () => {
@@ -89,7 +91,28 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             })           
         })        
             
-    })
+    });
+
+    it('AT_04.28.07', function() {
+        createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)         
+        createBookingPage.clickReservationTicketArrow();
+        createBookingPage.clickReservationTicketButton();   
+        cy.intercept('/tools/ping/**').as('getPopUp')
+        cy.wait('@getPopUp')      
+        bookingPopup.clickCloseBtnBookingPopup()
+        createBookingPage.clickFirstTripCard()
+
+        let availableSeatsSeatSelection
+        createBookingPage.getAvailableSeatsSeatSelection().then($el => {
+            availableSeatsSeatSelection = $el.toArray().length                 
+        })       
+
+        createBookingPage.getTicketsAvailableFirstTripCard().then($el => {
+            let availableSeatsSelectedTrip = $el.text()
+            
+            expect(availableSeatsSeatSelection).to.eq(+availableSeatsSelectedTrip)        
+        })    
+    });
 });
 
 //This describe for trip "Bangkok Khao San - Chonburi"
