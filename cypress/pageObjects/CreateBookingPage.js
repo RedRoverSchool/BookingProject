@@ -138,5 +138,17 @@ class CreateBookingPage {
         })
     };
 
+    getRandomPassengersAmmount() {
+        return this.getPassengersDetailsDropdown().then(($el) => {
+            const passengersArray = $el
+                .toArray()
+                .map(el => el.innerText.split('\n'))
+                .join(',').split(',')
+            const indexOfPassengersAmmount = Math.floor(Math.random() * passengersArray.length)
+            const passengersAmount = passengersArray[indexOfPassengersAmmount]
+            return passengersAmount
+        })
+    };
+
 }
 export default CreateBookingPage; 

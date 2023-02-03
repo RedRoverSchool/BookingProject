@@ -25,15 +25,9 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     });
 
     it('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', () => {
-        createBookingPage.getPassengersDetailsDropdown().then(($el) => {
-            const passengersArray = $el
-                .toArray()
-                .map(el => el.innerText.split('\n'))
-                .join(',').split(',')
-
-            const indexArr = Math.floor(Math.random() * passengersArray.length)
-            const passengersAmount = passengersArray[indexArr]
-             
+        createBookingPage.getRandomPassengersAmmount().then(($el) => {
+            const passengersAmount = $el
+            
             createBookingPage.getPassengersDetailsDropdown()
                 .select(passengersAmount)
                 .should('have.value', parseInt(passengersAmount))
