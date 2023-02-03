@@ -51,6 +51,9 @@ class CreateBookingPage {
     getAllSeatsSeatSelection = () => cy.get('.seat-chart .seats td');
    
 
+    // Summary section 
+    getColumnSeatsSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)')
+
     //Total - Footer section                  
     
     // Methods
