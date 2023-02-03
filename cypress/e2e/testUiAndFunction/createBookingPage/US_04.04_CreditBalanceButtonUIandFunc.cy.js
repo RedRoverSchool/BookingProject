@@ -16,19 +16,21 @@ describe('US_04.04 | Credit balance button UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
     })
 
-    xit('AT_04.04.01 | Create booking page > Verify that week/month format lable', function () {
+    it('AT_04.04.01 | Create booking page > Verify that week/month format lable', function () {
         let current = new Date()
+        current.setHours(current.getUTCHours() + 7)
         current.setDate(current.getDate() - current.getDay() + 1)
-	    let mondayDate = current.toLocaleString('en-GB', { month: 'short', day: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
+	    let mondayDate = current.toLocaleString('en-GB', { month: 'short', day: 'numeric' })
         current.setDate(current.getDate() - current.getDay() + 7)
-        let sundayDate = current.toLocaleString('en-GB', { month: 'short', day: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
+        let sundayDate = current.toLocaleString('en-GB', { month: 'short', day: 'numeric' })
         let weekFormat = mondayDate + " " + "-" + " " + sundayDate
         createBookingPage.getLabelCalendar().then(($el) => {
             let labelWeekFormat = $el.text()
             expect(weekFormat).to.eq(labelWeekFormat)
         })
         createBookingPage.clickMonthBtn()
-        let dateForBooking = new Date(Date.now() + 172800000)
+        let dateForBooking = new Date()
+        dateForBooking.setDate(current.getDate() + 2)
         let monthForBooking = dateForBooking.toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' })
         createBookingPage.getLabelCalendar().then(($el) => {
             let labelMonthFormat = $el.text()

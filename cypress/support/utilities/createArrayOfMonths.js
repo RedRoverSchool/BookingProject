@@ -5,7 +5,7 @@ const arrayOfConsetutiveMonths = () => {
 		const current = new Date()
 		current.setDate(1)
 		current.setMonth(current.getMonth() + count)
-		const month = current.toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
+		const month = current.toLocaleString('en-US', { month: 'short', year: 'numeric'})
 		consecutiveMonths.push(month)
 		count++
 	}

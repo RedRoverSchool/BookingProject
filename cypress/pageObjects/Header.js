@@ -12,7 +12,7 @@ class Header {
     getFlagIconEs = () => cy.get('a[href="/lang?l=es"]');
     getFlagIconRu = () => cy.get('a[href="/lang?l=ru"]');
     getFlagIconCn = () => cy.get('a[href="/lang?l=cn"]');
-    getFlagIconVi = () => cy.get('a[href="/lang?l=vi"]');
+    getFlagIconVi = () => cy.get('a[href="/lang?l=vi"]'); 
     getFlagIconTh = () => cy.get('a[href="/lang?l=th"]');
     getFlagIconViet = () => cy.get('a[href="/lang?l=vi"]');
     getSignOutBtn = () => cy.get('[href="/logout/"]');
@@ -39,8 +39,16 @@ class Header {
         this.getFlagIconEn().click();
     }
 
+    clickEnvelopeIcon() {
+        this.getEnvelopeIcon().click();
+    }
+
     clickFlagIconViet() {
         this.getFlagIconViet().click();
+    }
+
+    clickSignOutBtn() {
+        this.getSignOutBtn().click();
     }
 }
 export default Header;

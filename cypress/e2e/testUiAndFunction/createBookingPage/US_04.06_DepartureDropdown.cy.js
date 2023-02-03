@@ -4,18 +4,19 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
+const AGENT = Cypress.env('agent');
 
-describe('US_04.06 | Departure dropdown UI and functionality', () => {
-
-    const AGENT = Cypress.env('agent');
+describe('US_04.06 | Departure dropdown UI and functionality', () => {   
 
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        })
+        })       
+    });
 
-        cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
+    before(() => {
+        cy.visit('/')
+        cy.login(AGENT.email, AGENT.password)        
     });
 
     it('AT_04.06.01 | Verify that the Departure station dropdown menu displays required list of stations', function () {
@@ -27,6 +28,14 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
             cy.wrap($el).should('be.visible')
             expect($el.text()).to.be.equal(this.createBookingPage.dropdowns.departureStation.stationsNames[i])
         })
+    });
+
+    it('AT_04.06.02 | Verify that the Agent can choose stations from the Dropdown Menu', function(){
+        createBookingPage.selectNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[6])
+
+        createBookingPage.getDepartureStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[6])
+            .and('be.visible')
     });
 
 })
