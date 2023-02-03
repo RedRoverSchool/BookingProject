@@ -17,7 +17,7 @@ describe('US_04.30 | Summary UI', () => {
 		createBookingPage.clickFirstTripCard()
 	});
 
-	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section', () => {	
+	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section', () => {
 		createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
 			let numberOfPassengersArray = $el
 				.toArray()
@@ -33,6 +33,28 @@ describe('US_04.30 | Summary UI', () => {
 					createBookingPage.getColumnSeatsSummary().then(($el) => {
 						let seatsSummaryArray = $el.text()
 						expect(defaultSelectedSeatsArray).to.deep.eq(seatsSummaryArray)
+					})
+				})
+		})
+	});
+
+	it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers from passenger dropdown menu', () => {
+		createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
+			let numberOfPassengersArray = $el
+				.toArray()
+				.map($el => $el.innerText)
+
+			let index = Math.floor(Math.random() * numberOfPassengersArray.length)
+
+			createBookingPage.getPassengersDetailsDropdown().select(index)
+				.invoke('val')
+				.then((value) => {
+					let chosenNumOfPassengers = +value
+
+					createBookingPage.getRowsSummaryList().then(($el) => {
+						let numberOfRows = $el
+						expect(chosenNumOfPassengers).to.eq(numberOfRows.length)
+
 					})
 				})
 		})

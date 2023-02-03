@@ -28,7 +28,8 @@
             "font_size": "30px",
             "headerText": "Enter QA Test OP"
         },
-        "registerAgentAccount": "Register agent account"
+        "registerAgentAccount": "Register agent account",
+        "congratulationsHeader": "Congratulations!"
     },
     "img": {
         "logoFileName": "logo-main.png"

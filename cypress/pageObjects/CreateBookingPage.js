@@ -37,11 +37,15 @@ class CreateBookingPage {
     getPassengersDetailsDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
     getFareTypeDropdown = () => cy.get('[id^=select2-passenger-fare]');
-    getFareTypeDropdownList = () => cy.get('label [name="passenger-fare[]"] option');
+    getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
+    getMainPassengerFareTypeDropdownListOptions = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
+    getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getLabelMainPassenger  = () => cy.get('div.passenger-row > label');
     getPlaceholderPassengerName = () => cy.get('input[placeholder="Passenger name"]')
+    getPlaceholderPhoneNumber = () => cy.get('[placeholder="Phone number"]')
+    getMainPassengerSelectedSeatByDefault = () => cy.get('div[class="col-lg-12 passenger-row"] span[class="seat-number"]')
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
     getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
@@ -53,10 +57,13 @@ class CreateBookingPage {
 
     // Summary section 
     getColumnSeatsSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)')
+    getRowsSummaryList = () => cy.get('.total-wrapper > div.total-row')
     getAmountOfPassengersInSummary = () => cy.get('.box-default .total-wrapper  .total-row')
 
     //Total - Footer section                  
-    
+    getReservationTicketArrow = () => cy.get('.btn-group .caret');
+    getReservationTicketButton = () => cy.get('.btn-reserve-tickets');
+
     // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
@@ -100,7 +107,15 @@ class CreateBookingPage {
 
     clickSaturdayButton() {
         this.getSaturdayButton().click();
-    };    
+    };  
+    
+    clickReservationTicketArrow() {
+        this.getReservationTicketArrow().click()
+    };
+
+    clickReservationTicketButton() {
+        this.getReservationTicketButton().click()
+    };
     
     getRandomIndexOfMonth() {
 
@@ -124,7 +139,19 @@ class CreateBookingPage {
         })
     };
 
-    getRandomAmountOfPassSeatSelectionDrpDwn() {
+    getRandomPassengersAmmount() {
+        return this.getPassengersDetailsDropdown().then(($el) => {
+            const passengersArray = $el
+                .toArray()
+                .map(el => el.innerText.split('\n'))
+                .join(',').split(',')
+            const indexOfPassengersAmmount = Math.floor(Math.random() * passengersArray.length)
+            const passengersAmount = passengersArray[indexOfPassengersAmmount]
+            return passengersAmount
+        })
+    };
+    
+     getRandomAmountOfPassSeatSelectionDrpDwn() {
 
            return this.getSeatSelectionDropdownList().then($el => {
             let passengersArray = $el
@@ -137,5 +164,6 @@ class CreateBookingPage {
             return amountOfPass;
          })
     }
-};
+}
+
 export default CreateBookingPage; 

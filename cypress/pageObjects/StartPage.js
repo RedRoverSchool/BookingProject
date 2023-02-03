@@ -167,3 +167,11 @@ export class RegisterPopup {
         this.getForgotYourPasswordLink().click({force: true});
     };
 }
+
+export class CongratulationsPopup {
+        // Elements
+
+    getCongratulationsHeader = () => cy.get('#registerModal h2')
+
+    
+}

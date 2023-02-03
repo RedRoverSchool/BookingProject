@@ -72,7 +72,8 @@
     },
 
     "unavailableDayField": {
-        "cursor": "not-allowed"
+        "cursor": "not-allowed",
+        "backgroundColor": "rgb(226, 226, 226)"
     },
     "class": {
         "unavailableClass": "unavailable"
@@ -82,7 +83,15 @@
         "driverSeatText": "Driver"                
     },
     "placeholder":{
-        "name": "Passenger name"
+        "name": "Passenger name",
+        "phone": "Phone number"
+    },
+
+    "weekDayFields": {
+         "quantity": "7"
     }, 
-    "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)"
+
+    "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)",
+
+    "notSelectedWeekBtnBackgroundColor": "rgb(255, 255, 255)"
 }
