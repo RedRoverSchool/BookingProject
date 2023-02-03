@@ -39,6 +39,12 @@ describe('US_01.02 | Login-register section elements UI and functionality | Logi
             .should('have.css', 'color', this.startPage.buttons.loginBtnTextColor)
     });
 
+    it('AT_01.02.07 | Verify that the Login-register section has a white #ffffffe0 background color', function () {
+        startPage
+            .getBackgroundLoginSection()
+            .should('have.css', 'background-color', this.startPage.backgoundColor)
+    });
+
     it('AT_01.02.02 | Login button: visible / clickable / opening Login popup', function () {
         startPage.getLoginButton().should('be.visible');
         startPage.clickLoginButton();
