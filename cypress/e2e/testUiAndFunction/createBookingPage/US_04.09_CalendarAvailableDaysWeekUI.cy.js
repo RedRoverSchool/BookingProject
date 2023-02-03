@@ -64,6 +64,6 @@ describe('US_04.09 | Calendar available days week UI', () => {
 
 	it('AT_04.09.05 | Seven fields are displayed for the week', function() {
 		createBookingPage.getCalendarDays()
-			.should('have.length', this.createBookingPage.selectedDayField.quantity)
+			.should('have.length', this.createBookingPage.weekDayFields.quantity)
 	})
 });

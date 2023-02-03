@@ -60,8 +60,7 @@
 
     "selectedDayField": {
         "backgroundColor":"rgb(0, 166, 90)",
-        "color": "rgb(255, 255, 255)",
-        "quantity": "7"
+        "color": "rgb(255, 255, 255)"
     },
 
     "notSelectedDayField": {
@@ -84,5 +83,9 @@
     },
     "placeholder":{
         "name": "Passenger name"
+    },
+
+    "weekDayFields": {
+         "quantity": "7"
     }
 }
