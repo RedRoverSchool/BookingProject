@@ -94,6 +94,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     });
 
     it('AT_04.28.07', function() {
+        cy.reload()
         createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)         
         createBookingPage.clickReservationTicketArrow();
         createBookingPage.clickReservationTicketButton();   
