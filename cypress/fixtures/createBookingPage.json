@@ -80,6 +80,13 @@
     "seatSelectionTable": {
         "selectedSeatColor": "rgb(157, 208, 157)",
         "driverSeatText": "Driver"                
-    }
-    
+    },
+    "placeholder":{
+        "name": "Passenger name"
+    },
+
+    "weekDayFields": {
+         "quantity": "7"
+    }, 
+    "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)"
 }

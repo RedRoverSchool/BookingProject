@@ -19,9 +19,9 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
         
         createBookingPage.clickCalendarNextButton()
-        cy.wait(5000)
         createBookingPage.clickFridayButton()
-        cy.wait(2000)
+        cy.intercept('/tools/**').as('getTrip')
+		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
     });
 
@@ -85,7 +85,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
             expect(selectedSeats).to.equal(parseInt(passengersAmount))   
             })
         })
-    })
+    });
 
     it('AT_04.29.04 | The number of passengers in "Seat selection dropdown" is equal the number of passengers is displayed in the "Passengers details dropdown".', function() {
         createBookingPage.getSeatSelectionDropdownList().then(($el) => {
@@ -106,5 +106,5 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
             expect(parseInt(amountOfPass)).to.eq(amountOfChoosenPass.length)
            })
         }) 
-    })
+    });
 })

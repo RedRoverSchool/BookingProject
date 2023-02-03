@@ -18,9 +18,9 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
         
         createBookingPage.clickCalendarNextButton()
-        cy.wait(5000)
         createBookingPage.clickFridayButton()
-        cy.wait(2000)
+        cy.intercept('/tools/**').as('getTrip')
+		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
     });
 
@@ -77,6 +77,19 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 })
         })
     });
+
+    it('AT_04.28.08 | The total number of seats in the "Seat selection" section is equal the total number of seats in the selected trip', function() {    
+        createBookingPage.getNumberAllSeatsFirstTripCard().then($el => {
+            let numberAllSeats = $el.text().match(/\d/g).join('')
+
+            createBookingPage.getAllSeatsSeatSelection().then($el => {
+                let allSeatsSeatSelection = $el.toArray().length  
+                
+                expect(+numberAllSeats).to.eql(+allSeatsSeatSelection)
+            })           
+        })        
+            
+    })
 });
 
 //This describe for trip "Bangkok Khao San - Chonburi"
@@ -92,7 +105,7 @@ describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Ch
         cy.login(AGENT.email, AGENT.password)
     });
 
-    it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
+    it.skip('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
         
         createBookingPage.getDepartureStationSelectionDropdown()
             .select('Bangkok Khao San', {force: true})

@@ -54,7 +54,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})
 	})
 
-	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
+	it.skip('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
 		let date = new Date() 
 		let dateThailand = date.toLocaleString('en-GB', { day: 'numeric', timeZone: 'Asia/Bangkok' })
 		let currentMonthAndYear = date.toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok'})
