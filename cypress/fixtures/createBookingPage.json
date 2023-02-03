@@ -72,7 +72,8 @@
     },
 
     "unavailableDayField": {
-        "cursor": "not-allowed"
+        "cursor": "not-allowed",
+        "backgroundColor": "rgb(226, 226, 226)"
     },
     "class": {
         "unavailableClass": "unavailable"

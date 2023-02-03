@@ -55,7 +55,7 @@ describe('US_04.11 | Calendar week functionality', () => {
 		createBookingPage.getCalendarDays().each(($el) => {
 			if($el.hasClass('unavailable')){
 
-				expect($el).to.have.css('cursor',this.createBookingPage.unavailableDayField.cursor);
+				expect($el).to.have.css('background-color',this.createBookingPage.unavailableDayField.backgroundColor);
 			}
 		})
 	});
