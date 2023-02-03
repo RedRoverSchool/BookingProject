@@ -7,14 +7,13 @@ const createBookingPage = new CreateBookingPage();
 describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
-	before(() => {
+	beforeEach(function () {
+
 		cy.visit('/');
 		cy.login(AGENT.email, AGENT.password)
+		cy.intercept('/tools/**').as('getTrip')
+		cy.wait('@getTrip')
 		createBookingPage.clickMonthBtn()
-	});
-
-	beforeEach(function () {
-		
 		cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
@@ -54,13 +53,13 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})
 	})
 
-	it.skip('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
+	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
 		let date = new Date() 
 		let dateThailand = date.toLocaleString('en-GB', { day: 'numeric', timeZone: 'Asia/Bangkok' })
 		let currentMonthAndYear = date.toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok'})
 		createBookingPage.getMonthDropdownSelect().select(currentMonthAndYear)
 		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
-            if($el.text() < dateThailand){
+            if(+$el.text() < +dateThailand){
                 expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
             }          
 		})		

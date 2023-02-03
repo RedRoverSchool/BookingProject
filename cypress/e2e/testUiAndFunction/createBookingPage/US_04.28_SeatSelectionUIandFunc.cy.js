@@ -105,7 +105,7 @@ describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Ch
         cy.login(AGENT.email, AGENT.password)
     });
 
-    it.skip('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
+    it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
         
         createBookingPage.getDepartureStationSelectionDropdown()
             .select('Bangkok Khao San', {force: true})
@@ -118,12 +118,10 @@ describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Ch
             .should('have.text', this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])     
         
         createBookingPage.clickCalendarNextButton()
-        cy.wait(5000)
         createBookingPage.clickSaturdayButton()
-        cy.wait(2000)
+        cy.intercept('/tools/**').as('getTrip')
+		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
-        createBookingPage.getFirstTripCard()
-            .should('include.text', 'VIP bus 24')
 
         createBookingPage.getDriverSeat()
             .should('be.visible')

@@ -7,13 +7,15 @@ const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 
 describe('US_01.05 | Login By Email Tab UI', () => {
+    before(() => {
+        cy.visit('/');
+        startPage.clickLoginButton();
+    });
+   
     beforeEach(function () {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
         });
-
-        cy.visit('/');
-        startPage.clickLoginButton();
     });
 
     it('AT_01.05.01 | Insure By Email tab is visible', () => {
