@@ -51,7 +51,7 @@ describe('US_04.30 | Summary UI', () => {
 				.then((value) => {
 					let chosenNumOfPassengers = +value
 
-					createBookingPage.getRowsListSummary().then(($el) => {
+					createBookingPage.getRowsSummaryList().then(($el) => {
 						let numberOfRows = $el
 						expect(chosenNumOfPassengers).to.eq(numberOfRows.length)
 
