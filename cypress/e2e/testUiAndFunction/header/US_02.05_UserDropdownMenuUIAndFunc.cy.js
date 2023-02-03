@@ -26,7 +26,7 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 
 	it('AT_02.05.01 | Verify the User dropdown menu displays selection of 8 language icons', function () {
 		header.getLanguageIcons()
-			.should('have.length', this.header.hyperLinks.languageIconQuantity)		
+			.should('have.length', this.header.images.imageIconLength)		
 	})
 	
 	it('AT_02.05.02 |Verify UK flag" icon is displayed', function () {
@@ -100,4 +100,10 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 			startPage.getLoginButton()
 			.should('be.visible')
 	});
+
+	it('AT_02.05.03 | Clicking "Sign out" button gets user signed out', function () {
+		header.clickSignOutBtn()
+			startPage.getLoginButton()
+			.should('be.visible')
+	})
 });

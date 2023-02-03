@@ -11,6 +11,26 @@
     "url": {
         "header": "value"
     },
+    "columns": {
+        "default": ["#", "ID", "Booking date", "Route", "Departure date", "Departure time", "Vehicle", "Seats", "Contact", "Price, USD", "Status", "Expire"],
+        "id": ["#", "ID"],
+        "bookingDate": ["#", "Booking date"],
+        "route": ["#", "Route"],
+        "departureDate": ["#", "Departure date"],
+        "departureTime": ["#", "Departure time"],
+        "vehicle": ["#", "Vehicle"],
+        "channelAgent": ["#", "Channel / Agent"],
+        "seats": ["#", "Seats"],
+        "numbers": ["#", "Numbers"],
+        "contact": ["#", "Contact"],
+        "priceUsd": ["#", "Price, USD"],
+        "status": ["#", "Status"],
+        "expire": ["#", "Expire"],
+        "notes": ["#", "Notes"],
+        "idNotes": ["#", "ID", "Notes"],
+        "seatsStatus": ["#", "Seats", "Status"],
+        "routeVehicle": ["#", "Route", "Vehicle"]
+    },
     "inputFields": {
         "searchPlaceholder": "Search",
         "bookingIdPlaceholder": "Booking ID",

@@ -13,8 +13,32 @@ class BookingsListPage {
     getClearLink = () => cy.get('div #filterClear');
     getDateRange = () => cy.get('div #filterDateType');
 
-    clickPrintButton() {
+    // Booking list
+    getTableHeaders = () => cy.get('.table thead tr');
+    getColumnsSettingButton = () => cy.get('.table-columns-settings-link');
+    getColumnsCheckbox = () => cy.get('input[type="checkbox');
+    getColumnsOkButton = () => cy.get('.popup-table-columns-settings .btn-success');
+
+    // Methods
+    clickPrintButton () {
         this.clickPrintButton().click();
     };
+
+    clickColumnsSettingButton () {
+        this.getColumnsSettingButton().click();
+    }
+
+    checkColumnsCheckbox (columns) {
+        this.getColumnsCheckbox().check(columns);
+    }
+
+    uncheckColumnsCheckbox () {
+        this.getColumnsCheckbox().uncheck();
+    }
+
+    clickColumnsOkButton () {
+        this.getColumnsOkButton().click();
+    }
 }
+
 export default BookingsListPage;
