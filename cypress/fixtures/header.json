@@ -2,8 +2,8 @@
     "headers": {
         "header": "value"
     },
-    "hyperLinks": {
-        "languageIconQuantity": 8
+    "images": {
+        "imageIconLength": 8
     },
     "url": {
         "logoUrl": "https://qatest.site/"
