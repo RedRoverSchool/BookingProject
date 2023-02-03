@@ -136,8 +136,5 @@ class CreateBookingPage {
         })
     };
 
-    clickAvailableTripCard() {
-        this.getAvailableTripCard().click()
-    }
 }
 export default CreateBookingPage; 
