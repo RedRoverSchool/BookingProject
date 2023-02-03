@@ -55,6 +55,7 @@ class CreateBookingPage {
 
     // Summary section 
     getColumnSeatsSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)')
+    getRowsListSummary = () => cy.get('.total-wrapper > div.total-row')
 
     //Total - Footer section                  
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
