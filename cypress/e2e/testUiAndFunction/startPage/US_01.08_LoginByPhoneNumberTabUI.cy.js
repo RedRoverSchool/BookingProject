@@ -55,7 +55,7 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         .and('contain', this.startPage.label.labelCountryCode.text)
     });
 
-    it('AT_01.08.07 | Verify the agent is able to see "Phone number" input field', () => {
+    it('AT_01.08.07 | Verify the agent is able to see "Phone number" input field', function () {
         loginPopup
             .getPhoneNumberInput()
             .should('be.visible');
@@ -67,11 +67,11 @@ describe('US_01.08 | Login by phone number tab UI', () => {
             .should('be.visible');
     });
 
-    
-
-
-
-
+    it('AT_01.08.09 | Verify Phone number label has text "Phone number"', function () {
+        loginPopup
+            .getPhoneNumberLabel()
+            .should('have.text', this.startPage.label.labelPhoneNumber.text);
+    });
 
     it('AT_01.08.10 | Verify "Phone number" label has color - #aaa', function () {
         loginPopup

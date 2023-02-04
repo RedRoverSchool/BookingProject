@@ -59,4 +59,32 @@ describe('US_04.30 | Summary UI', () => {
 				})
 		})
 	})
-});
+
+	it('AT_04.30.02 | Total price is correct', () => {
+		createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
+			let arrayOfSeats = $el
+			.toArray()
+			.map($el => $el.innerText)
+
+			let indexOfSeat = Math.floor(Math.random() * arrayOfSeats.length)
+            let amountOfPass = arrayOfSeats[indexOfSeat]
+
+			createBookingPage.getSeatSelectionDropdown().select(amountOfPass)
+
+			createBookingPage.getPriceOfTicket().then(($el) => {
+
+				let price = $el.text().replace(/([^0-9])+/i, "") 
+				let priceForTicket = price * amountOfPass.replace(/([^0-9])+/i, "")
+
+				createBookingPage.getTotalPrice().then(($el) => {
+					let totalPrice = $el
+					.toArray()
+					.map($el => $el.innerText)
+					.join('')
+
+					expect(totalPrice).to.be.equal('USD' + " " + priceForTicket)
+				})
+			})
+		})
+	})
+})
