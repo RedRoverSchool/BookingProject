@@ -55,7 +55,7 @@ describe('US_04.11 | Calendar week functionality', () => {
 		createBookingPage.getCalendarDays().each(($el) => {
 			if($el.hasClass('unavailable')){
 
-				expect($el).to.have.css('cursor',this.createBookingPage.unavailableDayField.cursor);
+				expect($el).to.have.css('background-color',this.createBookingPage.unavailableDayField.backgroundColor);
 			}
 		})
 	});
@@ -66,5 +66,16 @@ describe('US_04.11 | Calendar week functionality', () => {
 			
 			expect($el).to.have.css('cursor',this.createBookingPage.validDayField.cursor);
 		});
+	});
+
+	it('AT_04.11.07 | Verify that When you hover the cursor over the expired date, a prohibition signs appears no_entry_sign', function() {
+		
+		createBookingPage.clickCalendarPrevButton();
+		createBookingPage.getCalendarDays().each(($el) => {
+			if($el.hasClass('unavailable')){
+
+				expect($el).to.have.css('cursor',this.createBookingPage.unavailableDayField.cursor);
+			}
+		})
 	});
 });

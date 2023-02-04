@@ -7,14 +7,13 @@ const createBookingPage = new CreateBookingPage();
 describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
-	before(() => {
+	beforeEach(function () {
+
 		cy.visit('/');
 		cy.login(AGENT.email, AGENT.password)
+		cy.intercept('/tools/**').as('getTrip')
+		cy.wait('@getTrip')
 		createBookingPage.clickMonthBtn()
-	});
-
-	beforeEach(function () {
-		
 		cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
@@ -60,7 +59,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		let currentMonthAndYear = date.toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok'})
 		createBookingPage.getMonthDropdownSelect().select(currentMonthAndYear)
 		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
-            if($el.text() < dateThailand){
+            if(+$el.text() < +dateThailand){
                 expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
             }          
 		})		
