@@ -107,4 +107,19 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
            })
         }) 
     });
-})
+
+    it('AT_04.29.05 | Verify number of passengers selected in the "Seat selection dropdown" became equal to the number of passengers in the "Summary" section', function () {
+             createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then($el => {
+                let amountOfPass = $el;
+
+                createBookingPage.getSeatSelectionDropdown().select(amountOfPass)
+
+                createBookingPage.getAmountOfPassengersInSummary().then($el => {
+                let amountOfPassengersInSummary = $el
+                    .toArray()
+                    
+                 expect(parseInt(amountOfPass)).to.eq(amountOfPassengersInSummary.length)
+             })
+         })
+    })
+});
