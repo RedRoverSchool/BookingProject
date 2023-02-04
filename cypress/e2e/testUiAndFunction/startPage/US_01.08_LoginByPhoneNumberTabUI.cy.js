@@ -54,4 +54,10 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         .should('be.visible')
         .and('contain', this.startPage.label.labelCountryCode.text)
     });
+
+    it('AT_01.08.07 | Verify the agent is able to see "Phone number" input field', () => {
+        loginPopup
+            .getPhoneNumberInput()
+            .should('be.visible');
+    });
 });
