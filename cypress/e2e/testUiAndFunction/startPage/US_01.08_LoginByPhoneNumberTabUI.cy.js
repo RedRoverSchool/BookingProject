@@ -60,4 +60,10 @@ describe('US_01.08 | Login by phone number tab UI', () => {
             .getPhoneNumberInput()
             .should('be.visible');
     });
+
+    it('AT_01.08.08 | Verify the agent is able to see "Country code" input field', () => {
+        loginPopup
+            .getCountryCodeInput()
+            .should('be.visible');
+    });
 });
