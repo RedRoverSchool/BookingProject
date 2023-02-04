@@ -30,4 +30,14 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
             .should('not.have.class', 'selected')
             .and('have.css', 'background-color', this.createBookingPage.notSelectedWeekBtnBackgroundColor);
     })
+
+    it('AT_04.15.03 | Month dropdown menu (to the left of the Week button) is visible and available only after the Month button is chosen', function () {
+        createBookingPage.getMonthDropdownSelect()
+            .should('be.visible');
+
+        createBookingPage.clickWeekBtn();
+
+        createBookingPage.getMonthDropdownSelect()
+            .should('not.be.visible');         
+    })
 });
