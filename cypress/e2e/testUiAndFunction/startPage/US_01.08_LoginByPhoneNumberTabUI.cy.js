@@ -66,4 +66,16 @@ describe('US_01.08 | Login by phone number tab UI', () => {
             .getCountryCodeInput()
             .should('be.visible');
     });
+
+    
+
+
+
+
+
+    it('AT_01.08.10 | Verify "Phone number" label has color - #aaa', function () {
+        loginPopup
+        .getPhoneNumberInputFieldLabel()
+        .should('have.css','color', this.startPage.label.labelPhoneNumberInputField.color)
+    });
 });

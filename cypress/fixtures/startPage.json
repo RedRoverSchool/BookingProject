@@ -55,6 +55,9 @@
             "color": "rgb(170, 170, 170)",
             "font_size": "10px",
             "text": "Country code"
+        },
+        "labelPhoneNumberInputField": {
+            "color": "rgb(170, 170, 170)"
         }
     },
     "links": {
