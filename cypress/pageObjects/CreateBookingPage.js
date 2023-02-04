@@ -46,6 +46,7 @@ class CreateBookingPage {
     getPlaceholderPassengerName = () => cy.get('input[placeholder="Passenger name"]')
     getPlaceholderPhoneNumber = () => cy.get('[placeholder="Phone number"]')
     getMainPassengerSelectedSeatByDefault = () => cy.get('div[class="col-lg-12 passenger-row"] span[class="seat-number"]')
+    getPassengerDetailsAssignedSeats = () => cy.get('span.seat-number')
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
     getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
