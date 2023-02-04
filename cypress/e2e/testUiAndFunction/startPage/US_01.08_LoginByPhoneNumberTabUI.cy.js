@@ -67,7 +67,7 @@ describe('US_01.08 | Login by phone number tab UI', () => {
             .should('be.visible');
     });
 
-    it.only('AT_01.08.09 | Verify Phone number label has text "Phone number"', function () {
+    it('AT_01.08.09 | Verify Phone number label has text "Phone number"', function () {
         loginPopup
             .getPhoneNumberLabel()
             .should('have.text', this.startPage.label.labelPhoneNumber.text);
