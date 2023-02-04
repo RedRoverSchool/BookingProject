@@ -24,9 +24,9 @@ describe('US_05.01 Booking list page >Top Section> Clear link UI', () => {
 
     it('AT_05.01.02 Verify that the link “Clear” displayed', function () {
         
-        bookingsListPage.getClearLink().should('be.visible');
-        bookingsListPage.getClearLink().should('have.text', this.bookingsListPage.links.filterClear);
-      
+        bookingsListPage
+            .getClearLink()
+            .should('be.visible')
+            .and('have.text', this.bookingsListPage.links.filterClear);
     });      
-  
 })
