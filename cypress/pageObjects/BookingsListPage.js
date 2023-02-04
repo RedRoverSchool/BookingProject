@@ -43,11 +43,6 @@ class BookingsListPage {
     clickClearLink() {
         this.clickClearLink().click();
     };
-
-
-
-
-
 }
 
 export default BookingsListPage;
