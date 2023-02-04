@@ -16,5 +16,14 @@ class BookingsListPage {
     clickPrintButton() {
         this.clickPrintButton().click();
     };
+
+    clickClearLink() {
+        this.clickClearLink().click();
+    };
+
+
+
+
+
 }
 export default BookingsListPage;
