@@ -16,6 +16,7 @@ class Header {
     getFlagIconTh = () => cy.get('a[href="/lang?l=th"]');
     getFlagIconViet = () => cy.get('a[href="/lang?l=vi"]');
     getSignOutBtn = () => cy.get('[href="/logout/"]');
+    getOperatorImage = () => cy.get('#op-dropdown > a > img');
 
 
 // methods
