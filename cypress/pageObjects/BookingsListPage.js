@@ -39,6 +39,10 @@ class BookingsListPage {
     clickColumnsOkButton () {
         this.getColumnsOkButton().click();
     }
+
+    clickClearLink() {
+        this.clickClearLink().click();
+    };
 }
 
 export default BookingsListPage;

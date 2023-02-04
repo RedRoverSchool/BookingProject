@@ -51,7 +51,7 @@ export class LoginPopup {
     getByEmailSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
     getMessageAlert = () => cy.get('div.alert');
     getLoginByPhoneNumberTab = () => cy.get('[href="#byphone"]');
-    getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) label');
+    getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) .control-label');
     getCloseBtn = () => cy.get('#loginModal .close');
     getCountryCodeLabel = () => cy.get('div[class="col-sm-2 col-xs-4"] label');
     getCountryCodeInput = () => cy.get('#byphone [name="phone1"]');
