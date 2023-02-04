@@ -19,7 +19,8 @@
         "loginBtnTextColor": "rgb(0, 128, 0)",
         "rusLoginBtnText": "Войти",
         "signInBtnTextColor": "rgb(108, 205, 102)",
-        "signInBtnText": "SIGN IN"
+        "signInBtnText": "SIGN IN",
+        "signInBtnBorderColor": "rgb(108, 205, 102)"
     },
     "headers": {
         "header_Login_Popup": {
