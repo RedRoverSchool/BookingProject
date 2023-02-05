@@ -60,6 +60,7 @@ export class LoginPopup {
     getCodeFromSmsInput = () => cy.get('#step2 [name="code"]');
     getByPhoneSignInButton = () => cy.get('#step2 [value="SIGN IN"]');
     getPhoneNumberInputFieldLabel = () => cy.get('div[class="col-sm-6 col-xs-8"] label')
+    getModulFormEntairely =() => cy.get('#loginModal .modal-content')
 
 
     // Methods

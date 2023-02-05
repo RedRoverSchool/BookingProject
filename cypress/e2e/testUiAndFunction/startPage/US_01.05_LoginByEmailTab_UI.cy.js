@@ -80,4 +80,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .getByEmailSignInButton()
             .should('have.css', 'color', this.startPage.buttons.signInBtnBorderColor);
     });
+
+    it('AT_01.05.11 | Verify Popup background color is #fff', function () {
+        loginPopup
+            .getModulFormEntairely()
+            .should('have.css', 'background-color', this.startPage.background);
+    });
 });
