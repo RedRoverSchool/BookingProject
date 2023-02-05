@@ -128,37 +128,52 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
 describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Chonburi" trip)', () => {
     
-    before(function() {
+    beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
-
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)
     });
 
-    it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
-        
+    before(() => {
+        cy.visit('/')
+        cy.login(AGENT.email, AGENT.password)
+
         createBookingPage.getDepartureStationSelectionDropdown()
             .select('Bangkok Khao San', {force: true})
-        createBookingPage.getDepartureStationDropdown()
-            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[2])    
-        
+                
         createBookingPage.getArrivalStationSelectionDropdown()
             .select('Chonburi', {force: true})
-        createBookingPage.getArrivalStationDropdown()
-            .should('have.text', this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])     
-        
+    
         createBookingPage.clickCalendarNextButton()
         createBookingPage.clickSaturdayButton()
         cy.intercept('/tools/**').as('getTrip')
 		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
+    });
 
+    it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
+        
+        createBookingPage.getDepartureStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[2])    
+        createBookingPage.getArrivalStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])     
+        
         createBookingPage.getDriverSeat()
             .should('be.visible')
             .and('have.text', this.createBookingPage.seatSelectionTable.driverSeatText)
             .and('have.css', 'border')
             .and('match', /dashed/)
+    });
+    
+    it('AT_04.28.05 | The title of "Seats table" is visible and matches to the class of the selected trip "VIP bus"', function () {
+
+        createBookingPage.getDepartureStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[2]) 
+        createBookingPage.getArrivalStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])
+             
+        createBookingPage.getTitleOfSeatsTable()
+            .should('be.visible')
+            .and('have.text', this.createBookingPage.tripClass[0])
     });
 });

@@ -93,5 +93,11 @@
 
     "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)",
 
-    "notSelectedWeekBtnBackgroundColor": "rgb(255, 255, 255)"
+    "notSelectedWeekBtnBackgroundColor": "rgb(255, 255, 255)",
+
+    "tripClass": [
+        "VIP bus",
+        "Ferry",
+        "Economy bus"
+    ]
 }
