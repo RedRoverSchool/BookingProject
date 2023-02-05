@@ -17,7 +17,7 @@ class Header {
     getFlagIconViet = () => cy.get('a[href="/lang?l=vi"]');
     getSignOutBtn = () => cy.get('[href="/logout/"]');
     getOperatorImage = () => cy.get('#op-dropdown > a > img');
-    getUserNavBar = () => cy.get('header > nav > div > ul');
+    getUserMenu = () => cy.get('#op-dropdown > ul');
 
 // methods
     clickBurgerMenu() {

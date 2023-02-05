@@ -25,7 +25,7 @@ describe('US_02.04 | User dropdown menu button UI and functionality', function()
     });
 
     it('AT_02.04.02 |"User dropdown menu" button is clickable and opens up the dropdown menu', function() {
-        header.clickUserNavBar()
-        header.getUserDropDownMenu().should('be.visible')
+        header.clickUserDropDownMenu()
+        header.getUserMenu().should('be.visible')
     });
 })
