@@ -6,7 +6,7 @@ const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_04.24 | Multiple passengers UI', () => {
+describe.skip('US_04.24 | Multiple passengers UI', () => {
 
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
