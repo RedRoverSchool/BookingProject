@@ -143,6 +143,16 @@ class CreateBookingPage {
         })
     };
 
+    hoverNeedDepartureStation(nameStation) {
+        this.getCreateBookingHeader().click()
+        this.clickDepartureStationDropdown()
+        this.getListDepartureStation().each(($el) => {
+            if ($el.text() == nameStation) {
+                cy.wrap($el).trigger('mouseover')
+            }
+        })
+    };
+
     getRandomPassengersAmmount() {
         return this.getPassengersDetailsDropdown().then(($el) => {
             const passengersArray = $el
