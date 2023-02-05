@@ -8,6 +8,7 @@ const leftMenuPanel = new LeftMenuPanel();
 const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
+const MYOPTION = { month: 'short', year: 'numeric' };
 
 describe('US_04.08 | Calendar-selection block UI and functionality week/month view', () => {
     before(() => {
@@ -17,7 +18,7 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
     });
 
     it('AT_04.08.03 | Verify that Label is present for week view', () => {
-       createBookingPage.getLabelCalendar().should('be.visible');
+        createBookingPage.getLabelCalendar().should('be.visible');
     });
 
     it('AT_04.08.01 | Verify that Label is present for month view', () => {
@@ -27,13 +28,12 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
 
     it('AT_04.08.04 | Verify that Click forward arrow works and switches month in correct order', () => {
         let date = new Date()
-        const options = { month: 'short', year: 'numeric' };
         for (let i = 0; i < 12; i++) {
             createBookingPage.clickCalendarNextButton();
             let nextMonth = date.getMonth() + 1;
             date.setMonth(nextMonth);
 
-            const formattedDate = date.toLocaleDateString('en-US', options);
+            const formattedDate = date.toLocaleDateString('en-US', MYOPTION);
             createBookingPage.getLabelCalendar().then(($label) => {
                 const text = $label.text();
                 expect(text).to.deep.equal(formattedDate);
@@ -41,7 +41,7 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
         }
     });
 
-    it('AT_04.08.05 | Verify previous arrow button switches weeks in descending order from 3 weeks ahead', () => {
+    it('AT_04.08.05 | Verify previous arrow button switches                                                                                                                                   from 3 weeks ahead', () => {
         createBookingPage.clickMonthBtn()
 
         let n = 3
@@ -54,11 +54,11 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
             let now = new Date();
             const currentThaiYear = now.toLocaleString('en-US', { year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' });
             const mondayWeeksAhead = new Date(mondayWeekAhead + " " + currentThaiYear);
-            
+
             for (let i = 1; i <= n; i++) {
                 createBookingPage.clickCalendarPrevButton();
                 mondayWeeksAhead.setDate(mondayWeeksAhead.getDate() - 7);
-               
+
                 let previousWeekMonday = mondayWeeksAhead.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ");
                 previousWeekMonday[i] = previousWeekMonday[1] + " " + previousWeekMonday[0]
 
@@ -67,11 +67,29 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
                 previousWeekSunday[i] = previousWeekSunday[1] + " " + previousWeekSunday[0]
 
                 mondayWeeksAhead.setDate(mondayWeeksAhead.getDate() - 6);
-               
+
                 createBookingPage.getLabelCalendar().then(($el) => {
                     expect($el.text()).to.eq(previousWeekMonday[i] + ' - ' + previousWeekSunday[i]);
                 });
             }
         });
     });
- });
+
+    it('AT_04.08.06 | Verify that Click back arrow works and switches month in correct order', () => {
+        createBookingPage.clickMonthBtn();
+        let date = new Date();
+        date.setMonth(date.getMonth() + 12);
+
+        for (let i = 12; i > 1; i--) {
+            createBookingPage.clickCalendarPrevButton();
+            let prevMonth = date.getMonth() - 1;
+            date.setMonth(prevMonth);
+
+            const formattedDate = date.toLocaleDateString('en-US', MYOPTION);
+            createBookingPage.getLabelCalendar().then(($label) => {
+                const text = $label.text();
+                expect(text).to.deep.equal(formattedDate);
+            });
+        }
+    });
+});
