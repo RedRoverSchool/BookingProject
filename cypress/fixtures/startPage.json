@@ -58,6 +58,9 @@
         },
         "labelPhoneNumber": {
             "text": "Phone number"
+        },
+        "labelPhoneNumberInputField": {
+            "color": "rgb(170, 170, 170)"
         }
     },
     "links": {

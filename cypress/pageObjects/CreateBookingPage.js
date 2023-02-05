@@ -47,8 +47,8 @@ class CreateBookingPage {
     getPlaceholderPassengerName = () => cy.get('input[placeholder="Passenger name"]')
     getPlaceholderPhoneNumber = () => cy.get('[placeholder="Phone number"]')
     getMainPassengerSelectedSeatByDefault = () => cy.get('div[class="col-lg-12 passenger-row"] span[class="seat-number"]')
-
     getPassengerDetailsAssignedSeats = () => cy.get('span.seat-number')
+    
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
     getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
@@ -56,6 +56,8 @@ class CreateBookingPage {
     getRowsSeatsSeatSection = () => cy.get('.seat-chart .seats tr:not(tr:first-child)');
     getDriverSeat = () => cy.get('table.seats tr td[class="seat blocked"]');
     getAllSeatsSeatSelection = () => cy.get('.seat-chart .seats td');
+    getTitleOfSeatsTable = () => cy.get('.seats tbody th');
+    getSeatInRow = () => cy.get('.seat-chart .seats tr:nth-child(2) td');
 
 
     // Summary section 
@@ -139,6 +141,16 @@ class CreateBookingPage {
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
                 cy.wrap($el).click()
+            }
+        })
+    };
+
+    hoverNeedDepartureStation(nameStation) {
+        this.getCreateBookingHeader().click()
+        this.clickDepartureStationDropdown()
+        this.getListDepartureStation().each(($el) => {
+            if ($el.text() == nameStation) {
+                cy.wrap($el).trigger('mouseover')
             }
         })
     };

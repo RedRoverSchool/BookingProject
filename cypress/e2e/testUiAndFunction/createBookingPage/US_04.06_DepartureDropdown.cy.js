@@ -38,4 +38,17 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
             .and('be.visible')
     });
 
-})
+    it('AT_04.06.03 | Verify that the background of the selected item in the Dropdown Menu has gray color (#DDDDDD)', function() {
+        createBookingPage.selectNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[3])
+
+        createBookingPage.hoverNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[1])
+        createBookingPage.getListDepartureStation().each($el => {
+            if($el.text() == this.createBookingPage.dropdowns.departureStation.stationsNames[3]){ 
+                              
+                expect($el).to.have.css('background-color', this.createBookingPage.selectedDepartureStationBackgroundColor)
+            }
+        })
+
+    });
+
+});
