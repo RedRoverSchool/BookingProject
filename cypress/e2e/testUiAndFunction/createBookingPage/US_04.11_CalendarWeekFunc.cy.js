@@ -68,6 +68,27 @@ describe('US_04.11 | Calendar week functionality', () => {
 		});
 	});
 
+	it('AT_04.11.06|Verify that when you click on the first and last date, its value matches the date in the string in the Calendar-selection block', () => {
+
+		createBookingPage.clickCalendarNextButton();
+
+		createBookingPage.getLabelCalendar().then(($el) => {
+			let firstDate = $el.text().split(" ")[0];
+			let lastDate = $el.text().split(" - ")[1].split(" ")[0];
+						
+			createBookingPage.getCalendarDays().first().then(($date) =>{
+				let firstDateOFWeek = $date.text();
+				
+				expect(firstDateOFWeek).to.eq(firstDate);
+			});
+			createBookingPage.getCalendarDays().last().then(($date) =>{
+				let firstDateOFWeek = $date.text();
+				
+				expect(firstDateOFWeek).to.eq(lastDate);
+			});
+		});
+	});
+
 	it('AT_04.11.07 | Verify that When you hover the cursor over the expired date, a prohibition signs appears no_entry_sign', function() {
 		
 		createBookingPage.clickCalendarPrevButton();
