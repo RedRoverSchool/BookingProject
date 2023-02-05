@@ -7,17 +7,19 @@ const createBookingPage = new CreateBookingPage();
 describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
-	beforeEach(function () {
-
-		cy.visit('/');
+	before(function () {
+		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
 		cy.intercept('/tools/**').as('getTrip')
 		cy.wait('@getTrip')
 		createBookingPage.clickMonthBtn()
+	})
+
+	beforeEach(function () {
 		cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
-	});
+	})
 
 	it('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
 		createBookingPage.getMonthDropdownList().then(($el) => {
