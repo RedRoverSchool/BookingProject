@@ -5,10 +5,14 @@ import HelpdeskPage from "../../../pageObjects/HelpdeskPage";
 
 const leftMenuPanel = new LeftMenuPanel();
 const helpdeskPage = new HelpdeskPage();
+const AGENT = Cypress.env('agent');
 
 describe('US_03.05 | Contact us link', () => {
 
-    const AGENT = Cypress.env('agent');
+    before(() => {
+        cy.visit('/');
+        cy.login(AGENT.email, AGENT.password);
+    });
     
     beforeEach(function () {
         cy.fixture('leftMenuPanel').then(leftMenuPanel => {
@@ -17,27 +21,23 @@ describe('US_03.05 | Contact us link', () => {
         cy.fixture('helpdeskPage').then(helpdeskPage => {
             this.helpdeskPage = helpdeskPage;
         });
-        cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
-    it('AT_03.05.01 | Sidebar has "Contact us" text, () => ', function() {
-        leftMenuPanel
-            .getContactUsMenuLink()
-            .should('have.text', this.leftMenuPanel.menuLinks.contactUsLink) 
-    })
-
-    it('AT_03.05.02 |"Contact us" icon is visible', () =>  {  
-        leftMenuPanel
-            .getContactUsIcon()
-            .should('be.visible')
-    })
-
-    it('AT_03.05.03 |Clicking "Contact us" opening Helpdesk page with a header "Helpdesk", () => ', function() {  
-        leftMenuPanel.clickContactUsIcon()
+    it('AT_03.05.03 | Clicking "Contact us" opening Helpdesk page with a header "Helpdesk", () => ', function () {  
+        leftMenuPanel.clickContactUsIcon();
         
         helpdeskPage
             .getHelpdeskHeader()
-            .should('include.text', this.helpdeskPage.headers.mainHeaderPage ) 
-    })
+            .should('include.text', this.helpdeskPage.headers.mainHeaderPage); 
+    });
+
+    it('AT_03.05.01 | Sidebar has "Contact us" text, () => ', function () {
+        leftMenuPanel
+            .getContactUsMenuLink()
+            .should('have.text', this.leftMenuPanel.menuLinks.contactUsLink);
+    });
+
+    it('AT_03.05.02 | "Contact us" icon is visible', () => {  
+        leftMenuPanel.getContactUsIcon().should('be.visible');
+    });
 })
