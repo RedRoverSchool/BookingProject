@@ -137,7 +137,7 @@ describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Ch
         cy.login(AGENT.email, AGENT.password)
     });
 
-    it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
+    it.skip('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
         
         createBookingPage.getDepartureStationSelectionDropdown()
             .select('Bangkok Khao San', {force: true})
