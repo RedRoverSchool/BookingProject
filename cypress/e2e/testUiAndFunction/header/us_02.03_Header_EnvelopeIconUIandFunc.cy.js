@@ -34,4 +34,3 @@ describe('US_02.03 Header Envelope icon UI and functionality', () => {
         header.getEnvelopeIcon().should('be.visible');
     });
 })
-
