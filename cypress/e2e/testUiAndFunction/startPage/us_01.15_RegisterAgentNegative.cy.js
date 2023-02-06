@@ -134,7 +134,7 @@ describe('US_01.15 | Register Agent Negative', function () {
             .and('have.text', this.startPage.alert.registerPopupErrorMessage.emptyPhoneField )
     })
 
-    it.only('AT_01.15.09 | Error message is displayed when user attempts to register with special characters in `Company name` field', function() {
+    it('AT_01.15.09 | Error message is displayed when user attempts to register with special characters in `Company name` field', function() {
         registerPopup.enterCompanyName(this.startPage.data.specialCharacters)
         registerPopup
             .getErrorMessage()
