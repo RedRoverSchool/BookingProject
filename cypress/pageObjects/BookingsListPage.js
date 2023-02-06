@@ -1,22 +1,27 @@
 class BookingsListPage {
 
     getBookingListHeader = () => cy.get('.page-title');
+
+    //Print section
     getPrintButton = () => cy.get('.row .btn-print');
     getPrintButtonIcon = () => cy.get('.row .btn-print i');
     getExcelButton = () => cy.get('.row .btn-excel');
     getExcelButtonIcon = () => cy.get('.row .btn-excel i');
+    
+    //Search section    
     getSearchField = () => cy.get('.pull-left input[placeholder="Search"]');
     getBookingIdField = () => cy.get('div #filterTracker');
     getStatusField = () => cy.get('.selection [placeholder="Status"]');
     getRouteField = () => cy.get('div #select2-filterRoute-container');
     getVehicleField = () => cy.get('div #select2-filterVehicle-container');
     getClearLink = () => cy.get('div #filterClear');
-    getDateRange = () => cy.get('div #filterDateType');
-    getFilterDefaultRange = () => cy.get('#filterDateType ~ span');
-    getDateRangeValues = () => cy.get('.ranges ul li');
-    
 
-    // Booking list
+    //Date filter section
+    getDateRangeType = () => cy.get('div #filterDateType');
+    getDatesRangeListDefaultValue = () => cy.get('#filterDateType ~ span');
+    getDatesRangeListValues = () => cy.get('.ranges ul li');
+    
+    // Booking list section
     getTableHeaders = () => cy.get('.table thead tr');
     getColumnsSettingButton = () => cy.get('.table-columns-settings-link');
     getColumnsCheckbox = () => cy.get('input[type="checkbox');
@@ -47,8 +52,8 @@ class BookingsListPage {
         this.clickClearLink().click();
     };
 
-    clickFilterDateRange() {
-        this.getFilterDefaultRange().click();
+    clickDatesRangeList() {
+        this.getDatesRangeListDefaultValue().click();
     };
         
 }

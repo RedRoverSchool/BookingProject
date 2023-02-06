@@ -37,14 +37,14 @@ describe('US_05.03 | Date filter UI', () => {
         const todayFormatted = formatDate(today)
         const past7DateFormatted = formatDate(past7Date)
 
-        bookingsListPage.getFilterDefaultRange()
+        bookingsListPage.getDatesRangeListDefaultValue()
             .should('have.text', `${past7DateFormatted} - ${todayFormatted}`)
     })
 
     it('AT_05.03.05 | Verify that the filter date range dropdown has values', function () {
-        bookingsListPage.clickFilterDateRange();
+        bookingsListPage.clickDatesRangeList();
         
-        bookingsListPage.getDateRangeValues().then(options => {
+        bookingsListPage.getDatesRangeListValues().then(options => {
             const dateRangesActual = options
                                     .toArray()
                                     .map(el =>el.innerHTML)
