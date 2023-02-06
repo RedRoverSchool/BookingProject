@@ -38,6 +38,17 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
         createBookingPage.clickWeekBtn();
 
         createBookingPage.getMonthDropdownSelect()
-            .should('not.be.visible');         
+            .should('not.be.visible');
     })
-});
+
+    it('AT_04.15.05 | Calendar label (between arrows) is visible and its format has the name of the current month and year (e.g. Jan 2023)', function () {
+        createBookingPage.clickMonthBtn();
+
+        createBookingPage.getLabelCalendar().should('be.visible');
+
+        let date = new Date();
+        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+        createBookingPage.getLabelCalendar().should('have.text', currentMonthAndYear);
+    })
+})
