@@ -40,4 +40,17 @@ describe('US_05.03 | Date filter UI', () => {
         bookingsListPage.getFilterDefaultRange()
             .should('have.text', `${past7DateFormatted} - ${todayFormatted}`)
     })
+
+    it('AT_05.03.05 | Verify that the filter date range dropdown has values', function () {
+        bookingsListPage.clickFilterDateRange();
+        
+        bookingsListPage.getDateRangeValues().then(options => {
+            const dateRangesActual = options
+                                    .toArray()
+                                    .map(el =>el.innerHTML)
+
+            expect(dateRangesActual).to.deep.equal(this.bookingsListPage.dropDown.datesRange);
+        });
+
+    })
 });

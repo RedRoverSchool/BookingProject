@@ -13,6 +13,8 @@ class BookingsListPage {
     getClearLink = () => cy.get('div #filterClear');
     getDateRange = () => cy.get('div #filterDateType');
     getFilterDefaultRange = () => cy.get('#filterDateType ~ span');
+    getDateRangeValues = () => cy.get('.ranges ul li');
+    
 
     // Booking list
     getTableHeaders = () => cy.get('.table thead tr');
@@ -44,6 +46,11 @@ class BookingsListPage {
     clickClearLink() {
         this.clickClearLink().click();
     };
+
+    clickFilterDateRange() {
+        this.getFilterDefaultRange().click();
+    };
+        
 }
 
 export default BookingsListPage;

@@ -40,6 +40,9 @@
     },
     "links": {
         "filterClear": "Clear"
+    },
+    "dropDown":{
+        "datesRange": ["Today", "Tomorrow", "Yesterday", "Next 7 Days", "Last 7 Days", "Last 30 Days", "Next Month", "This Month", "Last Month", "Custom Range"]
     }
-  
+                                                                                                                            
 }
