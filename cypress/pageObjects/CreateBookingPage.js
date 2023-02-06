@@ -28,7 +28,8 @@ class CreateBookingPage {
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
     getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class');
-    getPriceOfTicket = () => cy.get('.vehclass-ferry.selected .price')
+    getPriceOfTicket = () => cy.get('.vehclass-ferry.selected .price');
+    getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
@@ -59,6 +60,7 @@ class CreateBookingPage {
     getAllSeatsSeatSelection = () => cy.get('.seat-chart .seats td');
     getTitleOfSeatsTable = () => cy.get('.seats tbody th');
     getSeatInRow = () => cy.get('.seat-chart .seats tr:nth-child(2) td');
+    getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .available');
 
 
     // Summary section 
