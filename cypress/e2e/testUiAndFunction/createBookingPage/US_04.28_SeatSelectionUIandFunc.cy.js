@@ -205,13 +205,18 @@ describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Ch
             .and('have.text', this.createBookingPage.tripClass[0])
     });
 
-    it('AT_04.28.07', function() {      
+    it('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {      
         createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)         
         createBookingPage.clickReservationTicketArrow();
         createBookingPage.clickReservationTicketButton();   
         cy.intercept('/tools/ping/**').as('getPopUp')
-        cy.wait('@getPopUp')      
-        bookingPopup.clickCloseBtnBookingPopup()
+        cy.wait('@getPopUp').then(({ response }) => {
+            expect(response.statusCode).to.eq(200)
+            bookingPopup.getConfirmTicketButton().should('be.visible');
+            bookingPopup.getPassengerTitle().should('include.text', '(1)');
+            bookingPopup.getPassengersList().should('have.length', 1);
+            bookingPopup.clickCloseBtnBookingPopup()
+        })              
         createBookingPage.clickFirstTripCard()
 
         let availableSeatsSeatSelection
