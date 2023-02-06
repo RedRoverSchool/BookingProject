@@ -2,7 +2,9 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import getIntergerMinInclMaxExcl from "../../../support/utilities/getRandomInterger";
+import BookingPopup from '../../../pageObjects/BookingPopup';
 
+const bookingPopup = new BookingPopup();
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
