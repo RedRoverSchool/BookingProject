@@ -12,6 +12,7 @@ class BookingsListPage {
     getVehicleField = () => cy.get('div #select2-filterVehicle-container');
     getClearLink = () => cy.get('div #filterClear');
     getDateRange = () => cy.get('div #filterDateType');
+    getFilterDefaultRange = () => cy.get('#filterDateType ~ span');
 
     // Booking list
     getTableHeaders = () => cy.get('.table thead tr');
