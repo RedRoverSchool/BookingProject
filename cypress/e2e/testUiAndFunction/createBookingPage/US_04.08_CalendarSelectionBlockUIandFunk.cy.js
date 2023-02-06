@@ -2,6 +2,7 @@
 
 import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import startAndEndOfWeek from "../../../support/utilities/getStartAndEndOfTheWeek";
 
 
 const leftMenuPanel = new LeftMenuPanel();
@@ -41,7 +42,7 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
         }
     });
 
-    it('AT_04.08.05 | Verify previous arrow button switches                                                                                                                                   from 3 weeks ahead', () => {
+    it('AT_04.08.05 | Verify previous arrow button switches from 3 weeks ahead', () => {
         createBookingPage.clickMonthBtn()
 
         let n = 3
@@ -80,7 +81,7 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
         let date = new Date();
         date.setMonth(date.getMonth() + 12);
 
-        for (let i = 12; i > 1; i--) {
+        for (let i = 12; i >= 1; i--) {
             createBookingPage.clickCalendarPrevButton();
             let prevMonth = date.getMonth() - 1;
             date.setMonth(prevMonth);
@@ -89,6 +90,21 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
             createBookingPage.getLabelCalendar().then(($label) => {
                 const text = $label.text();
                 expect(text).to.deep.equal(formattedDate);
+            });
+        }
+    });
+
+    it('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
+        createBookingPage.clickWeekBtn();
+        let date = new Date();
+        let avalableForBookingDay = date.setDate(date.getDate() + 2);
+        for (let i = 0; i <= 10; i++) {
+            createBookingPage.getLabelCalendar().then(($label) => {
+                const text = $label.text();
+                expect(text).to.deep.equal(startAndEndOfWeek(avalableForBookingDay))
+
+                avalableForBookingDay = date.setDate(date.getDate() + 7);
+                createBookingPage.clickCalendarNextButton();
             });
         }
     });
