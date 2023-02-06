@@ -38,8 +38,13 @@
         "seatSelection": {
             "onePassenger": "1 passenger",
             "passengers": "passengers"
+        },
+
+        "dialCode": {
+            "byDefault": "+66"
         }
     },
+    
     "headers": {
         "mainHeaderPage": "Create booking"
     },

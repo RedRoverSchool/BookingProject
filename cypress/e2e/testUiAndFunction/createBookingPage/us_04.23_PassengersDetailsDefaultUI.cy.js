@@ -37,4 +37,8 @@ describe('US_04.23 | Passengers details default UI', () => {
 
         createBookingPage.getPlaceholderPhoneNumber().should('have.attr', 'placeholder', this.createBookingPage.placeholder.phone);
     });
+
+    it('AT_04.23.04 | Verify selected dial code is “+66” by default', function () {
+        createBookingPage.getSelectedDialCode().should('have.text', this.createBookingPage.dropdowns.dialCode.byDefault);
+    });
 });
