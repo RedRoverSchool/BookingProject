@@ -55,9 +55,27 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         .and('contain', this.startPage.label.labelCountryCode.text)
     });
 
-    it('AT_01.08.07 | Verify the agent is able to see "Phone number" input field', () => {
+    it('AT_01.08.07 | Verify the agent is able to see "Phone number" input field', function () {
         loginPopup
             .getPhoneNumberInput()
             .should('be.visible');
+    });
+
+    it('AT_01.08.08 | Verify the agent is able to see "Country code" input field', () => {
+        loginPopup
+            .getCountryCodeInput()
+            .should('be.visible');
+    });
+
+    it('AT_01.08.09 | Verify Phone number label has text "Phone number"', function () {
+        loginPopup
+            .getPhoneNumberLabel()
+            .should('have.text', this.startPage.label.labelPhoneNumber.text);
+    });
+
+    it('AT_01.08.10 | Verify "Phone number" label has color - #aaa', function () {
+        loginPopup
+        .getPhoneNumberInputFieldLabel()
+        .should('have.css','color', this.startPage.label.labelPhoneNumberInputField.color)
     });
 });

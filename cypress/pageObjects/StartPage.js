@@ -3,7 +3,7 @@ export class StartPage {
 
     getLoginButton = () => cy.get(".login")
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
-    getBackgroungVideo = () => cy.get('video')
+    getBackgroundVideo = () => cy.get('video')
     getLogo = () => cy.get('.logo')
     getBackgroundLoginSection = () => cy.get('.inner')
 
@@ -51,7 +51,7 @@ export class LoginPopup {
     getByEmailSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
     getMessageAlert = () => cy.get('div.alert');
     getLoginByPhoneNumberTab = () => cy.get('[href="#byphone"]');
-    getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) label');
+    getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) .control-label');
     getCloseBtn = () => cy.get('#loginModal .close');
     getCountryCodeLabel = () => cy.get('div[class="col-sm-2 col-xs-4"] label');
     getCountryCodeInput = () => cy.get('#byphone [name="phone1"]');
@@ -59,6 +59,8 @@ export class LoginPopup {
     getRequestCodeButton = () => cy.get('#byphone [value="REQUEST CODE"]');
     getCodeFromSmsInput = () => cy.get('#step2 [name="code"]');
     getByPhoneSignInButton = () => cy.get('#step2 [value="SIGN IN"]');
+    getPhoneNumberInputFieldLabel = () => cy.get('div[class="col-sm-6 col-xs-8"] label')
+    getModulFormEntairely =() => cy.get('#loginModal .modal-content')
 
 
     // Methods

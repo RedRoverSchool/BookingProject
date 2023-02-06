@@ -61,17 +61,12 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
 
     it('AT_04.29.03 | When selecting the required amount of passengers the corresponding number of seats in the "Seats table" will be rgb(157, 208, 157) color', function() {
         
-        createBookingPage.getSeatSelectionDropdownList().then(($el) => {
-            const passengersArray = $el
-                .toArray()
-                .map(el => el.innerText)
-    
-            const indexArr = Math.floor(Math.random() * passengersArray.length) 
-            const passengersAmount = passengersArray[indexArr]
+        createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then(($el) => {
+            const amountOfPass = $el
              
             createBookingPage.getSeatSelectionDropdown()
-                .select(passengersAmount)
-                .should('have.value', parseInt(passengersAmount))
+                .select(amountOfPass)
+                .should('have.value', parseInt(amountOfPass))
 
             createBookingPage.getSelectedSeats().then(($cell) => {
                 expect($cell).to.have.css('background-color', this.createBookingPage.seatSelectionTable.selectedSeatColor)
@@ -82,7 +77,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
  
                 const selectedSeats = selectedSeatsArr.length
 
-            expect(selectedSeats).to.equal(parseInt(passengersAmount))   
+            expect(selectedSeats).to.equal(parseInt(amountOfPass))   
             })
         })
     });

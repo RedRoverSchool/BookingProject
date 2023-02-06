@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import getIntergerMinInclMaxExcl from "../../../support/utilities/getRandomInterger";
 
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
@@ -72,55 +73,133 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         })
     });
 
-    it('AT_04.28.08 | The total number of seats in the "Seat selection" section is equal the total number of seats in the selected trip', function() {    
+    it('AT_04.28.08 | The total number of seats in the "Seat selection" section is equal the total number of seats in the selected trip', function () {
         createBookingPage.getNumberAllSeatsFirstTripCard().then($el => {
             let numberAllSeats = $el.text().match(/\d/g).join('')
 
             createBookingPage.getAllSeatsSeatSelection().then($el => {
-                let allSeatsSeatSelection = $el.toArray().length  
+                let allSeatsSeatSelection = $el.toArray().length
                 
                 expect(+numberAllSeats).to.eql(+allSeatsSeatSelection)
-            })           
-        })        
-            
+            })
+        })
     })
-});
+        
+        it('AT_04.28.11 | Verify custom seat selection by window and next two ones for chosen number of passengers watches assigned seats in passenger details section', () => {
+            createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
+                let amountOfPassengersArray = $el
+                    .toArray()
+                    .map($el => $el.innerText)
+
+                let index = getIntergerMinInclMaxExcl(2,11)
+
+                createBookingPage.getPassengersDetailsDropdown()
+                    .select(index)
+                    .invoke('val')
+                    .then((value) => {
+                        let chosenNumOfPassengers = +value
+
+                        createBookingPage.getSelectedSeats().click({ multiple: true })
+                       
+                        for (let i = 1; i <= Math.ceil(chosenNumOfPassengers/3); i++) {
+                            createBookingPage.getAllSeatsSeatSelection()
+                                .filter('.available')
+                                .contains('A')
+                                .first().click()
+                                .next().click()
+                                .next().click()
+                        }
+
+                        createBookingPage.getSelectedSeats().then(($el) => {
+                            let arrayOfCustomSeletedSeats = $el.text()
+
+                            createBookingPage.getPassengerDetailsAssignedSeats().then(($el) => {
+                                let arrayOfAssignedSeats = $el.text()
+                                expect(arrayOfAssignedSeats).to.deep.eq(arrayOfCustomSeletedSeats)
+
+                            })
+                        })
+                    })
+        })            
+    })
+
+    it('AT_04.28.10| In the "Seats table" the seats numbers in the vertical row start with one and increase by 1 in each subsequent row, the digit is followed by the same letter (1A, 2A, 3A, 1B, 2B, 3B etc.).', function () {
+        createBookingPage.getAllSeatsSeatSelection().then(($el) => {
+            let arrayOfSeats = $el
+            .toArray()
+            .map($el => $el.innerText)
+
+            createBookingPage.getSeatInRow().then(($el) => {
+                let lengthOfRow = $el.length
+                let newArray = []
+
+            for(let i = 0; i < lengthOfRow; i++){
+                let arr = []
+                for(let j = 0 + i; j < arrayOfSeats.length; j+=lengthOfRow){
+                    arr.push(arrayOfSeats[j])   
+                }
+                newArray.push(arr)
+            }
+            for(let i = 0; i < newArray.length; i++){
+                for(let j = 0; j < newArray[i].length; j++){
+                    expect(newArray[i][j]).to.eq(`${[j + 1]}${this.createBookingPage.alphabet[i]}`)
+                }
+            }
+            })
+        })
+    })
+})
 
 //This describe for trip "Bangkok Khao San - Chonburi"
 
 describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Chonburi" trip)', () => {
     
-    before(function() {
+    beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
-
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)
     });
 
-    it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
-        
+    before(() => {
+        cy.visit('/')
+        cy.login(AGENT.email, AGENT.password)
+
         createBookingPage.getDepartureStationSelectionDropdown()
             .select('Bangkok Khao San', {force: true})
-        createBookingPage.getDepartureStationDropdown()
-            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[2])    
-        
+                
         createBookingPage.getArrivalStationSelectionDropdown()
             .select('Chonburi', {force: true})
-        createBookingPage.getArrivalStationDropdown()
-            .should('have.text', this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])     
-        
+    
         createBookingPage.clickCalendarNextButton()
         createBookingPage.clickSaturdayButton()
         cy.intercept('/tools/**').as('getTrip')
 		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
+    });
 
+    it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
+        
+        createBookingPage.getDepartureStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[2])    
+        createBookingPage.getArrivalStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])     
+        
         createBookingPage.getDriverSeat()
             .should('be.visible')
             .and('have.text', this.createBookingPage.seatSelectionTable.driverSeatText)
             .and('have.css', 'border')
             .and('match', /dashed/)
+    });
+    
+    it('AT_04.28.05 | The title of "Seats table" is visible and matches to the class of the selected trip "VIP bus"', function () {
+
+        createBookingPage.getDepartureStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[2]) 
+        createBookingPage.getArrivalStationDropdown()
+            .should('have.text', this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])
+             
+        createBookingPage.getTitleOfSeatsTable()
+            .should('be.visible')
+            .and('have.text', this.createBookingPage.tripClass[0])
     });
 });
