@@ -197,4 +197,25 @@ describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Ch
             .should('be.visible')
             .and('have.text', this.createBookingPage.tripClass[0])
     });
+
+    it('AT_04.28.07', function() {      
+        createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)         
+        createBookingPage.clickReservationTicketArrow();
+        createBookingPage.clickReservationTicketButton();   
+        cy.intercept('/tools/ping/**').as('getPopUp')
+        cy.wait('@getPopUp')      
+        bookingPopup.clickCloseBtnBookingPopup()
+        createBookingPage.clickFirstTripCard()
+
+        let availableSeatsSeatSelection
+        createBookingPage.getAvailableSeatsSeatSelection().then($el => {
+            availableSeatsSeatSelection = $el.toArray().length                 
+        })       
+
+        createBookingPage.getTicketsAvailableFirstTripCard().then($el => {
+            let availableSeatsSelectedTrip = $el.text()
+            
+            expect(availableSeatsSeatSelection).to.eq(+availableSeatsSelectedTrip)        
+        })    
+    });
 });
