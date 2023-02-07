@@ -105,7 +105,7 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickFridayButton()
 			cy.intercept('/tools/**').as('getTrip')
 			cy.wait('@getTrip')
-			createBookingPage.clcikSecondTripCard()
+			createBookingPage.clickSecondTripCard()
 		});
 		it('AT_04.30.04 | Verify that amount of selected fare type passengers matches the amount on Booking Popup', function () {
 		    createBookingPage.getPassengersDetailsDropdown().select(5)

@@ -89,7 +89,7 @@ class CreateBookingPage {
         this.getFirstTripCard().click()
     };
 
-    clcikSecondTripCard() {
+    clickSecondTripCard() {
         this.getSecondTridCard().click()
     }
 
