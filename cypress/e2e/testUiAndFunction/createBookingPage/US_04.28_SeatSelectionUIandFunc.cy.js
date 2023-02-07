@@ -158,7 +158,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             }
             })
         })
-    })
+    });
 
     context('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', () => {
         before(() => {
@@ -192,8 +192,46 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 expect(availableSeatsSeatSelection).to.eq(+availableSeatsSelectedTrip)        
             })    
         });
-    })
-})
+    });
+
+    it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
+        createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then($el => {
+            let amountOfPass = $el;
+    
+            createBookingPage.getSeatSelectionDropdown()
+                .select(amountOfPass)
+    
+            createBookingPage.getSelectedSeats().then(($cell) => {
+                const selectedSeatsArr = $cell
+                    .toArray()
+                    .map(el => el.innerText)
+                    
+                let indexOfSeat = Math.floor(Math.random() * selectedSeatsArr.length)
+                let seatNumber = selectedSeatsArr[indexOfSeat]
+    
+                createBookingPage.getSelectedSeats()
+                    .contains(seatNumber)
+                    .click()
+                    
+                createBookingPage.getColumnSeatsSummary().then(($el) => {
+                    let seatsSummaryArrayAfter = $el
+                        .toArray()
+                        .map(el => el.innerText)
+
+                    expect(seatsSummaryArrayAfter[indexOfSeat]).to.eq(this.createBookingPage.summarySection.seatsColumn.warningText)
+                    cy.wrap($el)
+                        .contains(this.createBookingPage.summarySection.seatsColumn.warningText)
+                        .should('have.class', 'text-red')
+
+                    createBookingPage.getAllSeatsSeatSelection()
+                        .contains(seatNumber)
+                        .click()
+                        .should('have.class', 'selected')
+                })
+            })
+        })
+    });
+});
 
 //This describe for trip "Bangkok Khao San - Chonburi"
 
