@@ -29,7 +29,6 @@ describe('US_05.03 | Date filter UI', () => {
             this.bookingsListPage = bookingsListPage;
         })
     });
-
     it('AT_05.03.02 | Verify that the "calendar" dropdown has defaulted to the current date in format DD MMM, YYYY', function () {
         const today = new Date()
         const past7Date = new Date(new Date().setDate(today.getDate() - 6))
@@ -53,4 +52,20 @@ describe('US_05.03 | Date filter UI', () => {
         });
 
     })
+
+    it('AT_05.03.04 | Verify that the  DateType dropdown is visible and have 2 options', function () {
+        bookingsListPage.getDateRangeType() .should('be.visible');
+            bookingsListPage.getDateRangeTypeDefault().should('have.text', this.bookingsListPage.dropDown.datesRangeType.dateRangeTypeText);
+        
+        bookingsListPage.clickDateRangeType();
+        bookingsListPage.getDateRangeType()
+            .should('have.length', this. bookingsListPage.dropDown.datesRangeType.datesRangeTypeNumber)            
+        bookingsListPage.getDateRangeType().each(($el, i) => {
+            cy.wrap($el).should('be.visible')
+            expect($el.text()).to.be.equal(this.bookingsListPage.dropDown.datesRangeType.datesRangeTypeName[i])
+        })
+    })   
 });
+
+
+
