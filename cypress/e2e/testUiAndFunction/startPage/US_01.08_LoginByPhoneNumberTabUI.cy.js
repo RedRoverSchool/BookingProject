@@ -78,4 +78,10 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         .getPhoneNumberInputFieldLabel()
         .should('have.css','color', this.startPage.label.labelPhoneNumberInputField.color)
     });
+
+    it('AT_01.08.11 | Verify Phone number label has text "Phone number"', function() {
+        loginPopup
+            .getPhoneNumberInputFieldLabel()
+            .should('have.text', this.startPage.label.labelPhoneNumber.text)
+    });
 });
