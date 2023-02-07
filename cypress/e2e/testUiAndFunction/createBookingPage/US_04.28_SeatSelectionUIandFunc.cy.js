@@ -85,38 +85,51 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         })
     })
         
+    context('Verify custom seat selection by window and next two ones for chosen number of passengers watches assigned seats in passenger details section', () => {
+        before(() => {
+            cy.visit('/')
+            cy.login(AGENT.email, AGENT.password)
+
+            createBookingPage.clickCalendarNextButton()
+            createBookingPage.clickSaturdayButton()
+            cy.intercept('/tools/**').as('getTrip')
+            cy.wait('@getTrip')
+            createBookingPage.clickFirstTripCard()
+        });
+
         it('AT_04.28.11 | Verify custom seat selection by window and next two ones for chosen number of passengers watches assigned seats in passenger details section', () => {
-                let index = getIntergerMinInclMaxExcl(2,11)
-                createBookingPage.getPassengersDetailsDropdown()
-                    .select(index)
-                    .invoke('val')
-                    .then((value) => {
-                        let chosenNumOfPassengers = +value
+            let index = getIntergerMinInclMaxExcl(2, 11)
+            createBookingPage.getPassengersDetailsDropdown()
+                .select(index)
+                .invoke('val')
+                .then((value) => {
+                    let chosenNumOfPassengers = +value
 
-                        createBookingPage.getSelectedSeats().click({ multiple: true })
+                    createBookingPage.getSelectedSeats().click({ multiple: true })
                        
-                        for (let i = 1; i <= Math.ceil(chosenNumOfPassengers/3); i++) {
-                            createBookingPage.getAllSeatsSeatSelection()
-                                .filter('.available')
-                                .contains('A')
-                                .first()
-                                .click()
-                                .next()
-                                .click()
-                                .next()
-                                .click()
-                        }
+                    for (let i = 1; i <= Math.ceil(chosenNumOfPassengers / 3); i++) {
+                        createBookingPage.getAllSeatsSeatSelection()
+                            .filter('.available')
+                            .contains('A')
+                            .first()
+                            .click()
+                            .next()
+                            .click()
+                            .next()
+                            .click()
+                    }
 
-                        createBookingPage.getSelectedSeats().then(($el) => {
-                            let arrayOfCustomSeletedSeats = $el.text()
+                    createBookingPage.getSelectedSeats().then(($el) => {
+                        let arrayOfCustomSeletedSeats = $el.text()
 
-                            createBookingPage.getPassengerDetailsAssignedSeats().then(($el) => {
-                                let arrayOfAssignedSeats = $el.text()
-                                expect(arrayOfAssignedSeats).to.deep.eq(arrayOfCustomSeletedSeats)
+                        createBookingPage.getPassengerDetailsAssignedSeats().then(($el) => {
+                            let arrayOfAssignedSeats = $el.text()
+                            expect(arrayOfAssignedSeats).to.deep.eq(arrayOfCustomSeletedSeats)
                         })
                     })
-        })            
-    })
+                })
+        })
+    });
 
     it('AT_04.28.10| In the "Seats table" the seats numbers in the vertical row start with one and increase by 1 in each subsequent row, the digit is followed by the same letter (1A, 2A, 3A, 1B, 2B, 3B etc.).', function () {
         createBookingPage.getAllSeatsSeatSelection().then(($el) => {
