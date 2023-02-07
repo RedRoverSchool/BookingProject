@@ -1,5 +1,8 @@
 {
     "headers": {
         "mainHeaderPage": "Helpdesk"
+    },
+    "filter": {
+        "selectFilterStatus": "Active"
     }
 }

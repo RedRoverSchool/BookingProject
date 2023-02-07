@@ -19,9 +19,9 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
         
         createBookingPage.clickCalendarNextButton()
-        cy.wait(5000)
         createBookingPage.clickFridayButton()
-        cy.wait(2000)
+        cy.intercept('/tools/**').as('getTrip')
+		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
     });
 
@@ -61,17 +61,12 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
 
     it('AT_04.29.03 | When selecting the required amount of passengers the corresponding number of seats in the "Seats table" will be rgb(157, 208, 157) color', function() {
         
-        createBookingPage.getSeatSelectionDropdownList().then(($el) => {
-            const passengersArray = $el
-                .toArray()
-                .map(el => el.innerText)
-    
-            const indexArr = Math.floor(Math.random() * passengersArray.length) 
-            const passengersAmount = passengersArray[indexArr]
+        createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then(($el) => {
+            const amountOfPass = $el
              
             createBookingPage.getSeatSelectionDropdown()
-                .select(passengersAmount)
-                .should('have.value', parseInt(passengersAmount))
+                .select(amountOfPass)
+                .should('have.value', parseInt(amountOfPass))
 
             createBookingPage.getSelectedSeats().then(($cell) => {
                 expect($cell).to.have.css('background-color', this.createBookingPage.seatSelectionTable.selectedSeatColor)
@@ -82,10 +77,10 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
  
                 const selectedSeats = selectedSeatsArr.length
 
-            expect(selectedSeats).to.equal(parseInt(passengersAmount))   
+            expect(selectedSeats).to.equal(parseInt(amountOfPass))   
             })
         })
-    })
+    });
 
     it('AT_04.29.04 | The number of passengers in "Seat selection dropdown" is equal the number of passengers is displayed in the "Passengers details dropdown".', function() {
         createBookingPage.getSeatSelectionDropdownList().then(($el) => {
@@ -106,5 +101,20 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
             expect(parseInt(amountOfPass)).to.eq(amountOfChoosenPass.length)
            })
         }) 
+    });
+
+    it('AT_04.29.05 | Verify number of passengers selected in the "Seat selection dropdown" became equal to the number of passengers in the "Summary" section', function () {
+             createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then($el => {
+                let amountOfPass = $el;
+
+                createBookingPage.getSeatSelectionDropdown().select(amountOfPass)
+
+                createBookingPage.getAmountOfPassengersInSummary().then($el => {
+                let amountOfPassengersInSummary = $el
+                    .toArray()
+                    
+                 expect(parseInt(amountOfPass)).to.eq(amountOfPassengersInSummary.length)
+             })
+         })
     })
-})
+});

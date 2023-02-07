@@ -20,6 +20,6 @@ describe('US_05.03 Date filter UI', () => {
     });
     
     it('AT_05.03.01 Verify that the "filterDateType" dropdown is displayed', function() {  
-        bookingsListPage.getFilterDateTypeDropdown().should('be.visible')
+        bookingsListPage.getDateRangeType().should('be.visible')
     });
 })

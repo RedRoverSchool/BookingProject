@@ -16,6 +16,16 @@
             ]
         },
 
+        "arrivalStation": {
+            "stationsNumber": 4,
+            "stationsNames": [
+                "Ayutthaya",
+                "Chiang Mai Bus Terminal 1",
+                "Chonburi",
+                "Phuket Town"
+            ]
+        },
+
         "fareType": {
             "faretypesNumber": 3,
             "fareTypesNames": [
@@ -28,8 +38,13 @@
         "seatSelection": {
             "onePassenger": "1 passenger",
             "passengers": "passengers"
+        },
+
+        "dialCode": {
+            "byDefault": "+66"
         }
     },
+    
     "headers": {
         "mainHeaderPage": "Create booking"
     },
@@ -43,6 +58,11 @@
             "placeholderEmailViet": "|Email|"
         }
     },
+
+    "calendarMonth" : {
+        "colorText": "rgb(0, 166, 90)"
+    },
+
     "selectedDayField": {
         "backgroundColor":"rgb(0, 166, 90)",
         "color": "rgb(255, 255, 255)"
@@ -52,14 +72,39 @@
         "colorNumbers": "rgb(51, 51, 51)"
     },
 
+    "validDayField": {
+        "cursor": "pointer"
+    },
+
     "unavailableDayField": {
-        "cursor": "not-allowed"
+        "cursor": "not-allowed",
+        "backgroundColor": "rgb(226, 226, 226)"
     },
     "class": {
         "unavailableClass": "unavailable"
     },
     "seatSelectionTable": {
-        "selectedSeatColor": "rgb(157, 208, 157)"        
-    }
-    
+        "selectedSeatColor": "rgb(157, 208, 157)",
+        "driverSeatText": "Driver"                
+    },
+    "placeholder":{
+        "name": "Passenger name",
+        "phone": "Phone number"
+    },
+
+    "weekDayFields": {
+         "quantity": "7"
+    }, 
+
+    "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)",
+
+    "selectedDepartureStationBackgroundColor": "rgb(221, 221, 221)",
+
+    "notSelectedWeekBtnBackgroundColor": "rgb(255, 255, 255)",
+
+    "tripClass": [
+        "VIP bus",
+        "Ferry",
+        "Economy bus"
+    ]
 }

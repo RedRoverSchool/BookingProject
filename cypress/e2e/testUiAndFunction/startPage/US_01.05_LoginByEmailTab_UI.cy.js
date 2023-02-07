@@ -7,13 +7,15 @@ const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 
 describe('US_01.05 | Login By Email Tab UI', () => {
+    before(() => {
+        cy.visit('/');
+        startPage.clickLoginButton();
+    });
+   
     beforeEach(function () {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
         });
-
-        cy.visit('/');
-        startPage.clickLoginButton();
     });
 
     it('AT_01.05.01 | Insure By Email tab is visible', () => {
@@ -55,7 +57,33 @@ describe('US_01.05 | Login By Email Tab UI', () => {
 
     it('AT_01.05.09 | Verify SIGN IN button has text "SIGN IN"', function() {
         loginPopup
-            .getSignInButton()
+            .getByEmailSignInButton()
             .should('have.value', this.startPage.buttons.signInBtnText)
+    });
+
+    it('AT_01.05.10 | Verify SIGN IN button is visible and clickable', function() {
+        loginPopup
+            .clickByEmailSignInButton()
+
+        loginPopup.getMessageAlert()
+            .should('have.text', this.startPage.alert.loginPopupMessageAlert)
+    });
+    
+    it('AT_01.05.06 | Verify SIGN IN button has color - #6CCD66', function () {
+        loginPopup
+            .getByEmailSignInButton()
+            .should('have.css', 'color', this.startPage.buttons.signInBtnTextColor);
+    });
+
+    it('AT_01.05.08 | Verify SIGN IN button has border-color - #6CCD66', function () {
+        loginPopup
+            .getByEmailSignInButton()
+            .should('have.css', 'color', this.startPage.buttons.signInBtnBorderColor);
+    });
+
+    it('AT_01.05.11 | Verify Popup background color is #fff', function () {
+        loginPopup
+            .getModulFormEntairely()
+            .should('have.css', 'background-color', this.startPage.background);
     });
 });

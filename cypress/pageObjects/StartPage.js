@@ -3,8 +3,9 @@ export class StartPage {
 
     getLoginButton = () => cy.get(".login")
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
-    getBackgroungVideo = () => cy.get('video')
+    getBackgroundVideo = () => cy.get('video')
     getLogo = () => cy.get('.logo')
+    getBackgroundLoginSection = () => cy.get('.inner')
 
     //Flag icons
     
@@ -47,14 +48,19 @@ export class LoginPopup {
     getLoginPopupHeader = () => cy.get('#loginModal h2');
     getEmailLabel = () => cy.get('#byemail :nth-child(3) label');
     getPasswordInput = () => cy.get('#byemail input[name="password"]');
-    getSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
+    getByEmailSignInButton = () => cy.get('#byemail input[value="SIGN IN"]');
     getMessageAlert = () => cy.get('div.alert');
     getLoginByPhoneNumberTab = () => cy.get('[href="#byphone"]');
-    getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) label');
+    getPhoneNumberLabel = () => cy.get('#byphone :nth-child(3) .control-label');
     getCloseBtn = () => cy.get('#loginModal .close');
-    getPhoneNumberInputField = () => cy.get('input[name="phone2"]');
-    getCountryCodeInput = () => cy.get('.phonecode');
     getCountryCodeLabel = () => cy.get('div[class="col-sm-2 col-xs-4"] label');
+    getCountryCodeInput = () => cy.get('#byphone [name="phone1"]');
+    getPhoneNumberInput = () => cy.get('#byphone [name="phone2"]');
+    getRequestCodeButton = () => cy.get('#byphone [value="REQUEST CODE"]');
+    getCodeFromSmsInput = () => cy.get('#step2 [name="code"]');
+    getByPhoneSignInButton = () => cy.get('#step2 [value="SIGN IN"]');
+    getPhoneNumberInputFieldLabel = () => cy.get('div[class="col-sm-6 col-xs-8"] label')
+    getModulFormEntairely =() => cy.get('#loginModal .modal-content')
 
 
     // Methods
@@ -63,8 +69,8 @@ export class LoginPopup {
         this.getForgotYourPasswordLink().click({force: true});
     };
 
-    clickSignInButton() {
-        this.getSignInButton().click();
+    clickByEmailSignInButton() {
+        this.getByEmailSignInButton().click();
     };
 
     clickLoginByPhoneNumberTab() {
@@ -73,7 +79,27 @@ export class LoginPopup {
 
     clickCloseBtn() {
         this.getCloseBtn().click();
-    }; 
+    };
+
+    enterCountryCode(countryCode) {
+        this.getCountryCodeInput().type(countryCode, { force: true });
+    };
+
+    enterPhoneNumber(phoneNumber) {
+        this.getPhoneNumberInput().type(phoneNumber, { force: true });
+    };
+
+    clickRequestCodeButton() {
+        this.getRequestCodeButton().click();
+    };
+
+    enterCodeFromSms(code) {
+        this.getCodeFromSmsInput().type(code, { force: true });
+    };
+
+    clickByPhoneSignInButton() {
+        this.getByPhoneSignInButton().click();
+    };
 }
 
 export class RestorePopup {
@@ -117,6 +143,8 @@ export class RegisterPopup {
     getErrorMessage = () => cy.get('#registerModal .help-block.error')
     getRegisterAgentAccountHeader = () => cy.get('#registerModal h2')
     getForgotYourPasswordLink = () => cy.get('#registerModal .pull-right a')
+    getPopupCloseButton = () => cy.get('#registerModal .close')
+    getRegisterModalPopup = () => cy.get('div#registerModal')
 
     // Methods
 
@@ -143,4 +171,16 @@ export class RegisterPopup {
     clickForgotYourPasswordLink() {
         this.getForgotYourPasswordLink().click({force: true});
     };
+
+    clickRegisterPopupCloseButton(){
+        this.getPopupCloseButton().click({force: true})
+    };
+}
+
+export class CongratulationsPopup {
+        // Elements
+
+    getCongratulationsHeader = () => cy.get('#registerModal h2')
+
+    
 }

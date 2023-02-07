@@ -7,18 +7,19 @@ const createBookingPage = new CreateBookingPage();
 describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
-	before(() => {
-		cy.visit('/');
+	before(function () {
+		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
+		cy.intercept('/tools/**').as('getTrip')
+		cy.wait('@getTrip')
 		createBookingPage.clickMonthBtn()
-	});
+	})
 
 	beforeEach(function () {
-		
 		cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
-	});
+	})
 
 	it('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
 		createBookingPage.getMonthDropdownList().then(($el) => {
@@ -54,14 +55,13 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})
 	})
 
-	it.skip('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
+	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
 		let date = new Date() 
-        let fullDateThailand = date.toLocaleString('en-GB', { day: 'numeric' , month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' })
-        let currentDateThailand = +fullDateThailand.slice(0, 2)
-		let currentMonthAndYear = fullDateThailand.slice(3)
+		let dateThailand = date.toLocaleString('en-GB', { day: 'numeric', timeZone: 'Asia/Bangkok' })
+		let currentMonthAndYear = date.toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok'})
 		createBookingPage.getMonthDropdownSelect().select(currentMonthAndYear)
 		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
-            if($el.text() < currentDateThailand){
+            if(+$el.text() < +dateThailand){
                 expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
             }          
 		})		
