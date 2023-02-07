@@ -25,6 +25,7 @@ class CreateBookingPage {
 
     //Departure on
     getFirstTripCard = () => cy.get('div .trip:first-child');
+    getSecondTridCard = () => cy.get('div .trip:nth-child(2)');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
     getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class');
@@ -37,10 +38,11 @@ class CreateBookingPage {
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
     getPassengersDetailsDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
-    getFareTypeDropdown = () => cy.get('[id^=select2-passenger-fare]');
+    getFareTypeDropdown = () => cy.get('[id^="select2-passenger-fare"]');
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
     getMainPassengerFareTypeDropdownListOptions = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
+    getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getLabelMainPassenger = () => cy.get('div.passenger-row > label');
@@ -50,6 +52,7 @@ class CreateBookingPage {
     getPassengerDetailsAssignedSeats = () => cy.get('span.seat-number')
     getSelectedDialCode = () => cy.get('.iti__selected-dial-code');
     getDialCodeArrow = () => cy.get('.iti__selected-flag')
+
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
     getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
@@ -60,7 +63,6 @@ class CreateBookingPage {
     getTitleOfSeatsTable = () => cy.get('.seats tbody th');
     getSeatInRow = () => cy.get('.seat-chart .seats tr:nth-child(2) td');
 
-
     // Summary section 
     getColumnSeatsSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)')
     getRowsSummaryList = () => cy.get('.total-wrapper > div.total-row')
@@ -70,6 +72,7 @@ class CreateBookingPage {
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
     getReservationTicketButton = () => cy.get('.btn-reserve-tickets');
     getTotalPrice = () => cy.get('.footer-book-wrapper span.total-price')
+    getBookTicketsButton = () => cy.get('[class="btn btn-book"]')
 
     // Methods
     clickCalendarNextButton() {
@@ -83,6 +86,10 @@ class CreateBookingPage {
     clickFirstTripCard() {
         this.getFirstTripCard().click()
     };
+
+    clcikSecondTripCard() {
+        this.getSecondTridCard().click()
+    }
 
     typeIntoMainPassengerNameField(name) {
         this.getMainPassengerNameField().type(name)
@@ -184,6 +191,52 @@ class CreateBookingPage {
 
     clickWeekBtn() {
         this.getWeekButton().click();
+    }
+
+    selectChildFare() {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(function($el) {
+            if ($el.text() === 'Child') {
+                return cy.wrap($el).click()
+            }
+        })
+    };
+
+    selectAdultFare() {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(($el) => {
+            if ($el.text() === 'Adult') {
+                cy.wrap($el).click()
+            }
+        })
+    };
+
+    selectElderFare() {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(function ($el) {
+            if ($el.text() === 'Elder') {
+                return cy.wrap($el).click()
+            }
+        })
+    };
+
+    completeMultipleNameFields() {
+     return this.getMainPassengerNameField().each(($el, index) => {
+        let defaultPassengerName = 'Passenger ' + index
+        if(index <= 0) {
+          cy.wrap($el).type(defaultPassengerName)
+        } else if (index <= 1) {
+          cy.wrap($el).type(defaultPassengerName)
+        } else if (index <= 2) {
+          cy.wrap($el).type(defaultPassengerName)
+        } else if (index <= 3) {
+          cy.wrap($el).type(defaultPassengerName)  
+        } else if (index <= 4) {
+          cy.wrap($el).type(defaultPassengerName)      
+        } else {
+          cy.wrap($el).type(defaultPassengerName)
+        }
+    })	
+}
+    clickBookTicketsBtn() {
+        this.getBookTicketsButton().click();
     }
 }
 
