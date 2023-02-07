@@ -21,4 +21,12 @@ describe('US_01.11 | Header elements', () => {
         registerPopup.getRegisterAgentAccountHeader().should('have.css','color', 'rgb(102, 102, 102)');
         registerPopup.getRegisterAgentAccountHeader().should('have.css','font-size', '30px');
     });
+
+    it.only('AT_01.11.04 | Verify that after clicking on the X button in the top right corner, Popup is closed and the main page appears', () => {
+        registerPopup.getRegisterModalPopup().should('have.attr', 'aria-hidden', 'false')
+        registerPopup
+            .clickRegisterPopupCloseButton()
+
+        registerPopup.getRegisterModalPopup().should('have.attr', 'aria-hidden', 'true')
+    });
 });
