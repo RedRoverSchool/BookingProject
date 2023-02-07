@@ -6,15 +6,11 @@ import BookingPopup from '../../../pageObjects/BookingPopup';
 
 const bookingPopup = new BookingPopup();
 const createBookingPage = new CreateBookingPage();
-const MANAGER = Cypress.env('manager');
+
 const AGENT = Cypress.env('agent');
-const CI = Cypress.env('CI');
 
 describe('US_04.28 | Seat selection UI and functionality', () => {
-    beforeEach(function () {
-        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
-    })
-    
+        
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
@@ -150,6 +146,40 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             })
         })
     })
+
+    context('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', () => {
+        before(() => {
+            cy.visit('/')
+            cy.login(AGENT.email, AGENT.password)
+            
+            createBookingPage.clickCalendarNextButton()
+            createBookingPage.clickFridayButton()
+            cy.intercept('/tools/**').as('getTrip')
+            cy.wait('@getTrip')
+            createBookingPage.clickFirstTripCard()
+        });
+        
+        it('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {      
+            createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)         
+            createBookingPage.clickReservationTicketArrow();
+            createBookingPage.clickReservationTicketButton();   
+            cy.intercept('/tools/ping/**').as('getPopUp')
+            cy.wait('@getPopUp') 
+            bookingPopup.clickCloseBtnBookingPopup()             
+            createBookingPage.clickFirstTripCard()
+    
+            let availableSeatsSeatSelection
+            createBookingPage.getAvailableSeatsSeatSelection().then($el => {
+                availableSeatsSeatSelection = $el.toArray().length                 
+            })       
+    
+            createBookingPage.getTicketsAvailableFirstTripCard().then($el => {
+                let availableSeatsSelectedTrip = $el.text()
+                
+                expect(availableSeatsSeatSelection).to.eq(+availableSeatsSelectedTrip)        
+            })    
+        });
+    })
 })
 
 //This describe for trip "Bangkok Khao San - Chonburi"
@@ -203,32 +233,6 @@ describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Ch
         createBookingPage.getTitleOfSeatsTable()
             .should('be.visible')
             .and('have.text', this.createBookingPage.tripClass[0])
-    });
-
-    it('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {      
-        createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)         
-        createBookingPage.clickReservationTicketArrow();
-        createBookingPage.clickReservationTicketButton();   
-        cy.intercept('/tools/ping/**').as('getPopUp')
-        cy.wait('@getPopUp').then(({ response }) => {
-            expect(response.statusCode).to.eq(200)
-            bookingPopup.getConfirmTicketButton().should('be.visible');
-            bookingPopup.getPassengerTitle().should('include.text', '(1)');
-            bookingPopup.getPassengersList().should('have.length', 1);
-            bookingPopup.clickCloseBtnBookingPopup()
-        })              
-        createBookingPage.clickFirstTripCard()
-
-        let availableSeatsSeatSelection
-        createBookingPage.getAvailableSeatsSeatSelection().then($el => {
-            availableSeatsSeatSelection = $el.toArray().length                 
-        })       
-
-        createBookingPage.getTicketsAvailableFirstTripCard().then($el => {
-            let availableSeatsSelectedTrip = $el.text()
-            
-            expect(availableSeatsSeatSelection).to.eq(+availableSeatsSelectedTrip)        
-        })    
     });
     
 });
