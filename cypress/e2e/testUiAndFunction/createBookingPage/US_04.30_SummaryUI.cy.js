@@ -16,7 +16,7 @@ describe('US_04.30 | Summary UI', () => {
 		createBookingPage.clickFridayButton()
 		cy.intercept('/tools/**').as('getTrip')
 		cy.wait('@getTrip')
-		createBookingPage.clcikSecondTripCard()
+		createBookingPage.clickSecondTripCard()
 	});
 
 	beforeEach(function() {
