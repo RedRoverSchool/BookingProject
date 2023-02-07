@@ -230,4 +230,5 @@ describe('US_04.28 | Seat selection UI and functionality ("Bangkok Khao San - Ch
             expect(availableSeatsSeatSelection).to.eq(+availableSeatsSelectedTrip)        
         })    
     });
+    
 });
