@@ -29,6 +29,11 @@ describe('US_05.03 | Date filter UI', () => {
             this.bookingsListPage = bookingsListPage;
         })
     });
+
+    it('AT_05.03.01 Verify that the "filterDateType" dropdown is displayed', function() {  
+        bookingsListPage.getDateRangeType().should('be.visible')
+    });
+    
     it('AT_05.03.02 | Verify that the "calendar" dropdown has defaulted to the current date in format DD MMM, YYYY', function () {
         const today = new Date()
         const past7Date = new Date(new Date().setDate(today.getDate() - 6))
