@@ -51,4 +51,16 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
 
         createBookingPage.getLabelCalendar().should('have.text', currentMonthAndYear);
     })
+
+    it('AT_04.5.06 | Calendar-day-selection block (under the calendar label) is visible and has at least 28 days', function () {
+        createBookingPage.getCalendarDays().each($el => {
+            cy.wrap($el).should('be.visible');
+        });
+
+        createBookingPage.getCalendarDays().then($el => {
+            let quantityOfDays = $el.length;
+            
+            expect(quantityOfDays).to.be.at.least(28);
+        })
+    })
 })

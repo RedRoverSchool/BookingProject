@@ -106,5 +106,11 @@
         "VIP bus",
         "Ferry",
         "Economy bus"
-    ]
+    ],
+
+    "summarySection": {
+        "seatsColumn": {
+            "warningText": "Select seat"
+        }
+    }
 }

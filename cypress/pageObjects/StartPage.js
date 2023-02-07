@@ -143,6 +143,8 @@ export class RegisterPopup {
     getErrorMessage = () => cy.get('#registerModal .help-block.error')
     getRegisterAgentAccountHeader = () => cy.get('#registerModal h2')
     getForgotYourPasswordLink = () => cy.get('#registerModal .pull-right a')
+    getPopupCloseButton = () => cy.get('#registerModal .close')
+    getRegisterModalPopup = () => cy.get('div#registerModal')
 
     // Methods
 
@@ -168,6 +170,10 @@ export class RegisterPopup {
 
     clickForgotYourPasswordLink() {
         this.getForgotYourPasswordLink().click({force: true});
+    };
+
+    clickRegisterPopupCloseButton(){
+        this.getPopupCloseButton().click({force: true})
     };
 }
 
