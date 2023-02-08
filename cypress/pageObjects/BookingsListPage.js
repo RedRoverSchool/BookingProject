@@ -15,6 +15,7 @@ class BookingsListPage {
 
     // Booking list
     getTableHeaders = () => cy.get('.table thead tr');
+    getTableBody = () => cy.get('.table tbody tr');
     getColumnsSettingButton = () => cy.get('.table-columns-settings-link');
     getColumnsCheckbox = () => cy.get('input[type="checkbox');
     getColumnsOkButton = () => cy.get('.popup-table-columns-settings .btn-success');
@@ -39,6 +40,15 @@ class BookingsListPage {
     clickColumnsOkButton () {
         this.getColumnsOkButton().click();
     }
+
+    clickSortButton (value) {
+        this.getTableHeaders().contains(value).click();
+    }
+
+    dblClickSortButton (value) {
+        this.getTableHeaders().contains(value).dblclick();
+    }
+
 }
 
 export default BookingsListPage;
