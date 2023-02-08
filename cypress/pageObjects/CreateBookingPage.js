@@ -23,6 +23,7 @@ class CreateBookingPage {
     getWeekButton = () => cy.get('button.calendar-view-week');
     getSaturdayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(6)');
     getLableDepartureDate = () => cy.get('#label-departure-date');
+    getDepartureDate = () => cy.get('.popup-trip div:nth-child(5) span');
 
     //Departure on
     getFirstTripCard = () => cy.get('div .trip:first-child');
@@ -158,13 +159,13 @@ class CreateBookingPage {
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
-                cy.wrap($el).click()
+                cy.wrap($el).click({force: true})
             }
         })
     };
 
     hoverNeedDepartureStation(nameStation) {
-        this.getCreateBookingHeader().click()
+        this.getCreateBookingHeader().click({force: true})
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
