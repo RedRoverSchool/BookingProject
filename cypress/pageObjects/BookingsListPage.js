@@ -19,8 +19,8 @@ class BookingsListPage {
     //Date filter section
     getDateRangeType = () => cy.get('div #filterDateType option');
     getDateRangeTypeDefault = () => cy.get('div #filterDateType [selected]');
-    getDatesRangeListDefaultValue = () => cy.get('#filterDateType ~ span');
-    getDatesRangeListValues = () => cy.get('.ranges ul li');
+    getDrdnDatesRangeDefaultValue = () => cy.get('#filterDateType ~ span');
+    getDrpdDatesRangeList = () => cy.get('.ranges ul li');
     
     // Booking list section
     getTableHeaders = () => cy.get('.table thead tr');
@@ -53,8 +53,8 @@ class BookingsListPage {
         this.clickClearLink().click();
     };
 
-    clickDatesRangeList() {
-        this.getDatesRangeListDefaultValue().click();
+    clickDatesRangeDropdown() {
+        this.getDrdnDatesRangeDefaultValue().click();
     };
 
     clickDateRangeType() {

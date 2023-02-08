@@ -36,21 +36,16 @@ describe('US_05.03 | Date filter UI', () => {
         const todayFormatted = formatDate(today)
         const past7DateFormatted = formatDate(past7Date)
 
-        bookingsListPage.getDatesRangeListDefaultValue()
+        bookingsListPage.getDrdnDatesRangeDefaultValue()
             .should('have.text', `${past7DateFormatted} - ${todayFormatted}`)
     })
 
     it('AT_05.03.05 | Verify that the filter date range dropdown has values', function () {
-        bookingsListPage.clickDatesRangeList();
+        bookingsListPage.clickDatesRangeDropdown();
 
-        bookingsListPage.getDatesRangeListValues().then(options => {
-            const dateRangesActual = options
-                .toArray()
-                .map(el => el.innerHTML)
-
-            expect(dateRangesActual).to.deep.equal(this.bookingsListPage.dropDown.datesRange);
+        bookingsListPage.getDrpdDatesRangeList().each(($li,index) => {
+            expect($li.text()).eq(this.bookingsListPage.dropDown.datesRange[index])
         });
-
     })
 
     it('AT_05.03.04 | Verify that the  DateType dropdown is visible and have 2 options', function () {
