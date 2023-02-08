@@ -63,8 +63,6 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
     })
 
     it('AT_04.15.04| Departure date section has the label "Departure date"', function () {
-        createBookingPage.clickMonthBtn();
-
         createBookingPage.getLableDepartureDate().should('have.text', this.createBookingPage.departureDate);
     });
 

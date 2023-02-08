@@ -104,7 +104,7 @@
 
     "notSelectedWeekBtnBackgroundColor": "rgb(255, 255, 255)",
 
-        "departureDate": "Departure date",
+    "departureDate": "Departure date",
 
     "tripClass": [
         "VIP bus",
