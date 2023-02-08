@@ -152,13 +152,13 @@ class CreateBookingPage {
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
-                cy.wrap($el).click()
+                cy.wrap($el).click({force: true})
             }
         })
     };
 
     hoverNeedDepartureStation(nameStation) {
-        this.getCreateBookingHeader().click()
+        this.getCreateBookingHeader().click({force: true})
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
