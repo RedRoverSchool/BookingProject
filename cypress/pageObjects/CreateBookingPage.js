@@ -23,7 +23,7 @@ class CreateBookingPage {
     getWeekButton = () => cy.get('button.calendar-view-week');
     getSaturdayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(6)');
     getLableDepartureDate = () => cy.get('#label-departure-date');
-
+    
     //Departure on
     getFirstTripCard = () => cy.get('div .trip:first-child');
     getSecondTridCard = () => cy.get('div .trip:nth-child(2)');
@@ -32,6 +32,7 @@ class CreateBookingPage {
     getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class');
     getPriceOfTicket = () => cy.get('.vehclass-ferry.selected .price');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
+    getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
