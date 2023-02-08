@@ -39,7 +39,7 @@ describe("US_05.23 | Trip detais UI", () => {
     );
   });
 
-  it("05.23.01 | Verify departure time is in 24-hour notation HH:MM", function () {
+  it("AT_05.23.01 | Verify departure time is in 24-hour notation HH:MM", function () {
     createBookingPage.getDepartureTime().then(($span) => {
       const text = $span.text();
       expect(text).to.match(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/);
