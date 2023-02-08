@@ -92,4 +92,10 @@ describe('US_01.08 | Login by phone number tab UI', () => {
             .and('have.attr', 'placeholder', this.startPage.inputField.loginPopup.countryCode)
 
     });
+    
+    it('AT_01.08.14 | Insure Popup background color is #fff', function () {
+        loginPopup
+        .getModulFormEntairely()
+        .should('have.css', 'background-color', this.startPage.background)
+    });
 });
