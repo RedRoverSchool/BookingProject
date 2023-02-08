@@ -78,4 +78,18 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         .getPhoneNumberInputFieldLabel()
         .should('have.css','color', this.startPage.label.labelPhoneNumberInputField.color)
     });
+
+    it('AT_01.08.11 | Verify Phone number label has text "Phone number"', function() {
+        loginPopup
+            .getPhoneNumberInputFieldLabel()
+            .should('have.text', this.startPage.label.labelPhoneNumber.text)
+    });
+
+    it('AT_01.08.12 | Verify the agent is able to see Country code input field', function() {
+        loginPopup
+            .getCountryCodeInput()
+            .should('be.visible')
+            .and('have.attr', 'placeholder', this.startPage.inputField.loginPopup.countryCode)
+
+    });
 });

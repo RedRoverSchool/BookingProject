@@ -3,7 +3,7 @@ export class StartPage {
 
     getLoginButton = () => cy.get(".login")
     getRegisterAccountLink = () => cy.get('a[title="Register as agent"]')
-    getBackgroungVideo = () => cy.get('video')
+    getBackgroundVideo = () => cy.get('video')
     getLogo = () => cy.get('.logo')
     getBackgroundLoginSection = () => cy.get('.inner')
 
@@ -60,6 +60,7 @@ export class LoginPopup {
     getCodeFromSmsInput = () => cy.get('#step2 [name="code"]');
     getByPhoneSignInButton = () => cy.get('#step2 [value="SIGN IN"]');
     getPhoneNumberInputFieldLabel = () => cy.get('div[class="col-sm-6 col-xs-8"] label')
+    getModulFormEntairely =() => cy.get('#loginModal .modal-content')
 
 
     // Methods
@@ -142,6 +143,8 @@ export class RegisterPopup {
     getErrorMessage = () => cy.get('#registerModal .help-block.error')
     getRegisterAgentAccountHeader = () => cy.get('#registerModal h2')
     getForgotYourPasswordLink = () => cy.get('#registerModal .pull-right a')
+    getPopupCloseButton = () => cy.get('#registerModal .close')
+    getRegisterModalPopup = () => cy.get('div#registerModal')
 
     // Methods
 
@@ -167,6 +170,10 @@ export class RegisterPopup {
 
     clickForgotYourPasswordLink() {
         this.getForgotYourPasswordLink().click({force: true});
+    };
+
+    clickRegisterPopupCloseButton(){
+        this.getPopupCloseButton().click({force: true})
     };
 }
 

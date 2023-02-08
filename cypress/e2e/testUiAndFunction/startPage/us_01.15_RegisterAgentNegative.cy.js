@@ -21,16 +21,18 @@ const randomInvalidPhoneNumber = faker.random.alphaNumeric(12);
 
 describe('US_01.15 | Register Agent Negative', function () {
 
-    beforeEach(function () {
+    before(function () {
         cy.visit('/');
         startPage.clickRegisterAccountLink();
-
-        cy.fixture('startPage').then(startPage => {
+    })
+        beforeEach(function () {
+            cy.fixture('startPage').then(startPage => {
             this.startPage = startPage
         });
     });
 
     it('AT_01.15.01 | Error message is displayed when trying to register without entering name', function () {
+        registerPopup.getNameInputField().clear()
         registerPopup.enterCompanyName(randomCompanyName)
         registerPopup.enterEmail(randomEmail)
         registerPopup.enterPhoneNumber(randomPhoneNumber)
@@ -43,6 +45,7 @@ describe('US_01.15 | Register Agent Negative', function () {
 
     it('AT_01.15.02 | Error message is displayed when trying to register without company name', function () {
         registerPopup.enterName(randomFullName)
+        registerPopup.getCompanyInputField().clear()
         registerPopup.enterEmail(randomEmail)
         registerPopup.enterPhoneNumber(randomPhoneNumber)
         registerPopup.clickRegisterButton()
@@ -55,6 +58,7 @@ describe('US_01.15 | Register Agent Negative', function () {
     it('AT_01.15.03 | Error message is displayed when trying to register without email', function () {
         registerPopup.enterName(randomFullName)
         registerPopup.enterCompanyName(randomCompanyName)
+        registerPopup.getEmailInputField().clear()
         registerPopup.enterPhoneNumber(randomPhoneNumber)
         registerPopup.clickRegisterButton()
         registerPopup
@@ -78,6 +82,7 @@ describe('US_01.15 | Register Agent Negative', function () {
     it('AT_01.15.04 | Error message is displayed when trying to register without phone number', function () {
         registerPopup.enterName(randomFullName)
         registerPopup.enterCompanyName(randomCompanyName)
+        registerPopup.getPhoneInputField().clear()
         registerPopup.enterEmail(randomEmail)
         registerPopup.clickRegisterButton()
         registerPopup.getErrorMessage()

@@ -8,7 +8,7 @@ const registerPopup = new RegisterPopup();
 
 describe('US_01.11 | Header elements', () => {
 
-    beforeEach(function () {
+    before(function () {
 	    cy.visit('/');
         startPage.clickRegisterAccountLink();
 	});
@@ -20,5 +20,17 @@ describe('US_01.11 | Header elements', () => {
     it('AT_01.11.02 | Verify the title `Register agent account` has rgb(102, 102, 102) color, and 30px font-size‌', () => {
         registerPopup.getRegisterAgentAccountHeader().should('have.css','color', 'rgb(102, 102, 102)');
         registerPopup.getRegisterAgentAccountHeader().should('have.css','font-size', '30px');
+    });
+
+    it('AT_01.11.04 | Verify the functionality of the close button', () => {
+        registerPopup
+            .getRegisterModalPopup()
+            .should('have.attr', 'aria-hidden', 'false')
+        registerPopup
+            .clickRegisterPopupCloseButton()
+
+        registerPopup
+            .getRegisterModalPopup()
+            .should('have.attr', 'aria-hidden', 'true')
     });
 });

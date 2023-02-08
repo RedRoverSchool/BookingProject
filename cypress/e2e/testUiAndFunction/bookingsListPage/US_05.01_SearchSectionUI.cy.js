@@ -57,8 +57,11 @@ describe('US_05.01 Booking list page >Top Section> Search Form UI', () => {
 
     }); 
    
+    it('AT_05.01.02 Verify that the link “Clear” displayed', function () {
+        
+        bookingsListPage
+            .getClearLink()
+            .should('be.visible')
+            .and('have.text', this.bookingsListPage.links.filterClear);
+    });      
 })
-
-
-   
-

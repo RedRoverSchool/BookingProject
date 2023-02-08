@@ -1,8 +1,10 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import BookingPopup from "../../../pageObjects/BookingPopup";
 
 const createBookingPage = new CreateBookingPage();
+const bookingPopup = new BookingPopup();
 const AGENT = Cypress.env('agent');
 
 describe('US_04.30 | Summary UI', () => {
@@ -14,9 +16,16 @@ describe('US_04.30 | Summary UI', () => {
 		createBookingPage.clickFridayButton()
 		cy.intercept('/tools/**').as('getTrip')
 		cy.wait('@getTrip')
-		createBookingPage.clickFirstTripCard()
+		createBookingPage.clickSecondTripCard()
 	});
 
+	beforeEach(function() {
+	cy.fixture('bookingPopup').then(bookingPopup => {
+		this.bookingPopup = bookingPopup;
+		});
+	});
+	
+	context('AT_04.30.01 AT_04.30.03 AT_04.30.02 can be run within the same login', () => {
 	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section', () => {
 		createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
 			let numberOfPassengersArray = $el
@@ -88,3 +97,36 @@ describe('US_04.30 | Summary UI', () => {
 		})
 	})
 })
+	context('AT_04.30.04 | Amount of selected fare type passengers matches the amount on Booking Popup (needs new login)', () => {
+		before(() => {
+			cy.visit('/')
+			cy.login(AGENT.email, AGENT.password)
+			createBookingPage.clickCalendarNextButton()
+			createBookingPage.clickFridayButton()
+			cy.intercept('/tools/**').as('getTrip')
+			cy.wait('@getTrip')
+			createBookingPage.clickSecondTripCard()
+		});
+		it('AT_04.30.04 | Verify that amount of selected fare type passengers matches the amount on Booking Popup', function () {
+		    createBookingPage.getPassengersDetailsDropdown().select(5)
+			createBookingPage.completeMultipleNameFields()
+			createBookingPage.getFareTypeDropdown().each(($el, index) => {
+				if (index <= 2) {
+				  cy.wrap($el).click()
+				  createBookingPage.selectAdultFare()
+				} else if (index <= 4) {
+				  cy.wrap($el).click()
+				  createBookingPage.selectChildFare()
+				} else {
+				  cy.wrap($el).click()
+				  createBookingPage.selectElderFare()
+				}
+			})
+			createBookingPage.clickBookTicketsBtn();
+
+			bookingPopup.getFirstFareType().should('have.text', 3 + this.bookingPopup.passengerPrice.passengerFareTypes.adultFare)
+    		bookingPopup.getSecondFareType().should('have.text', 2 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
+    		bookingPopup.getThirdFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
+		})
+	})
+});

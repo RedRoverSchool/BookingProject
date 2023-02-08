@@ -22,13 +22,20 @@ class CreateBookingPage {
     getFridayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(5)');
     getWeekButton = () => cy.get('button.calendar-view-week');
     getSaturdayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(6)');
+    getLableDepartureDate = () => cy.get('#label-departure-date');
+    getDepartureDate = () => cy.get('.popup-trip div:nth-child(5) span');
 
     //Departure on
     getFirstTripCard = () => cy.get('div .trip:first-child');
+    getSecondTridCard = () => cy.get('div .trip:nth-child(2)');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
     getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class');
-    getPriceOfTicket = () => cy.get('.vehclass-ferry.selected .price')
+    getPriceOfTicket = () => cy.get('.vehclass-ferry.selected .price');
+    getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
+    getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
+    getDepartureLatestButton = () => cy.get('button.trips-order-desc');
+    getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
@@ -37,10 +44,11 @@ class CreateBookingPage {
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
     getPassengersDetailsDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
-    getFareTypeDropdown = () => cy.get('[id^=select2-passenger-fare]');
+    getFareTypeDropdown = () => cy.get('[id^="select2-passenger-fare"]');
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
     getMainPassengerFareTypeDropdownListOptions = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
+    getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getLabelMainPassenger = () => cy.get('div.passenger-row > label');
@@ -48,7 +56,9 @@ class CreateBookingPage {
     getPlaceholderPhoneNumber = () => cy.get('[placeholder="Phone number"]')
     getMainPassengerSelectedSeatByDefault = () => cy.get('div[class="col-lg-12 passenger-row"] span[class="seat-number"]')
     getPassengerDetailsAssignedSeats = () => cy.get('span.seat-number')
-    
+    getSelectedDialCode = () => cy.get('.iti__selected-dial-code');
+    getDialCodeArrow = () => cy.get('.iti__selected-flag')
+
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
     getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
@@ -58,7 +68,7 @@ class CreateBookingPage {
     getAllSeatsSeatSelection = () => cy.get('.seat-chart .seats td');
     getTitleOfSeatsTable = () => cy.get('.seats tbody th');
     getSeatInRow = () => cy.get('.seat-chart .seats tr:nth-child(2) td');
-
+    getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .available');
 
     // Summary section 
     getColumnSeatsSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)')
@@ -69,8 +79,9 @@ class CreateBookingPage {
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
     getReservationTicketButton = () => cy.get('.btn-reserve-tickets');
     getTotalPrice = () => cy.get('.footer-book-wrapper span.total-price')
-    getTotalPriceLabel = () => cy.get('.footer-book-wrapper > :first-child');
-    
+    getTotalPriceLabel = () => cy.get('.footer-book-wrapper > :first-child');    
+    getBookTicketsButton = () => cy.get('[class="btn btn-book"]')
+
     // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
@@ -83,6 +94,10 @@ class CreateBookingPage {
     clickFirstTripCard() {
         this.getFirstTripCard().click()
     };
+
+    clickSecondTripCard() {
+        this.getSecondTridCard().click()
+    }
 
     typeIntoMainPassengerNameField(name) {
         this.getMainPassengerNameField().type(name)
@@ -124,6 +139,10 @@ class CreateBookingPage {
         this.getReservationTicketButton().click()
     };
 
+    clickDepartureLatestButton() {
+        this.getDepartureLatestButton().click({ force: true })
+    };
+
     getRandomIndexOfMonth() {
 
         return this.getMonthDropdownList().then($el => {
@@ -141,13 +160,13 @@ class CreateBookingPage {
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
-                cy.wrap($el).click()
+                cy.wrap($el).click({force: true})
             }
         })
     };
 
     hoverNeedDepartureStation(nameStation) {
-        this.getCreateBookingHeader().click()
+        this.getCreateBookingHeader().click({force: true})
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
@@ -184,6 +203,52 @@ class CreateBookingPage {
 
     clickWeekBtn() {
         this.getWeekButton().click();
+    }
+
+    selectChildFare() {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(function($el) {
+            if ($el.text() === 'Child') {
+                return cy.wrap($el).click()
+            }
+        })
+    };
+
+    selectAdultFare() {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(($el) => {
+            if ($el.text() === 'Adult') {
+                cy.wrap($el).click()
+            }
+        })
+    };
+
+    selectElderFare() {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(function ($el) {
+            if ($el.text() === 'Elder') {
+                return cy.wrap($el).click()
+            }
+        })
+    };
+
+    completeMultipleNameFields() {
+     return this.getMainPassengerNameField().each(($el, index) => {
+        let defaultPassengerName = 'Passenger ' + index
+        if(index <= 0) {
+          cy.wrap($el).type(defaultPassengerName)
+        } else if (index <= 1) {
+          cy.wrap($el).type(defaultPassengerName)
+        } else if (index <= 2) {
+          cy.wrap($el).type(defaultPassengerName)
+        } else if (index <= 3) {
+          cy.wrap($el).type(defaultPassengerName)  
+        } else if (index <= 4) {
+          cy.wrap($el).type(defaultPassengerName)      
+        } else {
+          cy.wrap($el).type(defaultPassengerName)
+        }
+    })	
+}
+    clickBookTicketsBtn() {
+        this.getBookTicketsButton().click();
     }
 }
 

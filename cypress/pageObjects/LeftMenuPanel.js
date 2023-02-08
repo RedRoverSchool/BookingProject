@@ -24,5 +24,9 @@ class LeftMenuPanel {
     clickBookingIcon() {
         this.getBookingIcon().click()
     }
+
+    clickAccountManagementIcon() {
+        this.getAccountManagementIcon().click()
+    }
 }
 export default LeftMenuPanel;

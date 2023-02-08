@@ -1,0 +1,9 @@
+{
+    "passengerPrice": {
+        "passengerFareTypes": {
+            "adultFare": " x Adult",
+            "childFare": " x Child",
+            "elderFare": " x Elder"
+        }
+    }
+}

@@ -38,6 +38,35 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
         createBookingPage.clickWeekBtn();
 
         createBookingPage.getMonthDropdownSelect()
-            .should('not.be.visible');         
+            .should('not.be.visible');
     })
-});
+
+    it('AT_04.15.05 | Calendar label (between arrows) is visible and its format has the name of the current month and year (e.g. Jan 2023)', function () {
+        createBookingPage.clickMonthBtn();
+
+        createBookingPage.getLabelCalendar().should('be.visible');
+
+        let date = new Date();
+        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+        createBookingPage.getLabelCalendar().should('have.text', currentMonthAndYear);
+    })
+
+    it('AT_04.5.06 | Calendar-day-selection block (under the calendar label) is visible and has at least 28 days', function () {
+        createBookingPage.getCalendarDays().each($el => {
+            cy.wrap($el).should('be.visible');
+        });
+
+        createBookingPage.getCalendarDays().then($el => {
+            let quantityOfDays = $el.length;
+            
+            expect(quantityOfDays).to.be.at.least(28);
+        })
+    })
+
+    it('AT_04.15.04| Departure date section has the label "Departure date"', function () {
+        createBookingPage.clickMonthBtn();
+
+        createBookingPage.getLableDepartureDate().should('have.text', this.createBookingPage.departureDate);
+    });
+})
