@@ -24,6 +24,7 @@ class CreateBookingPage {
     getSaturdayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(6)');
     getLableDepartureDate = () => cy.get('#label-departure-date');
     getDepartureDate = () => cy.get('.popup-trip div:nth-child(5) span');
+    getDaySelected = () => cy.get('[class="day-wrapper selected"]');
 
     //Departure on
     getFirstTripCard = () => cy.get('div .trip:first-child');
@@ -159,13 +160,13 @@ class CreateBookingPage {
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
-                cy.wrap($el).click({force: true})
+                cy.wrap($el).click({ force: true })
             }
         })
     };
 
     hoverNeedDepartureStation(nameStation) {
-        this.getCreateBookingHeader().click({force: true})
+        this.getCreateBookingHeader().click({ force: true })
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
@@ -205,7 +206,7 @@ class CreateBookingPage {
     }
 
     selectChildFare() {
-        this.getAddedPassengerFareTypeDropdownListOptions().each(function($el) {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(function ($el) {
             if ($el.text() === 'Child') {
                 return cy.wrap($el).click()
             }
@@ -229,25 +230,32 @@ class CreateBookingPage {
     };
 
     completeMultipleNameFields() {
-     return this.getMainPassengerNameField().each(($el, index) => {
-        let defaultPassengerName = 'Passenger ' + index
-        if(index <= 0) {
-          cy.wrap($el).type(defaultPassengerName)
-        } else if (index <= 1) {
-          cy.wrap($el).type(defaultPassengerName)
-        } else if (index <= 2) {
-          cy.wrap($el).type(defaultPassengerName)
-        } else if (index <= 3) {
-          cy.wrap($el).type(defaultPassengerName)  
-        } else if (index <= 4) {
-          cy.wrap($el).type(defaultPassengerName)      
-        } else {
-          cy.wrap($el).type(defaultPassengerName)
-        }
-    })	
-}
+        return this.getMainPassengerNameField().each(($el, index) => {
+            let defaultPassengerName = 'Passenger ' + index
+            if (index <= 0) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else if (index <= 1) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else if (index <= 2) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else if (index <= 3) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else if (index <= 4) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else {
+                cy.wrap($el).type(defaultPassengerName)
+            }
+        })
+    }
     clickBookTicketsBtn() {
         this.getBookTicketsButton().click();
+    }
+
+    getRequiredDefaulDay_DDFormat() {
+        let date = new Date();
+        let currentTailandDate = date.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok' });
+        let requiredDefaultDay = (+currentTailandDate + 2).toString();
+        return requiredDefaultDay;
     }
 }
 

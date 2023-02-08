@@ -48,7 +48,6 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
 
         let date = new Date();
         const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-
         createBookingPage.getLabelCalendar().should('have.text', currentMonthAndYear);
     })
 
@@ -59,7 +58,6 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
 
         createBookingPage.getCalendarDays().then($el => {
             let quantityOfDays = $el.length;
-            
             expect(quantityOfDays).to.be.at.least(28);
         })
     })
@@ -69,4 +67,12 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
 
         createBookingPage.getLableDepartureDate().should('have.text', this.createBookingPage.departureDate);
     });
+
+    it('AT_04.15.07 | Selected day by default is according to requirements (current date by (GMT+7) + 2 days)', function () {
+        let requiredDay = createBookingPage.getRequiredDefaulDay_DDFormat()
+        createBookingPage.getDaySelected()
+            .invoke('text')
+            .should('eq', requiredDay);
+    })
+
 })
