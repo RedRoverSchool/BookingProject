@@ -113,6 +113,7 @@ export class RestorePopup {
     getCloseButton = () => cy.get('div#restoreModal .modal-header .close');
     getRestorePopup = () => cy.get('div#restoreModal');
     getRegisterLink = () => cy.get('.form-horizontal .modal-footer .pull-left a');
+    getHeaderText = () =>  cy.get('#restoreModal .text-center');
 
     // Methods
 
