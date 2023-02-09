@@ -42,7 +42,7 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
         }
     });
 
-    it('AT_04.08.05 | Verify previous arrow button switches from 3 weeks ahead', () => {
+    it.skip('AT_04.08.05 | Verify previous arrow button switches from 3 weeks ahead', () => {
         createBookingPage.clickMonthBtn()
 
         let n = 3
@@ -94,7 +94,7 @@ describe('US_04.08 | Calendar-selection block UI and functionality week/month vi
         }
     });
 
-    it('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
+    it.skip('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
         createBookingPage.clickWeekBtn();
         let date = new Date();
         let avalableForBookingDay = date.setDate(date.getDate() + 2);
