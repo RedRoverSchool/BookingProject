@@ -53,7 +53,7 @@ describe('US_01.02 | Login-register section elements UI and functionality | Logi
             .should('include.text', this.startPage.headers.header_Login_Popup.text)
     });
 
-    it('AT_01.02.09 | Background of login section is white rgb(255, 255, 255)', function() {
+    it('AT_01.02.09 | Background of login button is white rgb(255, 255, 255)', function() {
         startPage.getLoginButton()
             .should('have.css', 'background').then($el => {
                 expect($el).to.contain(this.startPage.buttons.loginBtnBackgroundColor)
