@@ -1,11 +1,11 @@
 class CreateBookingPage {
     //Header
-    getCreateBookingHeader = () => cy.get('div h1');
+    getHeaderCreateBooking = () => cy.get('div h1');
 
     //Departure/Arrival station
-    getDepartureStationDropdown = () => cy.get('#select2-departure-container');
+    getDropdownDepartureStation = () => cy.get('#select2-departure-container');
     getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
-    getArrivalStationDropdown = () => cy.get('#select2-destination-container');
+    getDropdownArrivalStation = () => cy.get('#select2-destination-container');
     getArrivalStationList = () => cy.get('.select2-results .select2-results__options');
     getDepartureStationSelectionDropdown = () => cy.get('select[name="departure"]');
     getArrivalStationSelectionDropdown = () => cy.get('select[name="destination"]');
@@ -120,11 +120,11 @@ class CreateBookingPage {
     }
 
     clickDepartureStationDropdown() {
-        this.getDepartureStationDropdown().click()
+        this.getDropdownDepartureStation().click()
     };
 
     clickArrivalStationDropdown() {
-        this.getArrivalStationDropdown().click()
+        this.getDropdownArrivalStation().click()
     };
 
     clickFareTypeDropdown() {
@@ -160,7 +160,7 @@ class CreateBookingPage {
     };
 
     selectNeedDepartureStation(nameStation) {
-        this.getCreateBookingHeader().click()
+        this.getHeaderCreateBooking().click()
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
@@ -170,7 +170,7 @@ class CreateBookingPage {
     };
 
     hoverNeedDepartureStation(nameStation) {
-        this.getCreateBookingHeader().click({ force: true })
+        this.getHeaderCreateBooking().click({ force: true })
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
@@ -260,6 +260,12 @@ class CreateBookingPage {
         let currentTailandDate = date.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok' });
         let requiredDefaultDay = (+currentTailandDate + 2).toString();
         return requiredDefaultDay;
+    }
+
+    getCurrentMonthAndYear() {
+        let date = new Date();
+        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return currentMonthAndYear;
     }
 }
 
