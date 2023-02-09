@@ -62,6 +62,7 @@ export class LoginPopup {
     getPhoneNumberInputFieldLabel = () => cy.get('div[class="col-sm-6 col-xs-8"] label')
     getModulFormEntairely =() => cy.get('#loginModal .modal-content');
     getModulPopUpByPhone = () => cy.get('#loginModal > .modal-dialog > .modal-content');
+    getRegisterLink = () => cy.get('.tab-content + .modal-footer > .pull-left [data-target="#registerModal"]');
 
 
     // Methods
@@ -101,6 +102,10 @@ export class LoginPopup {
     clickByPhoneSignInButton() {
         this.getByPhoneSignInButton().click();
     };
+
+    clickRegisterLink() {
+        this.getRegisterLink().click()
+    }
 }
 
 export class RestorePopup {
