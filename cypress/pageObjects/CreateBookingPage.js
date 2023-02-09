@@ -46,7 +46,7 @@ class CreateBookingPage {
     getMainPassengerPhoneField = () => cy.get('.iti #passenger-phone');
     getLabelPassengerDetails = () => cy.get('.passenger-wrapper div.title label');
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
-    getPassengersDetailsDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
+    getPassengersDetailsDropdownList = () => cy.get('.passenger-wrapper .title select.passengers-amount option');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
     getFareTypeDropdown = () => cy.get('[id^="select2-passenger-fare"]');
     getMainPassengerFareTypeDropdownSelect = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
@@ -266,6 +266,10 @@ class CreateBookingPage {
         let date = new Date();
         const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
         return currentMonthAndYear;
+    }
+
+    selectAmountPassengersDetailsDropdown(amount) {                 
+        this.getPassengersDetailsDropdown().select(`${amount}`)       
     }
 }
 
