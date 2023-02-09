@@ -12,7 +12,7 @@ const CI = Cypress.env('CI');
 
 function testCreatingReservationForPassengerType(passengerName, dropdownSelection, checkTextOnPassengerTypeLabel) {
     createBookingPage.typeIntoMainPassengerNameField(passengerName);
-    createBookingPage.getMainPassengerFareTypeDropdownList().select(dropdownSelection, { force: true });
+    createBookingPage.getMainPassengerFareTypeDropdownSelect().select(dropdownSelection, { force: true });
     createBookingPage.clickReservationTicketArrow();
     createBookingPage.clickReservationTicketButton();
 
