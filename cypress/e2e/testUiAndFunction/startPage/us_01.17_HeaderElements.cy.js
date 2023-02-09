@@ -29,6 +29,6 @@ describe('US_01.17 | Header elements', () => {
     it('AT_01.17.02 | Verify an Agent/User is able to see the heading `Restore password`', function () {
         restorePopup.getHeaderText()
         .should('be.visible')
-        .should('have.text', this.startPage.headers.restorePasswordHeaderText);
+        .and('have.text', this.startPage.headers.restorePasswordHeaderText);
     });
 });
