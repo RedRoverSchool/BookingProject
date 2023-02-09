@@ -11,7 +11,8 @@
             "emailIsPreviouslyUsed": "This Email is not allowed to use current website",
             "nameFieldSpecialCharacters": "Use latin letters, numbers and spaces"
         },
-        "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password"
+        "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password",
+        "loginPopupByPhoneMessageAlert": "Please enter proper country code and phone number"
     },
     "buttons": {
         "loginBtnText": "login",
