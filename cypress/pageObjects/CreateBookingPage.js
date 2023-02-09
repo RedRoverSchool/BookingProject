@@ -1,11 +1,11 @@
 class CreateBookingPage {
     //Header
-    getHeaderCreateBooking = () => cy.get('div h1');
+    getCreateBookingHeader = () => cy.get('div h1');
 
     //Departure/Arrival station
-    getDropdownDepartureStation = () => cy.get('#select2-departure-container');
+    getDepartureStationDropdown = () => cy.get('#select2-departure-container');
     getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
-    getDropdownArrivalStation = () => cy.get('#select2-destination-container');
+    getArrivalStationDropdown = () => cy.get('#select2-destination-container');
     getArrivalStationList = () => cy.get('.select2-results .select2-results__options');
     getDepartureStationSelectionDropdown = () => cy.get('select[name="departure"]');
     getArrivalStationSelectionDropdown = () => cy.get('select[name="destination"]');
@@ -120,11 +120,11 @@ class CreateBookingPage {
     }
 
     clickDepartureStationDropdown() {
-        this.getDropdownDepartureStation().click()
+        this.getDepartureStationDropdown().click()
     };
 
     clickArrivalStationDropdown() {
-        this.getDropdownArrivalStation().click()
+        this.getArrivalStationDropdown().click()
     };
 
     clickFareTypeDropdown() {
@@ -160,7 +160,7 @@ class CreateBookingPage {
     };
 
     selectNeedDepartureStation(nameStation) {
-        this.getHeaderCreateBooking().click()
+        this.getCreateBookingHeader().click()
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
@@ -170,7 +170,7 @@ class CreateBookingPage {
     };
 
     hoverNeedDepartureStation(nameStation) {
-        this.getHeaderCreateBooking().click({ force: true })
+        this.getCreateBookingHeader().click({ force: true })
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
