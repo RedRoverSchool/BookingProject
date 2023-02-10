@@ -1,6 +1,7 @@
 /// <reference types = "Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import getCustomCalendarDay from "../../../support/utilities/getCustomCalendarDay";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -65,5 +66,17 @@ describe('US_04.12 | Calendar month functionality', () => {
                 expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
             }          
 		})		
-	})
+	});
+
+	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
+		const currentDayThailand = getCustomCalendarDay(0)
+
+		createBookingPage.getCalendarDays()
+			.contains(currentDayThailand)
+			.click({ force: true })
+
+		createBookingPage.getDepartureTripCardsList().each(($el) => {
+			cy.wrap($el).should('have.class', 'disabled')
+		})
+	});
 })
