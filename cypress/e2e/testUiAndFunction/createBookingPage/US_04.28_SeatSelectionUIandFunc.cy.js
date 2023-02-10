@@ -4,6 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import getIntergerMinInclMaxExcl from "../../../support/utilities/getRandomInterger";
 import BookingPopup from '../../../pageObjects/BookingPopup';
 import getArray from "../../../support/utilities/getArray";
+import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
 
 const bookingPopup = new BookingPopup();
 const createBookingPage = new CreateBookingPage();
@@ -196,16 +197,14 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     });
 
     it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
-        createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then($el => {
-            let amountOfPass = $el;
+        createBookingPage.getSeatSelectionDropdownList().then($el => {
+            let amountOfPass = getRandomElementOfArray($el);
     
             createBookingPage.getSeatSelectionDropdown()
                 .select(amountOfPass)
     
-            createBookingPage.getSelectedSeats().then(($cell) => {
-                const selectedSeatsArr = $cell
-                    .toArray()
-                    .map(el => el.innerText)
+            createBookingPage.getSelectedSeats().then(($el) => {
+                const selectedSeatsArr = getArray($el)
                     
                 let indexOfSeat = Math.floor(Math.random() * selectedSeatsArr.length)
                 let seatNumber = selectedSeatsArr[indexOfSeat]
@@ -215,9 +214,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     .click()
                     
                 createBookingPage.getColumnSeatsSummary().then(($el) => {
-                    let seatsSummaryArrayAfter = $el
-                        .toArray()
-                        .map(el => el.innerText)
+                    let seatsSummaryArrayAfter = getArray($el)
 
                     expect(seatsSummaryArrayAfter[indexOfSeat]).to.eq(this.createBookingPage.summarySection.seatsColumn.warningText)
                     cy.wrap($el)
