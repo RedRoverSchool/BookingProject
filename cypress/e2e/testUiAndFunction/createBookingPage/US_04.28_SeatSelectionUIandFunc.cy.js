@@ -3,6 +3,7 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import getIntergerMinInclMaxExcl from "../../../support/utilities/getRandomInterger";
 import BookingPopup from '../../../pageObjects/BookingPopup';
+import getArray from "../../../support/utilities/getArray";
 
 const bookingPopup = new BookingPopup();
 const createBookingPage = new CreateBookingPage();
@@ -22,7 +23,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
         
         createBookingPage.clickCalendarNextButton()
-        createBookingPage.clickFridayButton()
+        // createBookingPage.clickFridayButton()
         cy.intercept('/tools/**').as('getTrip')
 		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
@@ -166,7 +167,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             cy.login(AGENT.email, AGENT.password)
             
             createBookingPage.clickCalendarNextButton()
-            createBookingPage.clickFridayButton()
+            //createBookingPage.clickFridayButton()
             cy.intercept('/tools/**').as('getTrip')
             cy.wait('@getTrip')
             createBookingPage.clickFirstTripCard()
@@ -227,6 +228,25 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                         .contains(seatNumber)
                         .click()
                         .should('have.class', 'selected')
+                })
+            })
+        })
+    });
+
+    it('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal', function () {
+        createBookingPage.getRandomPassengersAmmount().then($el => {
+            let passengersAmount = $el;
+
+            createBookingPage.getSeatSelectionDropdown()
+                .select(passengersAmount)
+
+            createBookingPage.getSelectedSeats().then(($el) => {
+                const selectedSeatsArray = getArray($el)
+     
+                createBookingPage.getPassengerDetailsAssignedSeats().then(($el) => {
+                const seatsNumberArray = getArray($el)
+     
+                expect(seatsNumberArray).to.deep.eq(selectedSeatsArray)
                 })
             })
         })
