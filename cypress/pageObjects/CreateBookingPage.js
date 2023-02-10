@@ -272,6 +272,10 @@ class CreateBookingPage {
     selectAmountPassengersDetailsDropdown(amount) {                 
         this.getPassengersDetailsDropdown().select(`${amount}`)       
     }
+
+    clickCalendarDay(customDay) {
+        this.getCalendarDays().contains(customDay).click({ force: true })
+    }
 }
 
 export default CreateBookingPage; 

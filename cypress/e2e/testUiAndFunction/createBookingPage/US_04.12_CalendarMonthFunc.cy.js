@@ -71,9 +71,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
 		const currentDayThailand = getCustomCalendarDay(0)
 
-		createBookingPage.getCalendarDays()
-			.contains(currentDayThailand)
-			.click({ force: true })
+		createBookingPage.clickCalendarDay(currentDayThailand)
 
 		createBookingPage.getDepartureTripCardsList().each(($el) => {
 			cy.wrap($el).should('have.class', 'disabled')
