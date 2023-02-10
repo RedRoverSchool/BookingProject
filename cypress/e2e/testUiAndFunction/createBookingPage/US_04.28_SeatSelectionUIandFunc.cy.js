@@ -3,6 +3,8 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import getIntergerMinInclMaxExcl from "../../../support/utilities/getRandomInterger";
 import BookingPopup from '../../../pageObjects/BookingPopup';
+import getArray from "../../../support/utilities/getArray";
+import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
 
 const bookingPopup = new BookingPopup();
 const createBookingPage = new CreateBookingPage();
@@ -22,7 +24,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
         
         createBookingPage.clickCalendarNextButton()
-        createBookingPage.clickFridayButton()
+        // createBookingPage.clickFridayButton()
         cy.intercept('/tools/**').as('getTrip')
 		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
@@ -55,18 +57,13 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     });
 
     it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers from passenger details dropdown menu', () => {
-        createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
-            let amountOfPassengersArray = $el
-                .toArray()
-                .map($el => $el.innerText)
-            
-            let index = Math.floor(Math.random() * amountOfPassengersArray.length)
-            
+        createBookingPage.getPassengersDetailsDropdownList().then($el => {
+            let numberOfPass = getRandomElementOfArray($el)  
             createBookingPage.getPassengersDetailsDropdown()
-                .select(index)
-                .invoke('val')
-                .then((value) => {
+                .select(numberOfPass)
+                .invoke('val').then((value) => {
                     let chosenNumOfPassengers = +value
+
                     createBookingPage.getSelectedSeats()
                         .then(($el) => {
                         let defaultNumberOfSelectedSeats = $el.length
@@ -88,7 +85,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         })
     })
         
-    context('Verify custom seat selection by window and next two ones for chosen number of passengers watches assigned seats in passenger details section', () => {
+    context('Verify custom seat selection by window and next two ones in each row for chosen number of passengers watches assigned seats in passenger details section', () => {
         before(() => {
             cy.visit('/')
             cy.login(AGENT.email, AGENT.password)
@@ -100,12 +97,11 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             createBookingPage.clickFirstTripCard()
         });
 
-        it('AT_04.28.11 | Verify custom seat selection by window and next two ones for chosen number of passengers watches assigned seats in passenger details section', () => {
+        it('AT_04.28.11 | Verify custom seat selection by window and next two ones in each row for chosen number of passengers watches assigned seats in passenger details section', () => {
             let index = getIntergerMinInclMaxExcl(2, 11)
             createBookingPage.getPassengersDetailsDropdown()
                 .select(index)
-                .invoke('val')
-                .then((value) => {
+                .invoke('val').then((value) => {
                     let chosenNumOfPassengers = +value
 
                     createBookingPage.getSelectedSeats().click({ multiple: true })
@@ -114,12 +110,9 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                         createBookingPage.getAllSeatsSeatSelection()
                             .filter('.available')
                             .contains('A')
-                            .first()
-                            .click()
-                            .next()
-                            .click()
-                            .next()
-                            .click()
+                            .first().click()
+                            .next().click()
+                            .next().click()
                     }
 
                     createBookingPage.getSelectedSeats().then(($el) => {
@@ -166,7 +159,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             cy.login(AGENT.email, AGENT.password)
             
             createBookingPage.clickCalendarNextButton()
-            createBookingPage.clickFridayButton()
+            //createBookingPage.clickFridayButton()
             cy.intercept('/tools/**').as('getTrip')
             cy.wait('@getTrip')
             createBookingPage.clickFirstTripCard()
@@ -195,16 +188,14 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     });
 
     it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
-        createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then($el => {
-            let amountOfPass = $el;
+        createBookingPage.getSeatSelectionDropdownList().then($el => {
+            let amountOfPass = getRandomElementOfArray($el);
     
             createBookingPage.getSeatSelectionDropdown()
                 .select(amountOfPass)
     
-            createBookingPage.getSelectedSeats().then(($cell) => {
-                const selectedSeatsArr = $cell
-                    .toArray()
-                    .map(el => el.innerText)
+            createBookingPage.getSelectedSeats().then(($el) => {
+                const selectedSeatsArr = getArray($el)
                     
                 let indexOfSeat = Math.floor(Math.random() * selectedSeatsArr.length)
                 let seatNumber = selectedSeatsArr[indexOfSeat]
@@ -214,9 +205,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     .click()
                     
                 createBookingPage.getColumnSeatsSummary().then(($el) => {
-                    let seatsSummaryArrayAfter = $el
-                        .toArray()
-                        .map(el => el.innerText)
+                    let seatsSummaryArrayAfter = getArray($el)
 
                     expect(seatsSummaryArrayAfter[indexOfSeat]).to.eq(this.createBookingPage.summarySection.seatsColumn.warningText)
                     cy.wrap($el)
@@ -227,6 +216,25 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                         .contains(seatNumber)
                         .click()
                         .should('have.class', 'selected')
+                })
+            })
+        })
+    });
+
+    it('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal', function () {
+        createBookingPage.getRandomPassengersAmmount().then($el => {
+            let passengersAmount = $el;
+
+            createBookingPage.getSeatSelectionDropdown()
+                .select(passengersAmount)
+
+            createBookingPage.getSelectedSeats().then(($el) => {
+                const selectedSeatsArray = getArray($el)
+     
+                createBookingPage.getPassengerDetailsAssignedSeats().then(($el) => {
+                const seatsNumberArray = getArray($el)
+     
+                expect(seatsNumberArray).to.deep.eq(selectedSeatsArray)
                 })
             })
         })
