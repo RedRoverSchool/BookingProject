@@ -123,7 +123,7 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 			.should('be.visible')
 		});
 
-		it.only('AT_02.05.18 | Verify "User dropdown menu" displays the "User Role"', function () {
+		it('AT_02.05.18 | Verify "User dropdown menu" displays the "User Role"', function () {
 			header.getUserRole()
 			.should('be.visible')
 		});
