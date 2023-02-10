@@ -44,6 +44,7 @@ class CreateBookingPage {
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
+    getExtraPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]:not(.form-control:first-child)')
     getMainPassengerPhoneField = () => cy.get('.iti #passenger-phone');
     getLabelPassengerDetails = () => cy.get('.passenger-wrapper div.title label');
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
