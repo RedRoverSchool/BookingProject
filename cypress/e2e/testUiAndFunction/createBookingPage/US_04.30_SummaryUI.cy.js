@@ -110,9 +110,10 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 	it('AT_04.30.05 | Verify total price for 3 passengers with each custom fare type (Adult, Child, Elder) is correct', function () {
-		    createBookingPage.getPassengersDetailsDropdown().select('3 passengers')
-		    createBookingPage.getAddedPassengersFareTypeDropdownLists().eq(0).select('Child', { force: true })
-		    createBookingPage.getMainPassengerFareTypeDropdownSelect().select('Elder', { force: true })
+		   createBookingPage.getPassengersDetailsDropdown().select('3 passengers')
+		   createBookingPage.getMainPassengerFareTypeDropdownSelect().select('Elder', { force: true })
+		   createBookingPage.getAddedPassengersFareTypeDropdownLists().eq(0).select('Child', { force: true })
+		    
 		    createBookingPage.getPricesSummaryList().then(($el) => {
 				const prices = getArray($el)
 
