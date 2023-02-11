@@ -3,10 +3,17 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../../pageObjects/BookingPopup";
 import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
+import getArray from "../../../support/utilities/getArray";
 
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
 const AGENT = Cypress.env('agent');
+
+const sumOfArray = (array) => {
+	return array
+		.map(el => el.split(" ")[1])
+		.reduce((total, el) => total += +el, 0)
+}
 
 describe('US_04.30 | Summary UI', () => {
 
@@ -35,7 +42,7 @@ describe('US_04.30 | Summary UI', () => {
 				.then(($el) => {
 					let defaultSelectedSeatsArray = $el.text()
 
-					createBookingPage.getColumnSeatsSummary().then(($el) => {
+					createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
 						let seatsSummaryArray = $el.text()
 						expect(defaultSelectedSeatsArray).to.deep.eq(seatsSummaryArray)
 					})
@@ -87,7 +94,38 @@ describe('US_04.30 | Summary UI', () => {
 			})
 		})
 	})
-})
+	})
+
+	context('Verify total price for 3 passengers with custom fare types is correct for trip ', () => {
+		before(function () {
+			cy.visit('/')
+			cy.login(AGENT.email, AGENT.password)
+			createBookingPage.clickCalendarNextButton()
+			createBookingPage.getDepartureStationSelectionDropdown().select("Bangkok Khao San", { force: true })
+			createBookingPage.getArrivalStationSelectionDropdown().select("Phuket Town", { force: true })
+			createBookingPage.clickFridayButton()
+			cy.intercept('/tools/**').as('getTrip')
+			cy.wait('@getTrip')
+			createBookingPage.clickFirstTripCard()
+		});
+
+	it('AT_04.30.05 | Verify total price for 3 passengers with each custom fare type (Adult, Child, Elder) is correct', function () {
+		    createBookingPage.getPassengersDetailsDropdown().select('3 passengers')
+		    createBookingPage.getAddedPassengersFareTypeDropdownLists().eq(0).select('Child', { force: true })
+		    createBookingPage.getAddedPassengersFareTypeDropdownLists().eq(1).select('Elder', { force: true })
+		    createBookingPage.getPricesSummaryList().then(($el) => {
+				const prices = getArray($el)
+
+				const finalPrice = "USD" + " " + sumOfArray(prices)
+
+				createBookingPage.getTotalPriceSummary().then(($el) => {
+					let totalPrice = $el.text()
+					expect(finalPrice).to.deep.eq(totalPrice)
+				})
+			})
+		})
+	});
+
 	context('AT_04.30.04 | Amount of selected fare type passengers matches the amount on Booking Popup (needs new login)', () => {
 		before(() => {
 			cy.visit('/')
