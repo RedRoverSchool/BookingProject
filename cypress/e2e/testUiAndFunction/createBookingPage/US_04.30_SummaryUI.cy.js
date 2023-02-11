@@ -2,6 +2,7 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../../pageObjects/BookingPopup";
+import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
 
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
@@ -27,14 +28,9 @@ describe('US_04.30 | Summary UI', () => {
 	
 	context('AT_04.30.01 AT_04.30.03 AT_04.30.02 can be run within the same login', () => {
 	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section', () => {
-		createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
-			let numberOfPassengersArray = $el
-				.toArray()
-				.map($el => $el.innerText)
-			
-			let index = Math.floor(Math.random() * numberOfPassengersArray.length)
-
-			createBookingPage.getPassengersDetailsDropdown().select(index)
+		createBookingPage.getPassengersDetailsDropdownList().then($el => {
+			let numberOfPass = getRandomElementOfArray($el)  	
+			createBookingPage.getPassengersDetailsDropdown().select(numberOfPass)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
 					let defaultSelectedSeatsArray = $el.text()
@@ -48,14 +44,9 @@ describe('US_04.30 | Summary UI', () => {
 	});
 
 	it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers from passenger dropdown menu', () => {
-		createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
-			let numberOfPassengersArray = $el
-				.toArray()
-				.map($el => $el.innerText)
-
-			let index = Math.floor(Math.random() * numberOfPassengersArray.length)
-
-			createBookingPage.getPassengersDetailsDropdown().select(index)
+		createBookingPage.getPassengersDetailsDropdownList().then($el => {
+			let numberOfPass = getRandomElementOfArray($el)  	
+			createBookingPage.getPassengersDetailsDropdown().select(numberOfPass)
 				.invoke('val')
 				.then((value) => {
 					let chosenNumOfPassengers = +value

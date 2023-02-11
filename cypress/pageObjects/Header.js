@@ -18,6 +18,8 @@ class Header {
     getSignOutBtn = () => cy.get('[href="/logout/"]');
     getOperatorImage = () => cy.get('#op-dropdown > a > img');
     getUserMenu = () => cy.get('#op-dropdown > ul');
+    getLogoDropdownMenu = () => cy.get('.img-circle');
+    getUserRole = () => cy.get('.pull-center');
 
 // methods
     clickBurgerMenu() {

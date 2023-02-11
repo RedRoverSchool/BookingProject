@@ -14,12 +14,12 @@ describe('US_04.09 | Calendar available days week UI', () => {
 	});
 
 	beforeEach(function () {
-	
-		cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
-        })
 
-		 //Precondition
+		cy.fixture('createBookingPage').then(createBookingPage => {
+			this.createBookingPage = createBookingPage;
+		})
+
+		//Precondition
 		createBookingPage.getWeekButton().should('have.class', 'selected');
 	});
 
@@ -37,11 +37,11 @@ describe('US_04.09 | Calendar available days week UI', () => {
 		})
 	})
 
-	it('AT_04.09.02|Verify that the active field has background color #00a65a and text color #FFFFFF', function() {
-		
+	it('AT_04.09.02|Verify that the active field has background color #00a65a and text color #FFFFFF', function () {
+
 		createBookingPage.getCalendarDays().each(($el) => {
-			if($el.hasClass('selected')){
-				
+			if ($el.hasClass('selected')) {
+
 				expect($el).to.have.css('color', this
 					.createBookingPage
 					.selectedDayField
@@ -49,21 +49,35 @@ describe('US_04.09 | Calendar available days week UI', () => {
 				expect($el).to.have.css('background-color', this
 					.createBookingPage
 					.selectedDayField
-					.backgroundColor);	
+					.backgroundColor);
 			};
 		});
 	});
 
-	it('AT_04.09.03 | In all inactive fields the number has the color #333333', function() {
+	it('AT_04.09.03 | In all inactive fields the number has the color #333333', function () {
 		createBookingPage.getCalendarDays().each($el => {
-			if(!$el.hasClass('selected')) {
+			if (!$el.hasClass('selected')) {
 				expect($el).to.have.css('color', this.createBookingPage.notSelectedDayField.colorNumbers)
 			}
 		})
 	});
 
-	it('AT_04.09.05 | Seven fields are displayed for the week', function() {
+	it('AT_04.09.05 | Seven fields are displayed for the week', function () {
 		createBookingPage.getCalendarDays()
 			.should('have.length', this.createBookingPage.weekDayFields.quantity)
 	})
+
+	it('AT_04.09.07 | Each field has a capital letter of the Latin alphabet', function () {
+
+		createBookingPage.getCalendarDays().then($els => {
+
+			for (let i = 0; i < 7; i++) {
+				const win = $els[i].ownerDocument.defaultView
+				const before = win.getComputedStyle($els[i], 'before')
+				const contentValue = before.getPropertyValue('content')
+				
+				expect(contentValue).to.deep.equal(contentValue.toUpperCase())
+			};
+		});
+	});
 });
