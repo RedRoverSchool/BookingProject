@@ -273,12 +273,6 @@ class CreateBookingPage {
         this.getPassengersDetailsDropdown().select(`${amount}`)
     }
 
-    getDefaultDayMonthYear() {      
-        let date = new Date();
-        let currentMonthYearTailand = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
-        let defaultDayMonthYear = this.getRequiredDefaulDay_DDFormat() + " " + currentMonthYearTailand;       
-        return defaultDayMonthYear;       
-    }
 }
 
 export default CreateBookingPage; 
