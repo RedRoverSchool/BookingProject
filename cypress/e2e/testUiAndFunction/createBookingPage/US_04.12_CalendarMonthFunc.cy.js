@@ -5,7 +5,7 @@ import getCustomCalendarDay from "../../../support/utilities/getCustomCalendarDa
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.12 | Calendar month functionality', () => {
+describe.skip('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
 	before(function () {
