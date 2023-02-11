@@ -77,4 +77,14 @@ describe('US_04.12 | Calendar month functionality', () => {
 			cy.wrap($el).should('have.class', 'disabled')
 		})
 	});
+
+	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
+		const tomorrowDayThailand = getCustomCalendarDay(1)
+
+		createBookingPage.clickCalendarDay(tomorrowDayThailand)
+
+		createBookingPage.getDepartureTripCardsList().each(($el) => {
+			cy.wrap($el).should('have.class', 'disabled')
+		})
+	});
 })
