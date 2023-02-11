@@ -204,7 +204,7 @@ describe.skip('US_04.28 | Seat selection UI and functionality', () => {
                     .contains(seatNumber)
                     .click()
                     
-                createBookingPage.getColumnSeatsSummary().then(($el) => {
+                createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
                     let seatsSummaryArrayAfter = getArray($el)
 
                     expect(seatsSummaryArrayAfter[indexOfSeat]).to.eq(this.createBookingPage.summarySection.seatsColumn.warningText)

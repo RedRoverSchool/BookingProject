@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import getNameOfDay from "../../../support/utilities/getNameOfDay";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -78,6 +79,14 @@ describe('US_04.09 | Calendar available days week UI', () => {
 				
 				expect(contentValue).to.deep.equal(contentValue.toUpperCase())
 			};
+		});
+	});
+
+	it('AT_04.09.06|Verify that the uppercase letters of the Latin alphabet are in order: M, T, W, T, F, S, S',  function() {
+		createBookingPage.getCalendarDays().each(($el,ind) => {
+			const nameOfDay = getNameOfDay($el).slice(1, -1);
+
+		expect(nameOfDay).to.eq(this.createBookingPage.nameOfDay[ind]);
 		});
 	});
 });
