@@ -47,7 +47,7 @@ describe('US_04.23 | Passengers details default UI', () => {
         createBookingPage.getDialCodeArrow().should('be.visible')
     });
 
-    it.only('AT_04.23.07 | Verify email input field has an “Email” text placeholder.', function ()  {
-        createBookingPage.getEmailInputField().should('have.attr', 'placeholder', 'Email');
+    it('AT_04.23.07 | Verify email input field has an “Email” text placeholder.', function ()  {
+        createBookingPage.getEmailInputField().should('have.attr', 'placeholder', this.createBookingPage.placeholder.email);
     });
 });

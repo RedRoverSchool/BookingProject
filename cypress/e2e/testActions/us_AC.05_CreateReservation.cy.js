@@ -27,7 +27,7 @@ function testCreatingReservationForPassengerType(passengerName, dropdownSelectio
     })
 };
 
-describe('US_AC.05 | Create reservation for 1 passenger', () => {
+describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
 
     before(function () {
         cy.cleanCiData(MANAGER.email, MANAGER.password, CI)

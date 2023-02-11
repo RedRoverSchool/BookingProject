@@ -89,7 +89,8 @@
     },
     "placeholder":{
         "name": "Passenger name",
-        "phone": "Phone number"
+        "phone": "Phone number",
+        "email": "Email"
     },
 
     "weekDayFields": {
