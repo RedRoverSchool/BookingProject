@@ -117,5 +117,15 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 			startPage.getLoginButton()
 				.should('be.visible')
 		});
+
+		it('AT_02.05.17 | Verify "User dropdown menu" displays the "Operator Logo"', function () {
+			header.getLogoDropdownMenu()
+			.should('be.visible')
+		});
+
+		it('AT_02.05.18 | Verify "User dropdown menu" displays the "User Role"', function () {
+			header.getUserRole()
+			.should('be.visible')
+		});
 	});
 });

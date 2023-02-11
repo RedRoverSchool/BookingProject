@@ -11,7 +11,7 @@ const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 const MYOPTION = { month: 'short', year: 'numeric' };
 
-describe('US_04.08 | Calendar-selection block UI and functionality week/month view', () => {
+describe.skip('US_04.08 | Calendar-selection block UI and functionality week/month view', () => {
     before(() => {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);

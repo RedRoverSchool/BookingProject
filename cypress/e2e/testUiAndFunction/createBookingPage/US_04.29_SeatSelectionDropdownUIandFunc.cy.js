@@ -1,6 +1,8 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import getArray from "../../../support/utilities/getArray";
+import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -19,7 +21,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
         
         createBookingPage.clickCalendarNextButton()
-        createBookingPage.clickFridayButton()
+        //createBookingPage.clickFridayButton()
         cy.intercept('/tools/**').as('getTrip')
 		cy.wait('@getTrip')
         createBookingPage.clickFirstTripCard()
@@ -31,13 +33,10 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
             const ticketsAvailable = Number($tickets.text())
             
             createBookingPage.getSeatSelectionDropdownList().then(($el) => {
-                const passengersAmountArray = $el
-                    .toArray()
-                    .map(el => parseInt(el.innerText))
-
+                const passengersAmountArray = getArray($el)
                 const passengersAmountAvailable = passengersAmountArray[passengersAmountArray.length - 1]
     
-                expect(passengersAmountAvailable).to.equal(ticketsAvailable)
+                expect(parseInt(passengersAmountAvailable)).to.equal(ticketsAvailable)
             })
         })
     });
@@ -45,9 +44,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
     it('AT_04.29.02 | The list of passengers starts with "1 passenger" and each subsequent element increases by one', function() {
         
         createBookingPage.getSeatSelectionDropdownList().then(($el) => {
-            const passengersArray = $el
-                .toArray()
-                .map(el => el.innerText)
+            const passengersArray = getArray($el)
                 
             if (passengersArray[0] == this.createBookingPage.dropdowns.seatSelection.onePassenger) {
                 for (let i = passengersArray.length - 1; i > 0; i--) {
@@ -61,20 +58,17 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
 
     it('AT_04.29.03 | When selecting the required amount of passengers the corresponding number of seats in the "Seats table" will be rgb(157, 208, 157) color', function() {
         
-        createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then(($el) => {
-            const amountOfPass = $el
+        createBookingPage.getSeatSelectionDropdownList().then(($el) => {
+            const amountOfPass = getRandomElementOfArray($el)
              
             createBookingPage.getSeatSelectionDropdown()
                 .select(amountOfPass)
                 .should('have.value', parseInt(amountOfPass))
 
-            createBookingPage.getSelectedSeats().then(($cell) => {
-                expect($cell).to.have.css('background-color', this.createBookingPage.seatSelectionTable.selectedSeatColor)
+            createBookingPage.getSelectedSeats().then(($el) => {
+                expect($el).to.have.css('background-color', this.createBookingPage.seatSelectionTable.selectedSeatColor)
 
-                const selectedSeatsArr = $cell
-                    .toArray()
-                    .map(el => el.innerText)
- 
+                const selectedSeatsArr = getArray($el)
                 const selectedSeats = selectedSeatsArr.length
 
             expect(selectedSeats).to.equal(parseInt(amountOfPass))   

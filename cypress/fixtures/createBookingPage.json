@@ -89,7 +89,8 @@
     },
     "placeholder":{
         "name": "Passenger name",
-        "phone": "Phone number"
+        "phone": "Phone number",
+        "email": "Email"
     },
 
     "weekDayFields": {
@@ -104,7 +105,7 @@
 
     "notSelectedWeekBtnBackgroundColor": "rgb(255, 255, 255)",
 
-        "departureDate": "Departure date",
+    "departureDate": "Departure date",
 
     "tripClass": [
         "VIP bus",

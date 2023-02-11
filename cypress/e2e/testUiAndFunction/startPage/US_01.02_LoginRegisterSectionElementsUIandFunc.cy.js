@@ -52,6 +52,13 @@ describe('US_01.02 | Login-register section elements UI and functionality | Logi
             .getLoginPopupHeader()
             .should('include.text', this.startPage.headers.header_Login_Popup.text)
     });
+
+    it('AT_01.02.09 | Background of login button is white rgb(255, 255, 255)', function() {
+        startPage.getLoginButton()
+            .should('have.css', 'background').then($el => {
+                expect($el).to.contain(this.startPage.buttons.loginBtnBackgroundColor)
+            })
+    });
 });
 /*
     Login and registration tests are separated to avoid going to the "/" before each test.

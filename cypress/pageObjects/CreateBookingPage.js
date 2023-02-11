@@ -10,6 +10,7 @@ class CreateBookingPage {
     getDepartureStationSelectionDropdown = () => cy.get('select[name="departure"]');
     getArrivalStationSelectionDropdown = () => cy.get('select[name="destination"]');
     getArrivalSearchField = () => cy.get('.select2-search__field');
+    getLabelDepartureStation = () => cy.get('.departure-wrapper label')
 
     //Departure date
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
@@ -24,6 +25,7 @@ class CreateBookingPage {
     getSaturdayButton = () => cy.get('div .calendar-day-selection-wrapper :nth-child(6)');
     getLableDepartureDate = () => cy.get('#label-departure-date');
     getDepartureDate = () => cy.get('.popup-trip div:nth-child(5) span');
+    getDaySelected = () => cy.get('[class="day-wrapper selected"]');
 
     //Departure on
     getFirstTripCard = () => cy.get('div .trip:first-child');
@@ -36,17 +38,21 @@ class CreateBookingPage {
     getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
     getDepartureLatestButton = () => cy.get('button.trips-order-desc');
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
+    
+    //Arrival on
+    getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
+    getExtraPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]:not(.form-control:first-child)')
     getMainPassengerPhoneField = () => cy.get('.iti #passenger-phone');
     getLabelPassengerDetails = () => cy.get('.passenger-wrapper div.title label');
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
-    getPassengersDetailsDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
+    getPassengersDetailsDropdownList = () => cy.get('.passenger-wrapper .title select.passengers-amount option');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
     getFareTypeDropdown = () => cy.get('[id^="select2-passenger-fare"]');
-    getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
-    getMainPassengerFareTypeDropdownListOptions = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
+    getMainPassengerFareTypeDropdownSelect = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
+    getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
@@ -161,13 +167,13 @@ class CreateBookingPage {
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
-                cy.wrap($el).click({force: true})
+                cy.wrap($el).click({ force: true })
             }
         })
     };
 
     hoverNeedDepartureStation(nameStation) {
-        this.getCreateBookingHeader().click({force: true})
+        this.getCreateBookingHeader().click({ force: true })
         this.clickDepartureStationDropdown()
         this.getListDepartureStation().each(($el) => {
             if ($el.text() == nameStation) {
@@ -207,7 +213,7 @@ class CreateBookingPage {
     }
 
     selectChildFare() {
-        this.getAddedPassengerFareTypeDropdownListOptions().each(function($el) {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(function ($el) {
             if ($el.text() === 'Child') {
                 return cy.wrap($el).click()
             }
@@ -231,25 +237,46 @@ class CreateBookingPage {
     };
 
     completeMultipleNameFields() {
-     return this.getMainPassengerNameField().each(($el, index) => {
-        let defaultPassengerName = 'Passenger ' + index
-        if(index <= 0) {
-          cy.wrap($el).type(defaultPassengerName)
-        } else if (index <= 1) {
-          cy.wrap($el).type(defaultPassengerName)
-        } else if (index <= 2) {
-          cy.wrap($el).type(defaultPassengerName)
-        } else if (index <= 3) {
-          cy.wrap($el).type(defaultPassengerName)  
-        } else if (index <= 4) {
-          cy.wrap($el).type(defaultPassengerName)      
-        } else {
-          cy.wrap($el).type(defaultPassengerName)
-        }
-    })	
-}
+        return this.getMainPassengerNameField().each(($el, index) => {
+            let defaultPassengerName = 'Passenger ' + index
+            if (index <= 0) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else if (index <= 1) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else if (index <= 2) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else if (index <= 3) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else if (index <= 4) {
+                cy.wrap($el).type(defaultPassengerName)
+            } else {
+                cy.wrap($el).type(defaultPassengerName)
+            }
+        })
+    }
     clickBookTicketsBtn() {
         this.getBookTicketsButton().click();
+    }
+
+    getRequiredDefaulDay_DDFormat() {
+        let date = new Date();
+        let currentTailandDate = date.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok' });
+        let requiredDefaultDay = (+currentTailandDate + 2).toString();
+        return requiredDefaultDay;
+    }
+
+    getCurrentMonthAndYear() {
+        let date = new Date();
+        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return currentMonthAndYear;
+    }
+
+    selectAmountPassengersDetailsDropdown(amount) {                 
+        this.getPassengersDetailsDropdown().select(`${amount}`)       
+    }
+
+    clickCalendarDay(customDay) {
+        this.getCalendarDays().contains(customDay).click({ force: true })
     }
 }
 

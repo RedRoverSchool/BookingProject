@@ -44,29 +44,31 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
     it('AT_04.15.05 | Calendar label (between arrows) is visible and its format has the name of the current month and year (e.g. Jan 2023)', function () {
         createBookingPage.clickMonthBtn();
 
-        createBookingPage.getLabelCalendar().should('be.visible');
-
-        let date = new Date();
-        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-
-        createBookingPage.getLabelCalendar().should('have.text', currentMonthAndYear);
+        createBookingPage.getLabelCalendar()
+            .should('be.visible')
+            .and('have.text', createBookingPage.getCurrentMonthAndYear());
     })
 
-    it('AT_04.5.06 | Calendar-day-selection block (under the calendar label) is visible and has at least 28 days', function () {
+    it('AT_04.15.06 | Calendar-day-selection block (under the calendar label) is visible and has at least 28 days', function () {
         createBookingPage.getCalendarDays().each($el => {
             cy.wrap($el).should('be.visible');
         });
 
         createBookingPage.getCalendarDays().then($el => {
             let quantityOfDays = $el.length;
-            
             expect(quantityOfDays).to.be.at.least(28);
         })
     })
 
     it('AT_04.15.04| Departure date section has the label "Departure date"', function () {
-        createBookingPage.clickMonthBtn();
-
         createBookingPage.getLableDepartureDate().should('have.text', this.createBookingPage.departureDate);
     });
+
+    it('AT_04.15.07 | Selected day by default is according to requirements (current date by (GMT+7) + 2 days)', function () {
+        let requiredDay = createBookingPage.getRequiredDefaulDay_DDFormat()
+        createBookingPage.getDaySelected()
+            .invoke('text')
+            .should('eq', requiredDay);
+    })
+
 })
