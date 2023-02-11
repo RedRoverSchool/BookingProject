@@ -38,7 +38,7 @@ class CreateBookingPage {
     getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
     getDepartureLatestButton = () => cy.get('button.trips-order-desc');
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
-    
+
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
 
@@ -84,7 +84,7 @@ class CreateBookingPage {
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
     getReservationTicketButton = () => cy.get('.btn-reserve-tickets');
     getTotalPrice = () => cy.get('.footer-book-wrapper span.total-price')
-    getTotalPriceLabel = () => cy.get('.footer-book-wrapper > :first-child');    
+    getTotalPriceLabel = () => cy.get('.footer-book-wrapper > :first-child');
     getBookTicketsButton = () => cy.get('[class="btn btn-book"]')
 
     // Methods
@@ -269,8 +269,15 @@ class CreateBookingPage {
         return currentMonthAndYear;
     }
 
-    selectAmountPassengersDetailsDropdown(amount) {                 
-        this.getPassengersDetailsDropdown().select(`${amount}`)       
+    selectAmountPassengersDetailsDropdown(amount) {
+        this.getPassengersDetailsDropdown().select(`${amount}`)
+    }
+
+    getDefaultDayMonthYear() {      
+        let date = new Date();
+        let currentMonthYearTailand = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
+        let defaultDayMonthYear = this.getRequiredDefaulDay_DDFormat() + " " + currentMonthYearTailand;       
+        return defaultDayMonthYear;       
     }
 }
 
