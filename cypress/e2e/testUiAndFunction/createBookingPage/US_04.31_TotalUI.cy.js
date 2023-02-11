@@ -14,5 +14,4 @@ describe('US_04.31 | Total UI', () => {
     it('AT_04.31.01 | Verify that the text "Total " is visible', () => {
         createBookingPage.getTotalPriceLabel().should('be.visible');    
     });
-    });
 })
