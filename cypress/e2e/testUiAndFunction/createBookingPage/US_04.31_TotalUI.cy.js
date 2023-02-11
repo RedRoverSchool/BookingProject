@@ -19,7 +19,7 @@ describe('US_04.31 | Total UI', () => {
         createBookingPage.getTotalPrice().should('have.text', '');
     });    
     
-     it('AT_04.31.03 |  Verify that button “Reset” is visible and has a font color #00a65a)', () => {
+     it('AT_04.31.03 |  Verify that button “Reset” is visible )', () => {
         createBookingPage.getResetButton().should('be.visible')
      });    
 })
