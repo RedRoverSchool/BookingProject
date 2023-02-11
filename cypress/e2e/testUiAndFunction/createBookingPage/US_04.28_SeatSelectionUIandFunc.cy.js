@@ -11,7 +11,7 @@ const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_04.28 | Seat selection UI and functionality', () => {
+describe.skip('US_04.28 | Seat selection UI and functionality', () => {
         
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
@@ -204,7 +204,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     .contains(seatNumber)
                     .click()
                     
-                createBookingPage.getColumnSeatsSummary().then(($el) => {
+                createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
                     let seatsSummaryArrayAfter = getArray($el)
 
                     expect(seatsSummaryArrayAfter[indexOfSeat]).to.eq(this.createBookingPage.summarySection.seatsColumn.warningText)

@@ -44,6 +44,7 @@ class CreateBookingPage {
 
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
+    getExtraPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]:not(.form-control:first-child)')
     getMainPassengerPhoneField = () => cy.get('.iti #passenger-phone');
     getLabelPassengerDetails = () => cy.get('.passenger-wrapper div.title label');
     getPassengersDetailsDropdown = () => cy.get('.passenger-wrapper .title select.passengers-amount');
@@ -76,16 +77,19 @@ class CreateBookingPage {
     getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .available');
 
     // Summary section 
-    getColumnSeatsSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)')
+    getSeatsNumberColumnSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)')
     getRowsSummaryList = () => cy.get('.total-wrapper > div.total-row')
     getAmountOfPassengersInSummary = () => cy.get('.box-default .total-wrapper  .total-row')
+    getPricesSummaryList = () => cy.get('.total-wrapper > div.total-row span')
+    getTotalPriceSummary = () => cy.get('.box-footer span.total-price.right')
 
     //Total - Footer section                  
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
     getReservationTicketButton = () => cy.get('.btn-reserve-tickets');
     getTotalPrice = () => cy.get('.footer-book-wrapper span.total-price')
     getTotalPriceLabel = () => cy.get('.footer-book-wrapper > :first-child');
-    getBookTicketsButton = () => cy.get('[class="btn btn-book"]')
+    getBookTicketsButton = () => cy.get('[class="btn btn-book"]');
+    getResetButton = () => cy.get('[class="btn btn-reset-form"]');
 
     // Methods
     clickCalendarNextButton() {
@@ -271,6 +275,10 @@ class CreateBookingPage {
 
     selectAmountPassengersDetailsDropdown(amount) {
         this.getPassengersDetailsDropdown().select(`${amount}`)
+    }
+
+    clickCalendarDay(customDay) {
+        this.getCalendarDays().contains(customDay).click({ force: true })
     }
 
 }
