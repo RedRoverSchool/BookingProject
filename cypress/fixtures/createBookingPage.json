@@ -123,5 +123,7 @@
 
     "greenColor": "rgb(0, 166, 90)",
 
-    "whiteColor": "rgb(255, 255, 255)"
+    "whiteColor": "rgb(255, 255, 255)",
+
+    "earliestBtnText": "Earliest"
 }
