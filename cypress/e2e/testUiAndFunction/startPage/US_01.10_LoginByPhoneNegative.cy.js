@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 const randomPhoneNumber = faker.phone.number('##########');
-const randomCodeNumber = faker.phone.number('###');
+const randomCodeNumber =  faker.random.alphaNumeric(3);
 
 describe('US_01.10 | Login by phone negative', () => {
     before(() => {
