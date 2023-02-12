@@ -287,6 +287,12 @@ class CreateBookingPage {
         const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
         return formattedDate;   
     }
+    getDefaultDayMonthYear() {      
+        let date = new Date();
+        let currentMonthYearTailand = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
+        let defaultDayMonthYear = this.getRequiredDefaulDay_DDFormat() + " " + currentMonthYearTailand;       
+        return defaultDayMonthYear;       
+    }
 
     getPreviousMonth(date) {
         let prevMonth = date.getMonth() - 1;

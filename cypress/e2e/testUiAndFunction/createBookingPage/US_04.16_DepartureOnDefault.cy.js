@@ -18,10 +18,15 @@ describe('US_04.16 | Departure On UI by default', () => {
         })
     })
 
-    it('AT_04.16.01 | Date" label in "Departure on" section is visible and its text color is green (color: #00a65a - rgb(0, 166, 90))', function() {    
+    it('AT_04.16.01 | "Selected Date" label in "Departure on" section is visible and its text color is green (color: #00a65a - rgb(0, 166, 90))', function() {    
         createBookingPage.getLabelDepartureOnDate()
             .should('be.visible')            
             .and('have.css', 'color', this.createBookingPage.dateLabelDepartureOnSectionColor);        
+    })
+
+    it('AT_04.16.02 | Selected date label near "Departure on" section name has format DD MM YYYY (for example, 14 Jan 2023)', () => {
+        createBookingPage.getLabelDepartureOnDate()
+        .should('have.text', createBookingPage.getDefaultDayMonthYear());
     })
 
 });
