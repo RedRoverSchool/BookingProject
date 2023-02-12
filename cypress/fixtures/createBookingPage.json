@@ -123,5 +123,7 @@
 
     "timeFormat": "/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/",
 
-    "nameOfDay":["M", "T", "W", "T", "F", "S", "S"]
+    "nameOfDay":["M", "T", "W", "T", "F", "S", "S"],
+
+    "dateLabelDepartureOnSectionColor": "rgb(0, 166, 90)"
 }
