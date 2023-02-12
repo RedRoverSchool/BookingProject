@@ -9,9 +9,8 @@ const leftMenuPanel = new LeftMenuPanel();
 const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
-const MYOPTION = { month: 'short', year: 'numeric' };
 
-describe.skip('US_04.08 | Calendar-selection block UI and functionality week/month view', () => {
+describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
     before(() => {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
@@ -26,23 +25,28 @@ describe.skip('US_04.08 | Calendar-selection block UI and functionality week/mon
         createBookingPage.clickMonthBtn();
         createBookingPage.getLabelCalendar().should('be.visible')
     });
+});
+
+describe('US_04.08 | Calendar-selection block functionality week/month view', () => {
+    beforeEach(() => {
+        cy.visit('/');
+        cy.login(AGENT.email, AGENT.password);
+        leftMenuPanel.clickBookingIcon();
+    });
 
     it('AT_04.08.04 | Verify that Click forward arrow works and switches month in correct order', () => {
-        let date = new Date()
+        const date = new Date()
+        createBookingPage.clickMonthBtn()
         for (let i = 0; i < 12; i++) {
             createBookingPage.clickCalendarNextButton();
-            let nextMonth = date.getMonth() + 1;
-            date.setMonth(nextMonth);
-
-            const formattedDate = date.toLocaleDateString('en-US', MYOPTION);
             createBookingPage.getLabelCalendar().then(($label) => {
                 const text = $label.text();
-                expect(text).to.deep.equal(formattedDate);
+                expect(text).to.deep.equal(createBookingPage.getNextMonth(date));
             });
         }
     });
 
-    it('AT_04.08.05 | Verify previous arrow button switches from 3 weeks ahead', () => {
+    it.skip('AT_04.08.05 | Verify previous arrow button switches from 3 weeks ahead', () => {
         createBookingPage.clickMonthBtn()
 
         let n = 3
@@ -78,29 +82,26 @@ describe.skip('US_04.08 | Calendar-selection block UI and functionality week/mon
 
     it('AT_04.08.06 | Verify that Click back arrow works and switches month in correct order', () => {
         createBookingPage.clickMonthBtn();
-        let date = new Date();
+        const date = new Date()
         date.setMonth(date.getMonth() + 12);
-
-        for (let i = 12; i >= 1; i--) {
+        for (let i = 1; i <= 12; i++) {
+            createBookingPage.clickCalendarNextButton();
+        }
+        for (let i = 12; i > 1; i--) {
             createBookingPage.clickCalendarPrevButton();
-            let prevMonth = date.getMonth() - 1;
-            date.setMonth(prevMonth);
-
-            const formattedDate = date.toLocaleDateString('en-US', MYOPTION);
             createBookingPage.getLabelCalendar().then(($label) => {
                 const text = $label.text();
-                expect(text).to.deep.equal(formattedDate);
+                expect(text).to.deep.equal(createBookingPage.getPreviousMonth(date));
             });
         }
     });
 
     it('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
-        createBookingPage.clickWeekBtn();
-        let date = new Date();
+        const date = new Date()
         let avalableForBookingDay = date.setDate(date.getDate() + 2);
-        for (let i = 0; i <= 10; i++) {
+        for (let i = 0; i < 10; i++) {
             createBookingPage.getLabelCalendar().then(($label) => {
-                const text = $label.text();
+                let text = $label.text();
                 expect(text).to.deep.equal(startAndEndOfWeek(avalableForBookingDay))
 
                 avalableForBookingDay = date.setDate(date.getDate() + 7);

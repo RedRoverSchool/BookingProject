@@ -280,6 +280,19 @@ class CreateBookingPage {
     clickCalendarDay(customDay) {
         this.getCalendarDays().contains(customDay).click({ force: true })
     }
-}
 
+    getNextMonth(date) {
+        let getNextMonth = date.getMonth() + 1;
+        const nextMonth = date.setMonth(getNextMonth);
+        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return formattedDate;   
+    }
+
+    getPreviousMonth(date) {
+        let prevMonth = date.getMonth() - 1;
+        date.setMonth(prevMonth);
+        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return formattedDate;
+    }
+}
 export default CreateBookingPage; 
