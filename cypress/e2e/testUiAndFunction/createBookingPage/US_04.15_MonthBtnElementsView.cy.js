@@ -22,13 +22,13 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
         createBookingPage.getMonthBtn()
             .should('be.visible')
             .and('have.class', 'selected')
-            .and('have.css', 'background-color', this.createBookingPage.selectedMonthBtnBackgroundColor);
+            .and('have.css', 'background-color', this.createBookingPage.greenColor);
     })
 
     it('AT_04.15.02 | While selected Month button, the Week button does not have the attribute "selected" and its background color is rgb(255, 255, 255)', function () {
         createBookingPage.getWeekButton()
             .should('not.have.class', 'selected')
-            .and('have.css', 'background-color', this.createBookingPage.notSelectedWeekBtnBackgroundColor);
+            .and('have.css', 'background-color', this.createBookingPage.whiteColor);
     })
 
     it('AT_04.15.03 | Month dropdown menu (to the left of the Week button) is visible and available only after the Month button is chosen', function () {

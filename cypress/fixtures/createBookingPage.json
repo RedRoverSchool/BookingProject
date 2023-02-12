@@ -97,13 +97,9 @@
          "quantity": "7"
     }, 
 
-    "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)",
-
     "selectedDepartureStationBackgroundColor": "rgb(221, 221, 221)",
 
     "hoveredDepartureStationBackgroundColor": "rgb(0, 166, 90)",
-
-    "notSelectedWeekBtnBackgroundColor": "rgb(255, 255, 255)",
 
     "departureDate": "Departure date",
 
@@ -125,9 +121,7 @@
 
     "nameOfDay":["M", "T", "W", "T", "F", "S", "S"],
 
-    "dateLabelDepartureOnSectionColor": "rgb(0, 166, 90)",
+    "greenColor": "rgb(0, 166, 90)",
 
-    "btnEarliestSelectedBackgroundColor": "rgb(0, 166, 90)",
-
-    "btnEarliestSelectedTextColor": "rgb(255,255,255)"
+    "whiteColor": "rgb(255, 255, 255)"
 }
