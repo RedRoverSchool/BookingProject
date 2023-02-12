@@ -22,7 +22,7 @@ describe('US_01.10 | Login by phone negative', () => {
     })
 
     it('AT_01.10.01 | Verify that registering is not possible with empty "Country code" input', function () {
-        loginPopup.enterPhoneNumber(this.startPage.data.phoneNumber.code)
+        loginPopup.enterPhoneNumber(randomPhoneNumber)
         loginPopup.clickRequestCodeButton();
         loginPopup.getMessageAlert().should('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
     });
