@@ -25,4 +25,11 @@ describe('US_01.10 | Login by phone negative', () => {
         loginPopup.clickRequestCodeButton();
         loginPopup.getMessageAlert().should('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
     });
+
+    it('AT_01.10.02 | Verify that registering is not possible with empty "Phone number" input', function () {
+        loginPopup.getPhoneNumberInput().clear()
+        loginPopup.enterCountryCode(this.startPage.data.phoneNumber.code)
+        loginPopup.clickRequestCodeButton();
+        loginPopup.getMessageAlert().should('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
+    });
 })
