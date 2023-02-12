@@ -27,15 +27,12 @@ function testCreatingReservationForPassengerType(passengerName, dropdownSelectio
     })
 };
 
-describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
-
-    before(function () {
-        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
-    })
-
+describe('US_AC.05 | Create reservation for 1 passenger', () => {
+ 
     beforeEach(function () {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)
+        cy.visit('/');
+        cy.login(AGENT.email, AGENT.password);
+        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
 
         createBookingPage.clickCalendarNextButton();
         createBookingPage.clickFridayButton();
