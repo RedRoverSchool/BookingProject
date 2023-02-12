@@ -281,6 +281,12 @@ class CreateBookingPage {
         this.getCalendarDays().contains(customDay).click({ force: true })
     }
 
+    getDefaultDayMonthYear() {      
+        let date = new Date();
+        let currentMonthYearTailand = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
+        let defaultDayMonthYear = this.getRequiredDefaulDay_DDFormat() + " " + currentMonthYearTailand;       
+        return defaultDayMonthYear;       
+    }
 }
 
 export default CreateBookingPage; 
