@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 const randomPhoneNumber = faker.phone.number('##########');
-const randomCodeNumber =  faker.random.alphaNumeric(3);
+
 
 describe('US_01.10 | Login by phone negative', () => {
     before(() => {
@@ -22,13 +22,13 @@ describe('US_01.10 | Login by phone negative', () => {
     })
 
     it('AT_01.10.01 | Verify that registering is not possible with empty "Country code" input', function () {
-        loginPopup.enterPhoneNumber(randomPhoneNumber)
+        loginPopup.enterPhoneNumber(this.startPage.data.phoneNumber.code)
         loginPopup.clickRequestCodeButton();
         loginPopup.getMessageAlert().should('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
     });
 
     it('AT_01.10.02 | Verify that registering is not possible with empty Phone number input', function () {
-        loginPopup.enterCountryCode(randomCodeNumber)
+        loginPopup.enterCountryCode('66')
         loginPopup.clickRequestCodeButton();
         loginPopup.getMessageAlert().should('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
     });
