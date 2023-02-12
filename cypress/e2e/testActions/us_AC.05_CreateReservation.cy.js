@@ -27,21 +27,18 @@ function testCreatingReservationForPassengerType(passengerName, dropdownSelectio
     })
 };
 
-describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
-
-    before(function () {
-        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
-    })
+describe('US_AC.05 | Create reservation for 1 passenger', () => {
 
     beforeEach(function () {
+        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
+
         cy.visit('/')
         cy.login(AGENT.email, AGENT.password)
 
         createBookingPage.clickCalendarNextButton();
         createBookingPage.clickFridayButton();
 
-        cy.intercept('/tools/**').as('getTrip')
-        cy.wait('@getTrip')
+        waitForToolsPing()
 
         createBookingPage.clickFirstTripCard();
     });
@@ -56,11 +53,9 @@ describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
         testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name, 'child', 'Child:')
     });
 
-
     it('AT_AC.05.01| Create reservation for 1 passenger - Adult', function () {
         testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'adult', 'Adult:');
     });
-
 
     it('AT_AC.05.03| Create reservation for 1 passenger - Elder', function () {
         testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'elder', 'Elder:');
