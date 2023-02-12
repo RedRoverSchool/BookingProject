@@ -2,6 +2,7 @@
 
 import CreateBookingPage from "../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../pageObjects/BookingPopup";
+import waitForToolsPing from '../../support/utilities/waitForToolsPing'
 
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
