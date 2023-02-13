@@ -80,13 +80,13 @@ describe('US_01.08 | Login by phone number tab UI', () => {
 
     it('AT_01.08.10 | Verify "Phone number" label has color - #aaa', function () {
         loginPopup
-        .getPhoneNumberInputFieldLabel()
+        .getPhoneNumberInputLabel()
         .should('have.css','color', this.colors.greyPhoneLabel)
     });
 
     it('AT_01.08.11 | Verify Phone number label has text "Phone number"', function() {
         loginPopup
-            .getPhoneNumberInputFieldLabel()
+            .getPhoneNumberInputLabel()
             .should('have.text', this.startPage.label.labelPhoneNumber.text)
     });
 
@@ -100,7 +100,7 @@ describe('US_01.08 | Login by phone number tab UI', () => {
     
     it('AT_01.08.14 | Insure Popup background color is #fff', function () {
         loginPopup
-        .getModulFormEntairely()
+        .getLoginPopupModal()
         .should('have.css', 'background-color', this.colors.white)
     });
 

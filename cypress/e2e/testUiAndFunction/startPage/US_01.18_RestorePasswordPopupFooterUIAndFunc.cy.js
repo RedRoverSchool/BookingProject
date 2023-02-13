@@ -20,7 +20,7 @@ describe ('US 01.18 | Restore password Popup > Footer UI and functionality', () 
     it('AT_01.18.01 | Verify the link "Register" is clickable and redirects to the "Register agent account" popup', function () {
         restorePopup.clickRegisterLink();
         registerPopup
-            .getRegisterAgentAccountHeader()
+            .getRegisterPopupHeader()
             .should('include.text', this.startPage.headers.registerAgentAccount)
     })
 })

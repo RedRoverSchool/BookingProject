@@ -25,7 +25,7 @@ describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
     it('AT_01.04.03 | Verify the functionality of the Register link', function() {
         loginPopup.clickRegisterLink()
 
-        registerPopup.getRegisterAgentAccountHeader()
+        registerPopup.getRegisterPopupHeader()
             .should('have.text', this.startPage.headers.registerAgentAccount)
     });
 

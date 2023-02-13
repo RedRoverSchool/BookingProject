@@ -32,7 +32,7 @@ describe('US_01.15 | Register Agent Negative', function () {
     });
 
     it('AT_01.15.01 | Error message is displayed when trying to register without entering name', function () {
-        registerPopup.getNameInputField().clear()
+        registerPopup.getNameInput().clear()
         registerPopup.enterCompanyName(randomCompanyName)
         registerPopup.enterEmail(randomEmail)
         registerPopup.enterPhoneNumber(randomPhoneNumber)
@@ -45,7 +45,7 @@ describe('US_01.15 | Register Agent Negative', function () {
 
     it('AT_01.15.02 | Error message is displayed when trying to register without company name', function () {
         registerPopup.enterName(randomFullName)
-        registerPopup.getCompanyInputField().clear()
+        registerPopup.getCompanyInput().clear()
         registerPopup.enterEmail(randomEmail)
         registerPopup.enterPhoneNumber(randomPhoneNumber)
         registerPopup.clickRegisterButton()
@@ -58,7 +58,7 @@ describe('US_01.15 | Register Agent Negative', function () {
     it('AT_01.15.03 | Error message is displayed when trying to register without email', function () {
         registerPopup.enterName(randomFullName)
         registerPopup.enterCompanyName(randomCompanyName)
-        registerPopup.getEmailInputField().clear()
+        registerPopup.getEmailInput().clear()
         registerPopup.enterPhoneNumber(randomPhoneNumber)
         registerPopup.clickRegisterButton()
         registerPopup
@@ -82,7 +82,7 @@ describe('US_01.15 | Register Agent Negative', function () {
     it('AT_01.15.04 | Error message is displayed when trying to register without phone number', function () {
         registerPopup.enterName(randomFullName)
         registerPopup.enterCompanyName(randomCompanyName)
-        registerPopup.getPhoneInputField().clear()
+        registerPopup.getPhoneInput().clear()
         registerPopup.enterEmail(randomEmail)
         registerPopup.clickRegisterButton()
         registerPopup.getErrorMessage()
