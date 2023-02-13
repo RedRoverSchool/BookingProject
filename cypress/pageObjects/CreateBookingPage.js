@@ -36,9 +36,9 @@ class CreateBookingPage {
     getPriceOfTicket = () => cy.get('.vehclass-ferry.selected .price');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
-    getDepartureLatestButton = () => cy.get('button.trips-order-desc');
+    getBtnLatest = () => cy.get('button.trips-order-desc');
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
-    getBtnDepartureErliest = () => cy.get('button.trips-order-asc');
+    getBtnErliest = () => cy.get('button.trips-order-asc');
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
@@ -150,7 +150,7 @@ class CreateBookingPage {
     };
 
     clickDepartureLatestButton() {
-        this.getDepartureLatestButton().click({ force: true })
+        this.getBtnLatest().click({ force: true })
     };
 
     getRandomIndexOfMonth() {
