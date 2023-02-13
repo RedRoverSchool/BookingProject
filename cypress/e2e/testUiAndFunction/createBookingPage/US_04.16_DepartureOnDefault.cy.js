@@ -43,7 +43,7 @@ describe('US_04.16 | Departure On UI by default', () => {
     })
 
     it('AT_04.16.05 | "Latest" button is visible, unselected, and has white (#FFF) background color', function() {
-        createBookingPage.getBtnLatest()
+        createBookingPage.getDepartureLatestButton()
         .should('be.visible')
         .and('not.be.selected')
         .and('have.css', 'background-color', this.createBookingPage.whiteColor);
