@@ -17,8 +17,8 @@ describe('US_01.12 | Footer UI and functionality', () => {
 
     it('AT_01.12.01 | After clicking "Forgot your password?" link the Registered Agent Account Popup window is closed and "Restore password" popup window appears', () => {
         registerPopup.clickForgotYourPasswordLink()
-        registerPopup.getRegisterAgentAccountHeader().should('not.be.visible')
-        restorePopup.getRestorePasswordHeader().should('be.visible')
+        registerPopup.getRegisterPopupHeader().should('not.be.visible')
+        restorePopup.getRestorePopupHeader().should('be.visible')
     })
 
     it('AT_01.12.02 | Verify Footer elements are visible' , () => {

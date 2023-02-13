@@ -21,36 +21,36 @@ describe('US_01.11 | Header elements', () => {
 
     it('AT_01.11.01 | Verify the title `Register agent account` are visible in the header', function () {
         registerPopup
-            .getRegisterAgentAccountHeader()
+            .getRegisterPopupHeader()
             .should('be.visible')
             .and('have.text', this.startPage.headers.registerAgentAccount);
     });
 
     it('AT_01.11.02 | Verify the title `Register agent account` has rgb(102, 102, 102) color, and 30px font-size', function () {
         registerPopup
-            .getRegisterAgentAccountHeader()
+            .getRegisterPopupHeader()
             .should('have.css','color', this.startPage.headers.header_Register_Popup.color);
         registerPopup
-            .getRegisterAgentAccountHeader()
+            .getRegisterPopupHeader()
             .should('have.css','font-size', this.startPage.headers.header_Register_Popup.front_size);
     });
 
     it('AT_01.11.03 | Verify that the X button is visible in the top right corner of the header', function () {
         registerPopup
-            .getPopupCloseButton()
+            .getRegisterPopupCloseButton()
             .should('be.visible')
             .and('have.css','position', 'static')
     });
 
     it('AT_01.11.04 | Verify the functionality of the close button', () => {
         registerPopup
-            .getRegisterModalPopup()
+            .getRegisterPopupModal()
             .should('have.attr', 'aria-hidden', 'false')
         registerPopup
             .clickRegisterPopupCloseButton()
 
         registerPopup
-            .getRegisterModalPopup()
+            .getRegisterPopupModal()
             .should('have.attr', 'aria-hidden', 'true')
     });
 });

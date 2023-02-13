@@ -83,7 +83,7 @@ describe('US_01.05 | Login By Email Tab UI', () => {
 
     it('AT_01.05.11 | Verify Popup background color is #fff', function () {
         loginPopup
-            .getModulFormEntairely()
+            .getLoginPopupModal()
             .should('have.css', 'background-color', this.startPage.background);
     });
 });
