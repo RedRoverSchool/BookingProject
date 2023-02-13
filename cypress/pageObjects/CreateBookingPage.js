@@ -65,7 +65,7 @@ class CreateBookingPage {
     getPassengerDetailsAssignedSeats = () => cy.get('span.seat-number')
     getSelectedDialCode = () => cy.get('.iti__selected-dial-code');
     getDialCodeArrow = () => cy.get('.iti__selected-flag');
-    getPlaceholderBookingNotes = () => cy.get('textarea#booking_notes')
+    getNotesInputField = () => cy.get('textarea#booking_notes')
 
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
