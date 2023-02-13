@@ -43,4 +43,14 @@ describe('US_04.26 | Passengers details functionality - Multiple passengers', ()
                 .and('be.visible')
         })
     });
+
+    it.only('AT_04.26.03 | Verify the agent is able to select the second and following passenger"s fare type', function() {
+
+        createBookingPage.getExtraFareTypeDrop().each($el => {
+            cy.wrap($el).click().select(this.createBookingPage.fareType.fareTypesNames[1])
+
+            cy.wrap($el).should('have.text', this.createBookingPage.fareType.fareTypesNames[1])
+                .and('be.visible')
+        })
+    });
 });
