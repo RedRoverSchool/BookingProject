@@ -36,4 +36,10 @@ describe('US_04.16 | Departure On UI by default', () => {
             .and('have.css', 'background-color', this.createBookingPage.greenColor);
     })
 
+    it('AT_04.16.04 | "Earliest" button has text "Earliest" in white color rgb(255, 255, 255)', function() {
+        createBookingPage.getBtnDepartureErliest()
+        .should('have.text', this.createBookingPage.earliestBtnText)
+        .and('have.css', 'color', this.createBookingPage.whiteColor);
+    })
+
 });

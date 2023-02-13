@@ -28,4 +28,8 @@ describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
         registerPopup.getRegisterAgentAccountHeader()
             .should('have.text', this.startPage.headers.registerAgentAccount)
     });
+
+    it('AT_01.04.02 | Verify the link Register is visible in the footer', () => {
+        loginPopup.getRegisterLink().should('be.visible')
+    });
 })
