@@ -7,7 +7,7 @@ const AGENT = Cypress.env('agent');
 
 describe('US_04.26 | Passengers details functionality - Multiple passengers', () => { 
 
-    const chosenAmountPassengers = 4    
+    const chosenAmountPassengers = 4
 
     before(() => {
         cy.visit('/');
@@ -44,13 +44,14 @@ describe('US_04.26 | Passengers details functionality - Multiple passengers', ()
         })
     });
 
-    it.only('AT_04.26.03 | Verify the agent is able to select the second and following passenger"s fare type', function() {
+    it('AT_04.26.03 | Verify the agent is able to select the second and following passenger"s fare type', function() {
+        createBookingPage.getExtraFareTypeData().each($el => {
+            cy.wrap($el).select(this.createBookingPage.dropdowns.fareType.fareTypesNames[1], { force: true })         
+        })
 
         createBookingPage.getExtraFareTypeDrop().each($el => {
-            cy.wrap($el).click().select(this.createBookingPage.fareType.fareTypesNames[1])
-
-            cy.wrap($el).should('have.text', this.createBookingPage.fareType.fareTypesNames[1])
-                .and('be.visible')
+            cy.wrap($el).should('have.text', this.createBookingPage.dropdowns.fareType.fareTypesNames[1])
+            .and('be.visible')
         })
     });
 });
