@@ -15,13 +15,17 @@ describe('US_04.16 | Departure On UI by default', () => {
     beforeEach(function () {
         cy.fixture('createBookingPage.json').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        })
-    })
+        });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
+    });
 
     it('AT_04.16.01 | "Selected Date" label in "Departure on" section is visible and its text color is green (color: #00a65a - rgb(0, 166, 90))', function () {
         createBookingPage.getLabelDepartureOnDate()
             .should('be.visible')
-            .and('have.css', 'color', this.createBookingPage.greenColor);
+            .and('have.css', 'color', this.colors.greenBookingPage);
     })
 
     it('AT_04.16.02 | Selected date label near "Departure on" section name has format DD MM YYYY (for example, 14 Jan 2023)', () => {
@@ -33,13 +37,13 @@ describe('US_04.16 | Departure On UI by default', () => {
         createBookingPage.getBtnDepartureErliest()
             .should('be.visible')
             .and('have.class', 'selected')
-            .and('have.css', 'background-color', this.createBookingPage.greenColor);
+            .and('have.css', 'background-color', this.colors.greenBookingPage);
     })
 
     it('AT_04.16.04 | "Earliest" button has text "Earliest" in white color rgb(255, 255, 255)', function() {
         createBookingPage.getBtnDepartureErliest()
         .should('have.text', this.createBookingPage.earliestBtnText)
-        .and('have.css', 'color', this.createBookingPage.whiteColor);
+        .and('have.css', 'color', this.colors.white);
     })
 
 });

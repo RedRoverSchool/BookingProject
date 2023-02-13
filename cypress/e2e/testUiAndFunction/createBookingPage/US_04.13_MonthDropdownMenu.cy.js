@@ -17,7 +17,11 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        })
+        });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
     })
 
     it('AT_04.13.01 | Month dropdown menu (to the left of the Week button) is visible and has 13 months for selection', () => {
@@ -82,7 +86,7 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
 
     it('AT_04.13.07 | Verify that all months in the Month dropdown menu have the color of their font #00a65a', function () {
         createBookingPage.getMonthDropdownList().each($el => {
-            cy.wrap($el).should('have.css', 'color', this.createBookingPage.calendarMonth.colorText)
+            cy.wrap($el).should('have.css', 'color', this.colors.greenBookingPage)
         })
     })
 })

@@ -17,6 +17,10 @@ describe('US_01.11 | Header elements', () => {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
         });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
     });
 
     it('AT_01.11.01 | Verify the title `Register agent account` are visible in the header', function () {
@@ -29,7 +33,7 @@ describe('US_01.11 | Header elements', () => {
     it('AT_01.11.02 | Verify the title `Register agent account` has rgb(102, 102, 102) color, and 30px font-size', function () {
         registerPopup
             .getRegisterAgentAccountHeader()
-            .should('have.css','color', this.startPage.headers.header_Register_Popup.color);
+            .should('have.css','color', this.colors.greyHeader);
         registerPopup
             .getRegisterAgentAccountHeader()
             .should('have.css','font-size', this.startPage.headers.header_Register_Popup.front_size);

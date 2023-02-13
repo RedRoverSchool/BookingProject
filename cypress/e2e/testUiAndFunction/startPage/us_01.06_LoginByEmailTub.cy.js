@@ -16,8 +16,8 @@ describe('US_01.06 | Login by email tub functionality', () => {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage
         });
-        cy.fixture('startPage').then(startPage => {
-            this.startPage = startPage
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
         });
         cy.visit('/');  
     });
@@ -29,7 +29,7 @@ describe('US_01.06 | Login by email tub functionality', () => {
 
     it('AT_01.06.02 | Color of Sign In Button', function () {
         startPage.clickLoginButton();
-        loginPopup.getByEmailSignInButton().should('have.css','color', this.startPage.buttons.signInBtnTextColor)
+        loginPopup.getByEmailSignInButton().should('have.css','color', this.colors.greenPopup)
     });
 });
 

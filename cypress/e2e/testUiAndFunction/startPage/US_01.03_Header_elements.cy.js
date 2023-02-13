@@ -16,6 +16,10 @@ describe('US_01.03 |  Header elements', () => {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
         });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
     });
 
 
@@ -24,7 +28,7 @@ describe('US_01.03 |  Header elements', () => {
             .getLoginPopupHeader()
             .should('be.visible')
             .and('include.text', this.startPage.headers.header_Login_Popup.text)
-            .and('have.css', 'color', this.startPage.headers.header_Login_Popup.color)
+            .and('have.css', 'color', this.colors.greyHeader)
             .and('have.css', 'font-size', this.startPage.headers.header_Login_Popup.font_size)
     });
 
