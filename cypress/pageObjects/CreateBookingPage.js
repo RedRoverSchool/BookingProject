@@ -38,6 +38,7 @@ class CreateBookingPage {
     getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
     getDepartureLatestButton = () => cy.get('button.trips-order-desc');
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
+    getBtnErliest = () => cy.get('button.trips-order-asc');
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
@@ -103,7 +104,7 @@ class CreateBookingPage {
     };
 
     clickFirstTripCard() {
-        this.getFirstTripCard().click()
+        this.getFirstTripCard().click({ force: true })
     };
 
     clickSecondTripCard() {
@@ -283,6 +284,24 @@ class CreateBookingPage {
         this.getCalendarDays().contains(customDay).click({ force: true })
     }
 
-}
+    getNextMonth(date) {
+        let getNextMonth = date.getMonth() + 1;
+        const nextMonth = date.setMonth(getNextMonth);
+        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return formattedDate;   
+    }
+    getDefaultDayMonthYear() {      
+        let date = new Date();
+        let currentMonthYearTailand = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
+        let defaultDayMonthYear = this.getRequiredDefaulDay_DDFormat() + " " + currentMonthYearTailand;       
+        return defaultDayMonthYear;       
+    }
 
+    getPreviousMonth(date) {
+        let prevMonth = date.getMonth() - 1;
+        date.setMonth(prevMonth);
+        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return formattedDate;
+    }
+}
 export default CreateBookingPage; 

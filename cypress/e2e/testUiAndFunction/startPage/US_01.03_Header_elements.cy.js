@@ -33,7 +33,7 @@ describe('US_01.03 |  Header elements', () => {
         loginPopup
             .getLoginPopupHeader()
             .should('include.text', this.startPage.headers.header_Login_Popup.text);
-        loginPopup.clickCloseBtn();
+        loginPopup.clickLoginPopupCloseButton();
         loginPopup.getLoginPopupHeader().should('not.be.visible');
     });
 })

@@ -84,7 +84,7 @@ describe('US_01.02 | Login-register section elements UI and functionality | Regi
 
     it('AT_01.02.05 | Verify Link "Register account now" is visible, clickable and opens registration pop up', function() {
         startPage.clickRegisterAccountLink()
-        registerPopup.getRegisterAgentAccountHeader().should('have.text', this.startPage.headers.registerAgentAccount);
+        registerPopup.getRegisterPopupHeader().should('have.text', this.startPage.headers.registerAgentAccount);
     });
 
 });
