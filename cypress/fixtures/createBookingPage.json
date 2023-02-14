@@ -125,5 +125,7 @@
 
     "whiteColor": "rgb(255, 255, 255)",
 
-    "earliestBtnText": "Earliest"
+    "earliestBtnText": "Earliest",
+
+    "latestBtnText": "Latest"
 }
