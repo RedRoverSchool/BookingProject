@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -12,25 +13,25 @@ function createReservation(passengerName) {
   createBookingPage.clickCalendarNextButton();
   createBookingPage.clickSaturdayButton();
 
-  cy.intercept("/tools/**").as("getTrip");
-  cy.wait("@getTrip");
+  waitForToolsPing();
 
   createBookingPage.clickFirstTripCard();
+  waitForToolsPing();
   createBookingPage.typeIntoMainPassengerNameField(passengerName);
   createBookingPage.clickReservationTicketArrow();
   createBookingPage.clickReservationTicketButton();
 }
 
-describe.skip("US_05.23 | Trip detais UI", () => {
+describe("US_05.23 | Trip detais UI", () => {
   beforeEach(function () {
     cy.fixture("createBookingPage").then((createBookingPage) => {
       this.createBookingPage = createBookingPage;
     });
+
+    cy.cleanCiData(MANAGER.email, MANAGER.password, CI);
   });
 
   beforeEach(function () {
-    cy.cleanCiData(MANAGER.email, MANAGER.password, CI);
-
     cy.visit("/");
     cy.login(AGENT.email, AGENT.password);
 
@@ -40,7 +41,7 @@ describe.skip("US_05.23 | Trip detais UI", () => {
   });
 
   it('AT_05.23.01 | Verify departure time is in 24-hour notation HH:MM', function () {
-    const timeFormat = createBookingPage.timeFormat;
+    const timeFormat = this.createBookingPage.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
     createBookingPage.getDepartureTime().then(($span) => {
@@ -50,7 +51,7 @@ describe.skip("US_05.23 | Trip detais UI", () => {
   });
 
   it('AT_05.23.02 | Verify departure date has format DD-MM-YYYY', function () {
-    const dateFormat = createBookingPage.dateFormat;
+    const dateFormat = this.createBookingPage.dateFormat;
     const dateFormatRegExp = new RegExp(dateFormat);
 
     createBookingPage.getDepartureDate().then(($span) => {
@@ -60,7 +61,7 @@ describe.skip("US_05.23 | Trip detais UI", () => {
   });
 
   it('AT_05.23.03 | Verify arrival time is in 24-hour notation HH:MM', function () {
-    const timeFormat = createBookingPage.timeFormat;
+    const timeFormat = this.createBookingPage.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
     createBookingPage.getArrivalTime().then(($span) => {

@@ -13,7 +13,11 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
     beforeEach(function() {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        })
+        });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
     });
 
     before(function() {
@@ -66,7 +70,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
                 .should('have.value', parseInt(amountOfPass))
 
             createBookingPage.getSelectedSeats().then(($el) => {
-                expect($el).to.have.css('background-color', this.createBookingPage.seatSelectionTable.selectedSeatColor)
+                expect($el).to.have.css('background-color', this.colors.greenSeat)
 
                 const selectedSeatsArr = getArray($el)
                 const selectedSeats = selectedSeatsArr.length

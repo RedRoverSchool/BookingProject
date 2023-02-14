@@ -51,6 +51,7 @@
                 "By departure date",
                 "By purchase date"
             ]
-        }        
+        },
+        "statusNoResult": "No results found"        
     }                                                                                                                            
 }

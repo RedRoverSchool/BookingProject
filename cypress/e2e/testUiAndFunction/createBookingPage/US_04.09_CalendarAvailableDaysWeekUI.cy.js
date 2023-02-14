@@ -18,7 +18,11 @@ describe('US_04.09 | Calendar available days week UI', () => {
 
 		cy.fixture('createBookingPage').then(createBookingPage => {
 			this.createBookingPage = createBookingPage;
-		})
+		});
+
+		cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
 
 		//Precondition
 		createBookingPage.getWeekButton().should('have.class', 'selected');
@@ -43,14 +47,8 @@ describe('US_04.09 | Calendar available days week UI', () => {
 		createBookingPage.getCalendarDays().each(($el) => {
 			if ($el.hasClass('selected')) {
 
-				expect($el).to.have.css('color', this
-					.createBookingPage
-					.selectedDayField
-					.color);
-				expect($el).to.have.css('background-color', this
-					.createBookingPage
-					.selectedDayField
-					.backgroundColor);
+				expect($el).to.have.css('color', this.colors.white);
+				expect($el).to.have.css('background-color', this.colors.greenBookingPage);
 			};
 		});
 	});
@@ -58,7 +56,7 @@ describe('US_04.09 | Calendar available days week UI', () => {
 	it('AT_04.09.03 | In all inactive fields the number has the color #333333', function () {
 		createBookingPage.getCalendarDays().each($el => {
 			if (!$el.hasClass('selected')) {
-				expect($el).to.have.css('color', this.createBookingPage.notSelectedDayField.colorNumbers)
+				expect($el).to.have.css('color', this.colors.greyUnavailableText)
 			}
 		})
 	});
