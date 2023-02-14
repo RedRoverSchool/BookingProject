@@ -281,7 +281,12 @@ class CreateBookingPage {
     }
 
     clickCalendarDay(customDay) {
-        this.getCalendarDays().contains(customDay).click({ force: true })
+        this.getCalendarDays().each(($el) => {
+            if ($el.text() === customDay) {
+                cy.wrap($el).click()
+                return false
+            } 
+        })    
     }
 
     getNextMonth(date) {
