@@ -72,6 +72,7 @@ describe('US_05.01 Booking list page >Top Section> Search Form UI', () => {
     });      
 
     it('AT_05.01.03 | Verify Status dropdown list has values', function () {
+        bookingsListPage.clickStatusDropDown()
         if (bodyXHR.filters.statuses.length == 0) {
             bookingsListPage
                 .getListStatusNoResults()

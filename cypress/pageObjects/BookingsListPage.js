@@ -16,7 +16,8 @@ class BookingsListPage {
     getVehicleField = () => cy.get('div #select2-filterVehicle-container');
     getClearLink = () => cy.get('div #filterClear');
     getDrdnStatusList = () => cy.get('#filterStatus option')
-    getListStatusNoResults = () => cy.get('#select2-filterStatus-results li')    
+    getListStatusNoResults = () => cy.get('#select2-filterStatus-results li') 
+    getDrdnStatus = () => cy.get('.selection textarea')   
 
     //Date filter section
     getDateRangeType = () => cy.get('div #filterDateType option');
@@ -65,6 +66,10 @@ class BookingsListPage {
 
     changeStatusesToLowerCase(text){
         return text[0]+text.substring(1, text.length).toLowerCase()
+    }
+
+    clickStatusDropDown() {
+        this.getDrdnStatus().click({force: true})
     }
 }
 
