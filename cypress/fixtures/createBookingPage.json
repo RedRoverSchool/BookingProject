@@ -102,5 +102,7 @@
 
     "nameOfDay":["M", "T", "W", "T", "F", "S", "S"],
 
-    "earliestBtnText": "Earliest"
+    "earliestBtnText": "Earliest",
+
+    "latestBtnText": "Latest"
 }
