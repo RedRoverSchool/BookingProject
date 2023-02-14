@@ -90,4 +90,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .getLoginPopupModal()
             .should('have.css', 'background-color', this.colors.white);
     });
+
+    it('AT_01.05.12 | Verify Password label has color - #aaa', function () {
+        loginPopup
+            .getPasswordInput()
+            .should('have.css','color', this.colors.greyHeader)
+    });
 });
