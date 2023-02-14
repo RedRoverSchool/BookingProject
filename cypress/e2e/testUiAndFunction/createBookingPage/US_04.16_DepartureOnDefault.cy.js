@@ -30,16 +30,29 @@ describe('US_04.16 | Departure On UI by default', () => {
     })
 
     it('AT_04.16.03 | "Earliest" button is selected, visible and has green background color (#00a65a - rgb(0, 166, 90))', function () {
-        createBookingPage.getBtnDepartureErliest()
+        createBookingPage.getBtnErliest()
             .should('be.visible')
             .and('have.class', 'selected')
             .and('have.css', 'background-color', this.createBookingPage.greenColor);
     })
 
     it('AT_04.16.04 | "Earliest" button has text "Earliest" in white color rgb(255, 255, 255)', function() {
-        createBookingPage.getBtnDepartureErliest()
+        createBookingPage.getBtnErliest()
         .should('have.text', this.createBookingPage.earliestBtnText)
         .and('have.css', 'color', this.createBookingPage.whiteColor);
+    })
+
+    it('AT_04.16.05 | "Latest" button is visible, unselected, and has white (#FFF) background color', function() {
+        createBookingPage.getDepartureLatestButton()
+        .should('be.visible')
+        .and('not.be.selected')
+        .and('have.css', 'background-color', this.createBookingPage.whiteColor);
+    })
+
+    it('AT_04.16.06 | "Latest" button has text "Latest" in green color (#00a65a)', function() {
+        createBookingPage.getDepartureLatestButton()
+        .should('have.text', this.createBookingPage.latestBtnText)
+        .and('have.css', 'color', this.createBookingPage.greenColor);
     })
 
 });

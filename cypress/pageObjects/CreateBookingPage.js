@@ -38,7 +38,7 @@ class CreateBookingPage {
     getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
     getDepartureLatestButton = () => cy.get('button.trips-order-desc');
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
-    getBtnDepartureErliest = () => cy.get('button.trips-order-asc');
+    getBtnErliest = () => cy.get('button.trips-order-asc');
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
@@ -64,7 +64,9 @@ class CreateBookingPage {
     getMainPassengerSelectedSeatByDefault = () => cy.get('div[class="col-lg-12 passenger-row"] span[class="seat-number"]')
     getPassengerDetailsAssignedSeats = () => cy.get('span.seat-number')
     getSelectedDialCode = () => cy.get('.iti__selected-dial-code');
-    getDialCodeArrow = () => cy.get('.iti__selected-flag')
+    getDialCodeArrow = () => cy.get('.iti__selected-flag');    
+    getExtraFareTypeData = () => cy.get('.fare-type-box .form-control');
+    getExtraFareTypeDrop = () => cy.get('.fare-type-box .select2-selection__rendered');
 
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
@@ -102,7 +104,7 @@ class CreateBookingPage {
     };
 
     clickFirstTripCard() {
-        this.getFirstTripCard().click()
+        this.getFirstTripCard().click({ force: true })
     };
 
     clickSecondTripCard() {

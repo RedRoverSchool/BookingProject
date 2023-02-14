@@ -29,7 +29,7 @@ describe('US_AC_01 | Register new agent', () => {
             registerPopup.enterEmail(randomEmail);
             registerPopup.enterPhoneNumber(randomPhoneNumber);
             registerPopup.clickRegisterButton();
-            congratulationsPopup.getCongratulationsHeader().should('have.text', this.startPage.headers.congratulationsHeader);
+            congratulationsPopup.getCongratulationsPopupHeader().should('have.text', this.startPage.headers.congratulationsHeader);
 
         });
 

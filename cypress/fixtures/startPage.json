@@ -31,6 +31,10 @@
             "font_size": "30px",
             "headerText": "Enter QA Test OP"
         },
+        "header_Register_Popup": {
+            "color": "rgb(102, 102, 102)",
+            "front_size": "30px"
+        },
         "registerAgentAccount": "Register agent account",
         "congratulationsHeader": "Congratulations!",
         "restorePasswordHeaderText": "Restore password"
