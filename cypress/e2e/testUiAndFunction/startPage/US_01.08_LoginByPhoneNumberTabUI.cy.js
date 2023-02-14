@@ -11,7 +11,12 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
         });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
     })
+
     before(function () {
         cy.visit('/');
         startPage.clickLoginButton();
@@ -39,7 +44,7 @@ describe('US_01.08 | Login by phone number tab UI', () => {
     it('AT_01.08.04 | Verify "Country code" label has color - #aaa', function () {
         loginPopup
         .getCountryCodeLabel()
-        .should('have.css','color', this.startPage.label.labelCountryCode.color)
+        .should('have.css','color', this.colors.greyPhoneLabel)
     });
 
     it('AT_01.08.05 | Verify "Country code" label has font-size - 10px', function () {
@@ -75,13 +80,13 @@ describe('US_01.08 | Login by phone number tab UI', () => {
 
     it('AT_01.08.10 | Verify "Phone number" label has color - #aaa', function () {
         loginPopup
-        .getPhoneNumberInputFieldLabel()
-        .should('have.css','color', this.startPage.label.labelPhoneNumberInputField.color)
+        .getPhoneNumberInputLabel()
+        .should('have.css','color', this.colors.greyPhoneLabel)
     });
 
     it('AT_01.08.11 | Verify Phone number label has text "Phone number"', function() {
         loginPopup
-            .getPhoneNumberInputFieldLabel()
+            .getPhoneNumberInputLabel()
             .should('have.text', this.startPage.label.labelPhoneNumber.text)
     });
 
@@ -95,8 +100,8 @@ describe('US_01.08 | Login by phone number tab UI', () => {
     
     it('AT_01.08.14 | Insure Popup background color is #fff', function () {
         loginPopup
-        .getModulFormEntairely()
-        .should('have.css', 'background-color', this.startPage.background)
+        .getLoginPopupModal()
+        .should('have.css', 'background-color', this.colors.white)
     });
 
     it('AT_01.08.13 | Verify "REQUEST CODE" button is visible', function () {

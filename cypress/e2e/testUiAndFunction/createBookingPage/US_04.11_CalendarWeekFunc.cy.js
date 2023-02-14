@@ -19,7 +19,11 @@ describe('US_04.11 | Calendar week functionality', () => {
 	beforeEach(function () {
 		cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        })
+        });
+
+		cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
 	});
 
 	it('AT_04.11.01|Verify that you can click on last date field if it has not expired', function() {
@@ -55,7 +59,7 @@ describe('US_04.11 | Calendar week functionality', () => {
 		createBookingPage.getCalendarDays().each(($el) => {
 			if($el.hasClass('unavailable')){
 
-				expect($el).to.have.css('background-color',this.createBookingPage.unavailableDayField.backgroundColor);
+				expect($el).to.have.css('background-color',this.colors.greyUnavailableBack);
 			}
 		})
 	});
@@ -99,4 +103,26 @@ describe('US_04.11 | Calendar week functionality', () => {
 			}
 		})
 	});
+
+	it('AT_04.11.05|Calendar week functionality >Verify that when you click an invalid date in the Departure on, the date does not change', function() {
+		createBookingPage.clickCalendarPrevButton();
+		createBookingPage.getCalendarDays().each($selDate => {
+			if($selDate.hasClass('selected')){
+				let selectedDay = $selDate.text();
+							
+				createBookingPage.getCalendarDays().each(($unDate) => {
+					let unavailableDay = $unDate;
+					if(unavailableDay.hasClass('unavailable')){
+						$unDate.on('click');
+						
+						createBookingPage.getLabelDepartureOnDate().then(($onDate) =>{
+							let onDate = $onDate.text().split(' ')[0];
+					
+							expect(selectedDay).to.eq(onDate);
+						})
+					}
+				})
+			}
+		});
+	})
 });

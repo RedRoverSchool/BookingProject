@@ -10,6 +10,21 @@ const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
+const getDateAndMonth = (el) => el.text().split('-')[0]
+const getPreviousWeekMonSundDays = (date) => {
+    let now = new Date()
+    const currentYear = now.toLocaleString('en-US', { year: 'numeric' });
+    const nextWeekMonday = new Date(date + " " + currentYear)
+    nextWeekMonday.setDate(nextWeekMonday.getDate() - 7)
+    let previousWeekMonday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
+    previousWeekMonday = previousWeekMonday[1] + " " + previousWeekMonday[0]
+
+    nextWeekMonday.setDate(nextWeekMonday.getDate() + 6)
+    let previousWeekSunday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
+    previousWeekSunday = previousWeekSunday[1] + " " + previousWeekSunday[0]
+    return previousWeekMonday + ' - ' + previousWeekSunday
+}
+
 describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
     before(() => {
         cy.visit('/');
@@ -46,39 +61,18 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         }
     });
 
-    it.skip('AT_04.08.05 | Verify previous arrow button switches from 3 weeks ahead', () => {
-        createBookingPage.clickMonthBtn()
-
-        let n = 3
-        for (let i = 1; i <= n; i++) {
-            createBookingPage.clickCalendarNextButton();
-        }
-
+    it('AT_04.08.05 | Verify previous arrow button switches calendar-week label', () => {
+        createBookingPage.clickCalendarNextButton();
         createBookingPage.getLabelCalendar().then(($el) => {
-            let mondayWeekAhead = $el.text().split('-')[0];
-            let now = new Date();
-            const currentThaiYear = now.toLocaleString('en-US', { year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' });
-            const mondayWeeksAhead = new Date(mondayWeekAhead + " " + currentThaiYear);
-
-            for (let i = 1; i <= n; i++) {
+            let mondayWeekAhead = getDateAndMonth($el);
                 createBookingPage.clickCalendarPrevButton();
-                mondayWeeksAhead.setDate(mondayWeeksAhead.getDate() - 7);
-
-                let previousWeekMonday = mondayWeeksAhead.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ");
-                previousWeekMonday[i] = previousWeekMonday[1] + " " + previousWeekMonday[0]
-
-                mondayWeeksAhead.setDate(mondayWeeksAhead.getDate() + 6);
-                let previousWeekSunday = mondayWeeksAhead.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ");
-                previousWeekSunday[i] = previousWeekSunday[1] + " " + previousWeekSunday[0]
-
-                mondayWeeksAhead.setDate(mondayWeeksAhead.getDate() - 6);
-
+               
                 createBookingPage.getLabelCalendar().then(($el) => {
-                    expect($el.text()).to.eq(previousWeekMonday[i] + ' - ' + previousWeekSunday[i]);
+                    expect($el.text()).to.eq(getPreviousWeekMonSundDays(mondayWeekAhead));
                 });
-            }
+            })
         });
-    });
+  
 
     it('AT_04.08.06 | Verify that Click back arrow works and switches month in correct order', () => {
         createBookingPage.clickMonthBtn();

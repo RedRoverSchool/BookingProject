@@ -16,7 +16,11 @@ describe('US_01.02 | Login-register section elements UI and functionality | Logi
     beforeEach(function () {
         cy.fixture('startPage').then(startPage => {
             this.startPage= startPage;
-        }); 
+        });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
 	});
 
     it('AT.01.02.03 | Login button has text “Login“', function () {
@@ -36,13 +40,13 @@ describe('US_01.02 | Login-register section elements UI and functionality | Logi
     it('AT_01.02.06 | Login button: text color green #008000', function () {
         startPage
             .getLoginButton()
-            .should('have.css', 'color', this.startPage.buttons.loginBtnTextColor)
+            .should('have.css', 'color', this.colors.greenStartPage)
     });
 
     it('AT_01.02.07 | Verify that the Login-register section has a white #ffffffe0 background color', function () {
         startPage
             .getBackgroundLoginSection()
-            .should('have.css', 'background-color', this.startPage.backgoundColor)
+            .should('have.css', 'background-color', this.colors.whiteTransparent)
     });
 
     it('AT_01.02.02 | Login button: visible / clickable / opening Login popup', function () {
@@ -56,7 +60,7 @@ describe('US_01.02 | Login-register section elements UI and functionality | Logi
     it('AT_01.02.09 | Background of login button is white rgb(255, 255, 255)', function() {
         startPage.getLoginButton()
             .should('have.css', 'background').then($el => {
-                expect($el).to.contain(this.startPage.buttons.loginBtnBackgroundColor)
+                expect($el).to.contain(this.colors.white)
             })
     });
 });
@@ -84,7 +88,7 @@ describe('US_01.02 | Login-register section elements UI and functionality | Regi
 
     it('AT_01.02.05 | Verify Link "Register account now" is visible, clickable and opens registration pop up', function() {
         startPage.clickRegisterAccountLink()
-        registerPopup.getRegisterAgentAccountHeader().should('have.text', this.startPage.headers.registerAgentAccount);
+        registerPopup.getRegisterPopupHeader().should('have.text', this.startPage.headers.registerAgentAccount);
     });
 
 });

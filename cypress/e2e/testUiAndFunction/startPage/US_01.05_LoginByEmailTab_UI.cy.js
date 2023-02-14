@@ -16,6 +16,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
         });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
     });
 
     it('AT_01.05.01 | Insure By Email tab is visible', () => {
@@ -39,7 +43,7 @@ describe('US_01.05 | Login By Email Tab UI', () => {
     it('AT_01.05.05 | Color of Email label', function () {
         loginPopup
             .getEmailLabel()
-            .should('have.css','color', this.startPage.label.labelEmail.color)
+            .should('have.css','color', this.colors.greyLabel)
     });
 
     it('AT_01.05.02 | Insure Email label text is "Email"', function () {
@@ -72,18 +76,18 @@ describe('US_01.05 | Login By Email Tab UI', () => {
     it('AT_01.05.06 | Verify SIGN IN button has color - #6CCD66', function () {
         loginPopup
             .getByEmailSignInButton()
-            .should('have.css', 'color', this.startPage.buttons.signInBtnTextColor);
+            .should('have.css', 'color', this.colors.greenPopup);
     });
 
     it('AT_01.05.08 | Verify SIGN IN button has border-color - #6CCD66', function () {
         loginPopup
             .getByEmailSignInButton()
-            .should('have.css', 'color', this.startPage.buttons.signInBtnBorderColor);
+            .should('have.css', 'color', this.colors.greenPopup);
     });
 
     it('AT_01.05.11 | Verify Popup background color is #fff', function () {
         loginPopup
-            .getModulFormEntairely()
-            .should('have.css', 'background-color', this.startPage.background);
+            .getLoginPopupModal()
+            .should('have.css', 'background-color', this.colors.white);
     });
 });

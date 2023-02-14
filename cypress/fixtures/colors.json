@@ -1,0 +1,15 @@
+{
+    "greenBookingPage": "rgb(0, 166, 90)",
+    "greenStartPage": "rgb(0, 128, 0)",
+    "greenPopup": "rgb(108, 205, 102)",
+    "greenSeat": "rgb(157, 208, 157)",
+    "white": "rgb(255, 255, 255)",
+    "whiteTransparent": "rgba(255, 255, 255, 0.88)",
+    "greyHeader": "rgb(102, 102, 102)",
+    "greyLabel": "rgb(153, 153, 153)",
+    "greyPhoneLabel": "rgb(170, 170, 170)",
+    "greyUnavailableText": "rgb(51, 51, 51)",
+    "greyUnavailableBack": "rgb(226, 226, 226)",
+    "greyDropdownBack": "rgb(221, 221, 221)",
+    "blue": "rgb(66, 139, 202)"
+}

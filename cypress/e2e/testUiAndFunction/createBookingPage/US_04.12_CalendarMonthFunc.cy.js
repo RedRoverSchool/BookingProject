@@ -2,17 +2,17 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import getCustomCalendarDay from "../../../support/utilities/getCustomCalendarDay";
+import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
-describe.skip('US_04.12 | Calendar month functionality', () => {
+describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
 	before(function () {
 		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
-		cy.intercept('/tools/**').as('getTrip')
-		cy.wait('@getTrip')
+		waitForToolsPing()
 		createBookingPage.clickMonthBtn()
 	})
 
@@ -21,6 +21,46 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
             this.createBookingPage = createBookingPage;
         })
 	})
+
+	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
+		let date = new Date() 
+		let dateThailand = date.toLocaleString('en-GB', { day: 'numeric', timeZone: 'Asia/Bangkok' })
+		let currentMonthAndYear = date.toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok'})
+		createBookingPage.getMonthDropdownSelect().select(currentMonthAndYear)
+		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
+            if(+$el.text() < +dateThailand){
+                expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
+            }          
+		})		
+	});
+
+	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
+		const currentDayThailand = getCustomCalendarDay(0)
+
+		createBookingPage.clickCalendarDay(currentDayThailand)
+
+		createBookingPage.getLabelDepartureOnDate().then(($el) => {
+			let departureDate = $el.text()
+			expect(departureDate).to.deep.equal(`${currentDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`)
+		})
+		createBookingPage.getDepartureTripCardsList().each(($el) => {
+			cy.wrap($el).should('have.class', 'disabled')
+		})
+	});
+
+	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
+		const tomorrowDayThailand = getCustomCalendarDay(1)
+
+		createBookingPage.clickCalendarDay(tomorrowDayThailand)
+
+		createBookingPage.getLabelDepartureOnDate().then(($el) => {
+			let departureDate = $el.text()
+			expect(departureDate).to.deep.equal(`${tomorrowDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`)
+		})
+		createBookingPage.getDepartureTripCardsList().each(($el) => {
+			cy.wrap($el).should('have.class', 'disabled')
+		})
+	});
 
 	it('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
 		createBookingPage.getMonthDropdownList().then(($el) => {
@@ -53,38 +93,6 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 							})
 						})
 				})
-		})
-	})
-
-	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
-		let date = new Date() 
-		let dateThailand = date.toLocaleString('en-GB', { day: 'numeric', timeZone: 'Asia/Bangkok' })
-		let currentMonthAndYear = date.toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok'})
-		createBookingPage.getMonthDropdownSelect().select(currentMonthAndYear)
-		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
-            if(+$el.text() < +dateThailand){
-                expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
-            }          
-		})		
-	});
-
-	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
-		const currentDayThailand = getCustomCalendarDay(0)
-
-		createBookingPage.clickCalendarDay(currentDayThailand)
-
-		createBookingPage.getDepartureTripCardsList().each(($el) => {
-			cy.wrap($el).should('have.class', 'disabled')
-		})
-	});
-
-	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
-		const tomorrowDayThailand = getCustomCalendarDay(1)
-
-		createBookingPage.clickCalendarDay(tomorrowDayThailand)
-
-		createBookingPage.getDepartureTripCardsList().each(($el) => {
-			cy.wrap($el).should('have.class', 'disabled')
 		})
 	});
 })
