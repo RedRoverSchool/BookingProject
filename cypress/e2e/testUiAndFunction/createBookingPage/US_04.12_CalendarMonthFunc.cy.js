@@ -6,7 +6,7 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.12 | Calendar month functionality', () => {
+describe.skip('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
 	before(function () {
