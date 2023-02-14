@@ -50,13 +50,13 @@ describe('US_04.16 | Departure On UI by default', () => {
         createBookingPage.getDepartureLatestButton()
         .should('be.visible')
         .and('not.be.selected')
-        .and('have.css', 'background-color', this.createBookingPage.whiteColor);
+        .and('have.css', 'background-color', this.colors.white);
     })
 
     it('AT_04.16.06 | "Latest" button has text "Latest" in green color (#00a65a)', function() {
         createBookingPage.getDepartureLatestButton()
         .should('have.text', this.createBookingPage.latestBtnText)
-        .and('have.css', 'color', this.createBookingPage.greenColor);
+        .and('have.css', 'color', this.colors.greenBookingPage);
     })
 
 });
