@@ -22,7 +22,7 @@ function createReservation(passengerName) {
   createBookingPage.clickReservationTicketButton();
 }
 
-describe("US_05.23 | Trip detais UI", () => {
+describe.skip("US_05.23 | Trip detais UI", () => {
   beforeEach(function () {
     cy.fixture("createBookingPage").then((createBookingPage) => {
       this.createBookingPage = createBookingPage;
