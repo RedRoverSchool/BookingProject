@@ -77,6 +77,10 @@ describe('US_01.02 | Login-register section elements UI and functionality | Regi
         cy.fixture('startPage').then(startPage => {
             this.startPage= startPage;
         }); 
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
 	});
 
     it('AT_01.02.01 | Verify Link "Register account now": visible and have text "Register account now"', function () {
@@ -91,4 +95,9 @@ describe('US_01.02 | Login-register section elements UI and functionality | Regi
         registerPopup.getRegisterPopupHeader().should('have.text', this.startPage.headers.registerAgentAccount);
     });
 
+    it('AT_01.02.08 | Link Register account now: color green', function () {
+        startPage
+            .getRegisterAccountLink()
+            .should('have.css', 'color', this.colors.greenStartPage)
+    });
 });
