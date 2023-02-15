@@ -17,19 +17,17 @@
     "buttons": {
         "loginBtnText": "login",
         "thLoginBtnText": "เข้าสู่ระบบ",
-        "loginBtnTextColor": "rgb(0, 128, 0)",
         "rusLoginBtnText": "Войти",
-        "signInBtnTextColor": "rgb(108, 205, 102)",
-        "signInBtnText": "SIGN IN",
-        "signInBtnBorderColor": "rgb(108, 205, 102)",
-        "loginBtnBackgroundColor": "rgb(255, 255, 255)"
+        "signInBtnText": "SIGN IN"
     },
     "headers": {
         "header_Login_Popup": {
             "text": "Enter",
-            "color": "rgb(102, 102, 102)",
             "font_size": "30px",
             "headerText": "Enter QA Test OP"
+        },
+        "header_Register_Popup": {
+            "front_size": "30px"
         },
         "registerAgentAccount": "Register agent account",
         "congratulationsHeader": "Congratulations!",
@@ -51,19 +49,14 @@
             "text": "Password"
         },
         "labelEmail": {
-            "color": "rgb(153, 153, 153)",
             "text": "Email"
         },
         "labelCountryCode": {
-            "color": "rgb(170, 170, 170)",
             "font_size": "10px",
             "text": "Country code"
         },
         "labelPhoneNumber": {
             "text": "Phone number"
-        },
-        "labelPhoneNumberInputField": {
-            "color": "rgb(170, 170, 170)"
         }
     },
     "links": {
@@ -76,7 +69,5 @@
             "code": 66,
             "number": 616161616
         }
-    },
-    "backgoundColor" : "rgba(255, 255, 255, 0.88)",
-    "background" : "rgb(255, 255, 255)"
+    }
 }

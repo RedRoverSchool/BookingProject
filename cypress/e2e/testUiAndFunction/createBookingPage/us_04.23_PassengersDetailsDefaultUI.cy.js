@@ -50,4 +50,9 @@ describe('US_04.23 | Passengers details default UI', () => {
     it('AT_04.23.07 | Verify email input field has an “Email” text placeholder.', function ()  {
         createBookingPage.getEmailInputField().should('have.attr', 'placeholder', this.createBookingPage.placeholder.email);
     });
+
+    it('AT_04.23.08 | Verify Passenger dropdown is visible', () => {
+        
+        createBookingPage.getPassengersDetailsDropdown().should('be.visible')
+     });
 });

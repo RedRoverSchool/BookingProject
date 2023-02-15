@@ -11,7 +11,11 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        })       
+        });
+        
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });    
     });
 
     before(() => {
@@ -45,7 +49,7 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
         createBookingPage.getListDepartureStation().each($el => {
             if($el.text() == this.createBookingPage.dropdowns.departureStation.stationsNames[3]){ 
                               
-                expect($el).to.have.css('background-color', this.createBookingPage.selectedDepartureStationBackgroundColor)
+                expect($el).to.have.css('background-color', this.colors.greyDropdownBack)
             }
         })
 
@@ -59,7 +63,7 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
         createBookingPage.getListDepartureStation().each($el => {
             if($el.text() == this.createBookingPage.dropdowns.departureStation.stationsNames[4]) {
 
-                expect($el).to.have.css('background-color', this.createBookingPage.hoveredDepartureStationBackgroundColor)
+                expect($el).to.have.css('background-color', this.colors.greenBookingPage)
             }
         })
     });
