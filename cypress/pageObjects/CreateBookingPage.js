@@ -283,7 +283,7 @@ class CreateBookingPage {
     clickCalendarDay(customDay) {
         this.getCalendarDays().each(($el) => {
             if ($el.text() === customDay) {
-                cy.wrap($el).click()
+                cy.wrap($el).click({force: true})
                 return false
             } 
         })    

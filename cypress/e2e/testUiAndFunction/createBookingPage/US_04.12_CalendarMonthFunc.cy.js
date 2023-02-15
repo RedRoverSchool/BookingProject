@@ -6,13 +6,13 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
-describe.skip('US_04.12 | Calendar month functionality', () => {
+describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
 	before(function () {
 		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
-		waitForToolsPing()
+		
 		createBookingPage.clickMonthBtn()
 	})
 
@@ -38,7 +38,7 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 		const currentDayThailand = getCustomCalendarDay(0)
 
 		createBookingPage.clickCalendarDay(currentDayThailand)
-
+		waitForToolsPing()
 		createBookingPage.getLabelDepartureOnDate().then(($el) => {
 			let departureDate = $el.text()
 			expect(departureDate).to.deep.equal(`${currentDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`)
@@ -52,7 +52,7 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 		const tomorrowDayThailand = getCustomCalendarDay(1)
 
 		createBookingPage.clickCalendarDay(tomorrowDayThailand)
-
+		waitForToolsPing()
 		createBookingPage.getLabelDepartureOnDate().then(($el) => {
 			let departureDate = $el.text()
 			expect(departureDate).to.deep.equal(`${tomorrowDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`)
@@ -71,7 +71,7 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 			let indexOfMonths = Math.floor(Math.random() * arrayOfMonths.length)
 			let chosenMonthAndYear = arrayOfMonths[indexOfMonths]
 
-			createBookingPage.getMonthDropdownSelect().select(chosenMonthAndYear)
+			createBookingPage.getMonthDropdownSelect().select(chosenMonthAndYear, {force: true})
 			createBookingPage
 				.getCalendarDays()
 				.not('.unavailable')
@@ -82,7 +82,7 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 					createBookingPage
 						.getCalendarDays()
 						.not('.unavailable')
-						.not('.shaded').eq(indexOfDate).click().then(($el) => {
+						.not('.shaded').eq(indexOfDate).click({force: true}).then(($el) => {
 							let dateChosen = $el.text()
 							let finalDateMonthAndYear = dateChosen + " " + chosenMonthAndYear
 
