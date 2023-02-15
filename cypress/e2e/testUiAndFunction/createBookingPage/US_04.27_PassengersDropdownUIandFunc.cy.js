@@ -6,7 +6,7 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe.skip('US_04.27 | Passengers dropdown UI', () => {
+describe('US_04.27 | Passengers dropdown UI', () => {
     
     before(() => {
         cy.visit('/');
@@ -19,14 +19,14 @@ describe.skip('US_04.27 | Passengers dropdown UI', () => {
     });
 
     beforeEach(function () {
-        cy.fixture('createBookingPage.json').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
         });
     });
 
     it('AT_04.27.01 | Verify the color of the text in the passengers dropdown menu', function () {
         createBookingPage.getPassengersDetailsDropdown()
             .should('be.visible')
-            .and('have.css', 'color', this.createBookingPage.greenColor);
+            .and('have.css', 'color', this.colors.greenBookingPage);
     });
 });
