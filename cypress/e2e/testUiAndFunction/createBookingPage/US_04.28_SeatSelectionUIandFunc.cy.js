@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
-import getIntergerMinInclMaxExcl from "../../../support/utilities/getRandomInterger";
+import getIntergerMinInclMaxExcl from "../../../support/utilities/getIntergerMinInclMaxExcl";
 import BookingPopup from '../../../pageObjects/BookingPopup';
 import getArray from "../../../support/utilities/getArray";
 import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
