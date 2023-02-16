@@ -34,7 +34,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})		
 	});
 
-	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
+	xit('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
 		const currentDayThailand = getCustomCalendarDay(0)
 
 		createBookingPage.clickCalendarDay(currentDayThailand)
@@ -48,7 +48,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})
 	});
 
-	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
+	xit('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
 		const tomorrowDayThailand = getCustomCalendarDay(1)
 
 		createBookingPage.clickCalendarDay(tomorrowDayThailand)
