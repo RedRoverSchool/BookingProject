@@ -29,8 +29,15 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
     });
 
     it('AT_04.05.02 | Verify that the Departure station label has color - #666', function() {
+        
         createBookingPage
         .getLabelDepartureStation()
         .should('have.css','color', this.colors.greyHeader)
+    });
+
+    it('AT_04.05.03 | Verify that the Departure station dropdown menu has Input select-search field', () => {
+        
+        createBookingPage.clickDepartureStationDropdown()
+        createBookingPage.getDepartureInputSelectSearchField().should('be.visible')
     });
 });    
