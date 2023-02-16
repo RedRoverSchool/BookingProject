@@ -17,10 +17,20 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
     });  
 
     it('AT_04.05.01 | Verify that the Departure station label is displayed, visible, and is not changeably', () => {
     
         createBookingPage.getLabelDepartureStation().should('be.visible')
+    });
+
+    it('AT_04.05.02 | Verify that the Departure station label has color - #666', function() {
+        createBookingPage
+        .getLabelDepartureStation()
+        .should('have.css','color', this.colors.greyHeader)
     });
 });    
