@@ -42,6 +42,13 @@
             "passwordInputField": "Password",
             "phoneNumberPlaceholder": "1234567",
             "countryCode": "66"
+        },
+        "registerPopup": {
+            "front_size": "14px",
+            "yourNameInputField": "John Doe",
+            "companyNameInputField": "Transportation Co",
+            "emailInputField": "agent@qatest.site",
+            "phoneNumberInputField": "Country code and phone number"
         }
     },
     "label": {
@@ -57,6 +64,15 @@
         },
         "labelPhoneNumber": {
             "text": "Phone number"
+        },
+        "labelYourName": {
+            "text": "Your name"
+        },
+        "labelCompanyName": {
+            "text": "Company name"
+        },
+        "labelsModalBody": {
+            "front_size": "14px"
         }
     },
     "links": {
