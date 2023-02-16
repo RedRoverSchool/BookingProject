@@ -103,4 +103,13 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
             });
         }
     });
+
+    it('AT_04.08.08 | Verify that back arrow click does not show the elapsed month', function() {
+        createBookingPage.clickMonthBtn();
+        createBookingPage.clickCalendarPrevButton();
+        createBookingPage.getLabelCalendar().then(($label) => {
+            let text = $label.text();
+            expect(text).to.deep.equal(createBookingPage.getCurrentMonthAndYear())
+        });
+    });
 });
