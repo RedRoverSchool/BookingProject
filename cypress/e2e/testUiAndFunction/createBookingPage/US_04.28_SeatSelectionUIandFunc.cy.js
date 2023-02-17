@@ -101,11 +101,9 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 cy.visit('/')
                 cy.login(AGENT.email, AGENT.password)
         
-                createBookingPage.getDepartureStationSelectionDropdown()
-                    .select('Bangkok Khao San', {force: true})
+                createBookingPage.selectDepartureStation('Bangkok Khao San')
                         
-                createBookingPage.getArrivalStationSelectionDropdown()
-                    .select('Chonburi', {force: true})
+                createBookingPage.selectArrivalStation('Chonburi')
             
                 createBookingPage.clickCalendarNextButton()
                 createBookingPage.clickSaturdayButton()
