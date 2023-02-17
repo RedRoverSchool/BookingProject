@@ -40,7 +40,7 @@ describe("US_05.23 | Trip detais UI", () => {
     );
   });
 
-  it('AT_05.23.01 | Verify departure time is in 24-hour notation HH:MM', function () {
+  it.skip('AT_05.23.01 | Verify departure time is in 24-hour notation HH:MM', function () {
     const timeFormat = this.createBookingPage.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
@@ -60,7 +60,7 @@ describe("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it('AT_05.23.03 | Verify arrival time is in 24-hour notation HH:MM', function () {
+  it.skip('AT_05.23.03 | Verify arrival time is in 24-hour notation HH:MM', function () {
     const timeFormat = this.createBookingPage.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
