@@ -96,4 +96,5 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .getPasswordInput()
             .should('have.css','color', this.colors.greyHeader)
     });
+    
 });
