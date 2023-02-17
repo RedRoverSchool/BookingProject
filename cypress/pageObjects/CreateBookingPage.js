@@ -11,6 +11,7 @@ class CreateBookingPage {
     getArrivalStationSelectionDropdown = () => cy.get('select[name="destination"]');
     getArrivalSearchField = () => cy.get('.select2-search__field');
     getLabelDepartureStation = () => cy.get('.departure-wrapper label')
+    getDepartureInputSelectSearchField = () => cy.get('.select2-search__field')
 
     //Departure date
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
@@ -42,7 +43,8 @@ class CreateBookingPage {
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
-
+    getArrivalTimeLabel = () => cy.get('.popup-trip div:nth-child(7) label');
+    
     //Passengers details
     getMainPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]');
     getExtraPassengerNameField = () => cy.get('.form-control[name="passenger-name[]"]:not(.form-control:first-child)')
@@ -96,6 +98,9 @@ class CreateBookingPage {
     getBookTicketsButton = () => cy.get('[class="btn btn-book"]');
     getResetButton = () => cy.get('[class="btn btn-reset-form"]');
 
+    // Credit Balance
+    getBalanceAmountOnBookingPage = () => cy.get("span#agent-balance");
+
     // Methods
     clickCalendarNextButton() {
         this.getCalendarNextButton().click()
@@ -122,7 +127,7 @@ class CreateBookingPage {
     };
 
     clickMonthBtn() {
-        this.getMonthBtn().click({ forse: true });
+        this.getMonthBtn().click({ force: true })
     }
 
     clickFridayButton() {
@@ -150,7 +155,7 @@ class CreateBookingPage {
     };
 
     clickReservationTicketButton() {
-        this.getReservationTicketButton().click()
+        this.getReservationTicketButton().click({ force: true })        
     };
 
     clickDepartureLatestButton() {
@@ -168,6 +173,24 @@ class CreateBookingPage {
             return indexOfMonth;
         });
     };
+
+    selectDepartureStation(stationName) {
+        this
+            .clickDepartureStationDropdown()
+        this
+            .getListDepartureStation()
+            .contains(stationName)
+            .click()
+    }
+
+    selectArrivalStation(stationName) {
+        this
+            .clickArrivalStationDropdown()
+        this
+            .getArrivalStationList()
+            .contains(stationName)
+            .click()
+    }
 
     selectNeedDepartureStation(nameStation) {
         this.getCreateBookingHeader().click()
@@ -285,7 +308,7 @@ class CreateBookingPage {
     clickCalendarDay(customDay) {
         this.getCalendarDays().each(($el) => {
             if ($el.text() === customDay) {
-                cy.wrap($el).click()
+                cy.wrap($el).click({force: true})
                 return false
             } 
         })    
@@ -311,4 +334,4 @@ class CreateBookingPage {
         return formattedDate;
     }
 }
-export default CreateBookingPage; 
+export default CreateBookingPage;
