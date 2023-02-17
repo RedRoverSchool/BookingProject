@@ -18,8 +18,11 @@ function createReservation(passengerName) {
   createBookingPage.clickFirstTripCard();
   waitForToolsPing();
   createBookingPage.typeIntoMainPassengerNameField(passengerName);
+  waitForToolsPing();
   createBookingPage.clickReservationTicketArrow();
+  waitForToolsPing();
   createBookingPage.clickReservationTicketButton();
+  waitForToolsPing();
 }
 
 describe("US_05.23 | Trip detais UI", () => {
