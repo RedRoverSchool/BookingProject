@@ -67,17 +67,11 @@ describe('US_04.09 | Calendar available days week UI', () => {
 	})
 
 	it('AT_04.09.07 | Each field has a capital letter of the Latin alphabet', function () {
-
-		createBookingPage.getCalendarDays().then($els => {
-
-			for (let i = 0; i < 7; i++) {
-				const win = $els[i].ownerDocument.defaultView
-				const before = win.getComputedStyle($els[i], 'before')
-				const contentValue = before.getPropertyValue('content')
-				
-				expect(contentValue).to.deep.equal(contentValue.toUpperCase())
-			};
-		});
+		createBookingPage.getCalendarDays().each($el => {
+			const nameOfDay = getNameOfDay($el)
+		
+			expect(nameOfDay).to.deep.equal(nameOfDay.toUpperCase())
+			});
 	});
 
 	it('AT_04.09.06|Verify that the uppercase letters of the Latin alphabet are in order: M, T, W, T, F, S, S',  function() {

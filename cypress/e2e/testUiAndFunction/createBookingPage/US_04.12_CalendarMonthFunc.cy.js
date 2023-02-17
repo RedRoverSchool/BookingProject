@@ -9,17 +9,15 @@ const createBookingPage = new CreateBookingPage();
 describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
-	before(function () {
-		cy.visit('/')
-		cy.login(AGENT.email, AGENT.password)
-		waitForToolsPing()
-		createBookingPage.clickMonthBtn()
-	})
-
 	beforeEach(function () {
 		cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
+
+		cy.visit('/')
+		cy.login(AGENT.email, AGENT.password)
+		
+		createBookingPage.clickMonthBtn()
 	})
 
 	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
@@ -34,34 +32,6 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})		
 	});
 
-	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
-		const currentDayThailand = getCustomCalendarDay(0)
-
-		createBookingPage.clickCalendarDay(currentDayThailand)
-
-		createBookingPage.getLabelDepartureOnDate().then(($el) => {
-			let departureDate = $el.text()
-			expect(departureDate).to.deep.equal(`${currentDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`)
-		})
-		createBookingPage.getDepartureTripCardsList().each(($el) => {
-			cy.wrap($el).should('have.class', 'disabled')
-		})
-	});
-
-	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
-		const tomorrowDayThailand = getCustomCalendarDay(1)
-
-		createBookingPage.clickCalendarDay(tomorrowDayThailand)
-
-		createBookingPage.getLabelDepartureOnDate().then(($el) => {
-			let departureDate = $el.text()
-			expect(departureDate).to.deep.equal(`${tomorrowDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`)
-		})
-		createBookingPage.getDepartureTripCardsList().each(($el) => {
-			cy.wrap($el).should('have.class', 'disabled')
-		})
-	});
-
 	it('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
 		createBookingPage.getMonthDropdownList().then(($el) => {
 			let arrayOfMonths = $el
@@ -71,7 +41,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 			let indexOfMonths = Math.floor(Math.random() * arrayOfMonths.length)
 			let chosenMonthAndYear = arrayOfMonths[indexOfMonths]
 
-			createBookingPage.getMonthDropdownSelect().select(chosenMonthAndYear)
+			createBookingPage.getMonthDropdownSelect().select(chosenMonthAndYear, {force: true})
 			createBookingPage
 				.getCalendarDays()
 				.not('.unavailable')
@@ -82,7 +52,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 					createBookingPage
 						.getCalendarDays()
 						.not('.unavailable')
-						.not('.shaded').eq(indexOfDate).click().then(($el) => {
+						.not('.shaded').eq(indexOfDate).click({force: true}).then(($el) => {
 							let dateChosen = $el.text()
 							let finalDateMonthAndYear = dateChosen + " " + chosenMonthAndYear
 
@@ -93,6 +63,32 @@ describe('US_04.12 | Calendar month functionality', () => {
 							})
 						})
 				})
+		})
+	});
+
+	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
+		const currentDayThailand = getCustomCalendarDay(0)
+
+		createBookingPage.clickCalendarDay(currentDayThailand)
+		waitForToolsPing()
+		createBookingPage.getLabelDepartureOnDate()
+			.should('have.text', (`${currentDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`))
+
+		createBookingPage.getDepartureTripCardsList().each(($el) => {
+			cy.wrap($el).should('have.class', 'disabled')
+		})
+	});
+
+	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
+		const tomorrowDayThailand = getCustomCalendarDay(1)
+
+		createBookingPage.clickCalendarDay(tomorrowDayThailand)
+		waitForToolsPing()
+		createBookingPage.getLabelDepartureOnDate()
+			.should('have.text', (`${tomorrowDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`))
+
+		createBookingPage.getDepartureTripCardsList().each(($el) => {
+			cy.wrap($el).should('have.class', 'disabled')
 		})
 	});
 })

@@ -148,6 +148,7 @@ export class RegisterPopup {
     getForgotYourPasswordLink = () => cy.get('#registerModal .pull-right a');
     getRegisterPopupCloseButton = () => cy.get('#registerModal .close');
     getRegisterPopupModal = () => cy.get('div#registerModal');
+    getYourNameLabel = () => cy.get('#registerModal .modal-body div:first-child label');
 
     // Methods
 

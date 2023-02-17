@@ -38,4 +38,9 @@ describe('US_01.01 | Multilanguage section elements UI and functionality', () =>
         startPage.clickRussiaFlagIcon();
         startPage.getLoginButton().should('have.text', this.startPage.buttons.rusLoginBtnText);
     });
+
+    it('AT_01.01.04 | Verify Thailand flag icon: clickable / changing language to Thai', function () {
+        startPage.clickThailandFlagIcon()
+        startPage.getLoginButton().should('have.text', this.startPage.buttons.thLoginBtnText)
+    });
 });

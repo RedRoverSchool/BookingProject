@@ -11,5 +11,7 @@
     "greyUnavailableText": "rgb(51, 51, 51)",
     "greyUnavailableBack": "rgb(226, 226, 226)",
     "greyDropdownBack": "rgb(221, 221, 221)",
-    "blue": "rgb(66, 139, 202)"
+    "blue": "rgb(66, 139, 202)",
+    "redWarningBg": "rgb(246, 234, 234)",
+    "redWarningBorder": "rgb(184, 77, 77)"
 }

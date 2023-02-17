@@ -1,4 +1,4 @@
-const arrayOfConsetutiveMonths = () => {
+const createArrayOfConsetutiveMonths = () => {
 	let consecutiveMonths = []
 	let count = 0
 	while (count <= 12) {
@@ -11,4 +11,4 @@ const arrayOfConsetutiveMonths = () => {
 	}
 	return consecutiveMonths
 }
-export default arrayOfConsetutiveMonths
+export default createArrayOfConsetutiveMonths

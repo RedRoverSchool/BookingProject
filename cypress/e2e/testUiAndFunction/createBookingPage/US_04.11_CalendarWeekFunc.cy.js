@@ -111,9 +111,8 @@ describe('US_04.11 | Calendar week functionality', () => {
 				let selectedDay = $selDate.text();
 							
 				createBookingPage.getCalendarDays().each(($unDate) => {
-					let unavailableDay = $unDate;
-					if(unavailableDay.hasClass('unavailable')){
-						$unDate.on('click');
+					if($unDate.hasClass('unavailable')){
+						cy.wrap($unDate).click();
 						
 						createBookingPage.getLabelDepartureOnDate().then(($onDate) =>{
 							let onDate = $onDate.text().split(' ')[0];

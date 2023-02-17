@@ -4,6 +4,8 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
 
 const createBookingPage = new CreateBookingPage();
 
+const sortDesc = (array) => array.sort((a, b) => +b.replace(/[^\d+]/g, '') - (+a.replace(/[^\d+]/g, '')))
+
 describe.only('US_04.22 | Trip card functionality', () => {
     const AGENT = Cypress.env('agent');
 
@@ -32,7 +34,7 @@ describe.only('US_04.22 | Trip card functionality', () => {
         })
     })
 
-    it('AT_04.22.02 | Verify trip cards are sorted in descending order if "latest" button is clicked', function () {
+    it('AT_04.22.02 | Verify trip cards are sorted from latest to earliest time of departure if "latest" button is clicked', function () {
        createBookingPage.clickDepartureLatestButton()
         
         const ordersSequence = []
@@ -42,7 +44,7 @@ describe.only('US_04.22 | Trip card functionality', () => {
                     .then((orders) => {
                         ordersSequence.push(orders)
 
-                        let ordersSortedDesc = ordersSequence.sort((a, b) => +b.replace(/[^\d+]/g, '') - (+a.replace(/[^\d+]/g, '')))
+                        let ordersSortedDesc = sortDesc(ordersSequence)
 
                         expect(ordersSequence[i]).to.eq(ordersSortedDesc[i])
                     })

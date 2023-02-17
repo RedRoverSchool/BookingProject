@@ -102,6 +102,10 @@
 
     "nameOfDay":["M", "T", "W", "T", "F", "S", "S"],
 
+    "warningTexts": {
+        "notAvailableTripText": "Trips are not available. Try searching for another date or location."
+    },
+
     "earliestBtnText": "Earliest",
 
     "latestBtnText": "Latest"

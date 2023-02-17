@@ -5,6 +5,8 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 const AGENT = Cypress.env('agent');
 const createBookingPage = new CreateBookingPage();
 
+const sortAsc = (array) => array.sort((a, b) => +a.replace(/[^\d+]/g, '') - (+b.replace(/[^\d+]/g, '')))
+
 describe('US_04.16 | Departure On UI by default', () => {
 
     before(function () {
@@ -59,4 +61,18 @@ describe('US_04.16 | Departure On UI by default', () => {
         .and('have.css', 'color', this.colors.greenBookingPage);
     })
 
+    it('AT_04.16.07 | Trip cards are sorted by time of departure from earliest to latest by default', () => {
+        const ordersSequence = []
+        createBookingPage.getDepartureTripCardsList().each(($el, i) => {
+            cy.wrap($el)
+                .invoke('attr', 'style')
+                .then((orders) => {
+                    ordersSequence.push(orders)
+
+                    let ordersSortedAsc = sortAsc(ordersSequence)
+
+                    expect(ordersSequence[i]).to.eq(ordersSortedAsc[i])
+                })
+        })
+    })
 });
