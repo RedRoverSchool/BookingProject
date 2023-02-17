@@ -27,6 +27,7 @@ class CreateBookingPage {
     getLableDepartureDate = () => cy.get('#label-departure-date');
     getDepartureDate = () => cy.get('.popup-trip div:nth-child(5) span');
     getDaySelected = () => cy.get('[class="day-wrapper selected"]');
+    getMondayButton = () => cy.get('div .calendar-day-selection-wrapper :first-child');
 
     //Departure on
     getFirstTripCard = () => cy.get('div .trip:first-child');
@@ -331,5 +332,21 @@ class CreateBookingPage {
         const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
         return formattedDate;
     }
+
+   /**
+   *
+   * this function returns the date as a string of the Monday of the current week
+   */
+  getCurrentMonday() {
+    const currentDate = new Date();
+    const currentMonday = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() - currentDate.getDay() + 1
+    );
+    const currentMondayDate = currentMonday.toDateString();
+    const currentMondayDayOnlyNumber = currentMondayDate.split(" ")[2];
+    return currentMondayDayOnlyNumber;
+  }
 }
 export default CreateBookingPage;
