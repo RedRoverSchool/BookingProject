@@ -42,7 +42,7 @@ class CreateBookingPage {
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
     getBtnErliest = () => cy.get('button.trips-order-asc');
     getTripClassDropdown = () => cy.get('select[name="trips_class"]');
-    getVehicleClassTripCardsList = () => cy.get('.trips-list-wrapper > div> span.class');
+    getVehicleClassTripCards = () => cy.get('.trips-list-wrapper > div> span.class');
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
