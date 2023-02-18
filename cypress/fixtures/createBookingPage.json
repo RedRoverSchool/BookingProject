@@ -115,5 +115,7 @@
 
     "earliestBtnText": "Earliest",
 
-    "latestBtnText": "Latest"
+    "latestBtnText": "Latest",
+
+    "passengerDefault": "1 passenger"
 }

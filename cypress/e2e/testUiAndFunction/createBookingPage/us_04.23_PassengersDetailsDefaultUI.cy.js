@@ -58,6 +58,6 @@ describe('US_04.23 | Passengers details default UI', () => {
 
     it('AT_04.23.09 | Verify Passenger dropdown has 1 passenger by default', function () {
         
-        createBookingPage.getDropdownPassengerDefault().should('have.text', this.createBookingPage.dropdowns.seatSelection.onePassenger)
+        createBookingPage.getDropdownPassengerDefault().should('have.text', this.createBookingPage.passengerDefault)
     });
 });
