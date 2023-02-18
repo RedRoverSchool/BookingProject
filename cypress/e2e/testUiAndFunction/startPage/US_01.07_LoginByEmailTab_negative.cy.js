@@ -30,4 +30,21 @@ describe('US_01.07 | Login by email tab negative', () => {
             .should("be.visible")
             .and('have.text',this.startPage.alert.loginPopupMessageAlert);
         });
+
+    it('AT_01.07.02 | Verify the error message after click Sign In with an invalid email', function () {
+        loginPopup
+            .getEmailInput()
+            .clear()
+            .type(this.startPage.dataInvalid.invalidEmail);
+        loginPopup
+            .getPasswordInput()
+            .clear()
+            .type(this.startPage.dataInvalid.validPassword);
+        loginPopup
+            .clickByEmailSignInButton();
+        loginPopup
+            .getEmailErrorMessage()
+            .should("be.visible")
+            .and('include.text', this.startPage.dataInvalid.errorMessage);   
+    });
 });

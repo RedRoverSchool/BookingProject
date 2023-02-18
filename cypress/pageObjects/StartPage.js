@@ -61,6 +61,7 @@ export class LoginPopup {
     getByPhoneSignInButton = () => cy.get('#step2 [value="SIGN IN"]');
     getPhoneNumberInputLabel = () => cy.get('div[class="col-sm-6 col-xs-8"] label');
     getLoginPopupModal =() => cy.get('#loginModal .modal-content');
+    getEmailErrorMessage = () => cy.get('.alert.alert-danger');
 
     // Methods
 

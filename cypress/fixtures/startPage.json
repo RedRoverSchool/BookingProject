@@ -85,5 +85,10 @@
             "code": 66,
             "number": 616161616
         }
+    },
+    "dataInvalid": {
+        "errorMessage": "Something goes wrong. Please contact your country manager.",
+        "invalidEmail": "test@qatest.site",
+        "validPassword": "12345678"
     }
 }
