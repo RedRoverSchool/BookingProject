@@ -46,7 +46,8 @@
     },
     
     "headers": {
-        "mainHeaderPage": "Create booking"
+        "mainHeaderPage": "Create booking",
+        "creditBalance": "Credit balance:"
     },
     "inputField": {
         "main_passenger": {
