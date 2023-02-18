@@ -42,7 +42,13 @@
 
         "dialCode": {
             "byDefault": "+66"
-        }
+        },
+
+        "tripClass": [
+            "VIP bus 24",
+            "Ferry 300",
+            "Economy bus 300"
+        ]
     },
     
     "headers": {
@@ -85,7 +91,7 @@
 
     "departureDate": "Departure date",
 
-    "tripClass": [
+    "seatsTableTitle": [
         "VIP bus",
         "Ferry",
         "Economy bus"

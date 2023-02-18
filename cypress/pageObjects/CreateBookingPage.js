@@ -16,7 +16,7 @@ class CreateBookingPage {
     //Departure date
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
     getCalendarPrevButton = () => cy.get('button.calendar-week-prev');
-    getCalendarDays = () => cy.get('.col-lg-12.calendar-day-selection-wrapper > .day-wrapper');
+    getCalendarDays = () => cy.get('.calendar-day-selection-wrapper > .day-wrapper');
     getLabelCalendar = () => cy.get('div #calendar-week');
     getMonthBtn = () => cy.get('.calendar-view-wrapper .calendar-view-month');
     getMonthDropdownList = () => cy.get('select[name="calendar_month"] option');
@@ -41,6 +41,8 @@ class CreateBookingPage {
     getDepartureLatestButton = () => cy.get('button.trips-order-desc');
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
     getBtnErliest = () => cy.get('button.trips-order-asc');
+    getTripClassDropdown = () => cy.get('select[name="trips_class"]');
+    getVehicleClassTripCardsList = () => cy.get('.trips-list-wrapper > div> span.class');
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
@@ -83,11 +85,11 @@ class CreateBookingPage {
     getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .available');
 
     // Summary section 
-    getSeatsNumberColumnSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)')
-    getRowsSummaryList = () => cy.get('.total-wrapper > div.total-row')
-    getAmountOfPassengersInSummary = () => cy.get('.box-default .total-wrapper  .total-row')
-    getPricesSummaryList = () => cy.get('.total-wrapper > div.total-row span')
-    getTotalPriceSummary = () => cy.get('.box-footer span.total-price.right')
+    getSeatsNumberColumnSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)');
+    getRowsSummaryList = () => cy.get('.total-wrapper > div.total-row');
+    getAmountOfPassengersInSummary = () => cy.get('.box-default .total-wrapper  .total-row');
+    getPricesSummaryList = () => cy.get('.total-wrapper > div.total-row span');
+    getTotalPriceSummary = () => cy.get('.box-footer span.total-price.right');
 
     //Total - Footer section                  
     getReservationTicketArrow = () => cy.get('.btn-group .caret');

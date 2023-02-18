@@ -1,20 +1,20 @@
 /// <reference types="Cypress" />
 
-import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
+import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
 const sortDesc = (array) => array.sort((a, b) => +b.replace(/[^\d+]/g, '') - (+a.replace(/[^\d+]/g, '')))
 
-describe.only('US_04.22 | Trip card functionality', () => {
+describe('US_04.22 | Trip card functionality', () => {
     const AGENT = Cypress.env('agent');
-
-    before(function(){
+   
+    beforeEach(function () {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
-    });
-
-    beforeEach(function () {
+        createBookingPage.clickCalendarNextButton()
+        waitForToolsPing()
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
         })
@@ -49,5 +49,16 @@ describe.only('US_04.22 | Trip card functionality', () => {
                         expect(ordersSequence[i]).to.eq(ordersSortedDesc[i])
                     })
             })   
+    })
+
+    it('AT_04.22.04 | Trip cards are filtered by vehicle class "VIP bus 24" selected from trip class dropdown menu', function () {
+        createBookingPage.selectDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[2])
+        createBookingPage.selectArrivalStation(this.createBookingPage.dropdowns.arrivalStation.stationsNames[3])
+        waitForToolsPing()
+        createBookingPage.getTripClassDropdown().select(this.createBookingPage.dropdowns.tripClass[0])
+
+        createBookingPage.getVehicleClassTripCardsList().filter(':visible').each(($el) => {
+            expect($el.text()).to.eq(this.createBookingPage.dropdowns.tripClass[0])
+        })
     })
 });

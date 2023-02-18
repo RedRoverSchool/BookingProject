@@ -134,7 +134,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                      
                 createBookingPage.getTitleOfSeatsTable()
                     .should('be.visible')
-                    .and('have.text', this.createBookingPage.tripClass[0])
+                    .and('have.text', this.createBookingPage.seatsTableTitle[0])
             });
         });
     });
