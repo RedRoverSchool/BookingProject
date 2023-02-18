@@ -57,7 +57,7 @@ describe('US_04.22 | Trip card functionality', () => {
         waitForToolsPing()
         createBookingPage.getTripClassDropdown().select(this.createBookingPage.dropdowns.tripClass[0])
 
-        createBookingPage.getVehicleClassTripCardsList().filter(':visible').each(($el) => {
+        createBookingPage.getVehicleClassTripCards().filter(':visible').each(($el) => {
             expect($el.text()).to.eq(this.createBookingPage.dropdowns.tripClass[0])
         })
     })
