@@ -72,7 +72,9 @@ class CreateBookingPage {
     getDialCodeArrow = () => cy.get('.iti__selected-flag');    
     getExtraFareTypeData = () => cy.get('.fare-type-box .form-control');
     getExtraFareTypeDrop = () => cy.get('.fare-type-box .select2-selection__rendered');
-    getDropdownPassengerDefault = () => cy.get('.passenger-wrapper option[value="1"]')
+    getDropdownPassengerDefault = () => cy.get('.passenger-wrapper option[value="1"]');
+    getRemovePassengerBtns = () => cy.get('.passenger-row .btn-remove-passenger');
+
     //Seat selection
     getSeatSelectionDropdown = () => cy.get('.layout-wrapper .title select.passengers-amount');
     getSeatSelectionDropdownList = () => cy.get('.layout-wrapper .title select.passengers-amount option');
@@ -355,6 +357,10 @@ class CreateBookingPage {
     
    clickBalanceOnBookingPage() {
     this.getBalanceOnBookingPage().click();
+   }
+
+   clickRemovePassengerBtn(passengerNumber) {
+    this.getRemovePassengerBtns().eq(passengerNumber - 1).click()
    }
 }
 export default CreateBookingPage;
