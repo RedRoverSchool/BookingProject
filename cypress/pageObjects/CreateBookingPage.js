@@ -293,6 +293,7 @@ class CreateBookingPage {
             cy.wrap($el).type('Passenger ' + index)
         })
     }
+    
     clickBookTicketsBtn() {
         this.getBookTicketsButton().click();
     }
