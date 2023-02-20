@@ -89,6 +89,7 @@
     "dataInvalid": {
         "errorMessage": "Something goes wrong. Please contact your country manager.",
         "invalidEmail": "test@qatest.site",
-        "validPassword": "12345678"
+        "validPassword": "12345678", 
+        "lettersInCountryCode": "SK"
     }
 }

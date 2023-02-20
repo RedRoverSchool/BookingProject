@@ -40,4 +40,9 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
         createBookingPage.clickDepartureStationDropdown()
         createBookingPage.getDepartureInputSelectSearchField().should('be.visible')
     });
+
+    it('AT_04.05.06 | Verify that the Arrival station label has color - #666', function() {
+
+        createBookingPage.getLabelArrivalStation().should('have.css','color', this.colors.greyHeader)    
+    })
 });    

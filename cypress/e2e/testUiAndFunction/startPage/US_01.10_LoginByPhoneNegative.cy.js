@@ -19,6 +19,8 @@ describe('US_01.10 | Login by phone negative', () => {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage
         });
+        loginPopup.getCountryCodeInput().clear();
+        loginPopup.getPhoneNumberInput().clear();
     })
 
     it('AT_01.10.01 | Verify that registering is not possible with empty "Country code" input', function () {
@@ -28,9 +30,18 @@ describe('US_01.10 | Login by phone negative', () => {
     });
 
     it('AT_01.10.02 | Verify that registering is not possible with empty "Phone number" input', function () {
-        loginPopup.getPhoneNumberInput().clear()
         loginPopup.enterCountryCode(this.startPage.data.phoneNumber.code)
         loginPopup.clickRequestCodeButton();
         loginPopup.getMessageAlert().should('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
     });
+
+    it('AT_01.10.03 | Verify that registering is not possible with any letters "Country code" input', function () {
+        loginPopup.enterCountryCode(this.startPage.dataInvalid.lettersInCountryCode);
+        loginPopup.enterPhoneNumber(this.startPage.data.phoneNumber.number);
+        loginPopup.clickRequestCodeButton();
+
+        loginPopup.getMessageAlert()
+            .should('be.visible')
+            .and('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
+    })
 })
