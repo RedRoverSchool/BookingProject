@@ -5,7 +5,8 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
-const sortDesc = (array) => array.sort((a, b) => +b.replace(/[^\d+]/g, '') - (+a.replace(/[^\d+]/g, '')))
+const sortDesc = (array) => array.sort((a, b) => +b.replace(/[^\d+]/g, '') - (+a.replace(/[^\d+]/g, '')));
+const sortAsc = (array) => array.sort((a, b) => +a.replace(/[^\d+]/g, '') - (+b.replace(/[^\d+]/g, '')))
 
 describe('US_04.22 | Trip card functionality', () => {
     const AGENT = Cypress.env('agent');
@@ -61,4 +62,20 @@ describe('US_04.22 | Trip card functionality', () => {
             expect($el.text()).to.eq(this.createBookingPage.dropdowns.tripClass[0])
         })
     })
+
+    it('AT_04.22.06| Verify when after clicking on the "Earliest" tab, user should the earliest available trip on a left', function() {
+        createBookingPage.getBtnErliest().should('have.class', 'selected')      
+        const ordersSequence = []
+        createBookingPage.getDepartureTripCardsList().each(($el, i) => {
+                cy.wrap($el)
+                    .invoke('attr', 'style')
+                    .then((orders) => {
+                        ordersSequence.push(orders)
+
+                        let ordersSortedAsc = sortAsc([...ordersSequence])
+
+                        expect(ordersSequence[i]).to.eq(ordersSortedAsc[i])
+                    })
+            })   
+    });
 });
