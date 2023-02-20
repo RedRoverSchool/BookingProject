@@ -35,7 +35,7 @@ describe('US_01.10 | Login by phone negative', () => {
         loginPopup.getMessageAlert().should('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
     });
 
-    it('AT_01.10.03 | Verify that registering is not possible with any letters "Country code" input', function () {
+    it('AT_01.10.03 | Registering is not possible with any letters "Country code" input', function () {
         loginPopup.enterCountryCode(this.startPage.dataInvalid.lettersInCountryCode);
         loginPopup.enterPhoneNumber(this.startPage.data.phoneNumber.number);
         loginPopup.clickRequestCodeButton();
@@ -43,5 +43,15 @@ describe('US_01.10 | Login by phone negative', () => {
         loginPopup.getMessageAlert()
             .should('be.visible')
             .and('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
+    })
+
+    it('AT_01.10.04 | Registering is not possible with any letters "Phone numbe" input', function() {
+        loginPopup.enterCountryCode(this.startPage.data.phoneNumber.code);
+        loginPopup.enterPhoneNumber(this.startPage.dataInvalid.letterInPhoneNumber);
+        loginPopup.clickRequestCodeButton();
+
+        loginPopup.getPhoneNumberAlert()
+        .should('be.visible')
+        .and('have.text', this.startPage.alert.loginPopupByPhoneWrongNumberAlert);
     })
 })
