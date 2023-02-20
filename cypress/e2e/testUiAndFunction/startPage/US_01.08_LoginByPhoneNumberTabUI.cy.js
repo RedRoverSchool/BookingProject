@@ -114,5 +114,5 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         loginPopup
         .getRequestCodeButton()
         .should('have.css', 'color', this.colors.greenPopup)
-});
+})
 });
