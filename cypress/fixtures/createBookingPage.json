@@ -117,5 +117,7 @@
 
     "latestBtnText": "Latest",
 
-    "passengerDefault": "1 passenger"
+    "passengerDefault": "1 passenger",
+
+    "seatSelectoinLabel": "Seat selection"
 }
