@@ -58,6 +58,7 @@ class CreateBookingPage {
     getPassengersDetailsDropdownList = () => cy.get('.passenger-wrapper .title select.passengers-amount option');
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
     getFareTypeDropdown = () => cy.get('[id^="select2-passenger-fare"]');
+    getFareTypeLabel = () => cy.get('.div-fare-type > label');
     getMainPassengerFareTypeDropdownSelect = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
@@ -70,6 +71,7 @@ class CreateBookingPage {
     getMainPassengerSelectedSeatByDefault = () => cy.get('div[class="col-lg-12 passenger-row"] span[class="seat-number"]')
     getPassengerDetailsAssignedSeats = () => cy.get('span.seat-number')
     getSelectedDialCode = () => cy.get('.iti__selected-dial-code');
+    getNotesInputField = () => cy.get('textarea#booking_notes');
     getDialCodeArrow = () => cy.get('.iti__selected-flag');    
     getExtraFareTypeData = () => cy.get('.fare-type-box .form-control');
     getExtraFareTypeDrop = () => cy.get('.fare-type-box .select2-selection__rendered');
