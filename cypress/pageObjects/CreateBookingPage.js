@@ -257,7 +257,7 @@ class CreateBookingPage {
     };
 
     selectAdultFare() {
-        this.getMainPassengerFareTypeDropdownList().each(function ($el) {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(function ($el) {
             if ($el.text() === 'Adult') {
                return cy.wrap($el).click()
             }
@@ -351,7 +351,7 @@ class CreateBookingPage {
      * @param {*} fareType 
      */
     selectFareType(fareType) {
-        this.getMainPassengerFareTypeDropdownList().each(function ($el) {
+        this.getAddedPassengerFareTypeDropdownListOptions().each(function ($el) {
             if ($el.text() === fareType) {
                return cy.wrap($el).click()
             }
