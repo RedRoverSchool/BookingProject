@@ -45,7 +45,7 @@ describe('US_01.10 | Login by phone negative', () => {
             .and('have.text', this.startPage.alert.loginPopupByPhoneMessageAlert);
     })
 
-    it('AT_01.10.04 | Registering is not possible with any letters "Phone numbe" input', function() {
+    it('AT_01.10.04 | Registering is not possible with any letters in "Phone number" input', function() {
         loginPopup.enterCountryCode(this.startPage.data.phoneNumber.code);
         loginPopup.enterPhoneNumber(this.startPage.dataInvalid.letterInPhoneNumber);
         loginPopup.clickRequestCodeButton();
