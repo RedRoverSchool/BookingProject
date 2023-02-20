@@ -275,7 +275,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             createBookingPage.getLabelSeatSelection().should('have.text', this.createBookingPage.seatSelectoinLabel)
             
 
-        })
+        });
     });
 });
 
