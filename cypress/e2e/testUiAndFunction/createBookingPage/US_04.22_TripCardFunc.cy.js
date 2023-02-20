@@ -2,11 +2,9 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
+import { sortDesc, sortAsc } from "../../../support/utilities/sortArrayByDigit";
 
 const createBookingPage = new CreateBookingPage();
-
-const sortDesc = (array) => array.sort((a, b) => +b.replace(/[^\d+]/g, '') - (+a.replace(/[^\d+]/g, '')));
-const sortAsc = (array) => array.sort((a, b) => +a.replace(/[^\d+]/g, '') - (+b.replace(/[^\d+]/g, '')))
 
 describe('US_04.22 | Trip card functionality', () => {
     const AGENT = Cypress.env('agent');
@@ -36,20 +34,20 @@ describe('US_04.22 | Trip card functionality', () => {
     })
 
     it('AT_04.22.02 | Verify trip cards are sorted from latest to earliest time of departure if "latest" button is clicked', function () {
-       createBookingPage.clickDepartureLatestButton()
+        createBookingPage.clickDepartureLatestButton()
         
         const ordersSequence = []
         createBookingPage.getDepartureTripCardsList().each(($el, i) => {
-                cy.wrap($el)
-                    .invoke('attr', 'style')
-                    .then((orders) => {
-                        ordersSequence.push(orders)
+            cy.wrap($el)
+                .invoke('attr', 'style')
+                .then((orders) => {
+                    ordersSequence.push(orders)
 
-                        let ordersSortedDesc = sortDesc(ordersSequence)
+                    let ordersSortedDesc = sortDesc([...ordersSequence])
 
-                        expect(ordersSequence[i]).to.eq(ordersSortedDesc[i])
-                    })
-            })   
+                    expect(ordersSequence[i]).to.eq(ordersSortedDesc[i])
+                })
+        })
     })
 
     it('AT_04.22.04 | Trip cards are filtered by vehicle class "VIP bus 24" selected from trip class dropdown menu', function () {
