@@ -104,6 +104,14 @@ export class LoginPopup {
     enterCodeFromSms(code) {
         this.getCodeFromSmsInput().type(code, { force: true });
     };
+
+    enterEmail(email) {
+        this.getEmailInput().clear().type(email, { force: true });
+    };
+
+    enterPassword(password) {
+        this.getPasswordInput().clear().type(password, { force: true });
+    };
 }
 
 export class RestorePopup {
