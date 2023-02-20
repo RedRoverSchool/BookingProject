@@ -122,5 +122,11 @@
 
     "passengerDefault": "1 passenger",
 
-    "seatSelectoinLabel": "Seat selection"
+    "seatSelectoinLabel": "Seat selection",
+
+    "passengersAmountBoundaryArray300": [
+        "1 passenger",
+        "60 passengers",
+        "300 passengers"
+    ]
 }
