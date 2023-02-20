@@ -31,7 +31,7 @@ describe('US_01.07 | Login by email tab negative', () => {
             .and('have.text',this.startPage.alert.loginPopupMessageAlert);
         });
 
-    it.skip('AT_01.07.02 | Verify the error message after click Sign In with an invalid email', function () {
+    it('AT_01.07.02 | Verify the error message after click Sign In with an invalid email', function () {
         loginPopup.enterEmail(this.startPage.dataInvalid.invalidEmail);
         loginPopup.enterPassword(this.startPage.dataInvalid.validPassword);
         loginPopup.clickByEmailSignInButton();
