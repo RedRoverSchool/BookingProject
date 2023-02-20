@@ -271,29 +271,7 @@ class CreateBookingPage {
             }
         })
     };
-    
-    /**
-     * pass needed fareType in a function ('Adult, Child, Elder) to select option in dropdown
-     * @param {*} fareType 
-     */
-    selectFareType(fareType) {
-        this.getMainPassengerFareTypeDropdownList().each(function ($el) {
-            if ($el.text() === fareType) {
-               return cy.wrap($el).click()
-            }
-        })
-    };
 
-    /**
-     * fills out all displayed name inputs with default names
-     * @returns 'Passenger ' + index
-     */
-    completeMultipleNameFields() {
-        return this.getMainPassengerNameField().each(($el, index) => {
-            cy.wrap($el).type('Passenger ' + index)
-        })
-    }
-    
     clickBookTicketsBtn() {
         this.getBookTicketsButton().click();
     }
@@ -367,5 +345,27 @@ class CreateBookingPage {
    clickRemovePassengerBtn(passengerNumber) {
     this.getRemovePassengerBtns().eq(passengerNumber - 1).click()
    }
+
+    /**
+     * pass needed fareType in a function ('Adult, Child, Elder) to select option in dropdown
+     * @param {*} fareType 
+     */
+    selectFareType(fareType) {
+        this.getMainPassengerFareTypeDropdownList().each(function ($el) {
+            if ($el.text() === fareType) {
+               return cy.wrap($el).click()
+            }
+        })
+    };
+
+    /**
+     * fills out all displayed name inputs with default names
+     * @returns 'Passenger ' + index
+     */
+    completeMultipleNameFields() {
+        return this.getMainPassengerNameField().each(($el, index) => {
+            cy.wrap($el).type('Passenger ' + index)
+        })
+    }
 }
 export default CreateBookingPage;
