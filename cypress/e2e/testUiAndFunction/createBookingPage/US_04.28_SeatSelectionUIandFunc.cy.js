@@ -271,10 +271,9 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 })
             })
         });
+        
         it('AT_04.28.01|The section name "Seat selection" is visible', function (){
             createBookingPage.getLabelSeatSelection().should('have.text', this.createBookingPage.seatSelectoinLabel)
-            
-
         });
     });
 });
