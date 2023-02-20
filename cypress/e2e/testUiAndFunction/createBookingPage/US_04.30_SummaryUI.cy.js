@@ -28,12 +28,15 @@ describe('US_04.30 | Summary UI', () => {
 	});
 
 	beforeEach(function() {
-	cy.fixture('bookingPopup').then(bookingPopup => {
+		cy.fixture('bookingPopup').then(bookingPopup => {
 		this.bookingPopup = bookingPopup;
 		});
+
+		cy.fixture('createBookingPage').then(createBookingPage => {
+		this.createBookingPage = createBookingPage
+		})
 	});
 	
-	context('AT_04.30.01 AT_04.30.03 AT_04.30.02 can be run within the same login', () => {
 		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section', () => {
 			createBookingPage.getPassengersDetailsDropdownList().then($el => {
 				let numberOfPass = getRandomElementOfArray($el)
@@ -120,10 +123,9 @@ describe('US_04.30 | Summary UI', () => {
 				})
 			})
 		})
-	})
 
-	context('AT_04.30.04 | Amount of selected fare type passengers matches the amount on Booking Popup (needs new login)', () => {
-		before(() => {
+context('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
+		beforeEach(() => {
 			cy.visit('/')
 			cy.login(AGENT.email, AGENT.password)
 			createBookingPage.clickCalendarNextButton()
@@ -132,26 +134,32 @@ describe('US_04.30 | Summary UI', () => {
 			cy.wait('@getTrip')
 			createBookingPage.clickSecondTripCard()
 		});
-		it('AT_04.30.04 | Verify that amount of selected fare type passengers matches the amount on Booking Popup', function () {
-		    createBookingPage.getPassengersDetailsDropdown().select(5)
-			createBookingPage.completeMultipleNameFields()
-			createBookingPage.getFareTypeDropdown().each(($el, index) => {
-				if (index <= 2) {
-				  cy.wrap($el).click()
-				  createBookingPage.selectAdultFare()
-				} else if (index <= 4) {
-				  cy.wrap($el).click()
-				  createBookingPage.selectChildFare()
-				} else {
-				  cy.wrap($el).click()
-				  createBookingPage.selectElderFare()
-				}
-			})
-			createBookingPage.clickBookTicketsBtn();
 
-			bookingPopup.getFirstFareType().should('have.text', 3 + this.bookingPopup.passengerPrice.passengerFareTypes.adultFare)
-    		bookingPopup.getSecondFareType().should('have.text', 2 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
-    		bookingPopup.getThirdFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
-		})
-	 })
-});
+		it('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
+		    createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
+			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.getFareTypeDropdown().click()
+			createBookingPage.selectFareType('Adult')
+			createBookingPage.clickBookTicketsBtn();
+			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.adultFare)
+		});
+
+		it('AT_04.30.06 | Verify that selected passenger fare type "Child" matches the amount on Booking Popup', function () {
+			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
+			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.getFareTypeDropdown().click()
+			createBookingPage.selectFareType('Child')
+			createBookingPage.clickBookTicketsBtn();
+			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
+		});
+
+		it('AT_04.30.07 | Verify that selected passenger fare type "Elder" matches the amount on Booking Popup', function () {
+			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
+			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.getFareTypeDropdown().click()
+			createBookingPage.selectFareType('Elder')
+			createBookingPage.clickBookTicketsBtn();
+			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
+		});
+	})
+})

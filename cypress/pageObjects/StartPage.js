@@ -61,7 +61,8 @@ export class LoginPopup {
     getByPhoneSignInButton = () => cy.get('#step2 [value="SIGN IN"]');
     getPhoneNumberInputLabel = () => cy.get('div[class="col-sm-6 col-xs-8"] label');
     getLoginPopupModal =() => cy.get('#loginModal .modal-content');
-
+    getEmailErrorMessage = () => cy.get('.alert.alert-danger');
+   
     // Methods
 
     clickForgotYourPasswordLink() {
@@ -103,6 +104,14 @@ export class LoginPopup {
     enterCodeFromSms(code) {
         this.getCodeFromSmsInput().type(code, { force: true });
     };
+
+    enterEmail(email) {
+        this.getEmailInput().clear().type(email, { force: true });
+    };
+
+    enterPassword(password) {
+        this.getPasswordInput().clear().type(password, { force: true });
+    };
 }
 
 export class RestorePopup {
@@ -115,6 +124,7 @@ export class RestorePopup {
     getRestorePopupCloseButton = () => cy.get('div#restoreModal .modal-header .close');
     getRestorePopupModal = () => cy.get('div#restoreModal');
     getRegisterLink = () => cy.get('.form-horizontal .modal-footer .pull-left a');
+    getEnterEmailAlert = () => cy.get('div.help-block.error')
 
     // Methods
 

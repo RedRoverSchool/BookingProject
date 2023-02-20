@@ -1,11 +1,10 @@
 /// <reference types = "Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import { sortAsc } from  "../../../support/utilities/sortArrayByDigit";
 
 const AGENT = Cypress.env('agent');
 const createBookingPage = new CreateBookingPage();
-
-const sortAsc = (array) => array.sort((a, b) => +a.replace(/[^\d+]/g, '') - (+b.replace(/[^\d+]/g, '')))
 
 describe('US_04.16 | Departure On UI by default', () => {
 
@@ -69,7 +68,7 @@ describe('US_04.16 | Departure On UI by default', () => {
                 .then((orders) => {
                     ordersSequence.push(orders)
 
-                    let ordersSortedAsc = sortAsc(ordersSequence)
+                    let ordersSortedAsc = sortAsc([...ordersSequence])
 
                     expect(ordersSequence[i]).to.eq(ordersSortedAsc[i])
                 })

@@ -134,7 +134,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                      
                 createBookingPage.getTitleOfSeatsTable()
                     .should('be.visible')
-                    .and('have.text', this.createBookingPage.tripClass[0])
+                    .and('have.text', this.createBookingPage.seatsTableTitle[0])
             });
         });
     });
@@ -270,6 +270,10 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     })
                 })
             })
+        });
+        
+        it('AT_04.28.01|The section name "Seat selection" is visible', function (){
+            createBookingPage.getLabelSeatSelection().should('have.text', this.createBookingPage.seatSelectoinLabel)
         });
     });
 });

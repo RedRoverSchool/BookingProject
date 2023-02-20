@@ -54,4 +54,10 @@ describe('US_04.26 | Passengers details functionality - Multiple passengers', ()
             .and('be.visible')
         })
     });
+
+    it('AT_04.26.04 | Verify that only one passenger is removed by clicking the "Remove passenger" button', function() {
+        createBookingPage.clickRemovePassengerBtn(1)
+
+        createBookingPage.getAmountOfChosenPass().should('have.length', chosenAmountPassengers - 1)
+    });
 });
