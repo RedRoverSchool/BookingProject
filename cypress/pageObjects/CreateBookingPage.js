@@ -58,7 +58,7 @@ class CreateBookingPage {
     getPhoneNumberInputFild = () => cy.get('input#passenger-phone');
     getFareTypeDropdown = () => cy.get('[id^="select2-passenger-fare"]');
     getMainPassengerFareTypeDropdownSelect = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
-    getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
+    getMainPassengerFareTypeDropdownList = () => cy.get('[class="select2-results__options"] li');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
@@ -254,9 +254,9 @@ class CreateBookingPage {
     };
 
     selectAdultFare() {
-        this.getAddedPassengerFareTypeDropdownListOptions().each(($el) => {
+        this.getMainPassengerFareTypeDropdownList().each(function ($el) {
             if ($el.text() === 'Adult') {
-                cy.wrap($el).click()
+               return cy.wrap($el).click()
             }
         })
     };
@@ -268,23 +268,26 @@ class CreateBookingPage {
             }
         })
     };
+    
+    /**
+     * pass needed fareType in a function ('Adult, Child, Elder) to select option in dropdown
+     * @param {*} fareType 
+     */
+    selectFareType(fareType) {
+        this.getMainPassengerFareTypeDropdownList().each(function ($el) {
+            if ($el.text() === fareType) {
+               return cy.wrap($el).click()
+            }
+        })
+    };
 
+    /**
+     * fills out all displayed name inputs with default names
+     * @returns 'Passenger ' + index
+     */
     completeMultipleNameFields() {
         return this.getMainPassengerNameField().each(($el, index) => {
-            let defaultPassengerName = 'Passenger ' + index
-            if (index <= 0) {
-                cy.wrap($el).type(defaultPassengerName)
-            } else if (index <= 1) {
-                cy.wrap($el).type(defaultPassengerName)
-            } else if (index <= 2) {
-                cy.wrap($el).type(defaultPassengerName)
-            } else if (index <= 3) {
-                cy.wrap($el).type(defaultPassengerName)
-            } else if (index <= 4) {
-                cy.wrap($el).type(defaultPassengerName)
-            } else {
-                cy.wrap($el).type(defaultPassengerName)
-            }
+            cy.wrap($el).type('Passenger ' + index)
         })
     }
     clickBookTicketsBtn() {
