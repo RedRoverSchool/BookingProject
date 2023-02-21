@@ -163,7 +163,7 @@ context('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger far
 			createBookingPage.clickSecondTripCard()
 		});
 
-		it.skip('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
+		it('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
 		    createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
 			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
@@ -172,7 +172,7 @@ context('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger far
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.adultFare)
 		});
 
-		it.skip('AT_04.30.06 | Verify that selected passenger fare type "Child" matches the amount on Booking Popup', function () {
+		it('AT_04.30.06 | Verify that selected passenger fare type "Child" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
 			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
@@ -181,7 +181,7 @@ context('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger far
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
 		});
 
-		it.skip('AT_04.30.07 | Verify that selected passenger fare type "Elder" matches the amount on Booking Popup', function () {
+		it('AT_04.30.07 | Verify that selected passenger fare type "Elder" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
 			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
