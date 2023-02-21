@@ -92,9 +92,9 @@ class CreateBookingPage {
 
     // Summary section 
     getSeatsNumberColumnSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)');
-    getRowsSummaryList = () => cy.get('.total-wrapper > div.total-row');
+    getRowsSummary = () => cy.get('.total-wrapper > div.total-row');
     getAmountOfPassengersInSummary = () => cy.get('.box-default .total-wrapper  .total-row');
-    getPricesSummaryList = () => cy.get('.total-wrapper > div.total-row span');
+    getPricesSummary = () => cy.get('.total-wrapper > div.total-row span');
     getTotalPriceSummary = () => cy.get('.box-footer span.total-price.right');
 
     //Total - Footer section                  

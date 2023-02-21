@@ -1,7 +1,9 @@
 {
     "alert": {
         "restorePasswordPopup": {
-            "alertMessage": "Please check your email with the password restore instructions"
+            "alertMessage": "Please check your email with the password restore instructions",
+            "enterEmailAlert": "Please enter your email",
+            "wrongEmail": "Wrong email"
         },
         "registerPopupErrorMessage": {
             "emptyNameField": "Please enter your name",
@@ -85,7 +87,8 @@
         "phoneNumber": {
             "code": 66,
             "number": 616161616
-        }
+        },
+        "invalidEmail": "test@@qatest.site"
     },
     "dataInvalid": {
         "errorMessage": "Something goes wrong. Please contact your country manager.",
