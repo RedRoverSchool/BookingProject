@@ -124,19 +124,33 @@ describe('US_04.30 | Summary UI', () => {
 			})
 		})
 	
-	it ('AT_04.30.08 | Verify total price for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
-		createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.passengerDefault)
-		let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
+	    it('AT_04.30.08 | Verify price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
+		    createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.passengerDefault)
+		    let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 		
-		for (let i = 0; i < fareTypesArray.length; i++ ) {
-			createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true })
+		    for (let i = 0; i < fareTypesArray.length; i++ ) {
+			createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true } )
 			
 			createBookingPage.getPricesSummary().then(($el) => {
 				let actualPrice = $el.text()
 				expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
 			})
 		}
-		})
+	})
+	
+	    it('AT_04.30.09 | Verify total price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
+		    createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.passengerDefault)
+		    let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
+
+		    for (let i = 0; i < fareTypesArray.length; i++) {
+			createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true })
+
+			createBookingPage.getTotalPriceSummary().then(($el) => {
+				let actualPrice = $el.text()
+				expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
+			})
+		}
+	})
 
 context('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
 		beforeEach(() => {

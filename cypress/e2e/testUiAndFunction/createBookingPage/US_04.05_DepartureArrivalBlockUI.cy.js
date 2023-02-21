@@ -45,4 +45,9 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
 
         createBookingPage.getLabelArrivalStation().should('have.css','color', this.colors.greyHeader)    
     })
+
+    it('AT_04.05.04 | Verify that the Departure station label has font - 15px sans-serif', function() {
+
+        createBookingPage.getLabelDepartureStation().should('have.css', 'font-size', this.createBookingPage.departureStationLabelFont)
+    });
 });    
