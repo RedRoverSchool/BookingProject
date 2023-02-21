@@ -33,6 +33,10 @@ describe('US_05.04 | Date filter functionality', () => {
     it('AT_05.04.01 Verify that the "filterDateType" dropdown is clickable', function() {  
         bookingsListPage.clickDateRangeType()
     });
+    
+    it('AT_05.04.02 Verify that the "calendar" dropdown is clickable', function() {  
+        bookingsListPage.clickDatesRangeDropdown()
+    });
 });
 
 
