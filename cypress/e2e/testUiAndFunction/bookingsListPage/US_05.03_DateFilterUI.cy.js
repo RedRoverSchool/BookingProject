@@ -6,11 +6,6 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 const bookingsListPage = new BookingsListPage();
 const leftMenuPanel = new LeftMenuPanel();
 
-function formatDate(date) {
-    const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' }
-    return date.toLocaleString('en-US', optionsDate)
-        .replace(/(\S{3}).(\d{1,2})(.).(\d{4})/, "$2 $1$3 $4")
-}
 
 describe('US_05.03 | Date filter UI', () => {
 
@@ -35,11 +30,8 @@ describe('US_05.03 | Date filter UI', () => {
     });
     
     it('AT_05.03.02 | Verify that the "calendar" dropdown has defaulted to the current date in format DD MMM, YYYY', function () {
-        const today = new Date()
-        const past7Date = new Date(new Date().setDate(today.getDate() - 6))
-
-        const todayFormatted = formatDate(today)
-        const past7DateFormatted = formatDate(past7Date)
+        const todayFormatted = bookingsListPage.getDateFromCurrentDDMMMYYYY(0)
+        const past7DateFormatted = bookingsListPage.getDateFromCurrentDDMMMYYYY(-6)
 
         bookingsListPage.getDrdnDatesRangeDefaultValue()
             .should('have.text', `${past7DateFormatted} - ${todayFormatted}`)
