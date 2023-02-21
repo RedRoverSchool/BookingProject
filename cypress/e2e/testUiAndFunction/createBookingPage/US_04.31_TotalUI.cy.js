@@ -36,4 +36,8 @@ describe('US_04.31 | Total UI', () => {
     it('AT_04.31.05 | Verify that the button “Book tickets” is visible', () => {
         createBookingPage.getBookTicketsButton().should('be.visible')
     });
+
+    it('AT_04.31.06 | Verify that button “Book tickets” has a background color (#FFF) after navigating on it.', function () {
+        createBookingPage.getBookTicketsButton(). should('have.css', 'color', this.colors.white)
+    });
 })
