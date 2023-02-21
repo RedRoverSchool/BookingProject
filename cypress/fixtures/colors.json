@@ -1,5 +1,6 @@
 {
     "greenBookingPage": "rgb(0, 166, 90)",
+    "lightGreenBookingPage": "rgb(237, 248, 237)",
     "greenStartPage": "rgb(0, 128, 0)",
     "greenPopup": "rgb(108, 205, 102)",
     "greenSeat": "rgb(157, 208, 157)",

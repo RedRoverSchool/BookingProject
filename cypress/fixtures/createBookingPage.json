@@ -122,5 +122,9 @@
 
     "passengerDefault": "1 passenger",
 
-    "seatSelectoinLabel": "Seat selection"
+    "seatSelectoinLabel": "Seat selection",
+
+    "selectedDateLabel": {
+        "front_size": "22.5px"
+    }
 }
