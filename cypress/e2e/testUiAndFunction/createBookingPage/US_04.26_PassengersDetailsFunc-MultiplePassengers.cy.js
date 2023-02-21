@@ -60,4 +60,34 @@ describe('US_04.26 | Passengers details functionality - Multiple passengers', ()
 
         createBookingPage.getAmountOfChosenPass().should('have.length', chosenAmountPassengers - 1)
     });
+
+    context('Section of main passenger', () => {
+
+        before(() => {
+            cy.visit('/');
+            //cy.login(AGENT.email, AGENT.password);
+            
+            //Precondition
+            createBookingPage.clickCalendarNextButton();
+            cy.intercept('/tools/**').as('getTrip');
+            cy.wait('@getTrip');
+            createBookingPage.clickFirstTripCard();            
+        });  
+
+        it.only('AT_04.26.05 | Verify all info about main passenger is not deleted after selecting different number of passengers', function() {
+            createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+            createBookingPage.selectCountryPhoneCode(this.createBookingPage.inputField.main_passenger.country)
+            createBookingPage.typeIntoMainPassengerPhoneField(this.createBookingPage.inputField.main_passenger.phone)
+            createBookingPage.typeIntoMainPassengerEmailField(this.createBookingPage.inputField.main_passenger.email)
+            createBookingPage.selectFareTypeMainPassenger(this.createBookingPage.dropdowns.fareType.fareTypesNames[2])
+            createBookingPage.selectAmountPassengersDetailsDropdown(chosenAmountPassengers)
+
+            
+            
+           
+        })
+
+
+
+    })
 });
