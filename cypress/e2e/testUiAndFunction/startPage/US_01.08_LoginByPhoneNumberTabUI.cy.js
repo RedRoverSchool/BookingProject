@@ -109,4 +109,10 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         .getRequestCodeButton()
         .should('be.visible')
     })
+
+    it('AT_01.08.15 | Verify `REQUEST CODE` button has color - #6CCD66', function () {
+        loginPopup
+        .getRequestCodeButton()
+        .should('have.css', 'color', this.colors.greenPopup)
+})
 });
