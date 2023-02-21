@@ -71,6 +71,18 @@ class BookingsListPage {
     clickStatusDropDown() {
         this.getDrdnStatus().click({force: true})
     }
+
+    getDate(days) {
+        const current = new Date()
+        return new Date(current.setDate(current.getDate() + days))
+    }
+    getDateFromCurrentDDMMMYYYY(days) {
+        const date = this.getDate(days)
+        const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' }
+        return date.toLocaleString('en-US', optionsDate)
+            .replace(/(\S{3}).(\d{1,2})(.).(\d{4})/, "$2 $1$3 $4")
+    }
+    
 }
 
 export default BookingsListPage;

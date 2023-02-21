@@ -4,6 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../../pageObjects/BookingPopup";
 import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
 import getArray from "../../../support/utilities/getArray";
+import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
@@ -22,8 +23,7 @@ describe('US_04.30 | Summary UI', () => {
 		cy.login(AGENT.email, AGENT.password)
 		createBookingPage.clickCalendarNextButton()
 		createBookingPage.clickFridayButton()
-		cy.intercept('/tools/**').as('getTrip')
-		cy.wait('@getTrip')
+		waitForToolsPing()
 		createBookingPage.clickSecondTripCard()
 	});
 
@@ -61,7 +61,7 @@ describe('US_04.30 | Summary UI', () => {
 					.then((value) => {
 						let chosenNumOfPassengers = +value
 
-						createBookingPage.getRowsSummaryList().then(($el) => {
+						createBookingPage.getRowsSummary().then(($el) => {
 							let numberOfRows = $el
 							expect(chosenNumOfPassengers).to.eq(numberOfRows.length)
 
@@ -112,7 +112,7 @@ describe('US_04.30 | Summary UI', () => {
 					createBookingPage.selectElderFare()
 				}
 			})
-			createBookingPage.getPricesSummaryList().then(($el) => {
+			createBookingPage.getPricesSummary().then(($el) => {
 				const prices = getArray($el)
 
 				const finalPrice = "USD" + " " + sumOfArray(prices)
@@ -122,6 +122,20 @@ describe('US_04.30 | Summary UI', () => {
 					expect(finalPrice).to.deep.eq(totalPrice)
 				})
 			})
+		})
+	
+	it ('AT_04.30.08 | Verify total price for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
+		createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.passengerDefault)
+		let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
+		
+		for (let i = 0; i < fareTypesArray.length; i++ ) {
+			createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true })
+			
+			createBookingPage.getPricesSummary().then(($el) => {
+				let actualPrice = $el.text()
+				expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
+			})
+		}
 		})
 
 context('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
