@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage.js";
 
 const AGENT = Cypress.env('agent');
@@ -12,8 +13,7 @@ describe('US_04.17 | Departure on trip selected UI', function () {
         cy.login(AGENT.email, AGENT.password);
 
         createBookingPage.clickCalendarNextButton();
-        cy.intercept('/tools/**').as('getTrip');
-        cy.wait('@getTrip');
+        waitForToolsPing()
         createBookingPage.clickFirstTripCard();
     });
 
