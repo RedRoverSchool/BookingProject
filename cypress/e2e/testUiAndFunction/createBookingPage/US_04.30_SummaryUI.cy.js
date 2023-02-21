@@ -124,19 +124,16 @@ describe('US_04.30 | Summary UI', () => {
 			})
 		})
 	
-	it('AT_04.30.08 | Verify total price for one passenger for each fare type (Elder, Child, Adult) matches price displayed in summary section', function () {
+	it ('AT_04.30.08 | Verify total price for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
 		createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.passengerDefault)
 		let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 		
-		for (let faretype of fareTypesArray) {
-			createBookingPage.getMainPassengerFareTypeDropdownSelect().select(faretype, { force: true })
+		for (let i = 0; i < fareTypesArray.length; i++ ) {
+			createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true })
 			
 			createBookingPage.getPricesSummary().then(($el) => {
-				let priceFromSummary = $el.text()
-				createBookingPage.getTotalPriceSummary().then(($el) => {
-					let totalPriceSummary = $el.text()
-					expect(priceFromSummary).to.eq(totalPriceSummary)
-				})
+				let actualPrice = $el.text()
+				expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
 			})
 		}
 		})
