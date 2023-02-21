@@ -104,7 +104,6 @@ class CreateBookingPage {
     getTotalPriceLabel = () => cy.get('.footer-book-wrapper > :first-child');
     getBookTicketsButton = () => cy.get('[class="btn btn-book"]');
     getResetButton = () => cy.get('[class="btn btn-reset-form"]');
-    getBookTicketsButton = () => cy.get('[class="btn btn-book"]');
 
     // Credit Balance
     getBalanceAmountOnBookingPage = () => cy.get("span#agent-balance");
