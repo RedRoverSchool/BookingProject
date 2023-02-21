@@ -32,4 +32,8 @@ describe('US_04.31 | Total UI', () => {
     it('AT_04.31.04 | Verify that button “Reset” has a font color (#00a65a)', function () {
         createBookingPage.getResetButton().should('have.css', 'color', this.colors.greenBookingPage)
     });
+
+    it('AT_04.31.05 | Verify that the button “Book tickets” is visible', () => {
+        createBookingPage.getBookTicketsButton().should('be.visible')
+    });
 })
