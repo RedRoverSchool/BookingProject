@@ -122,5 +122,8 @@
 
     "passengerDefault": "1 passenger",
 
-    "seatSelectoinLabel": "Seat selection"
+    "seatSelectoinLabel": "Seat selection", 
+
+   "pricesForFerryAdultChildElder" : ["USD 12.75", "USD 12","USD 6"]
+    
 }
