@@ -115,4 +115,14 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
              })
          })
     })
+
+    it('AT_04.29.06 |Verify that when you select a random number of passengers in the "Seat Selection" drop down list, it is equal to the number of passengers in the "Passenger Information" drop-down list', function() {
+        createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then(($el) => {
+            let amountOfPass = $el.split(" ")[0];
+            createBookingPage.getSeatSelectionDropdown().select(amountOfPass);
+            createBookingPage
+                .getPassengersDetailsDropdown()
+                .should("have.value", amountOfPass);
+        });
+    });
 });
