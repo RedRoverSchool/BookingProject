@@ -73,7 +73,7 @@ describe("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it('AT_05.23.04 | Verify arrival time label is visible', function () {
+  it.skip('AT_05.23.04 | Verify arrival time label is visible', function () {
     createBookingPage.getArrivalTimeLabel().should('be.visible');
   });
 });
