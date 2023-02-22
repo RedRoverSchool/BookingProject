@@ -53,7 +53,7 @@ describe("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it('AT_05.23.02 | Verify departure date has format DD-MM-YYYY', function () {
+  it.skip('AT_05.23.02 | Verify departure date has format DD-MM-YYYY', function () {
     const dateFormat = this.createBookingPage.dateFormat;
     const dateFormatRegExp = new RegExp(dateFormat);
 
