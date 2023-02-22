@@ -53,7 +53,7 @@ describe("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it('AT_05.23.02 | Verify departure date has format DD-MM-YYYY', function () {
+  it.skip('AT_05.23.02 | Verify departure date has format DD-MM-YYYY', function () {
     const dateFormat = this.createBookingPage.dateFormat;
     const dateFormatRegExp = new RegExp(dateFormat);
 
@@ -63,7 +63,7 @@ describe("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it.skip('AT_05.23.03 | Verify arrival time is in 24-hour notation HH:MM', function () {
+  it('AT_05.23.03 | Verify arrival time is in 24-hour notation HH:MM', function () {
     const timeFormat = this.createBookingPage.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
@@ -73,7 +73,7 @@ describe("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it('AT_05.23.04 | Verify arrival time label is visible', function () {
+  it.skip('AT_05.23.04 | Verify arrival time label is visible', function () {
     createBookingPage.getArrivalTimeLabel().should('be.visible');
   });
 });

@@ -128,6 +128,11 @@
 
    "pricesForFerryAdultChildElder" : ["USD 12.75", "USD 12", "USD 6"],
 
-   "departureStationLabelFont": "15px"
-    
+   "departureStationLabelFont": "15px",
+
+    "passengersAmountBoundaryArray300": [
+        "1 passenger",
+        "60 passengers",
+        "300 passengers"
+    ]
 }

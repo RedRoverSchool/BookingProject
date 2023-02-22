@@ -63,6 +63,10 @@ describe('US_05.03 | Date filter UI', () => {
                     this.bookingsListPage.dropDown.datesRangeType.datesRangeTypeName[i]);
         });
     });
+
+    it('AT_05.03.03 Verify that the "calendar" dropdown is displayed', function() {  
+        bookingsListPage.getDrdnDatesRangeDefaultValue().should('be.visible')
+    });
 });
 
 
