@@ -126,6 +126,10 @@
 
     "seatSelectoinLabel": "Seat selection", 
 
+    "selectedDateLabel": {
+        "front_size": "22.5px"
+    },
+
    "pricesForFerryAdultChildElder" : ["USD 12.75", "USD 12", "USD 6"],
 
    "departureStationLabelFont": "15px",
