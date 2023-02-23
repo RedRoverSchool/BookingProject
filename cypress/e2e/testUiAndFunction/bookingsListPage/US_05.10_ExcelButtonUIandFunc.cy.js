@@ -35,7 +35,7 @@ describe('US_05.10 Excel button UI and functionality', () => {
             .should('have.text', this.bookingsListPage.buttons.excelButtonName);
         bookingListPage
             .getExcelButtonIcon()
-            .should('have.attr', 'class', this.bookingsListPage.buttons.excelButtonIcon);
+            .should('have.attr', 'class', this.bookingsListPage.buttons.excelButtonIcon);    
     });
 
     it('AT_05.10.03 | Verify the "Excel" button is clickable, downloads the file with extension ".csv" and its name contain defaullt dates range (dropdown) ', function () {
