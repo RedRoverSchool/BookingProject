@@ -74,6 +74,12 @@ describe('US_04.23 | Passengers details default UI', () => {
         createBookingPage.getDropdownPassengerDefault().should('have.text', this.createBookingPage.passengerDefault)
     });
 
+    it('AT_04.23.12 | Verify "Notes/Remark" label is present and visible.', function ()  {
+        createBookingPage
+            .getNotesRemarkLabel()
+            .should('be.visible');
+    });
+       
     it('AT_04.23.13 | Verify Fare type has “Adult” option displayed by default.', function ()  {
         createBookingPage
             .getFareTypeDropdown()

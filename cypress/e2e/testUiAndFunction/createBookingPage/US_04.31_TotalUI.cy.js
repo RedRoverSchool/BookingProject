@@ -40,4 +40,12 @@ describe('US_04.31 | Total UI', () => {
     it('AT_04.31.06 | Verify that button “Book tickets” has a background color (#FFF) after navigating on it.', function () {
         createBookingPage.getBookTicketsButton(). should('have.css', 'color', this.colors.white)
     });
+
+    it('AT_04.31.08 |  Verify that dropdown-toggle button is visible', () => {
+        createBookingPage.getDropdownToggleButton().should('be.visible')
+    });
+
+    it('AT_04.31.07 | Verify that the dropdown-toggle button has color (#FFF', function () {
+        createBookingPage.getDropdownToggleButton().should('have.css', 'color',  this.colors.white)
+    });
 })

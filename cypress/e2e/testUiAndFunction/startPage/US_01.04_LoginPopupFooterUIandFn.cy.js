@@ -32,4 +32,8 @@ describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
     it('AT_01.04.02 | Verify the link Register is visible in the footer', () => {
         loginPopup.getRegisterLink().should('be.visible')
     });
+
+    it('AT_01.04.04 | Verify the text "No account yet?" is visible in the footer', function () {
+        loginPopup.getNoAccountYet().should('be.visible')
+    });
 })

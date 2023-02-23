@@ -60,6 +60,8 @@
     "inputField": {
         "main_passenger": {
             "name": "Stephan",
+            "country": "United States",
+            "phoneCountryCode": "+1",
             "phone": "291234567",
             "email": "hello@test.plus",
             "placeholderPhoneNumberTh": "เบอร์โทรศัพท์",
@@ -123,6 +125,10 @@
     "passengerDefault": "1 passenger",
 
     "seatSelectoinLabel": "Seat selection", 
+
+    "selectedDateLabel": {
+        "front_size": "22.5px"
+    },
 
    "pricesForFerryAdultChildElder" : ["USD 12.75", "USD 12", "USD 6"],
 

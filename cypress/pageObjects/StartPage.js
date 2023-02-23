@@ -62,6 +62,7 @@ export class LoginPopup {
     getPhoneNumberInputLabel = () => cy.get('div[class="col-sm-6 col-xs-8"] label');
     getLoginPopupModal =() => cy.get('#loginModal .modal-content');
     getEmailErrorMessage = () => cy.get('.alert.alert-danger');
+    getNoAccountYet = () => cy.get('#loginModal .pull-left');
    
     // Methods
 
