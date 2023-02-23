@@ -7,7 +7,6 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   defaultCommandTimeout: 15000,
   requestTimeout: 15000,
-  trashAssetsBeforeRuns: true,
   e2e: {
     baseUrl: 'https://qatest.site',
     setupNodeEvents(on, config) {
