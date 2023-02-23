@@ -12,38 +12,115 @@
         "header": "value"
     },
     "columns": {
-        "default": ["#", "ID", "Booking date", "Route", "Departure date", "Departure time", "Vehicle", "Seats", "Contact", "Price, USD", "Status", "Expire"],
-        "id": ["#", "ID"],
-        "bookingDate": ["#", "Booking date"],
-        "route": ["#", "Route"],
-        "departureDate": ["#", "Departure date"],
-        "departureTime": ["#", "Departure time"],
-        "vehicle": ["#", "Vehicle"],
-        "channelAgent": ["#", "Channel / Agent"],
-        "seats": ["#", "Seats"],
-        "numbers": ["#", "Numbers"],
-        "contact": ["#", "Contact"],
-        "priceUsd": ["#", "Price, USD"],
-        "status": ["#", "Status"],
-        "expire": ["#", "Expire"],
-        "notes": ["#", "Notes"],
-        "idNotes": ["#", "ID", "Notes"],
-        "seatsStatus": ["#", "Seats", "Status"],
-        "routeVehicle": ["#", "Route", "Vehicle"]
+        "default": [
+            "#",
+            "ID",
+            "Booking date",
+            "Route",
+            "Departure date",
+            "Departure time",
+            "Vehicle",
+            "Seats",
+            "Contact",
+            "Price, USD",
+            "Status",
+            "Expire"
+        ],
+        "id": [
+            "#",
+            "ID"
+        ],
+        "bookingDate": [
+            "#",
+            "Booking date"
+        ],
+        "route": [
+            "#",
+            "Route"
+        ],
+        "departureDate": [
+            "#",
+            "Departure date"
+        ],
+        "departureTime": [
+            "#",
+            "Departure time"
+        ],
+        "vehicle": [
+            "#",
+            "Vehicle"
+        ],
+        "channelAgent": [
+            "#",
+            "Channel / Agent"
+        ],
+        "seats": [
+            "#",
+            "Seats"
+        ],
+        "numbers": [
+            "#",
+            "Numbers"
+        ],
+        "contact": [
+            "#",
+            "Contact"
+        ],
+        "priceUsd": [
+            "#",
+            "Price, USD"
+        ],
+        "status": [
+            "#",
+            "Status"
+        ],
+        "expire": [
+            "#",
+            "Expire"
+        ],
+        "notes": [
+            "#",
+            "Notes"
+        ],
+        "idNotes": [
+            "#",
+            "ID",
+            "Notes"
+        ],
+        "seatsStatus": [
+            "#",
+            "Seats",
+            "Status"
+        ],
+        "routeVehicle": [
+            "#",
+            "Route",
+            "Vehicle"
+        ]
     },
     "inputFields": {
         "searchPlaceholder": "Search",
         "bookingIdPlaceholder": "Booking ID",
         "statusPlaceholder": "Status",
         "routeText": "Route",
-        "vehicleText": "Vehicle"      
+        "vehicleText": "Vehicle"
     },
     "links": {
         "filterClear": "Clear"
     },
-    
-    "dropDown":{
-        "datesRange": ["Today", "Tomorrow", "Yesterday", "Next 7 Days", "Last 7 Days", "Last 30 Days", "Next Month", "This Month", "Last Month", "Custom Range"],
+    "dropDown": {
+        "datesRange": [
+            "Today",
+            "Tomorrow",
+            "Yesterday",
+            "Next 7 Days",
+            "Last 7 Days",
+            "Last 30 Days",
+            "Next Month",
+            "This Month",
+            "Last Month",
+            "Custom Range"
+        ],
         "datesRangeType": {
             "dateRangeTypeText": "By purchase date",
             "datesRangeTypeNumber": 2,
@@ -52,6 +129,11 @@
                 "By purchase date"
             ]
         },
-        "statusNoResult": "No results found"        
-    }                                                                                                                            
+        "statusNoResult": "No results found"
+    },
+    
+    "path": {
+        "folder": "cypress/downloads/Bookings ",
+        "extension": ".csv"
+    }
 }

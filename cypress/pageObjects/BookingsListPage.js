@@ -83,6 +83,23 @@ class BookingsListPage {
             .replace(/(\S{3}).(\d{1,2})(.).(\d{4})/, "$2 $1$3 $4")
     }
     
+    clickExcelButton(){
+        this.getExcelButton().click();
+    }
+
+    getDateYYYYMMDD(date) {
+        const optionsDate = { day: 'numeric', month: 'numeric', year: 'numeric' }
+        optionsDate.month = optionsDate.day = '2-digit';
+        return date.toLocaleString('en-US', optionsDate)
+            .replace(/(\d{2}).(\d{2}).(\d{4})/, '$3-$1-$2')
+    }
+
+    formatteddDatesRangeYYYYMMDD(dates) {
+        const arrayDatesRange = dates.split(' - ')
+        let day0 = this.getDateYYYYMMDD(new Date(arrayDatesRange[0]))
+        let day1 = this.getDateYYYYMMDD(new Date(arrayDatesRange[1]))
+        return `${day0} - ${day1}`
+    }
 }
 
 export default BookingsListPage;

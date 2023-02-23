@@ -21,6 +21,10 @@ describe('US_05.10 Excel button UI and functionality', () => {
         });
     });
 
+    after(function () {
+        cy.task('deleteFolder')
+    });
+
     it('AT_05.10.01 Verify "Excel" button is displayed', () => {
         bookingListPage.getExcelButton().should('be.visible');
     });
@@ -31,6 +35,17 @@ describe('US_05.10 Excel button UI and functionality', () => {
             .should('have.text', this.bookingsListPage.buttons.excelButtonName);
         bookingListPage
             .getExcelButtonIcon()
-            .should('have.attr', 'class', this.bookingsListPage.buttons.excelButtonIcon);    
+            .should('have.attr', 'class', this.bookingsListPage.buttons.excelButtonIcon);
+    });
+
+    it('AT_05.10.03 | Verify the "Excel" button is clickable, downloads the file with extension ".csv" and its name contain defaullt dates range (dropdown) ', function () {
+        bookingListPage.getDrdnDatesRangeDefaultValue()
+            .then(($rangeDates) => {
+                let expectedFormattedRrangeDates = bookingListPage.formatteddDatesRangeYYYYMMDD($rangeDates.text())
+                let expectedFilePath = this.bookingsListPage.path.folder + expectedFormattedRrangeDates + this.bookingsListPage.path.extension
+
+                bookingListPage.clickExcelButton()
+                cy.readFile(expectedFilePath)
+            })
     });
 });
