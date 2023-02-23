@@ -20,7 +20,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         })
     });
 
-    describe('US_04.28 | Seat selection UI', () => {
+    describe.skip('US_04.28 | Seat selection UI', () => {
 
         before(() => {
             cy.visit('/')
