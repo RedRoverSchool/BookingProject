@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
@@ -47,5 +48,11 @@ describe('US_04.31 | Total UI', () => {
 
     it('AT_04.31.07 | Verify that the dropdown-toggle button has color (#FFF', function () {
         createBookingPage.getDropdownToggleButton().should('have.css', 'color',  this.colors.white)
+    });
+
+    it('AT_04.31.09 | Verify that the pop up button “Reserve tickets” is visible', () => {
+        createBookingPage.clickSecondTripCard()
+        createBookingPage.clickReservationTicketArrow()
+        createBookingPage.getReservationTicketButton().should('be.visible')
     });
 })
