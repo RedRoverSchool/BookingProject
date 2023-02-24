@@ -152,6 +152,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 cy.login(AGENT.email, AGENT.password)
         
                 createBookingPage.selectDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[7])
+                waitForToolsPing()
                 createBookingPage.clickCalendarNextButton()
                 waitForToolsPing()
                 createBookingPage.clickFirstTripCard()
@@ -166,7 +167,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                         .select(numberOfPass)
                         .invoke('val').then((value) => {
                             let chosenNumOfPassengers = +value
-                            waitForToolsPing()
+                        
                             createBookingPage.getSelectedSeats()
                                 .then(($el) => {
                                 let defaultNumberOfSelectedSeats = $el.length
@@ -216,8 +217,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     .select(index)
                     .invoke('val').then((value) => {
                         let chosenNumOfPassengers = +value
-                        
-                        waitForToolsPing()
+
                         createBookingPage.getSelectedSeats().click({ multiple: true })
                         
                         for (let i = 1; i <= Math.ceil(chosenNumOfPassengers / 3); i++) {
