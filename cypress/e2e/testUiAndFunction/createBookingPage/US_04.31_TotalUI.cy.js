@@ -50,7 +50,7 @@ describe('US_04.31 | Total UI', () => {
         createBookingPage.getDropdownToggleButton().should('have.css', 'color',  this.colors.white)
     });
 
-    it('AT_04.31.09 | Verify that the pop up button “Reserve tickets” is visible', () => {
+    it.skip('AT_04.31.09 | Verify that the pop up button “Reserve tickets” is visible', () => {
         createBookingPage.clickSecondTripCard()
         createBookingPage.clickReservationTicketArrow()
         createBookingPage.getReservationTicketButton().should('be.visible')

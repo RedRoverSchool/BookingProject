@@ -43,4 +43,11 @@ describe('US_04.24 | Multiple passengers UI', () => {
             .should('have.attr', 'title')
             .and('equal', this.createBookingPage.dropdowns.fareType.fareTypesNames[0]);
     });
+
+    it('AT_04.24.04 | Verify Notes/Remark input field has a “Booking notes” text placeholder and is visible', function ()  {
+        createBookingPage
+            .getNotesInputField()
+            .should('be.visible')
+            .and('have.attr', 'placeholder', this.createBookingPage.placeholder.notes);
+    });
 });    

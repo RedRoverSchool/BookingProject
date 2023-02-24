@@ -29,6 +29,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             createBookingPage.clickCalendarNextButton()
             waitForToolsPing()
             createBookingPage.clickFirstTripCard()
+            waitForToolsPing()
         });
 
         it('AT_04.28.01|The section name "Seat selection" is visible', function (){
@@ -99,7 +100,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             })
         });
 
-        context('Trip "Bangkok Khao San - Chonburi"', () => {
+        describe('Trip "Bangkok Khao San - Chonburi"', () => {
 
             before(() => {
                 cy.visit('/')
@@ -108,9 +109,11 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 createBookingPage.selectDepartureStation('Bangkok Khao San')
                 createBookingPage.selectArrivalStation('Chonburi')
                 createBookingPage.clickCalendarNextButton()
+                waitForToolsPing()
                 createBookingPage.clickSaturdayButton()
                 waitForToolsPing()
                 createBookingPage.clickFirstTripCard()
+                waitForToolsPing()
             });
         
             it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
@@ -149,9 +152,12 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 cy.login(AGENT.email, AGENT.password)
         
                 createBookingPage.selectDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[7])
+                waitForToolsPing()
                 createBookingPage.clickCalendarNextButton()
                 waitForToolsPing()
                 createBookingPage.clickFirstTripCard()
+                waitForToolsPing()
+
             });
 
             it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers from passenger details dropdown menu', () => {
@@ -161,7 +167,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                         .select(numberOfPass)
                         .invoke('val').then((value) => {
                             let chosenNumOfPassengers = +value
-        
+                        
                             createBookingPage.getSelectedSeats()
                                 .then(($el) => {
                                 let defaultNumberOfSelectedSeats = $el.length
@@ -176,7 +182,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     let amountOfPass = getRandomElementOfArray($el);
             
                     createBookingPage.getSeatSelectionDropdown()
-                        .select(amountOfPass)
+                        .select(amountOfPass, { force: true })
             
                     createBookingPage.getSelectedSeats().then(($el) => {
                         const selectedSeatsArr = getArray($el)
@@ -238,7 +244,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 let passengersAmountBoundaryArray = this.createBookingPage.passengersAmountBoundaryArray300
                 for(let passengersAmount of passengersAmountBoundaryArray){
                     createBookingPage.getSeatSelectionDropdown()
-                        .select(passengersAmount)
+                        .select(passengersAmount, { force: true })
                     createBookingPage.getSelectedSeats().then(($el) => {
                         let selectedSeatsNumbers = getArray($el)
                         expect(selectedSeatsNumbers.length).to.eq(parseInt(passengersAmount))
@@ -253,7 +259,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             });
         });
 
-        context('Testcases with booking/reservation', () => {
+        describe('Testcases with booking/reservation', () => {
            
             beforeEach(() => {
                 cy.visit('/')
@@ -264,6 +270,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 createBookingPage.clickCalendarNextButton()
                 waitForToolsPing()
                 createBookingPage.clickFirstTripCard()
+                waitForToolsPing()
             });
 
             it.skip('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {      

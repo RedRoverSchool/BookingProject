@@ -384,17 +384,12 @@ class CreateBookingPage {
 
     selectCountryPhoneCode(country) {
         this.getSelectedDialCode().click()
-        this.getAllCountryCodes().each($el => {
-            if ($el.text() == country) {
-                cy.wrap($el).click()
-            }
-        })
+        this.getAllCountryCodes().contains(country).click()
     }
 
     selectFareTypeMainPassenger(FareType) {
-        this.getMainPassengerFareTypeDropdownSelect().each($el => {
-            cy.wrap($el).select(FareType, { force: true })         
-        })
+        this.getMainPassengerFareTypeDropdownSelect()
+            .select(FareType, { force: true })        
     }
 }
 export default CreateBookingPage;

@@ -67,15 +67,15 @@ describe('US_04.26 | Passengers details functionality - Multiple passengers', ()
             createBookingPage.selectAmountPassengersDetailsDropdown(1)            
         });
 
-        it('Verify the data into Main passenger name input field', function() {
+        it('Verify Main passenger name input field data', function() {
             createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
             createBookingPage.selectAmountPassengersDetailsDropdown(chosenAmountPassengers)
 
             createBookingPage.getMainPassengerNameField()
                 .should('have.value', this.createBookingPage.inputField.main_passenger.name)           
         });
-
-        it('Verify the phone country code in Main passenger phone country code dropdown', function() {
+        
+        it('Verify Main passenger phone country code data', function() {
             createBookingPage.selectCountryPhoneCode(this.createBookingPage.inputField.main_passenger.country)
             createBookingPage.selectAmountPassengersDetailsDropdown(chosenAmountPassengers)
 
@@ -83,7 +83,7 @@ describe('US_04.26 | Passengers details functionality - Multiple passengers', ()
                 .should('have.text', this.createBookingPage.inputField.main_passenger.phoneCountryCode)
         });
 
-        it('Verify the data into Main passenger phone number input field', function() {
+        it('Verify Main passenger phone number input field data', function() {
             createBookingPage.typeIntoMainPassengerPhoneField(this.createBookingPage.inputField.main_passenger.phone)
             createBookingPage.selectAmountPassengersDetailsDropdown(chosenAmountPassengers)
 
@@ -91,15 +91,15 @@ describe('US_04.26 | Passengers details functionality - Multiple passengers', ()
                 .should('have.value', this.createBookingPage.inputField.main_passenger.phone)
         });
 
-        it('Verify the data into Main passenger Email input field', function() {
+        it('Verify Main passenger Email input field data', function() {
             createBookingPage.typeIntoMainPassengerEmailField(this.createBookingPage.inputField.main_passenger.email)
             createBookingPage.selectAmountPassengersDetailsDropdown(chosenAmountPassengers)
 
             createBookingPage.getEmailInputField()
                 .should('have.value', this.createBookingPage.inputField.main_passenger.email)
         });
-
-        it('Verify the data into Main passenger Fare type dropdown', function() {
+        
+        it('Verify Main passenger Fare type dropdown data', function() {
             createBookingPage.selectFareTypeMainPassenger(this.createBookingPage.dropdowns.fareType.fareTypesNames[2])
             createBookingPage.selectAmountPassengersDetailsDropdown(chosenAmountPassengers)
       
