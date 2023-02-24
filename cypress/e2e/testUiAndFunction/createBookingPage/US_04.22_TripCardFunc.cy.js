@@ -62,6 +62,9 @@ describe('US_04.22 | Trip card functionality', () => {
     })
 
     it('AT_04.22.06| Verify when after clicking on the "Earliest" tab, user should the earliest available trip on a left', function() {
+        createBookingPage.clickDepartureErliestButton() 
+        createBookingPage.clickDepartureErliestButton() 
+        
         createBookingPage.getBtnErliest().should('have.class', 'selected')      
         const ordersSequence = []
         createBookingPage.getDepartureTripCardsList().each(($el, i) => {
