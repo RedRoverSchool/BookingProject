@@ -243,7 +243,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 let passengersAmountBoundaryArray = this.createBookingPage.passengersAmountBoundaryArray300
                 for(let passengersAmount of passengersAmountBoundaryArray){
                     createBookingPage.getSeatSelectionDropdown()
-                        .select(passengersAmount)
+                        .select(passengersAmount, { force: true })
                     createBookingPage.getSelectedSeats().then(($el) => {
                         let selectedSeatsNumbers = getArray($el)
                         expect(selectedSeatsNumbers.length).to.eq(parseInt(passengersAmount))
