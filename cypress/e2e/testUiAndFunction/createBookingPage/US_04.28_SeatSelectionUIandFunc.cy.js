@@ -243,6 +243,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                         createBookingPage.getSelectedSeats().then(($el) => {
                             let arrayOfCustomSeletedSeats = getArray($el)
                             expect(isSameRowSeatsA_B_C(arrayOfCustomSeletedSeats)).to.be.true
+                            expect(arrayOfCustomSeletedSeats.length).to.eq(chosenNumOfPassengers)
 
                             createBookingPage.getPassengerDetailsAssignedSeats().each(($el, i) => {
                                 let assignedSeat = $el.text()
