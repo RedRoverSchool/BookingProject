@@ -177,14 +177,14 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                                               this.createBookingPage.validBoundaryValues.nominalValue,
                                               this.createBookingPage.validBoundaryValues.belowMaximum]
                 
-                for (let numberOfpassengers of numberOfPassengersArray) {
+                for (let numberOfPassengers of numberOfPassengersArray) {
 
                     createBookingPage.getPassengersDetailsDropdown()
-                        .select(numberOfpassengers)
+                        .select(numberOfPassengers)
                     
                         createBookingPage.getSelectedSeats().then(($el) => {
                             let defaultNumberOfSelectedSeats = getArray($el)
-                            expect(defaultNumberOfSelectedSeats.length).to.eq(parseInt(numberOfpassengers))
+                            expect(defaultNumberOfSelectedSeats.length).to.eq(parseInt(numberOfPassengers))
                         })
                 }
             });
