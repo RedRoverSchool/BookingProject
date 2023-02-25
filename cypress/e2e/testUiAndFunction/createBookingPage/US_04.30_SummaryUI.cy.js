@@ -200,4 +200,8 @@ context('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger far
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
 		});
 	})
+
+	it('AT_04.30.10 | Text "Total" is displayed and visible', function ()  {
+        createBookingPage.getTotalSummaryText().should('be.visible');
+    })
 })
