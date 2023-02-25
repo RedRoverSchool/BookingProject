@@ -61,6 +61,7 @@ class CreateBookingPage {
     getFareTypeLabel = () => cy.get('.div-fare-type > label');
     getMainPassengerFareTypeDropdownSelect = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
+    getMainPassengerFareTypeContainerText = () => cy.get('.div-fare-type > label > span');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');

@@ -60,8 +60,8 @@ describe('US_04.30 | Summary UI', () => {
 
 	it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2, 150, 299) from passenger dropdown menu', function () {
 		let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
-		this.createBookingPage.validBoundaryValues.nominalValue,
-		this.createBookingPage.validBoundaryValues.belowMaximum]
+		                              this.createBookingPage.validBoundaryValues.nominalValue,
+		                              this.createBookingPage.validBoundaryValues.belowMaximum]
 		for (let numberOfPassengers of numberOfPassengersArray) {
 			createBookingPage.getPassengersDetailsDropdown().select(numberOfPassengers)
 
@@ -137,8 +137,9 @@ describe('US_04.30 | Summary UI', () => {
 		    let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 		
 		    for (let i = 0; i < fareTypesArray.length; i++ ) {
-			createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true } )
-			
+			    createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true } )
+			    createBookingPage.getMainPassengerFareTypeContainerText().should('have.text', fareTypesArray[i])
+				
 			createBookingPage.getPricesSummary().then(($el) => {
 				let actualPrice = $el.text()
 				expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
@@ -151,7 +152,8 @@ describe('US_04.30 | Summary UI', () => {
 		    let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 
 		    for (let i = 0; i < fareTypesArray.length; i++) {
-			createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true })
+				createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true })
+				createBookingPage.getMainPassengerFareTypeContainerText().should('have.text', fareTypesArray[i])
 
 			createBookingPage.getTotalPriceSummary().then(($el) => {
 				let actualPrice = $el.text()
