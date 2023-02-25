@@ -134,12 +134,6 @@
 
    "departureStationLabelFont": "15px",
 
-    "passengersAmountBoundaryArray300": [
-        "1 passenger",
-        "60 passengers",
-        "300 passengers"
-    ], 
-
     "validBoundaryValues": {
         "minimum" : "1 passenger",
         "aboveMinimum" : "2 passengers",
