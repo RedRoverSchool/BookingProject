@@ -18,8 +18,7 @@ describe('US_04.18 | Create booking page > Selected trip card UI', () => {
         })
     })
 
-
-        it('AT_04.18.01 | "Number available tickets" trip card is visible, selected, and background color is green(#00a65a)', function () {
+        it('AT_04.18.01 | "Number available tickets" trip card is visible, selected, and background color is green(#00a65a - rgb(0, 166, 90))', function () {
             createBookingPage.getSecondTripCard()
                 .should('be.visible')
                 .and('have.class', 'selected')
