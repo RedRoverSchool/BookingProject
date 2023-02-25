@@ -138,5 +138,13 @@
         "1 passenger",
         "60 passengers",
         "300 passengers"
-    ]
+    ], 
+
+    "validBoundaryValues": {
+        "minimum" : "1 passenger",
+        "aboveMinimum" : "2 passengers",
+        "nominalValue" : "150 passengers",
+        "belowMaximum" : "299 passengers",
+        "maximum" : "300 passengers"
+    }
 }
