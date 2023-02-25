@@ -56,7 +56,7 @@
     },
     
     "path": {
-        "folder": "cypress/downloads/Bookings ",
+        "folder": "Bookings ",
         "extension": ".csv"
     }
 }

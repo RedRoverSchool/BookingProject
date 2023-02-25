@@ -1,5 +1,6 @@
 const { defineConfig } = require("cypress");
 const { rmdir } = require('fs')
+const { verifyDownloadTasks } = require('cy-verify-downloads');
 
 module.exports = defineConfig({
   viewportWidth: 1920,
@@ -15,7 +16,7 @@ module.exports = defineConfig({
           deleteFolder() {
             console.log('deleting folder downloads')
             return new Promise((resolve) => {
-              rmdir('cypress/downloads', { recursive: true },  (err) => {
+              rmdir('cypress/downloads', {maxRetries: 10,  recursive: true , force: true },  (err) => {
                 if (err) {
                   console.error(err)
                 }
@@ -23,7 +24,8 @@ module.exports = defineConfig({
               })
             })
           },
-        })
+        }),
+        on('task', verifyDownloadTasks)
     },
   },
   video: false,

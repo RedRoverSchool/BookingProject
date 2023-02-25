@@ -20,3 +20,4 @@ Cypress.on('uncaught:exception', () => false)
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+require('cy-verify-downloads').addCustomCommand();

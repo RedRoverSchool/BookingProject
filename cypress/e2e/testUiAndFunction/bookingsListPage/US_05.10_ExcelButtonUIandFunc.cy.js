@@ -13,6 +13,7 @@ describe('US_05.10 Excel button UI and functionality', () => {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
         leftMenuPanel.clickBookingManagementIcon();
+        cy.task('deleteFolder')
     });
 
     beforeEach(function () {
@@ -21,9 +22,6 @@ describe('US_05.10 Excel button UI and functionality', () => {
         });
     });
 
-    after(function () {
-        cy.task('deleteFolder')
-    });
 
     it('AT_05.10.01 Verify "Excel" button is displayed', () => {
         bookingListPage.getExcelButton().should('be.visible');
@@ -43,9 +41,13 @@ describe('US_05.10 Excel button UI and functionality', () => {
             .then(($rangeDates) => {
                 let expectedFormattedRrangeDates = bookingListPage.formatteddDatesRangeYYYYMMDD($rangeDates.text())
                 let expectedFilePath = this.bookingsListPage.path.folder + expectedFormattedRrangeDates + this.bookingsListPage.path.extension
-
+                
                 bookingListPage.clickExcelButton()
-                cy.readFile(expectedFilePath)
+
+                cy.verifyDownload('.', { contains: true });
+                cy.verifyDownload('.csv', { contains: true });
+                
+                cy.verifyDownload(expectedFilePath);
             })
     });
 });
