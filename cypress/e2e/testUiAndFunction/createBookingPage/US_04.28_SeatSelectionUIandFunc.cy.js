@@ -146,7 +146,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
     describe('US_04.28 | Seat selection functionality', () => {
 
-        context('Testcases without booking/reservation', () => {
+        describe('Testcases without booking/reservation', () => {
             beforeEach(function () {
                 cy.visit('/')
                 cy.login(AGENT.email, AGENT.password)
@@ -160,21 +160,21 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
             });
 
-            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers from passenger details dropdown menu', () => {
-                createBookingPage.getPassengersDetailsDropdownList().then($el => {
-                    let numberOfPass = getRandomElementOfArray($el)  
+            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers from passenger details dropdown menu', function ()  {
+                let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
+                this.createBookingPage.validBoundaryValues.nominalValue,
+                this.createBookingPage.validBoundaryValues.belowMaximum]
+                
+                for (let numberOFpassengers of numberOfPassengersArray) {
+
                     createBookingPage.getPassengersDetailsDropdown()
-                        .select(numberOfPass)
-                        .invoke('val').then((value) => {
-                            let chosenNumOfPassengers = +value
-                        
-                            createBookingPage.getSelectedSeats()
-                                .then(($el) => {
-                                let defaultNumberOfSelectedSeats = $el.length
-                                    expect(defaultNumberOfSelectedSeats).to.eq(chosenNumOfPassengers)
-                            })
+                        .select(numberOFpassengers)
+                    
+                        createBookingPage.getSelectedSeats().then(($el) => {
+                            let defaultNumberOfSelectedSeats = getArray($el)
+                            expect(defaultNumberOfSelectedSeats.length).to.eq(parseInt(numberOFpassengers))
                         })
-                })
+                }
             });
 
             it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
