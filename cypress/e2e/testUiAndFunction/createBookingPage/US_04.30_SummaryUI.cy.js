@@ -2,7 +2,6 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../../pageObjects/BookingPopup";
-import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
 import getArray from "../../../support/utilities/getArray";
 import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
@@ -22,9 +21,11 @@ describe('US_04.30 | Summary UI', () => {
 		cy.visit('/')
 		cy.login(AGENT.email, AGENT.password)
 		createBookingPage.clickCalendarNextButton()
+		waitForToolsPing()
 		createBookingPage.clickFridayButton()
 		waitForToolsPing()
 		createBookingPage.clickSecondTripCard()
+		waitForToolsPing()
 	});
 
 	beforeEach(function() {
@@ -37,38 +38,45 @@ describe('US_04.30 | Summary UI', () => {
 		})
 	});
 	
-		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section', () => {
-			createBookingPage.getPassengersDetailsDropdownList().then($el => {
-				let numberOfPass = getRandomElementOfArray($el)
-				createBookingPage.getPassengersDetailsDropdown().select(numberOfPass)
-				createBookingPage.getSelectedSeats()
-					.then(($el) => {
-						let defaultSelectedSeatsArray = $el.text()
+	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
+		let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.minimum,
+		                               this.createBookingPage.validBoundaryValues.nominalValue,
+		                               this.createBookingPage.validBoundaryValues.maximum]
+		for (let numberOfPassengers of numberOfPassengersArray) {
+			createBookingPage.getPassengersDetailsDropdown().select(numberOfPassengers)
 
-						createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
-							let seatsSummaryArray = $el.text()
-							expect(defaultSelectedSeatsArray).to.deep.eq(seatsSummaryArray)
-						})
+			createBookingPage.getSelectedSeats()
+				.then(($el) => {
+					let defaultSelectedSeatsArray = getArray($el)
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(numberOfPassengers))
+				
+					createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
+						let seatsSummaryArray = getArray($el)
+						expect(defaultSelectedSeatsArray).to.deep.eq(seatsSummaryArray)
 					})
-			})
-		});
+				})
+		}
+	});
 
-		it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers from passenger dropdown menu', () => {
-			createBookingPage.getPassengersDetailsDropdownList().then($el => {
-				let numberOfPass = getRandomElementOfArray($el)
-				createBookingPage.getPassengersDetailsDropdown().select(numberOfPass)
-					.invoke('val')
-					.then((value) => {
-						let chosenNumOfPassengers = +value
+	it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2, 150, 299) from passenger dropdown menu', function () {
+		let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
+		this.createBookingPage.validBoundaryValues.nominalValue,
+		this.createBookingPage.validBoundaryValues.belowMaximum]
+		for (let numberOfPassengers of numberOfPassengersArray) {
+			createBookingPage.getPassengersDetailsDropdown().select(numberOfPassengers)
 
-						createBookingPage.getRowsSummary().then(($el) => {
-							let numberOfRows = $el
-							expect(chosenNumOfPassengers).to.eq(numberOfRows.length)
+			createBookingPage.getSelectedSeats()
+				.then(($el) => {
+					let defaultSelectedSeatsArray = getArray($el)
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(numberOfPassengers))
 
-						})
+					createBookingPage.getRowsSummary().then(($el) => {
+						let numberOfRows = $el
+						expect(parseInt(numberOfPassengers)).to.eq(numberOfRows.length)
 					})
-			})
-		})
+				})
+		}
+	});
 
 		it('AT_04.30.02 | Total price is correct', () => {
 			createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
