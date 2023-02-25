@@ -223,7 +223,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 })
             });
 
-            it.only('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
+            it('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
                 createBookingPage.getPassengersDetailsDropdown()
                     .select(this.createBookingPage.numberOfPassengers.sixPassengers)
                     .invoke('val').then((value) => {
