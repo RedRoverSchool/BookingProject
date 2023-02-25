@@ -125,7 +125,7 @@ describe('US_04.30 | Summary UI', () => {
 		})
 	
 	    it('AT_04.30.08 | Verify price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
-		    createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.passengerDefault)
+			createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.numberOfPassengers.passengerDefault)
 		    let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 		
 		    for (let i = 0; i < fareTypesArray.length; i++ ) {
@@ -139,7 +139,7 @@ describe('US_04.30 | Summary UI', () => {
 	})
 	
 	    it('AT_04.30.09 | Verify total price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
-		    createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.passengerDefault)
+			createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.numberOfPassengers.passengerDefault)
 		    let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 
 		    for (let i = 0; i < fareTypesArray.length; i++) {

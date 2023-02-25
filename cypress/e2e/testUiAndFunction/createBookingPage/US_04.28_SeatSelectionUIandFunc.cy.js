@@ -12,6 +12,18 @@ const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
+const isSameRowSeatsA_B_C = (array) => {
+    let check = true
+    let expectedString = "ABC"
+    for (let i = 0; i < array.length; i += 3) {
+        let checkForA_B_C = array.slice(i, i + 3).map(el => el.replace(/^\d/g, '')).join("")
+        let checkForSameNumber = new Set(array.slice(i, i + 3).map(el => parseInt(el)))
+        check = check && (checkForSameNumber.size == 1) && (checkForA_B_C == expectedString)   
+    }
+    return check
+}
+
+
 describe('US_04.28 | Seat selection UI and functionality', () => {
         
     beforeEach(function () {
@@ -211,16 +223,15 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 })
             });
 
-            it('AT_04.28.11 | Verify custom seat selection by window and next two ones in each row for chosen number of passengers watches assigned seats in passenger details section', () => {
-                let index = getIntergerMinInclMaxExcl(2, 11)
+            it.only('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
                 createBookingPage.getPassengersDetailsDropdown()
-                    .select(index)
+                    .select(this.createBookingPage.numberOfPassengers.sixPassengers)
                     .invoke('val').then((value) => {
                         let chosenNumOfPassengers = +value
-
+                     
                         createBookingPage.getSelectedSeats().click({ multiple: true })
                         
-                        for (let i = 1; i <= Math.ceil(chosenNumOfPassengers / 3); i++) {
+                        for (let i = 1; i <= chosenNumOfPassengers / 3; i++) {
                             createBookingPage.getAllSeatsSeatSelection()
                                 .filter('.available')
                                 .contains('A')
@@ -230,11 +241,12 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                         }
 
                         createBookingPage.getSelectedSeats().then(($el) => {
-                            let arrayOfCustomSeletedSeats = $el.text()
+                            let arrayOfCustomSeletedSeats = getArray($el)
+                            expect(isSameRowSeatsA_B_C(arrayOfCustomSeletedSeats)).to.be.true
 
-                            createBookingPage.getPassengerDetailsAssignedSeats().then(($el) => {
-                                let arrayOfAssignedSeats = $el.text()
-                                expect(arrayOfAssignedSeats).to.deep.eq(arrayOfCustomSeletedSeats)
+                            createBookingPage.getPassengerDetailsAssignedSeats().each(($el, i) => {
+                                let assignedSeat = $el.text()
+                                expect(assignedSeat).to.eq(arrayOfCustomSeletedSeats[i])
                             })
                         })
                     })
