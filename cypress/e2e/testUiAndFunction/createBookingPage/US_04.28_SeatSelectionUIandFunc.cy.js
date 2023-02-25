@@ -172,19 +172,19 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
             });
 
-            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers from passenger details dropdown menu', function ()  {
+            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', function ()  {
                 let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
-                this.createBookingPage.validBoundaryValues.nominalValue,
-                this.createBookingPage.validBoundaryValues.belowMaximum]
+                                              this.createBookingPage.validBoundaryValues.nominalValue,
+                                              this.createBookingPage.validBoundaryValues.belowMaximum]
                 
-                for (let numberOFpassengers of numberOfPassengersArray) {
+                for (let numberOfpassengers of numberOfPassengersArray) {
 
                     createBookingPage.getPassengersDetailsDropdown()
-                        .select(numberOFpassengers)
+                        .select(numberOfpassengers)
                     
                         createBookingPage.getSelectedSeats().then(($el) => {
                             let defaultNumberOfSelectedSeats = getArray($el)
-                            expect(defaultNumberOfSelectedSeats.length).to.eq(parseInt(numberOFpassengers))
+                            expect(defaultNumberOfSelectedSeats.length).to.eq(parseInt(numberOfpassengers))
                         })
                 }
             });
