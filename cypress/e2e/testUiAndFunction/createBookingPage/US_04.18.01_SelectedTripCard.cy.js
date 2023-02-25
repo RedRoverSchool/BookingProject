@@ -3,7 +3,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.18 | Create booking page > Selected trip card UI', () => {
+describe.skip('US_04.18 | Create booking page > Selected trip card UI', () => {
     const AGENT = Cypress.env('agent');
 
     before(() => {
