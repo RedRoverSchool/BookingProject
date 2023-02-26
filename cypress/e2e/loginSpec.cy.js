@@ -1,13 +1,10 @@
 /// <reference types="Cypress" />
 
 describe('Login', () => {
-
-    const MANAGER = Cypress.env('manager');
     const AGENT = Cypress.env('agent');
-    const CI = Cypress.env('CI');
 
     beforeEach(function () {
-        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
+        cy.cleanData()
     })
 
     beforeEach(function () {
