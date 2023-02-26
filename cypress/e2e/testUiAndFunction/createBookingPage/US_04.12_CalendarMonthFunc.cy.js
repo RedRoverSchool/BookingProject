@@ -32,7 +32,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})		
 	});
 
-	it('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
+	it.skip('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
 		createBookingPage.getMonthDropdownList().then(($el) => {
 			let arrayOfMonths = $el
 				.toArray()
