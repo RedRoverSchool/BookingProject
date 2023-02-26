@@ -62,6 +62,7 @@ class CreateBookingPage {
     getFareTypeLabel = () => cy.get('.div-fare-type > label');
     getMainPassengerFareTypeDropdownSelect = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
+    getMainPassengerFareTypeContainerText = () => cy.get('.div-fare-type > label > span');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
@@ -99,6 +100,7 @@ class CreateBookingPage {
     getAmountOfPassengersInSummary = () => cy.get('.box-default .total-wrapper  .total-row');
     getPricesSummary = () => cy.get('.total-wrapper > div.total-row span');
     getTotalPriceSummary = () => cy.get('.box-footer span.total-price.right');
+    getTotalSummaryLabel = () => cy.get('div.box-footer > span:nth-child(1) > b');
 
     //Total - Footer section                  
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
@@ -393,6 +395,24 @@ class CreateBookingPage {
             .select(FareType, { force: true })        
     }
 
-    getLableNumberAvailable
+    selectNeedArrivalStation(nameStation) {
+        this.getCreateBookingHeader().click()
+        this.clickArrivalStationDropdown()
+        this.getArrivalStationList().each(($el) => {
+            if ($el.text() == nameStation) {
+                cy.wrap($el).click({ force: true })
+            }
+        })
+    }
+
+    hoverNeedArrivalStation(nameStation) {
+        this.getCreateBookingHeader().click({ force: true })
+        this.clickArrivalStationDropdown()
+        this.getArrivalStationList().each(($el) => {
+            if ($el.text() == nameStation) {
+                cy.wrap($el).trigger('mouseover')
+            }
+        })
+    }
 }
 export default CreateBookingPage;

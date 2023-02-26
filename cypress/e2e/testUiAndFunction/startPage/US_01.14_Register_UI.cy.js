@@ -21,7 +21,7 @@ describe('US_01.14 | Register UI', () => {
         startPage.clickRegisterAccountLink()
     });
 
-    it('AT_01.14.01 | Verify that the label "Your name" is visible in the modal body, has the #666 color and font size: 14px' , function () {
+    it('AT_01.14.01 | Verify that the label "Your name" is visible in the modal body, has the #999 color and font size: 14px' , function () {
         registerPopup
             .getYourNameLabel()
             .should('be.visible')
@@ -30,4 +30,12 @@ describe('US_01.14 | Register UI', () => {
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
     })
 
+    it('AT_01.14.02 | Verify that the example(placeholder) "John Doe" is visible in the name field, has the #666 color, and font size: 14px' , function () {
+        registerPopup
+            .getNameInput()
+            .should('be.visible')
+            .and('have.attr', 'placeholder', this.startPage.inputField.registerPopup.yourNameInputField)
+            .and('have.css', 'color', this.colors.greyHeader)
+            .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
+    })
 })

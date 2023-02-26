@@ -29,4 +29,15 @@ describe('US_04.07_Arrival Dropdown UI and functionality ', () => {
         createBookingPage.clickArrivalStationDropdown()
         createBookingPage.getArrivalStationList().should('be.visible')
     });
+
+    it('AT_04.07.03 | Verify that the background of the selected item in the Dropdown Menu has gray color (#DDDDDD).', function() {
+        createBookingPage.selectNeedArrivalStation(this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])
+        createBookingPage.hoverNeedArrivalStation(this.createBookingPage.dropdowns.arrivalStation.stationsNames[1])
+        createBookingPage.getArrivalStationList().each($el => {
+            if($el.text() == this.createBookingPage.dropdowns.arrivalStation.stationsNames[2]){ 
+                              
+                expect($el).to.have.css('background-color', this.colors.greyDropdownBack)
+            }
+        })
+    })
 })

@@ -122,8 +122,6 @@
 
     "latestBtnText": "Latest",
 
-    "passengerDefault": "1 passenger",
-
     "seatSelectoinLabel": "Seat selection", 
 
     "selectedDateLabel": {
@@ -134,11 +132,18 @@
 
    "departureStationLabelFont": "15px",
 
-    "passengersAmountBoundaryArray300": [
-        "1 passenger",
-        "60 passengers",
-        "300 passengers"
-    ],
+    "validBoundaryValues": {
+        "minimum" : "1 passenger",
+        "aboveMinimum" : "2 passengers",
+        "nominalValue" : "150 passengers",
+        "belowMaximum" : "299 passengers",
+        "maximum" : "300 passengers"
+    }, 
+
+    "numberOfPassengers": {
+       "passengerDefault": "1 passenger",
+       "sixPassengers":  "6 passengers"   
+    },
 
     "labelTicketsAvailableText": " tickets available"
 }
