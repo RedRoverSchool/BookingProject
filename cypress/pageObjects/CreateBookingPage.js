@@ -319,7 +319,7 @@ class CreateBookingPage {
     };
 
     clickBookTicketsBtn() {
-        this.getBookTicketsButton().click();
+        this.getBookTicketsButton().should('not.have.attr', 'disabled').click();
     }
 
     getRequiredDefaulDay_DDFormat() {
