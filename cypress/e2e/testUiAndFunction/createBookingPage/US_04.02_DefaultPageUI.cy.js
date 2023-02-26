@@ -30,4 +30,9 @@ describe('US_04.02_Default page UI', () => {
         createBookingPage.getLabelDepartureStation().should('exist');
         createBookingPage.getLabelDepartureStation().should('be.visible');        
     });
+
+    it('AT_04.02.05 | Verify Departure date section exists/is visible', function ()  {
+        createBookingPage.getDepartureDateSection().should('exist');
+        createBookingPage.getDepartureDateSection().should('be.visible');        
+    });
 })
