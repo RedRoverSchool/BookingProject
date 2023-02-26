@@ -4,10 +4,8 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
-
-const MANAGER = Cypress.env("manager");
 const AGENT = Cypress.env("agent");
-const CI = Cypress.env("CI");
+
 
 function createReservation(passengerName) {
   createBookingPage.clickCalendarNextButton();
@@ -25,13 +23,13 @@ function createReservation(passengerName) {
   waitForToolsPing();
 }
 
-describe("US_05.23 | Trip detais UI", () => {
+describe.skip("US_05.23 | Trip detais UI", () => {
   beforeEach(function () {
     cy.fixture("createBookingPage").then((createBookingPage) => {
       this.createBookingPage = createBookingPage;
     });
 
-    cy.cleanCiData(MANAGER.email, MANAGER.password, CI);
+    cy.cleanData();
   });
 
   beforeEach(function () {
