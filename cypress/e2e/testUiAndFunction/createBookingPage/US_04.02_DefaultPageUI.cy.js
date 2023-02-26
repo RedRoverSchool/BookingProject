@@ -15,4 +15,19 @@ describe('US_04.02_Default page UI', () => {
     it('AT_04.02.01 | Verify heading of the page is "Create booking" and it is visible', function ()  {
         createBookingPage.getCreateBookingHeader().should('be.visible');
     });
+
+    it('AT_04.02.02 | Verify Departure/Arrival station section exists/is visible', function ()  {
+        createBookingPage.getDepartureStationSection().should('exist');
+        createBookingPage.getDepartureStationSection().should('be.visible');        
+    });
+
+    it('AT_04.02.03 | Verify section has a label "Arrival station" and it is visible', function ()  {
+        createBookingPage.getLabelArrivalStation().should('exist');
+        createBookingPage.getLabelArrivalStation().should('be.visible');        
+    });
+
+    it('AT_04.02.04 | Verify section has a label "Departure station" and it is visible', function ()  {
+        createBookingPage.getLabelDepartureStation().should('exist');
+        createBookingPage.getLabelDepartureStation().should('be.visible');        
+    });
 })
