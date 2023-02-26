@@ -3,7 +3,6 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from '../../../pageObjects/BookingPopup';
 import getArray from "../../../support/utilities/getArray";
-import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
 import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const bookingPopup = new BookingPopup();

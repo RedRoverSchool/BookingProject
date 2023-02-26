@@ -20,7 +20,7 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		});
 	});
 
-	context('Verify icons are displayed', () => {
+	describe('Verify user dropdown menu UI', () => {
 		before(() => {
 			cy.visit('/')
 			cy.login(AGENT.email, AGENT.password)
@@ -28,64 +28,58 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		});
 
 		it('AT_02.05.01 | Verify the User dropdown menu displays selection of 8 language icons', function () {
-			header.getLanguageIcons()
-				.should('have.length', this.header.images.imageIconLength)
+			header.getLanguageIcons().should('have.length', this.header.images.imageIconLength)
 		});
 
 		it('AT_02.05.02 |Verify UK flag" icon is displayed', function () {
-			header.getFlagIconEn()
-				.should('be.visible')
+			header.getFlagIconEn().should('be.visible')
 		});
 
 		it('AT_02.05.09 |Verify FR flag" icon is displayed', function () {
-			header.getFlagIconFr()
-				.should('be.visible')
+			header.getFlagIconFr().should('be.visible')
 		});
 
 		it('AT_02.05.05 | Verify TH flag icon is displayed', function () {
-			header.getFlagIconTh()
-				.should('be.visible')
+			header.getFlagIconTh().should('be.visible')
 		});
 
 		it('AT_02.05.14 | Verify the "Vietnamese flag" icon is displayed', function () {
-			header.getFlagIconViet()
-				.should('be.visible')
+			header.getFlagIconViet().should('be.visible')
 		});
 
 		it('AT_02.05.07 | Verify "User dropdown menu" has "Sign out" button', function () {
-			header.getSignOutBtn()
+			header
+				.getSignOutBtn()
 				.should('be.visible')
-				.should('have.text', this.header.userDropDownMenu.signOutBtn)
+				.and('have.text', this.header.userDropDownMenu.signOutBtn)
 		});
 
 		it('AT_02.05.10 |Verify De flag" icon is displayed', function () {
-			header.getFlagIconDe()
-				.should('be.visible')
+			header.getFlagIconDe().should('be.visible')
 		});
 
 		it('AT_02.05.10 |Verify Es flag" icon is displayed', function () {
-			header.getFlagIconEs()
-				.should('be.visible')
+			header.getFlagIconEs().should('be.visible')
 		});
 
 		it('AT_02.05.10 |Verify Ru flag" icon is displayed', function () {
-			header.getFlagIconRu()
-				.should('be.visible')
+			header.getFlagIconRu().should('be.visible')
 		});
 
 		it('AT_02.05.10 |Verify Cn flag" icon is displayed', function () {
-			header.getFlagIconCn()
-				.should('be.visible')
+			header.getFlagIconCn().should('be.visible')
 		});
 
-		it('AT_02.05.07| Verify "User dropdown menu" has "Sign out" button', function () {
-			header.clickSignOutBtn()
-			startPage.getLoginButton()
-				.should('be.visible')
+		it('AT_02.05.17 | Verify "User dropdown menu" displays the "Operator Logo"', function () {
+			header.getLogoDropdownMenu().should('be.visible')
+		});
+
+		it('AT_02.05.18 | Verify "User dropdown menu" displays the "User Role"', function () {
+			header.getUserRole().should('be.visible')
 		});
 	});
 
-	context('Verify icons are clickable', () => {
+	describe('Verify user dropdown menu functionality', () => {
 		beforeEach(function () {
 			cy.visit('/')
 			cy.login(AGENT.email, AGENT.password)
@@ -94,15 +88,22 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 
 		it('AT_02.05.06 | Verify TH flag icon is clickable', function () {
 			header.clickFlagIconTh()
-			createBookingPage.getPhoneNumberInputFild().should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
+			createBookingPage
+				.getPhoneNumberInputFild()
+				.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
 		});
 
 		it('AT_02.05.04 |Verify UK flag  icon is clickable', function () {
 			header.clickFlagIconTh()
-			createBookingPage.getPhoneNumberInputFild().should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
+			createBookingPage
+				.getPhoneNumberInputFild()
+				.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
+			
 			header.clickUserDropDownMenu()
 			header.clickFlagIconEn()
-			createBookingPage.getPhoneNumberInputFild().should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberEn)
+			createBookingPage
+				.getPhoneNumberInputFild()
+				.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberEn)
 		});
 
 		it('AT_02.05.15 | Verify the "Vietnamese flag" icon is clickable', function () {
@@ -114,18 +115,12 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 
 		it('AT_02.05.03 | Clicking "Sign out" button gets user signed out', function () {
 			header.clickSignOutBtn()
-			startPage.getLoginButton()
-				.should('be.visible')
+			startPage.getLoginButton().should('be.visible')
 		});
 
-		it('AT_02.05.17 | Verify "User dropdown menu" displays the "Operator Logo"', function () {
-			header.getLogoDropdownMenu()
-			.should('be.visible')
-		});
-
-		it('AT_02.05.18 | Verify "User dropdown menu" displays the "User Role"', function () {
-			header.getUserRole()
-			.should('be.visible')
+		it.skip('AT_02.05.08 | Verify that Clicking "Sign out" button redirects user to the "Start" page', function () {
+			header.clickSignOutBtn()
+			startPage.getLoginButton().should('be.visible')
 		});
 	});
 });
