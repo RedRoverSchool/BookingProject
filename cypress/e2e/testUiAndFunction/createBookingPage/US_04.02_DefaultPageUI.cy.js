@@ -25,4 +25,9 @@ describe('US_04.02_Default page UI', () => {
         createBookingPage.getLabelArrivalStation().should('exist');
         createBookingPage.getLabelArrivalStation().should('be.visible');        
     });
+
+    it('AT_04.02.04 | Verify section has a label "Departure station" and it is visible', function ()  {
+        createBookingPage.getLabelDepartureStation().should('exist');
+        createBookingPage.getLabelDepartureStation().should('be.visible');        
+    });
 })
