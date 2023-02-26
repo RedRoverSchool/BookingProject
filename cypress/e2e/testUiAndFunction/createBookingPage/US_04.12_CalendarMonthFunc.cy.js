@@ -51,12 +51,13 @@ describe('US_04.12 | Calendar month functionality', () => {
 				.getCalendarDays()
 				.contains(createBookingPage.getRequiredDefaulDay_DDFormat())
 				.click({force: true}).then(($el) => {
-							let dateChosen = $el.text()
+					let dateChosen = $el.text()
+					expect(dateChosen).to.eq(createBookingPage.getRequiredDefaulDay_DDFormat())
+
 							let finalDateMonthAndYear = dateChosen + " " + monthsAndYear
 
 							createBookingPage.getLabelDepartureOnDate().then(($el) => {
 								let departureDate = $el.text()
-
 								expect(departureDate).to.eq(finalDateMonthAndYear)
 							})
 						})
