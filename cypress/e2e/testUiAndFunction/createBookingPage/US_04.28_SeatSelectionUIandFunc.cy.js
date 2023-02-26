@@ -3,7 +3,6 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from '../../../pageObjects/BookingPopup';
 import getArray from "../../../support/utilities/getArray";
-import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
 import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const bookingPopup = new BookingPopup();
@@ -47,10 +46,11 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             createBookingPage.getLabelSeatSelection().should('have.text', this.createBookingPage.seatSelectoinLabel)
         });
 
-        it('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', () => {
-            createBookingPage.getRandomPassengersAmmount().then(($el) => {
-                const passengersAmount = $el
-                
+        it('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', function() {
+            let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
+                                                 this.createBookingPage.validBoundaryValues.nominalValue,
+                                                 this.createBookingPage.validBoundaryValues.maximum]
+            for(let passengersAmount of passengersAmountBoundaryArray){
                 createBookingPage.getPassengersDetailsDropdown()
                     .select(passengersAmount)
                     .should('have.value', parseInt(passengersAmount))
@@ -58,7 +58,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 createBookingPage.getSeatSelectionDropdown()
                     .should('be.visible')
                     .and('have.value', parseInt(passengersAmount));
-            })
+            }
         });
 
         it('AT_04.28.06 | In the "Seats table" the seats numbers in the horizontal row start with number of row in order followed by a letter in alphabetical order (1A, 1B, 1C, 2A, 2B, 2C etc.)', function () {
@@ -189,16 +189,17 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             });
 
             it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
-                createBookingPage.getSeatSelectionDropdownList().then($el => {
-                    let amountOfPass = getRandomElementOfArray($el);
-            
+                let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
+                                                     this.createBookingPage.validBoundaryValues.nominalValue,
+                                                     this.createBookingPage.validBoundaryValues.maximum]
+                for(let passengersAmount of passengersAmountBoundaryArray){
                     createBookingPage.getSeatSelectionDropdown()
-                        .select(amountOfPass, { force: true })
+                        .select(passengersAmount, { force: true })
             
                     createBookingPage.getSelectedSeats().then(($el) => {
                         const selectedSeatsArr = getArray($el)
                             
-                        let indexOfSeat = Math.floor(Math.random() * selectedSeatsArr.length)
+                        let indexOfSeat = Math.floor(selectedSeatsArr.length / 2)
                         let seatNumber = selectedSeatsArr[indexOfSeat]
             
                         createBookingPage.getSelectedSeats()
@@ -212,14 +213,15 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                             cy.wrap($el)
                                 .contains(this.createBookingPage.summarySection.seatsColumn.warningText)
                                 .should('have.class', 'text-red')
-        
+                            
+                            //postcondition
                             createBookingPage.getAllSeatsSeatSelection()
                                 .contains(seatNumber)
                                 .click()
                                 .should('have.class', 'selected')
                         })
                     })
-                })
+                }
             });
 
             it('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
