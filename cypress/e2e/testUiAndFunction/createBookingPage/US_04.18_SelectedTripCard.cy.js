@@ -1,5 +1,6 @@
 /// <reference types ="cypress" />
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
+import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -10,6 +11,7 @@ describe('US_04.18 | Create booking page > Selected trip card UI', () => {
         cy.visit('/');
         cy.login(AGENT.email, AGENT.password);
         createBookingPage.clickCalendarNextButton();
+        waitForToolsPing();
         createBookingPage.clickSecondTripCard();
     })
     beforeEach(function () {

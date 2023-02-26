@@ -131,7 +131,7 @@ class CreateBookingPage {
     };
 
     clickSecondTripCard() {
-        this.getSecondTripCard().click()
+        this.getSecondTripCard().click({ force: true })
     }
 
     typeIntoMainPassengerNameField(name) {
