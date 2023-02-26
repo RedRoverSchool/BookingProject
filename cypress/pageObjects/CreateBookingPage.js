@@ -3,6 +3,7 @@ class CreateBookingPage {
     getCreateBookingHeader = () => cy.get('div h1');
 
     //Departure/Arrival station
+    getDepartureStationSection = () => cy.get('.box-body.route-wrapper');
     getDepartureStationDropdown = () => cy.get('#select2-departure-container');
     getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
     getArrivalStationDropdown = () => cy.get('#select2-destination-container');
@@ -32,12 +33,12 @@ class CreateBookingPage {
 
     //Departure on
     getFirstTripCard = () => cy.get('div .trip:first-child');
-    getSecondTridCard = () => cy.get('div .trip:nth-child(2)');
+    getSecondTripCard = () => cy.get('div .trip:nth-child(2)');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
     getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class');
     getPriceOfTicket = () => cy.get('.vehclass-ferry.selected .price');
-    getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
+    getLabelTicketsAvailableSelectedTripCard = () => cy.get('.selected .availability');
     getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
     getDepartureLatestButton = () => cy.get('button.trips-order-desc');
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
@@ -61,6 +62,7 @@ class CreateBookingPage {
     getFareTypeLabel = () => cy.get('.div-fare-type > label');
     getMainPassengerFareTypeDropdownSelect = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select');
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
+    getMainPassengerFareTypeContainerText = () => cy.get('.div-fare-type > label > span');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
     getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
@@ -98,6 +100,7 @@ class CreateBookingPage {
     getAmountOfPassengersInSummary = () => cy.get('.box-default .total-wrapper  .total-row');
     getPricesSummary = () => cy.get('.total-wrapper > div.total-row span');
     getTotalPriceSummary = () => cy.get('.box-footer span.total-price.right');
+    getTotalSummaryLabel = () => cy.get('div.box-footer > span:nth-child(1) > b');
 
     //Total - Footer section                  
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
@@ -127,7 +130,7 @@ class CreateBookingPage {
     };
 
     clickSecondTripCard() {
-        this.getSecondTridCard().click()
+        this.getSecondTripCard().click()
     }
 
     typeIntoMainPassengerNameField(name) {
@@ -390,6 +393,26 @@ class CreateBookingPage {
     selectFareTypeMainPassenger(FareType) {
         this.getMainPassengerFareTypeDropdownSelect()
             .select(FareType, { force: true })        
+    }
+
+    selectNeedArrivalStation(nameStation) {
+        this.getCreateBookingHeader().click()
+        this.clickArrivalStationDropdown()
+        this.getArrivalStationList().each(($el) => {
+            if ($el.text() == nameStation) {
+                cy.wrap($el).click({ force: true })
+            }
+        })
+    }
+
+    hoverNeedArrivalStation(nameStation) {
+        this.getCreateBookingHeader().click({ force: true })
+        this.clickArrivalStationDropdown()
+        this.getArrivalStationList().each(($el) => {
+            if ($el.text() == nameStation) {
+                cy.wrap($el).trigger('mouseover')
+            }
+        })
     }
 }
 export default CreateBookingPage;

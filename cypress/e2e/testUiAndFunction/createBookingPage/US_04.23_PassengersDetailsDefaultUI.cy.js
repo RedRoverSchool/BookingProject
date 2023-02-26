@@ -71,7 +71,7 @@ describe('US_04.23 | Passengers details default UI', () => {
 
     it('AT_04.23.09 | Verify Passenger dropdown has 1 passenger by default', function () {
         
-        createBookingPage.getDropdownPassengerDefault().should('have.text', this.createBookingPage.passengerDefault)
+        createBookingPage.getDropdownPassengerDefault().should('have.text', this.createBookingPage.numberOfPassengers.passengerDefault)
     });
 
     it('AT_04.23.12 | Verify "Notes/Remark" label is present and visible.', function ()  {
