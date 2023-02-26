@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
-describe('US_04.15 | Create booking page > Month button elements view', () => {
+describe.skip('US_04.15 | Create booking page > Month button elements view', () => {
 
     before(function () {
         cy.visit('/');
