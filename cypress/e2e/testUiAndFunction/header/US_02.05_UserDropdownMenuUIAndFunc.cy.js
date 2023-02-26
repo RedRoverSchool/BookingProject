@@ -20,7 +20,7 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		});
 	});
 
-	context('Verify icons are displayed', () => {
+	describe('Verify icons are displayed', () => {
 		before(() => {
 			cy.visit('/')
 			cy.login(AGENT.email, AGENT.password)
@@ -85,7 +85,7 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 		});
 	});
 
-	context('Verify icons are clickable', () => {
+	describe('Verify icons are clickable', () => {
 		beforeEach(function () {
 			cy.visit('/')
 			cy.login(AGENT.email, AGENT.password)
