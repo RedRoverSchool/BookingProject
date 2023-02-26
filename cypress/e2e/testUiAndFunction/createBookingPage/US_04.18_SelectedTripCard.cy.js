@@ -28,7 +28,7 @@ describe('US_04.18 | Create booking page > Selected trip card UI', () => {
         createBookingPage.getSecondTripCard()
             .should('be.visible')
             .and('have.class', 'selected')
-            .and('have.css', 'background-color', this.colors.greenBookingPage)
+            .and('have.css', 'background-color', this.colors.greenBookingPage);
     })
 
     it('AT_04.18.02 | "Number available tickets" label contains the Number and "available tickets" text with color rgb(0, 166, 90) / background-color rgb(237, 248, 237)rgb(237, 248, 237)', function () {
@@ -39,7 +39,7 @@ describe('US_04.18 | Create booking page > Selected trip card UI', () => {
             createBookingPage.getLabelTicketsAvailableSecondTripCard()
                 .should('have.css', 'color', this.colors.greenBookingPage)
                 .and('have.css', 'background-color', this.colors.lightGreenBookingPage)
-                .and('have.text', labelText)
+                .and('have.text', labelText);
         })
     })
 })
