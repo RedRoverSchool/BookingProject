@@ -7,8 +7,21 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 const createBookingPage = new CreateBookingPage();
 
 const validBoundaryValues = (arr1, arr2) => {
-	let validBoundaryArray = arr1.filter((el) => arr2.includes(el))
-	return [validBoundaryArray[0], validBoundaryArray[6], validBoundaryArray[12]]
+	let bondaryArray = []
+	let date = new Date()
+	let currentYear = date.toLocaleDateString('en-US', { year: 'numeric' })
+	date.setFullYear(date.getFullYear() + 1)
+	let nextYear = date.toLocaleDateString('en-US', { year: 'numeric' })
+	for (let i = 0; i < arr2.length; i++) {
+		for (let j = 0; j < arr1.length; j++) {
+			if (arr2[i].includes(arr1[j])) {
+				bondaryArray.push(arr1[j])
+			}
+		}
+	}
+	let bondaryArrayValuesWithYear = bondaryArray
+		.map((el, i) => bondaryArray.indexOf(el) == bondaryArray.lastIndexOf(el) ? el + " " + currentYear : el[i] === el[bondaryArray.indexOf(el)] ? el + " " + currentYear : el + " " + nextYear)
+	return [bondaryArrayValuesWithYear[0], bondaryArrayValuesWithYear[6], bondaryArrayValuesWithYear[12]]
 }
 
 describe('US_04.12 | Calendar month functionality', () => {
@@ -42,7 +55,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 			expect($el.text()).to.eq(createBookingPage.createArrayOfConsetutiveMonths()[i])
 		})
 
-		let validBoundaryValueArrayMinNomMax = validBoundaryValues(this.createBookingPage.arrayOfExpectedMonths,
+		let validBoundaryValueArrayMinNomMax = validBoundaryValues(this.createBookingPage.arrayOfMonths,
 		createBookingPage.createArrayOfConsetutiveMonths())
 
 		for (let monthsAndYear of validBoundaryValueArrayMinNomMax) {
