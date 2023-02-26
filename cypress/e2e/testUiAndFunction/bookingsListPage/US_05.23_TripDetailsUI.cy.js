@@ -31,7 +31,7 @@ describe("US_05.23 | Trip detais UI", () => {
       this.createBookingPage = createBookingPage;
     });
 
-    cy.cleanCiData(MANAGER.email, MANAGER.password, CI);
+    cy.cleanData();
   });
 
   beforeEach(function () {
