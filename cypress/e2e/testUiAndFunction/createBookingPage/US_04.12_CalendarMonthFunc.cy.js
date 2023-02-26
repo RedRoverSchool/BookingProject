@@ -6,6 +6,11 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
+const validBoundaryValuesMinNomMax = (arr1, arr2) => {
+	let validBoundaryArray = arr1.filter((el) => arr2.includes(el))
+	return [validBoundaryArray[0], validBoundaryArray[6], validBoundaryArray[12]]
+}
+
 describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
@@ -32,38 +37,30 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})		
 	});
 
-	it('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
-		createBookingPage.getMonthDropdownList().then(($el) => {
-			let arrayOfMonths = $el
-				.toArray()
-				.map(el => el.innerText)
+	it('AT_04.12.02 | Verify chosen date (two days from current Thailand date),  chosen month and year (current, 6 months from current, 12 month from current) match label departure on date', function () {
+		createBookingPage.getMonthDropdownList().each(($el, i) => {
+			expect($el.text()).to.eq(createBookingPage.createArrayOfConsetutiveMonths()[i])
+		})
 
-			let indexOfMonths = Math.floor(Math.random() * arrayOfMonths.length)
-			let chosenMonthAndYear = arrayOfMonths[indexOfMonths]
+		let validBoundaryValueArrayMinNomMax = validBoundaryValuesMinNomMax(this.createBookingPage.arrayOfExpectedMonths,
+		createBookingPage.createArrayOfConsetutiveMonths())
 
-			createBookingPage.getMonthDropdownSelect().select(chosenMonthAndYear, {force: true})
+		for (let monthsAndYear of validBoundaryValueArrayMinNomMax) {
+			createBookingPage.getMonthDropdownSelect().select(monthsAndYear, {force: true})
 			createBookingPage
 				.getCalendarDays()
-				.not('.unavailable')
-				.not('.shaded')
-				.then(($el) => {
-					let arrayOfDates = $el
-					let indexOfDate = Math.floor(Math.random() * arrayOfDates.length)
-					createBookingPage
-						.getCalendarDays()
-						.not('.unavailable')
-						.not('.shaded').eq(indexOfDate).click({force: true}).then(($el) => {
+				.contains(createBookingPage.getRequiredDefaulDay_DDFormat())
+				.click({force: true}).then(($el) => {
 							let dateChosen = $el.text()
-							let finalDateMonthAndYear = dateChosen + " " + chosenMonthAndYear
+							let finalDateMonthAndYear = dateChosen + " " + monthsAndYear
 
 							createBookingPage.getLabelDepartureOnDate().then(($el) => {
 								let departureDate = $el.text()
 
-								expect(departureDate).to.deep.equal(finalDateMonthAndYear)
+								expect(departureDate).to.eq(finalDateMonthAndYear)
 							})
 						})
-				})
-		})
+		}
 	});
 
 	it.skip('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {

@@ -392,5 +392,19 @@ class CreateBookingPage {
         this.getMainPassengerFareTypeDropdownSelect()
             .select(FareType, { force: true })        
     }
+
+    createArrayOfConsetutiveMonths = () => {
+        let consecutiveMonths = []
+        let count = 0
+        while (count <= 12) {
+            const current = new Date()
+            current.setDate(1)
+            current.setMonth(current.getMonth() + count)
+            const month = current.toLocaleString('en-US', { month: 'short', year: 'numeric' })
+            consecutiveMonths.push(month)
+            count++
+        }
+        return consecutiveMonths
+    }  
 }
 export default CreateBookingPage;
