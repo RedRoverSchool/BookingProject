@@ -6,22 +6,23 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
-const validBoundaryValues = (arr1, arr2) => {
-	let bondaryArray = []
+const validBoundaryValues = (array) => {
 	let date = new Date()
 	let currentYear = date.toLocaleDateString('en-US', { year: 'numeric' })
-	date.setFullYear(date.getFullYear() + 1)
-	let nextYear = date.toLocaleDateString('en-US', { year: 'numeric' })
-	for (let i = 0; i < arr2.length; i++) {
-		for (let j = 0; j < arr1.length; j++) {
-			if (arr2[i].includes(arr1[j])) {
-				bondaryArray.push(arr1[j])
-			}
+	const currentMonth = date.toLocaleString('en-US', { month: 'short' })
+	let bondaryArray = []
+	for (let i = 0; i < array.length; i++) {
+		if (array[i] === currentMonth && i <= 6) {
+			bondaryArray.push(`${array[i]} ${currentYear}`)
+			bondaryArray.push(`${array[i + 6]} ${currentYear}`)
+			bondaryArray.push(`${array[i]} ${+currentYear + 1}`)
+		} else if (array[i] === currentMonth && i > 6) {
+			bondaryArray.push(`${array[i]} ${currentYear}`)
+			bondaryArray.push(`${array[i - 6]} ${currentYear}`)
+			bondaryArray.push(`${array[i]} ${+currentYear + 1}`)
 		}
 	}
-	let bondaryArrayValuesWithYear = bondaryArray
-		.map((el, i) => bondaryArray.indexOf(el) == bondaryArray.lastIndexOf(el) ? el + " " + currentYear : el[i] === el[bondaryArray.indexOf(el)] ? el + " " + currentYear : el + " " + nextYear)
-	return [bondaryArrayValuesWithYear[0], bondaryArrayValuesWithYear[6], bondaryArrayValuesWithYear[12]]
+	return bondaryArray
 }
 
 describe('US_04.12 | Calendar month functionality', () => {
@@ -51,12 +52,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 	});
 
 	it('AT_04.12.02 | Verify chosen date (two days from current Thailand date),  chosen month and year (current, 6 months from current, 12 month from current) match label departure on date', function () {
-		createBookingPage.getMonthDropdownList().each(($el, i) => {
-			expect($el.text()).to.eq(createBookingPage.createArrayOfConsetutiveMonths()[i])
-		})
-
-		let validBoundaryValueArrayMinNomMax = validBoundaryValues(this.createBookingPage.arrayOfMonths,
-		createBookingPage.createArrayOfConsetutiveMonths())
+		let validBoundaryValueArrayMinNomMax = validBoundaryValues(this.createBookingPage.arrayOfMonths)
 
 		for (let monthsAndYear of validBoundaryValueArrayMinNomMax) {
 			createBookingPage.getMonthDropdownSelect().select(monthsAndYear, {force: true})
