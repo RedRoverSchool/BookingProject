@@ -99,6 +99,7 @@ class CreateBookingPage {
     getAmountOfPassengersInSummary = () => cy.get('.box-default .total-wrapper  .total-row');
     getPricesSummary = () => cy.get('.total-wrapper > div.total-row span');
     getTotalPriceSummary = () => cy.get('.box-footer span.total-price.right');
+    getTotalSummaryLabel = () => cy.get('div.box-footer > span:nth-child(1) > b');
 
     //Total - Footer section                  
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
