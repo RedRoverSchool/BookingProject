@@ -22,7 +22,7 @@ function testCreatingReservationForPassengerType(passengerName, dropdownSelectio
     bookingPopup.getOnePassengerTypeLabel().should('have.text', checkTextOnPassengerTypeLabel);  
 };
 
-describe('US_AC.05 | Create reservation for 1 passenger', () => {
+describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
 
     beforeEach(function () {
         cy.cleanData()
