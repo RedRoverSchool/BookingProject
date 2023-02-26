@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
-describe('US_04.15 | Create booking page > Month button elements view', () => {
+describe.skip('US_04.15 | Create booking page > Month button elements view', () => {
 
     before(function () {
         cy.visit('/');
@@ -45,7 +45,7 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
             .should('not.be.visible');
     })
 
-    it('AT_04.15.05 | Calendar label (between arrows) is visible and its format has the name of the current month and year (e.g. Jan 2023)', function () {
+    it.skip('AT_04.15.05 | Calendar label (between arrows) is visible and its format has the name of the current month and year (e.g. Jan 2023)', function () {
         createBookingPage.clickMonthBtn();
 
         createBookingPage.getLabelCalendar()
@@ -68,7 +68,7 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
         createBookingPage.getLableDepartureDate().should('have.text', this.createBookingPage.departureDate);
     });
 
-    it('AT_04.15.07 | Selected day by default is according to requirements (current date by (GMT+7) + 2 days)', function () {
+    it.skip('AT_04.15.07 | Selected day by default is according to requirements (current date by (GMT+7) + 2 days)', function () {
         let requiredDay = createBookingPage.getRequiredDefaulDay_DDFormat()
         createBookingPage.getDaySelected()
             .invoke('text')

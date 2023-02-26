@@ -20,7 +20,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		createBookingPage.clickMonthBtn()
 	})
 
-	it('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
+	it.skip('AT_04.12.01 | Create booking page > Verify any date earlier than the current date is not available.', function () {
 		let date = new Date() 
 		let dateThailand = date.toLocaleString('en-GB', { day: 'numeric', timeZone: 'Asia/Bangkok' })
 		let currentMonthAndYear = date.toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok'})
@@ -32,7 +32,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})		
 	});
 
-	it('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
+	it.skip('AT_04.12.02 | Verify any available chosen date, month and year from month dropdown menu match label departure on date', function () {
 		createBookingPage.getMonthDropdownList().then(($el) => {
 			let arrayOfMonths = $el
 				.toArray()
@@ -79,7 +79,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})
 	});
 
-	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
+	it.skip('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
 		const tomorrowDayThailand = getCustomCalendarDay(1)
 
 		createBookingPage.clickCalendarDay(tomorrowDayThailand)

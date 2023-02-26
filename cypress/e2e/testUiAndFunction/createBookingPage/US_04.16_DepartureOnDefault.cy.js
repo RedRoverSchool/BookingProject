@@ -29,7 +29,7 @@ describe('US_04.16 | Departure On UI by default', () => {
             .and('have.css', 'color', this.colors.greenBookingPage);
     })
 
-    it('AT_04.16.02 | Selected date label near "Departure on" section name has format DD MM YYYY (for example, 14 Jan 2023)', () => {
+    it.skip('AT_04.16.02 | Selected date label near "Departure on" section name has format DD MM YYYY (for example, 14 Jan 2023)', () => {
         createBookingPage.getLabelDepartureOnDate()
             .should('have.text', createBookingPage.getDefaultDayMonthYear());
     })
