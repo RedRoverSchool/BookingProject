@@ -143,5 +143,7 @@
     "numberOfPassengers": {
        "passengerDefault": "1 passenger",
        "sixPassengers":  "6 passengers"   
-    }
+    },
+
+    "labelTicketsAvailableText": " tickets available"
 }
