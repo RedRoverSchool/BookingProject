@@ -6,7 +6,7 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
-const validBoundaryValuesMinNomMax = (arr1, arr2) => {
+const validBoundaryValues = (arr1, arr2) => {
 	let validBoundaryArray = arr1.filter((el) => arr2.includes(el))
 	return [validBoundaryArray[0], validBoundaryArray[6], validBoundaryArray[12]]
 }
@@ -42,7 +42,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 			expect($el.text()).to.eq(createBookingPage.createArrayOfConsetutiveMonths()[i])
 		})
 
-		let validBoundaryValueArrayMinNomMax = validBoundaryValuesMinNomMax(this.createBookingPage.arrayOfExpectedMonths,
+		let validBoundaryValueArrayMinNomMax = validBoundaryValues(this.createBookingPage.arrayOfExpectedMonths,
 		createBookingPage.createArrayOfConsetutiveMonths())
 
 		for (let monthsAndYear of validBoundaryValueArrayMinNomMax) {
