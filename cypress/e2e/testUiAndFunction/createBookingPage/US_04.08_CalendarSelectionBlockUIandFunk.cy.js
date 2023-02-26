@@ -123,7 +123,8 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
       });
 
     it('AT_04.08.09 | Verify that Arrows is present for week view', () => {
-        createBookingPage.getWeekButton().should('have.class', 'selected');
+        createBookingPage
+        .getWeekButton().should('have.class', 'selected');
         createBookingPage.getCalendarPrevButton().should('be.visible');
         createBookingPage.getCalendarNextButton().should('be.visible');
     });
