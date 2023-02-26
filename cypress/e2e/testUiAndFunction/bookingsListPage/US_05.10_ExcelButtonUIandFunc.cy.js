@@ -40,13 +40,12 @@ describe('US_05.10 Excel button UI and functionality', () => {
         bookingListPage.getDrdnDatesRangeDefaultValue()
             .then(($rangeDates) => {
                 let expectedFormattedRrangeDates = bookingListPage.formatteddDatesRangeYYYYMMDD($rangeDates.text())
-                let expectedFilePath = this.bookingsListPage.path.folder + expectedFormattedRrangeDates + this.bookingsListPage.path.extension
+                let expectedFilePath = this.bookingsListPage.excelFile.name + expectedFormattedRrangeDates + this.bookingsListPage.excelFile.extension
                 
                 bookingListPage.clickExcelButton()
 
                 cy.verifyDownload('.', { contains: true });
                 cy.verifyDownload('.csv', { contains: true });
-                
                 cy.verifyDownload(expectedFilePath);
             })
     });

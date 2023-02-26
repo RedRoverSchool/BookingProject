@@ -55,8 +55,8 @@
         "statusNoResult": "No results found"        
     },
     
-    "path": {
-        "folder": "Bookings ",
+    "excelFile": {
+        "name": "Bookings ",
         "extension": ".csv"
     }
 }
