@@ -2,7 +2,7 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import getArray from "../../../support/utilities/getArray";
-import getRandomElementOfArray from "../../../support/utilities/getRandomElementOfArray";
+import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -25,10 +25,9 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         cy.login(AGENT.email, AGENT.password)
         
         createBookingPage.clickCalendarNextButton()
-        //createBookingPage.clickFridayButton()
-        cy.intercept('/tools/**').as('getTrip')
-		cy.wait('@getTrip')
+        waitForToolsPing()
         createBookingPage.clickFirstTripCard()
+        waitForToolsPing
     });
 
     it('AT_04.29.01 | The amount of passengers in the "Seat selection dropdown" is equal the number of available tickets in the selected trip', function() {
@@ -61,23 +60,24 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
     });
 
     it('AT_04.29.03 | When selecting the required amount of passengers the corresponding number of seats in the "Seats table" will be rgb(157, 208, 157) color', function() {
-        
-        createBookingPage.getSeatSelectionDropdownList().then(($el) => {
-            const amountOfPass = getRandomElementOfArray($el)
-             
-            createBookingPage.getSeatSelectionDropdown()
-                .select(amountOfPass)
-                .should('have.value', parseInt(amountOfPass))
+        let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
+                                             this.createBookingPage.validBoundaryValues.nominalValue,
+                                             this.createBookingPage.validBoundaryValues.maximum]
+            
+            for(let passengersAmount of passengersAmountBoundaryArray){
+                createBookingPage.getSeatSelectionDropdown()
+                    .select(passengersAmount, { force: true })
+                    .should('have.value', parseInt(passengersAmount))
 
-            createBookingPage.getSelectedSeats().then(($el) => {
-                expect($el).to.have.css('background-color', this.colors.greenSeat)
+                createBookingPage.getSelectedSeats().then(($el) => {
+                    expect($el).to.have.css('background-color', this.colors.greenSeat)
 
-                const selectedSeatsArr = getArray($el)
-                const selectedSeats = selectedSeatsArr.length
+                    const selectedSeatsArr = getArray($el)
+                    const selectedSeats = selectedSeatsArr.length
 
-            expect(selectedSeats).to.equal(parseInt(amountOfPass))   
-            })
-        })
+                expect(selectedSeats).to.equal(parseInt(passengersAmount))   
+                })
+            }
     });
 
     it('AT_04.29.04 | The number of passengers in "Seat selection dropdown" is equal the number of passengers is displayed in the "Passengers details dropdown".', function() {

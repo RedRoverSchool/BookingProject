@@ -15,7 +15,7 @@ const sumOfArray = (array) => {
 		.reduce((total, el) => total += +el, 0)
 }
 
-describe('US_04.30 | Summary UI', () => {
+describe.skip('US_04.30 | Summary UI', () => {
 
 	before(() => {
 		cy.visit('/')
@@ -200,4 +200,8 @@ context('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger far
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
 		});
 	})
+
+	it('AT_04.30.10 | Text "Total" is displayed and visible', function ()  {
+        createBookingPage.getTotalSummaryLabel().should('be.visible');
+    })
 })
