@@ -138,5 +138,7 @@
         "1 passenger",
         "60 passengers",
         "300 passengers"
-    ]
+    ],
+
+    "labelTicketsAvailableText": " tickets available"
 }
