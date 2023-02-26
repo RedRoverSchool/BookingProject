@@ -46,7 +46,7 @@ describe('US_04.31 | Total UI', () => {
         createBookingPage.getDropdownToggleButton().should('be.visible')
     });
 
-    it('AT_04.31.07 | Verify that the dropdown-toggle button has color (#FFF', function () {
+    it('AT_04.31.07 | Verify that the dropdown-toggle button has color (#FFF)', function () {
         createBookingPage.getDropdownToggleButton().should('have.css', 'color',  this.colors.white)
     });
 
@@ -57,4 +57,8 @@ describe('US_04.31 | Total UI', () => {
         createBookingPage.clickReservationTicketArrow()
         createBookingPage.getReservationTicketButton().should('be.visible')
     });
+
+    it('AT_04.31.10 | Verify that the pop-up button “Reserve tickets” has a background color (#f4f4f4)', function () {
+        createBookingPage.getReservationTicketButton().should('have.css', 'background-color', this.colors.lightGrey)
+    })
 })

@@ -393,6 +393,26 @@ class CreateBookingPage {
             .select(FareType, { force: true })        
     }
 
+    selectNeedArrivalStation(nameStation) {
+        this.getCreateBookingHeader().click()
+        this.clickArrivalStationDropdown()
+        this.getArrivalStationList().each(($el) => {
+            if ($el.text() == nameStation) {
+                cy.wrap($el).click({ force: true })
+            }
+        })
+    }
+
+    hoverNeedArrivalStation(nameStation) {
+        this.getCreateBookingHeader().click({ force: true })
+        this.clickArrivalStationDropdown()
+        this.getArrivalStationList().each(($el) => {
+            if ($el.text() == nameStation) {
+                cy.wrap($el).trigger('mouseover')
+            }
+        })
+    }
+
     createArrayOfConsetutiveMonths = () => {
         let consecutiveMonths = []
         let count = 0
