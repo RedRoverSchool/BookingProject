@@ -15,4 +15,9 @@ describe('US_04.02_Default page UI', () => {
     it('AT_04.02.01 | Verify heading of the page is "Create booking" and it is visible', function ()  {
         createBookingPage.getCreateBookingHeader().should('be.visible');
     });
+
+    it('AT_04.02.02 | Verify Departure/Arrival station section exists/is visible', function ()  {
+        createBookingPage.getDepartureStationSection().should('exist');
+        createBookingPage.getDepartureStationSection().should('be.visible');        
+    });
 })
