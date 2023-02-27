@@ -1,7 +1,6 @@
 /// <reference types="Cypress" />
 
-import { StartPage } from "../../../pageObjects/StartPage.js";
-import { RegisterPopup } from "../../../pageObjects/StartPage.js";
+import { StartPage, RegisterPopup } from "../../../pageObjects/StartPage.js";
 import { faker } from '@faker-js/faker';
 
 const startPage = new StartPage();
@@ -12,7 +11,7 @@ const randomEmail = faker.internet.email();
 const randomPhoneNumber = faker.phone.number('+66##########')
 
 
-describe('US_01.13.01 | Register functionality', () => {
+describe('US_01.13 | Register functionality', () => {
     
     before(() => {
         cy.visit('/')
