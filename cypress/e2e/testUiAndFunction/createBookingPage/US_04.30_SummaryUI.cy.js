@@ -164,7 +164,7 @@ describe('US_04.30 | Summary UI', () => {
 
 	it('AT_04.30.10 | Text "Total" is displayed and visible', function ()  {
         createBookingPage.getTotalSummaryLabel().should('be.visible');
-    })
+	})
 
 	describe('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
 		beforeEach(() => {
