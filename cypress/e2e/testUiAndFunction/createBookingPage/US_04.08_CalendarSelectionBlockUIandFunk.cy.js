@@ -41,7 +41,7 @@ describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
         createBookingPage.getLabelCalendar().should('be.visible')
     });
 
-    it.only('AT_04.08.10 | Verify that Arrows is present for month view', () => {
+    it('AT_04.08.10 | Verify that Arrows is present for month view', () => {
         createBookingPage.clickMonthBtn()
         createBookingPage.getMonthBtn().should('have.class', 'selected');
         createBookingPage.getCalendarPrevButton().should('be.visible');
