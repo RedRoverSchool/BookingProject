@@ -294,16 +294,16 @@ class CreateBookingPage {
         this.getBookTicketsButton().click();
     }
 
-    getRequiredDefaulDay_DDFormat() {
+   getRequiredDefaulDay_DDFormat() {
         let date = new Date();
         let currentTailandDate = date.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok' });
         let requiredDefaultDay = (+currentTailandDate + 2).toString();
         return requiredDefaultDay;
     }
 
-    getCurrentMonthAndYear() {
+       getCurrentMonthAndYear() {
         let date = new Date();
-        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
         return currentMonthAndYear;
     }
 
