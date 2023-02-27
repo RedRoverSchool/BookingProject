@@ -416,6 +416,9 @@ class CreateBookingPage {
         })
     }
 
+    /**
+      * @returns array of 13 consetutive months, starting from current
+    */
     createArrayOfConsetutiveMonths = () => {
         let consecutiveMonths = []
         let count = 0
@@ -429,5 +432,12 @@ class CreateBookingPage {
         }
         return consecutiveMonths
     }  
+
+    /**
+      * @returns array of 3 months in order: next from current, six months from current, 12 months from current 
+    */
+    validBoundaryValuesMonthDropdownAboveMinNomMax () {
+        return [this.createArrayOfConsetutiveMonths()[1], this.createArrayOfConsetutiveMonths()[6], this.createArrayOfConsetutiveMonths()[12]]
+    }
 }
 export default CreateBookingPage;

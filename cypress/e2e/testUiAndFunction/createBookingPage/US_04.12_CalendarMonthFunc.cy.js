@@ -3,27 +3,9 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import getCustomCalendarDay from "../../../support/utilities/getCustomCalendarDay";
 import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
+import getArray from "../../../support/utilities/getArray";
 
 const createBookingPage = new CreateBookingPage();
-
-const validBoundaryValues = (array) => {
-	let date = new Date()
-	let currentYear = date.toLocaleDateString('en-US', { year: 'numeric' })
-	const currentMonth = date.toLocaleString('en-US', { month: 'short' })
-	let bondaryArray = []
-	for (let i = 0; i < array.length; i++) {
-		if (array[i] === currentMonth && i <= 6) {
-			bondaryArray.push(`${array[i]} ${currentYear}`)
-			bondaryArray.push(`${array[i + 6]} ${currentYear}`)
-			bondaryArray.push(`${array[i]} ${+currentYear + 1}`)
-		} else if (array[i] === currentMonth && i > 6) {
-			bondaryArray.push(`${array[i]} ${currentYear}`)
-			bondaryArray.push(`${array[i - 6]} ${currentYear}`)
-			bondaryArray.push(`${array[i]} ${+currentYear + 1}`)
-		}
-	}
-	return bondaryArray
-}
 
 describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
@@ -51,11 +33,18 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})		
 	});
 
-	it.skip('AT_04.12.02 | Verify chosen date (two days from current Thailand date),  chosen month and year (current, 6 months from current, 12 month from current) match label departure on date', function () {
-		let validBoundaryValueArrayMinNomMax = validBoundaryValues(this.createBookingPage.arrayOfMonths)
+	it('AT_04.12.02 | Verify chosen date (two days from current Thailand date),  chosen month and year ( next from current, 6 months from current, 12 months from current) match label departure on date', function () {
+		createBookingPage.getMonthDropdownList().then(($el) => {
+			let arrayofMonths = getArray($el)
+			expect(arrayofMonths).to.deep.eq(createBookingPage.createArrayOfConsetutiveMonths())
+		})
+		
+		let validBoundaryValueArrayAboveMinNomMax = createBookingPage.validBoundaryValuesMonthDropdownAboveMinNomMax()
 
-		for (let monthsAndYear of validBoundaryValueArrayMinNomMax) {
-			createBookingPage.getMonthDropdownSelect().select(monthsAndYear, {force: true})
+		for (let monthsAndYear of validBoundaryValueArrayAboveMinNomMax) {
+			createBookingPage
+				.getMonthDropdownSelect()
+				.select(monthsAndYear, { force: true })
 			createBookingPage
 				.getCalendarDays()
 				.contains(createBookingPage.getRequiredDefaulDay_DDFormat())
