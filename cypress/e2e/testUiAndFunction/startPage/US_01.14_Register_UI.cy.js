@@ -38,4 +38,13 @@ describe('US_01.14 | Register UI', () => {
             .and('have.css', 'color', this.colors.greyHeader)
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
     })
+
+    it('AT_01.14.03 | Verify that the label "Company name" is visible in the modal body, has the #999 color and font size: 14px' , function () {
+        registerPopup
+            .getCompanyNameLabel()
+            .should('be.visible')
+            .and('include.text', this.startPage.label.labelCompanyName.text)
+            .and('have.css', 'color', this.colors.greyLabel)
+            .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
+    })
 })
