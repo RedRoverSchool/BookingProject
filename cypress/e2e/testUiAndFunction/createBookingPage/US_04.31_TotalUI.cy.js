@@ -53,13 +53,11 @@ describe('US_04.31 | Total UI', () => {
     it('AT_04.31.09 | Verify that the pop up button "Reserve tickets" is visible', () => {
         waitForToolsPing()
         createBookingPage.clickCalendarNextButton()
-        waitForToolsPing()
         createBookingPage.clickSaturdayButton()
-        waitForToolsPing()
         createBookingPage.clickSecondTripCard()
         createBookingPage.clickReservationTicketArrow()
         createBookingPage.getReservationTicketButton().should('be.visible')
-    });
+});
 
     it('AT_04.31.10 | Verify that the pop-up button “Reserve tickets” has a background color (#f4f4f4)', function () {
         createBookingPage.getReservationTicketButton().should('have.css', 'background-color', this.colors.lightGrey)
