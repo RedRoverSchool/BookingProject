@@ -42,9 +42,9 @@ describe('US_04.12 | Calendar month functionality', () => {
 		
 		let validBoundaryValueArrayMinNomMax = createBookingPage.validBoundaryValuesMonthDropdownMinNomMax()
 		const currentDateThailand = getCustomCalendarDay(0)
-		const firstAvailiableForBookingfDay = getCustomCalendarDay(2)
+		const firstAvailiableForBookingDay = getCustomCalendarDay(2)
 
-		if (firstAvailiableForBookingfDay === "1" || firstAvailiableForBookingfDay === "2") {
+		if (firstAvailiableForBookingDay === "1" || firstAvailiableForBookingDay === "2") {
 			createBookingPage.clickCalendarPrevButton()	
 		}
 
