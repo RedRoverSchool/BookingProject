@@ -34,30 +34,34 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})		
 	});
 
-	it('AT_04.12.02 | Verify chosen date (two days from current Thailand date),  chosen month and year ( next from current, 6 months from current, 12 months from current) match label departure on date', function () {
+	it('AT_04.12.02 | Verify current Thailand date,  chosen month and year (current, 6 months from current, 12 months from current) match label departure on date', function () {
 		createBookingPage.getMonthDropdownList().then(($el) => {
 			let arrayofMonths = getArray($el)
 			expect(arrayofMonths).to.deep.eq(createBookingPage.createArrayOfConsetutiveMonths())
 		})
 		
-		let validBoundaryValueArrayAboveMinNomMax = createBookingPage.validBoundaryValuesMonthDropdownAboveMinNomMax()
+		let validBoundaryValueArrayMinNomMax = createBookingPage.validBoundaryValuesMonthDropdownMinNomMax()
+		const currentDateThailand = getCustomCalendarDay(0)
+		const firstAvailiableForBookingfDay = getCustomCalendarDay(2)
 
-		for (let monthsAndYear of validBoundaryValueArrayAboveMinNomMax) {
+		if (firstAvailiableForBookingfDay === "1" || firstAvailiableForBookingfDay === "2") {
+			createBookingPage.clickCalendarPrevButton()	
+		}
+
+		for (let monthsAndYear of validBoundaryValueArrayMinNomMax) {
 			createBookingPage
-				.getMonthDropdownSelect()
-				.select(monthsAndYear, { force: true })
+				.selectMonthFromMonthDropdown(monthsAndYear)
+			createBookingPage
+				.clickCalendarDay(currentDateThailand)
 			createBookingPage
 				.getCalendarDays()
-				.contains(createBookingPage.getRequiredDefaulDay_DDFormat())
-				.click({force: true}).then(($el) => {
+				.filter('.selected').then(($el) => {
 					let dateChosen = $el.text()
-					expect(dateChosen).to.eq(createBookingPage.getRequiredDefaulDay_DDFormat())
-
-							let finalDateMonthAndYear = dateChosen + " " + monthsAndYear
-
+					expect(dateChosen).to.eq(currentDateThailand)
+                       
 							createBookingPage.getLabelDepartureOnDate().then(($el) => {
 								let departureDate = $el.text()
-								expect(departureDate).to.eq(finalDateMonthAndYear)
+								expect(departureDate).to.eq( dateChosen + " " + monthsAndYear)
 							})
 						})
 		}
