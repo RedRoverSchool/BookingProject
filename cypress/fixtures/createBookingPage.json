@@ -145,6 +145,8 @@
        "sixPassengers":  "6 passengers"   
     },
 
+    "labelTicketsAvailableText": " tickets available",
+
     "arrayOfMonths" : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 }

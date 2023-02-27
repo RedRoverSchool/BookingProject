@@ -3,6 +3,7 @@ class CreateBookingPage {
     getCreateBookingHeader = () => cy.get('div h1');
 
     //Departure/Arrival station
+    getDepartureStationSection = () => cy.get('.box-body.route-wrapper');
     getDepartureStationDropdown = () => cy.get('#select2-departure-container');
     getListDepartureStation = () => cy.get('.select2-results .select2-results__option');
     getArrivalStationDropdown = () => cy.get('#select2-destination-container');
@@ -37,13 +38,14 @@ class CreateBookingPage {
     getLabelDepartureOnDate = () => cy.get('#label-departure-on #trips-selected-date');
     getNumberAllSeatsFirstTripCard = () => cy.get('div .trip:first-child .class');
     getPriceOfTicket = () => cy.get('.vehclass-ferry.selected .price');
-    getLabelTicketsAvailableSelectedTripCard = () => cy.get('.selected .availability');
+    getLabelTicketsAvailableSecondTripCard = () => cy.get('.trip:nth-child(2) span.availability');
     getDepartureTime = () => cy.get('.popup-trip div:nth-child(6) span');
     getDepartureLatestButton = () => cy.get('button.trips-order-desc');
     getDepartureTripCardsList = () => cy.get('.trips-list-wrapper > div.trip');
     getBtnErliest = () => cy.get('button.trips-order-asc');
     getTripClassDropdown = () => cy.get('select[name="trips_class"]');
     getVehicleClassTripCards = () => cy.get('.trips-list-wrapper > div> span.class');
+    getNumberTicketsAvailableSecondTripCard = () => cy.get('.trip:nth-child(2) span.availability .num');
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
@@ -129,7 +131,7 @@ class CreateBookingPage {
     };
 
     clickSecondTripCard() {
-        this.getSecondTripCard().click()
+        this.getSecondTripCard().click({ force: true })
     }
 
     typeIntoMainPassengerNameField(name) {
