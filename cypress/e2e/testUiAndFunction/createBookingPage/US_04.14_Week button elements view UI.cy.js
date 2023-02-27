@@ -24,8 +24,6 @@ describe('US_04.14 | Week button elements view ', () => {
     });  
 
     it('AT_04.14.01 | In the upper left corner of the section there is a label Departure date which has the color #666666', function() {
-        createBookingPage
-        .getLableDepartureDate()
-        .should('have.css','color', this.colors.greyHeader)
+        createBookingPage.getLableDepartureDate().should('have.css','color', this.colors.greyHeader)
     });
 });    
