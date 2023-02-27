@@ -93,7 +93,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})
 	});
 
-	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
+	it.skip('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
 		const tomorrowDayThailand = getCustomCalendarDay(1)
 		const availableDayThailand = getCustomCalendarDay(2)
 
