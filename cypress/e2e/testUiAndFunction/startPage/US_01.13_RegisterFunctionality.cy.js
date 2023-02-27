@@ -21,7 +21,7 @@ describe('US_01.13 | Register functionality', () => {
     beforeEach(function () {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
-        });
+         });
 	});
 
     it('AT_01.13.01 | Register button is clickble', function () {
