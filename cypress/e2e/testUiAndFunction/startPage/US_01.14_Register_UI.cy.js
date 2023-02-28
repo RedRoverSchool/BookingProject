@@ -47,4 +47,13 @@ describe('US_01.14 | Register UI', () => {
             .and('have.css', 'color', this.colors.greyLabel)
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
     })
+    
+    it('AT_01.14.04 | Verify that the example(placeholder) "Transportation Co" is visible in the company name field, has the #666 color, and font size: 14px' , function () {
+        registerPopup
+            .getCompanyInput()
+            .should('be.visible')
+            .and('have.attr', 'placeholder', this.startPage.inputField.registerPopup.companyNameInputField)
+            .and('have.css', 'color', this.colors.greyHeader)
+            .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
+    })
 })
