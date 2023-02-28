@@ -22,13 +22,13 @@ function testCreatingReservationForPassengerType(passengerName, dropdownSelectio
     bookingPopup.getOnePassengerTypeLabel().should('have.text', checkTextOnPassengerTypeLabel);  
 };
 
-describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
+describe('US_AC.05 | Create reservation for 1 passenger', () => {
 
     beforeEach(function () {
         cy.cleanData()
 
+        cy.loginWithSession(AGENT.email, AGENT.password)
         cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)
 
         createBookingPage.clickCalendarNextButton();
         createBookingPage.clickFridayButton();
@@ -48,11 +48,11 @@ describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
         testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name, 'child', 'Child:')
     });
 
-    it.skip('AT_AC.05.01| Create reservation for 1 passenger - Adult', function () {
+    it('AT_AC.05.01| Create reservation for 1 passenger - Adult', function () {
         testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'adult', 'Adult:');
     });
 
-    it.skip('AT_AC.05.03| Create reservation for 1 passenger - Elder', function () {
+    it('AT_AC.05.03| Create reservation for 1 passenger - Elder', function () {
         testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'elder', 'Elder:');
     });
 });   
