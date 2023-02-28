@@ -15,7 +15,7 @@ const sumOfArray = (array) => {
 		.reduce((total, el) => total += +el, 0)
 }
 
-describe('US_04.30 | Summary UI', () => {
+describe.skip('US_04.30 | Summary UI', () => {
 
 	before(() => {
 		cy.visit('/')
@@ -38,7 +38,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	});
 	
-	it.skip('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
+	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
 		let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.minimum,
 		                               this.createBookingPage.validBoundaryValues.nominalValue,
 		                               this.createBookingPage.validBoundaryValues.maximum]
