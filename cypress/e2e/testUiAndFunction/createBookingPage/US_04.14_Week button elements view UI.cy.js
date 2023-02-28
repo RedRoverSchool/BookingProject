@@ -15,7 +15,7 @@ describe('US_04.14 | Week button elements view ', () => {
 
     beforeEach(function() {
         cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+           this.createBookingPage = createBookingPage;
         });
 
         cy.fixture('colors').then(colors => {
@@ -25,5 +25,10 @@ describe('US_04.14 | Week button elements view ', () => {
 
     it('AT_04.14.01 | In the upper left corner of the section there is a label Departure date which has the color #666666', function() {
         createBookingPage.getLableDepartureDate().should('have.css','color', this.colors.greyHeader)
+    });
+
+    it('AT_04.14.02| The Week button is located in the upper right corner of the section Departure date', function () {
+        createBookingPage.getWeekButton().should('be.visible');
+        createBookingPage.getWeekButton().should('have.text', this.createBookingPage.weekButtonText);
     });
 });    
