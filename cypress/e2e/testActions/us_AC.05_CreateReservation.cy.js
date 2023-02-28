@@ -2,7 +2,6 @@
 
 import CreateBookingPage from "../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../pageObjects/BookingPopup";
-import waitForToolsPing from '../../support/utilities/waitForToolsPing'
 
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
@@ -10,12 +9,14 @@ const bookingPopup = new BookingPopup();
 const AGENT = Cypress.env('agent');
 
 function testCreatingReservationForPassengerType(passengerName, dropdownSelection, checkTextOnPassengerTypeLabel) {
+    cy.intercept('/tools/ping/**').as('getToolsPing');
+
     createBookingPage.typeIntoMainPassengerNameField(passengerName);
     createBookingPage.getMainPassengerFareTypeDropdownSelect().select(dropdownSelection, { force: true });
     createBookingPage.clickReservationTicketArrow();
     createBookingPage.clickReservationTicketButton();
 
-    waitForToolsPing()
+    cy.wait('@getToolsPing')
     bookingPopup.getConfirmTicketButton().should('be.visible');
     bookingPopup.getPassengerTitle().should('include.text', '(1)');
     bookingPopup.getPassengersList().should('have.length', 1);
@@ -25,15 +26,17 @@ function testCreatingReservationForPassengerType(passengerName, dropdownSelectio
 describe('US_AC.05 | Create reservation for 1 passenger', () => {
 
     beforeEach(function () {
-        cy.cleanData()
+        cy.cleanData();
 
-        cy.loginWithSession(AGENT.email, AGENT.password)
-        cy.visit('/')
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');
+
+        cy.intercept('/tools/ping/**').as('getToolsPing');
 
         createBookingPage.clickCalendarNextButton();
         createBookingPage.clickFridayButton();
 
-        waitForToolsPing()
+        cy.wait('@getToolsPing');
 
         createBookingPage.clickFirstTripCard();
     });

@@ -1,4 +1,3 @@
-import waitForToolsPing from '../support/utilities/waitForToolsPing.js'
 
 const CLEAN = Cypress.env('clean');
 const MANAGER_CI = Cypress.env('managerCI');
@@ -6,7 +5,6 @@ const MANAGER = Cypress.env('manager');
 const STATUS_CI = Cypress.env('CI');
 
 Cypress.Commands.add('loginWithSession', (email, password) => {
-    
     cy.session([email, password], () => {
         cy.intercept('POST', 'login').as('login');
         cy.visit('/');
@@ -17,7 +15,6 @@ Cypress.Commands.add('loginWithSession', (email, password) => {
         cy.wait('@login');
     });
 });
-
 
 Cypress.Commands.add('login', (email, password) => {
     cy.get('div.inner a.login').click();

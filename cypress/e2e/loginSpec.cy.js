@@ -1,13 +1,11 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../pageObjects/CreateBookingPage";
+const createBookingPage = new CreateBookingPage();
 
+const AGENT = Cypress.env('agent');
 
 describe('Login', () => {
-    const AGENT = Cypress.env('agent');
-
-    const createBookingPage = new CreateBookingPage();
-
     beforeEach(function () {
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
