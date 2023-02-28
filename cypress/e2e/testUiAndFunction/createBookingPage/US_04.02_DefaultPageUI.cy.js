@@ -17,22 +17,22 @@ describe('US_04.02_Default page UI', () => {
     });
 
     it('AT_04.02.02 | Verify Departure/Arrival station section exists/is visible', function ()  {
-        createBookingPage.getDepartureStationSection().should('exist');
-        createBookingPage.getDepartureStationSection().should('be.visible');        
+        createBookingPage.getDepartureStationSection().should('exist').and('be.visible');              
     });
 
     it('AT_04.02.03 | Verify section has a label "Arrival station" and it is visible', function ()  {
-        createBookingPage.getLabelArrivalStation().should('exist');
-        createBookingPage.getLabelArrivalStation().should('be.visible');        
+        createBookingPage.getLabelArrivalStation().should('exist').and('be.visible');               
     });
 
     it('AT_04.02.04 | Verify section has a label "Departure station" and it is visible', function ()  {
-        createBookingPage.getLabelDepartureStation().should('exist');
-        createBookingPage.getLabelDepartureStation().should('be.visible');        
+        createBookingPage.getLabelDepartureStation().should('exist').and('be.visible');                
     });
 
     it('AT_04.02.05 | Verify Departure date section exists/is visible', function ()  {
-        createBookingPage.getDepartureDateSection().should('exist');
-        createBookingPage.getDepartureDateSection().should('be.visible');        
+        createBookingPage.getDepartureDateSection().should('exist').and('be.visible');               
+    });
+
+    it('AT_04.02.06 | Verify section title is "Departure date" and it is visible', function ()  {
+        createBookingPage.getDepartureDateLabel().should('exist').and('be.visible');                
     });
 })

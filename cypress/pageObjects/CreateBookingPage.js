@@ -17,6 +17,7 @@ class CreateBookingPage {
 
     //Departure date
     getDepartureDateSection = () => cy.get('.box-body.calendar-wrapper');
+    getDepartureDateLabel = () => cy.get('#label-departure-date');
     getCalendarNextButton = () => cy.get('div .calendar-week-next');
     getCalendarPrevButton = () => cy.get('button.calendar-week-prev');
     getCalendarDays = () => cy.get('.calendar-day-selection-wrapper > .day-wrapper');
