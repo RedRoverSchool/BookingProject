@@ -50,4 +50,10 @@ describe('US_04.24 | Multiple passengers UI', () => {
             .should('be.visible')
             .and('have.attr', 'placeholder', this.createBookingPage.placeholder.notes);
     });
+
+    it('AT_04.24.05 | Verify email input field has an “Email” text placeholder.', function ()  {
+        createBookingPage
+            .getEmailInputField()
+            .should('have.attr', 'placeholder', this.createBookingPage.placeholder.email);
+    });
 });    
