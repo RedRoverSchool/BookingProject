@@ -28,7 +28,8 @@ describe('US_04.14 | Week button elements view ', () => {
     });
 
     it('AT_04.14.02| The Week button is located in the upper right corner of the section Departure date', function () {
-        createBookingPage.getWeekButton().should('be.visible');
-        createBookingPage.getWeekButton().should('have.text', this.createBookingPage.weekButtonText);
+        createBookingPage.getWeekButton()
+        .should('be.visible')
+        .and('have.text', this.createBookingPage.weekButtonText);
     });
 });    
