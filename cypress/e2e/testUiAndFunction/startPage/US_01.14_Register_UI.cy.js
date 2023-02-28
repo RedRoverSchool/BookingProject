@@ -56,4 +56,13 @@ describe('US_01.14 | Register UI', () => {
             .and('have.css', 'color', this.colors.greyHeader)
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
     })
+    
+    it('AT_01.14.05 | Verify that the label "Email" is visible in the modal body, has the #999 color and font size: 14px' , function () {
+        registerPopup
+            .getEmailLabel()
+            .should('be.visible')
+            .and('include.text', this.startPage.label.labelEmail.text)
+            .and('have.css', 'color', this.colors.greyLabel)
+            .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
+    }) 
 })
