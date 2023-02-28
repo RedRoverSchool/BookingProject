@@ -300,8 +300,14 @@ class CreateBookingPage {
         let requiredDate = date.toLocaleString("en-US", { day: 'numeric',  timeZone: 'Asia/Bangkok'});
         return requiredDate;
     }
+
+    getCurrentMonthAndYear() {
+        let date = new Date();
+        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        return currentMonthAndYear;
+    }
  
-       getFirstAvailableForBookingDefaultMonthYear() {
+    getFirstAvailableForBookingDefaultMonthYear() {
         let date = new Date();
         date.setDate(date.getDate() + 2);
         let requiredMonthYear = date.toLocaleString("en-US", { month: 'short', year: 'numeric',  timeZone: 'Asia/Bangkok'});
