@@ -27,9 +27,10 @@ describe('US_04.14 | Week button elements view ', () => {
         createBookingPage.getLableDepartureDate().should('have.css','color', this.colors.greyHeader)
     });
 
-    it('AT_04.14.02| The Week button is located in the upper right corner of the section Departure date', function () {
+    it('AT_04.14.02| The Week button is located in the upper right corner of the section Departure date, visible and have text "Week"', function () {
         createBookingPage.getWeekButton()
         .should('be.visible')
-        .and('have.text', this.createBookingPage.weekButtonText);
+        .and('have.text', this.createBookingPage.weekButtonText)
+        .and('have.css','position', 'static')
     });
 });    
