@@ -34,4 +34,12 @@ describe ('US_01.20 | Start Page > Restore Password Negative', function() {
             .and('have.text', this.startPage.alert.restorePasswordPopup.wrongEmail);
 
     });
+
+    it('AT_01.20.02 | Verify that the user is not able to restore the password with a missing domain at the Email input', function() {
+        restorePopup.enterEmail(this.startPage.dataInvalid.missingDomainEmail);
+        restorePopup.clickRestoreButton();
+        restorePopup.getEnterEmailAlert()
+            .should('be.visible')
+            .and('have.text', this.startPage.alert.restorePasswordPopup.wrongEmail);
+    });
 });

@@ -96,6 +96,7 @@
         "validPassword": "12345678", 
         "lettersInCountryCode": "SK",
         "letterInPhoneNumber": "61616161A",
-        "symbolsInCountryCode": "%@"
+        "symbolsInCountryCode": "%@",
+        "missingDomainEmail": "test@"
     }
 }
