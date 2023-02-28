@@ -34,6 +34,8 @@ class CreateBookingPage {
     getMondayButton = () => cy.get('div .calendar-day-selection-wrapper :first-child');
 
     //Departure on
+    getDepartureOnSection = () => cy.get('.box-body.trips-wrapper');
+    getDepartureOnLabel = () => cy.get('.trips-filters-wrapper #label-departure-on');
     getFirstTripCard = () => cy.get('div .trip:first-child');
     getSecondTripCard = () => cy.get('div .trip:nth-child(2)');
     getTicketsAvailableFirstTripCard = () => cy.get('.trip:first-child span.availability span.num');
