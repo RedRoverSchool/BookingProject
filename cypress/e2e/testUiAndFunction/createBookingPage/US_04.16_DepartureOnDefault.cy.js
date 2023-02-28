@@ -2,7 +2,6 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import { sortAsc } from  "../../../support/utilities/sortArrayByDigit";
-import ifLeapYear from "../../../support/utilities/ifLeapYear";
 
 const AGENT = Cypress.env('agent');
 const createBookingPage = new CreateBookingPage();
@@ -30,40 +29,9 @@ describe('US_04.16 | Departure On UI by default', () => {
             .and('have.css', 'color', this.colors.greenBookingPage);
     })
 
-    it.skip('AT_04.16.02 | Selected date label near "Departure on" section name has format DD MM YYYY (for example, 14 Jan 2023)', () => {
+    it('AT_04.16.02 | Selected date label near "Departure on" section name has format DD MM YYYY (for example, 14 Jan 2023)', () => {
         createBookingPage.getLabelDepartureOnDate()
-            .should('have.text', createBookingPage.getDefaultDayMonthYear());
-    })
-
-    it.only('AT_04.16.02 | Selected date label near "Departure on" section name has format DD MM YYYY (for example, 14 Jan 2023)', () => {
-        let date = new Date();
-        const currentDay = date.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok'}).toString();
-        const currentMonth = date.toLocaleDateString('en-US', { month: 'short', timeZone: 'Asia/Bangkok' });
-        const currentYear = date.toLocaleDateString('en-US', { year: 'numeric',  timeZone: 'Asia/Bangkok' });
-        let requiredDay = 0;
-        let requiredMonth = "";
-        let monthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-        for (let i = 0; i < monthArray.length; i++) {
-            if (currentMonth == monthArray[i] && (i == 0 || i == 2 || i == 4 || i == 6 || i == 7 || i == 9 || i == 11)) {
-                currentDay == 30 ? requiredDay = 1 : currentDay == 31 ? requiredDay = 2 : requiredDay = (+currentDay + 2);
-            } else if (currentMonth == monthArray[i] && (i == 3 || i == 5 || i == 8 || i == 10)) {
-                currentDay == 29 ? requiredDay = 1 : currentDay == 30 ? requiredDay = 2 : requiredDay = (+currentDay + 2);
-            } else {
-                if (ifLeapYear(currentYear)) {
-                    currentDay == 28 ? (requiredDay = 1, requiredMonth = monthArray[i + 1]) : currentDay == 29 ? (requiredDay = 2, requiredMonth = monthArray[i + 1]) : requiredDay = (+currentDay + 2);
-                } else {
-                    currentDay == 27 ? (requiredDay = 1, requiredMonth = monthArray[i + 1]) : currentDay == 28 ? (requiredDay = 2, requiredMonth = monthArray[i + 1]) : requiredDay = (+currentDay + 2); 
-                }
-
-            }
-        }
-        cy.log(currentDay)
-        cy.log("requiredDay = " +requiredDay)
-        cy.log(currentMonth)
-        cy.log(requiredMonth)
-     //   createBookingPage.getLabelDepartureOnDate()
-       //     .should('have.text', createBookingPage.getDefaultDayMonthYear());
+            .should('have.text', createBookingPage.getFirstAvailableForBookingDefaultDayMonthYear());
     })
 
     it('AT_04.16.03 | "Earliest" button is selected, visible and has green background color (#00a65a - rgb(0, 166, 90))', function () {

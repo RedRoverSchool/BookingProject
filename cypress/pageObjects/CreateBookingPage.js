@@ -294,17 +294,18 @@ class CreateBookingPage {
         this.getBookTicketsButton().click();
     }
 
-   getRequiredDefaulDay_DDFormat() {
+    getFirstAvailableForBookingDefaultDay() {                   
         let date = new Date();
-        let currentTailandDate = date.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok' });
-        let requiredDefaultDay = (+currentTailandDate + 2).toString();
-        return requiredDefaultDay;
+        date.setDate(date.getDate() + 2);
+        let requiredDate = date.toLocaleString("en-US", { day: 'numeric',  timeZone: 'Asia/Bangkok'});
+        return requiredDate;
     }
-
-       getCurrentMonthAndYear() {
+ 
+       getFirstAvailableForBookingDefaultMonthYear() {
         let date = new Date();
-        const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
-        return currentMonthAndYear;
+        date.setDate(date.getDate() + 2);
+        let requiredMonthYear = date.toLocaleString("en-US", { month: 'short', year: 'numeric',  timeZone: 'Asia/Bangkok'});
+        return requiredMonthYear;
     }
 
     selectAmountPassengersDetailsDropdown(amount) {
@@ -326,10 +327,9 @@ class CreateBookingPage {
         const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
         return formattedDate;   
     }
-    getDefaultDayMonthYear() {      
-        let date = new Date();
-        let currentMonthYearTailand = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
-        let defaultDayMonthYear = this.getRequiredDefaulDay_DDFormat() + " " + currentMonthYearTailand;       
+
+    getFirstAvailableForBookingDefaultDayMonthYear() {             
+        let defaultDayMonthYear = this.getFirstAvailableForBookingDefaultDay() + " " + this.getFirstAvailableForBookingDefaultMonthYear();
         return defaultDayMonthYear;       
     }
 
@@ -414,6 +414,6 @@ class CreateBookingPage {
                 cy.wrap($el).trigger('mouseover')
             }
         })
-    }
+    }      
 }
 export default CreateBookingPage;
