@@ -112,7 +112,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 			createBookingPage.clickCalendarDay(tomorrowDayThailand)
 			waitForToolsPing()
 			createBookingPage.getLabelDepartureOnDate()
-				.should('have.text', (`${tomorrowDayThailand} ${createBookingPage.getNextMonth()}`))
+				.should('have.text', (`${tomorrowDayThailand} ${createBookingPage.getNextMonthAndCurrentYear()}`))
 
 			createBookingPage.getDepartureTripCardsList().each(($el) => {
 				cy.wrap($el).should('have.class', 'disabled')

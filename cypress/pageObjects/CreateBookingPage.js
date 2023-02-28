@@ -451,7 +451,7 @@ class CreateBookingPage {
         return [this.createArrayOfConsetutiveMonths()[0], this.createArrayOfConsetutiveMonths()[6], this.createArrayOfConsetutiveMonths()[12]]
     }
 
-    getNextMonth() {
+    getNextMonthAndCurrentYear() {
         const date = new Date();
         let nextMonth = date.getMonth() + 1;
         date.setMonth(nextMonth);
