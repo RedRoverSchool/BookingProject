@@ -145,6 +145,8 @@
        "sixPassengers":  "6 passengers"   
     },
 
-    "labelTicketsAvailableText": " tickets available"
+    "labelTicketsAvailableText": " tickets available",
+
+    "labelDepartureStationMargin": "0px 0px 5px"
 
 }
