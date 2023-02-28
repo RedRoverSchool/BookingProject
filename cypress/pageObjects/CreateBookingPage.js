@@ -450,5 +450,13 @@ class CreateBookingPage {
     validBoundaryValuesMonthDropdownMinNomMax () {
         return [this.createArrayOfConsetutiveMonths()[0], this.createArrayOfConsetutiveMonths()[6], this.createArrayOfConsetutiveMonths()[12]]
     }
+
+    getNextMonthAndCurrentYear() {
+        const date = new Date();
+        let nextMonth = date.getMonth() + 1;
+        date.setMonth(nextMonth);
+        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
+        return formattedDate;
+    }
 }
 export default CreateBookingPage;

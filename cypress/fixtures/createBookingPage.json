@@ -147,5 +147,7 @@
 
     "labelTicketsAvailableText": " tickets available",
 
+    "labelDepartureStationMargin": "0px 0px 5px",
+
     "weekButtonText": "Week"
 }

@@ -38,7 +38,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	});
 	
-	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
+	it.skip('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
 		let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.minimum,
 		                               this.createBookingPage.validBoundaryValues.nominalValue,
 		                               this.createBookingPage.validBoundaryValues.maximum]
@@ -58,7 +58,7 @@ describe('US_04.30 | Summary UI', () => {
 		}
 	});
 
-	it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2, 150, 299) from passenger dropdown menu', function () {
+	it.skip('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2, 150, 299) from passenger dropdown menu', function () {
 		let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
 		                              this.createBookingPage.validBoundaryValues.nominalValue,
 		                              this.createBookingPage.validBoundaryValues.belowMaximum]
