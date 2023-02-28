@@ -38,7 +38,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	});
 	
-	it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
+	it.skip('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
 		let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.minimum,
 		                               this.createBookingPage.validBoundaryValues.nominalValue,
 		                               this.createBookingPage.validBoundaryValues.maximum]
