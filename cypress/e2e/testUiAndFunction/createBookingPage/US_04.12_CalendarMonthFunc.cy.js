@@ -34,7 +34,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 		})		
 	});
 
-	it.skip('AT_04.12.02 | Verify current Thailand date,  chosen month and year (current, 6 months from current, 12 months from current) match label departure on date', function () {
+	it('AT_04.12.02 | Verify current Thailand date,  chosen month and year (current, 6 months from current, 12 months from current) match label departure on date', function () {
 		createBookingPage.getMonthDropdownList().then(($el) => {
 			let arrayofMonths = getArray($el)
 			expect(arrayofMonths).to.deep.eq(createBookingPage.createArrayOfConsetutiveMonths())
@@ -46,6 +46,7 @@ describe('US_04.12 | Calendar month functionality', () => {
 
 		if (firstAvailiableForBookingDay === "1" || firstAvailiableForBookingDay === "2") {
 			createBookingPage.clickCalendarPrevButton()	
+			validBoundaryValueArrayMinNomMax[0] = createBookingPage.validBoundaryValuesMonthDropdownMinNomMax()[1]
 		}
 
 		for (let monthsAndYear of validBoundaryValueArrayMinNomMax) {
@@ -53,18 +54,12 @@ describe('US_04.12 | Calendar month functionality', () => {
 				.selectMonthFromMonthDropdown(monthsAndYear)
 			createBookingPage
 				.clickCalendarDay(currentDateThailand)
-			createBookingPage
-				.getCalendarDays()
-				.filter('.selected').then(($el) => {
-					let dateChosen = $el.text()
-					expect(dateChosen).to.eq(currentDateThailand)
-                       
-							createBookingPage.getLabelDepartureOnDate().then(($el) => {
-								let departureDate = $el.text()
-								expect(departureDate).to.eq( dateChosen + " " + monthsAndYear)
-							})
-						})
-		}
+			       
+					createBookingPage.getLabelDepartureOnDate().then(($el) => {
+						let departureDate = $el.text()
+							expect(departureDate).to.eq(currentDateThailand + " " + monthsAndYear)
+					})			
+		    }
 	});
 
 	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
