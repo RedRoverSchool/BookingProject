@@ -10,8 +10,8 @@ const AGENT = Cypress.env('agent');
 describe('US_03.03 Bookings management link', () => {
     
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
     beforeEach(function () {

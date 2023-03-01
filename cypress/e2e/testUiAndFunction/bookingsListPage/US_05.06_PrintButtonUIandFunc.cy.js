@@ -11,8 +11,8 @@ describe('US_05.06 Print Button UI and functionality', () => {
     const AGENT = Cypress.env('agent');
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         leftMenuPanel.clickBookingManagementIcon();
     });
 

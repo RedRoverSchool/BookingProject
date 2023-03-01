@@ -9,8 +9,8 @@ const AGENT = Cypress.env('agent');
 describe('US_04.17 | Departure on trip selected UI', function () {
 
     before(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
 
         createBookingPage.clickCalendarNextButton();
         waitForToolsPing();

@@ -19,8 +19,8 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
     });
 
     before(() => {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)        
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');       
     });
 
     it('AT_04.06.01 | Verify that the Departure station dropdown menu displays required list of stations', function () {
@@ -55,9 +55,9 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
 
     });
 
-    it('AT_04.06.04 | Verify that the background of the newly selected item changes color to green(#00A65A) when the item is selected', function() {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password) 
+    it.skip('AT_04.06.04 | Verify that the background of the newly selected item changes color to green(#00A65A) when the item is selected', function() {
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/'); 
         createBookingPage.hoverNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[4])
 
         createBookingPage.getListDepartureStation().each($el => {

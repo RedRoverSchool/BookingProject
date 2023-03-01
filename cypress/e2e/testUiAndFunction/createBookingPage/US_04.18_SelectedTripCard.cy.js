@@ -8,8 +8,8 @@ describe('US_04.18 | Create booking page > Selected trip card UI', () => {
     const AGENT = Cypress.env('agent');
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         createBookingPage.clickCalendarNextButton();
         waitForToolsPing();
         createBookingPage.clickSecondTripCard();

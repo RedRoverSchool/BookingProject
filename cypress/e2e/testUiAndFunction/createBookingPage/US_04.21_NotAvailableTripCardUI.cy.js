@@ -8,8 +8,8 @@ describe('US_04.21 | Not available trip card UI', () => {
     const AGENT = Cypress.env('agent');
 
     before(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
 
         createBookingPage.selectDepartureStation('Chonburi')
         createBookingPage.selectArrivalStation('Bangkok Khao San')
