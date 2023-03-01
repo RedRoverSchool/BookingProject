@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
-import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 import BookingsListPage from "../../../pageObjects/BookingsListPage";
+import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 
 const bookingsListPage = new BookingsListPage();
 const leftMenuPanel = new LeftMenuPanel();
@@ -18,7 +18,6 @@ describe("US_05.01_Search section functionality", () => {
   });
 
   it("AT_05.02.03| Verify that the clear button is clickable and removes all inputs", () => {
-    
     bookingsListPage.typeRandomWordInSearchField();
     bookingsListPage.clickClearLink();
 
