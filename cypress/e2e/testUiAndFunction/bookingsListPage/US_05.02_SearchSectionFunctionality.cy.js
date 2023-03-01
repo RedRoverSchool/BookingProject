@@ -6,7 +6,7 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 const bookingsListPage = new BookingsListPage();
 const leftMenuPanel = new LeftMenuPanel();
 
-describe("US_05.01_Search section functionality", () => {
+describe("US_05.02_Search section functionality", () => {
   const AGENT = Cypress.env("agent");
 
   before(() => {
@@ -17,7 +17,7 @@ describe("US_05.01_Search section functionality", () => {
     leftMenuPanel.clickBookingManagementIcon();
   });
 
-  it("AT_05.02.03| Verify that the clear button is clickable and removes all inputs", () => {
+  it("AT_05.02.03.01| Verify the Сlear anchor is clickable and removes all input data from the placeholder field Search", () => {
     bookingsListPage.typeRandomWordInSearchField();
     bookingsListPage.clickClearLink();
 
