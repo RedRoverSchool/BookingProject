@@ -13,9 +13,12 @@ describe('US_04.31 | Total UI', () => {
     });
 
     beforeEach(function () {
-        cy.fixture('colors').then(colors => {
-            this.colors = colors;
-        cy.intercept('/tools/ping/**').as('getToolsPing');
+        beforeEach(function () {
+            cy.fixture('colors').then(colors => {
+                this.colors = colors;
+            });
+            cy.intercept('/tools/ping/**').as('getToolsPing');
+        });
         });
 	});
 
