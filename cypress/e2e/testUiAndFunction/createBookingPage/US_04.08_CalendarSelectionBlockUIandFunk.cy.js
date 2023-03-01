@@ -40,6 +40,12 @@ describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
         createBookingPage.clickMonthBtn();
         createBookingPage.getLabelCalendar().should('be.visible')
     });
+
+    it('AT_04.08.10 | Verify that Arrows is present for month view', () => {
+        createBookingPage.getMonthBtn().should('have.class', 'selected');
+        createBookingPage.getCalendarPrevButton().should('be.visible');
+        createBookingPage.getCalendarNextButton().should('be.visible');
+    });
 });
 
 describe('US_04.08 | Calendar-selection block functionality week/month view', () => {
@@ -121,4 +127,11 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
           expect(openedWeekMonday).to.deep.equal(createBookingPage.getCurrentMonday());
         });
       });
+
+    it('AT_04.08.09 | Verify that Arrows is present for week view', () => {
+        createBookingPage
+        .getWeekButton().should('have.class', 'selected');
+        createBookingPage.getCalendarPrevButton().should('be.visible');
+        createBookingPage.getCalendarNextButton().should('be.visible');
+    });
 });

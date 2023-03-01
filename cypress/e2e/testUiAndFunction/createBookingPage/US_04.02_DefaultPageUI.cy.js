@@ -26,6 +26,11 @@ describe('US_04.02_Default page UI', () => {
 
     it('AT_04.02.04 | Verify section has a label "Departure station" and it is visible', function ()  {
         createBookingPage.getLabelDepartureStation().should('have.text', 'Departure station').and('be.visible');                
+        createBookingPage.getLabelArrivalStation().should('exist').and('be.visible');               
+    });
+
+    it('AT_04.02.04 | Verify section has a label "Departure station" and it is visible', function ()  {
+        createBookingPage.getLabelDepartureStation().should('exist').and('be.visible');                
     });
 
     it('AT_04.02.05 | Verify Departure date section exists/is visible', function ()  {
@@ -41,6 +46,6 @@ describe('US_04.02_Default page UI', () => {
     });
 
     it('AT_04.02.08 | Verify section title is "Departure on" and it is visible', function ()  {
-        createBookingPage.getDepartureOnLabel().should('include.text', 'Departure on').and('be.visible');                
+        createBookingPage.getDepartureOnLabel().should('include.text', 'Departure on').and('be.visible');                           
     });
 })
