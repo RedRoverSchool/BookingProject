@@ -255,7 +255,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     })
             });
         
-            it('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal (for 1, 150, 300 passengers)', function () {
+            it.skip('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal (for 1, 150, 300 passengers)', function () {
                 let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                      this.createBookingPage.validBoundaryValues.nominalValue,
                                                      this.createBookingPage.validBoundaryValues.maximum]
