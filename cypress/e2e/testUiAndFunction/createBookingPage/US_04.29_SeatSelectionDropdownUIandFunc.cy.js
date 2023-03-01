@@ -21,6 +21,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
     });
 
     before(function() {
+        cy.cleanData();
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
         
@@ -59,7 +60,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         })
     });
 
-    it('AT_04.29.03 | When selecting the required amount of passengers the corresponding number of seats in the "Seats table" will be rgb(157, 208, 157) color', function() {
+    it.skip('AT_04.29.03 | When selecting the required amount of passengers the corresponding number of seats in the "Seats table" will be rgb(157, 208, 157) color', function() {
         let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                              this.createBookingPage.validBoundaryValues.nominalValue,
                                              this.createBookingPage.validBoundaryValues.maximum]

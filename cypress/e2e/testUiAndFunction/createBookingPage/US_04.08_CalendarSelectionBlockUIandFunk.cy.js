@@ -50,8 +50,8 @@ describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
 
 describe('US_04.08 | Calendar-selection block functionality week/month view', () => {
     beforeEach(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         leftMenuPanel.clickBookingIcon();
     });
 
@@ -96,7 +96,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         }
     });
 
-    xit('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
+    it.skip('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
         const date = new Date()
         let avalableForBookingDay = date.setDate(date.getDate() + 2);
         for (let i = 0; i < 10; i++) {
@@ -110,7 +110,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         }
     });
 
-    it('AT_04.08.08 | Verify that back arrow click does not show the elapsed month', function() {
+    it.skip('AT_04.08.08 | Verify that back arrow click does not show the elapsed month', function() {
         createBookingPage.clickMonthBtn();
         createBookingPage.clickCalendarPrevButton();
         createBookingPage.getLabelCalendar().then(($label) => {

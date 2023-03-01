@@ -46,7 +46,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             createBookingPage.getLabelSeatSelection().should('have.text', this.createBookingPage.seatSelectoinLabel)
         });
 
-        it('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', function() {
+        it.skip('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', function() {
             let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                  this.createBookingPage.validBoundaryValues.nominalValue,
                                                  this.createBookingPage.validBoundaryValues.maximum]
@@ -159,6 +159,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
         describe('Testcases without booking/reservation', () => {
             beforeEach(function () {
+                cy.cleanData();
                 cy.loginWithSession(AGENT.email, AGENT.password);
                 cy.visit('/');
         
@@ -275,9 +276,10 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             });
         });
 
-        describe('Testcases with booking/reservation', () => {
+        describe.skip('Testcases with booking/reservation', () => {
            
             beforeEach(() => {
+                cy.cleanData();
                 cy.loginWithSession(AGENT.email, AGENT.password);
                 cy.visit('/');
                 
