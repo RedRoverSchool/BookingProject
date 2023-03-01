@@ -7,6 +7,7 @@ const AGENT = Cypress.env('agent');
 
 describe('Login', () => {
     beforeEach(function () {
+        cy.cleanData();
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
         
@@ -15,12 +16,46 @@ describe('Login', () => {
         })
       });
 
-    it('verify agent can login', function () {
+    it('verify agent can book a ticket', function () {
+        let expectedTextId;
         cy.get('div.booking-header h1').should('include.text', this.createBookingPage.headers.mainHeaderPage);
-    })
 
-    it('verify agent can login', function () {
         createBookingPage.clickCalendarNextButton();
-        createBookingPage.clickFridayButton();
+		createBookingPage.clickFridayButton();
+
+        cy.intercept('/tools/**').as('getTrip');
+        cy.wait('@getTrip');
+
+        cy.get('div.trip').each(($el) => {
+            const statusText = $el.text();
+            if (statusText !== 'Overdue') {
+                cy.wrap($el).click();
+                return false;
+            }
+        })
+
+        cy.get('div .passenger-wrapper div.title >label').should('be.visible').and('include.text', 'Passengers details')
+        cy.get('div.layout-wrapper div.title label').should('be.visible').and('include.text', 'Seat selection')
+
+        cy.get('div.passenger-wrapper input[name="passenger-name[]"]').type('TestUser1');
+        cy.get('div.passenger-row select[name="passenger-fare[]"]').select('child', {force: true});
+
+        cy.contains('Book tickets').click({ force: true });
+
+        cy.intercept('/tools/ping/**').as('getPopUp');
+        cy.wait('@getPopUp');
+
+        cy.get('.popup-content').should('be.visible');
+        cy.get('span.booking-tracker').then(($id) => {
+            expectedTextId = $id.text();
+        })
+
+        cy.get('a[href="/orders/"]').click({ force: true });
+        cy.get('#reportrange').click();
+        cy.get('li[data-range-key="This Month"]').click();
+
+        cy.get('#data tbody tr td:nth-child(2) div').then(($id) => {
+            expect($id.text()).to.contain(expectedTextId);
+        })
     })
 })
