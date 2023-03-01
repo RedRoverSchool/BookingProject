@@ -7,7 +7,7 @@ import getArray from "../../../support/utilities/getArray";
 
 const createBookingPage = new CreateBookingPage();
 
-describe.skip('US_04.12 | Calendar month functionality', () => {
+describe('US_04.12 | Calendar month functionality', () => {
 	const AGENT = Cypress.env('agent');
 
 	beforeEach(function () {
@@ -67,7 +67,7 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 		}
 	});
 
-	it.skip('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
+	it('AT_04.12.04 | Verify tickets are not available for the current date (GMT+7)', () => {
 		const currentDayThailand = getCustomCalendarDay(0)
 		const availableDayThailand = getCustomCalendarDay(2)
 		
@@ -77,7 +77,7 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 			createBookingPage.clickCalendarDay(currentDayThailand)
 			waitForToolsPing()
 			createBookingPage.getLabelDepartureOnDate()
-				.should('have.text', (`${currentDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`))
+				.should('have.text', (`${currentDayThailand} ${createBookingPage.getCurrentMonthAndYearThailand()}`))
 
 			createBookingPage.getDepartureTripCardsList().each(($el) => {
 				cy.wrap($el).should('have.class', 'disabled')
@@ -86,14 +86,14 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 		createBookingPage.clickCalendarDay(currentDayThailand)
 		waitForToolsPing()
 		createBookingPage.getLabelDepartureOnDate()
-			.should('have.text', (`${currentDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`))
+			.should('have.text', (`${currentDayThailand} ${createBookingPage.getCurrentMonthAndYearThailand()}`))
 
 		createBookingPage.getDepartureTripCardsList().each(($el) => {
 			cy.wrap($el).should('have.class', 'disabled')
 		})
 	});
 
-	it.skip('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
+	it('AT_04.12.05 | Tickets are not available for tomorrow (the current date by GMT+7)', () => {
 		const tomorrowDayThailand = getCustomCalendarDay(1)
 		const availableDayThailand = getCustomCalendarDay(2)
 		
@@ -103,7 +103,7 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 			createBookingPage.clickCalendarDay(tomorrowDayThailand)
 			waitForToolsPing()
 			createBookingPage.getLabelDepartureOnDate()
-				.should('have.text', (`${tomorrowDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`))
+				.should('have.text', (`${tomorrowDayThailand} ${createBookingPage.getCurrentMonthAndYearThailand()}`))
 
 			createBookingPage.getDepartureTripCardsList().each(($el) => {
 				cy.wrap($el).should('have.class', 'disabled')
@@ -121,7 +121,7 @@ describe.skip('US_04.12 | Calendar month functionality', () => {
 			createBookingPage.clickCalendarDay(tomorrowDayThailand)
 			waitForToolsPing()
 			createBookingPage.getLabelDepartureOnDate()
-				.should('have.text', (`${tomorrowDayThailand} ${createBookingPage.getCurrentMonthAndYear()}`))
+				.should('have.text', (`${tomorrowDayThailand} ${createBookingPage.getCurrentMonthAndYearThailand()}`))
 
 			createBookingPage.getDepartureTripCardsList().each(($el) => {
 				cy.wrap($el).should('have.class', 'disabled')
