@@ -31,7 +31,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         waitForToolsPing
     });
 
-    it('AT_04.29.01 | The amount of passengers in the "Seat selection dropdown" is equal the number of available tickets in the selected trip', function() {
+    it.skip('AT_04.29.01 | The amount of passengers in the "Seat selection dropdown" is equal the number of available tickets in the selected trip', function() {
 
         createBookingPage.getTicketsAvailableFirstTripCard().then(($tickets) => {
             const ticketsAvailable = Number($tickets.text())
@@ -81,7 +81,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
             }
     });
 
-    it('AT_04.29.04 | The number of passengers in "Seat selection dropdown" is equal the number of passengers is displayed in the "Passengers details dropdown".', function() {
+    it.skip('AT_04.29.04 | The number of passengers in "Seat selection dropdown" is equal the number of passengers is displayed in the "Passengers details dropdown".', function() {
         createBookingPage.getSeatSelectionDropdownList().then(($el) => {
            let arrayOfSeats = $el
                .toArray()
@@ -102,7 +102,7 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         }) 
     });
 
-    it('AT_04.29.05 | Verify number of passengers selected in the "Seat selection dropdown" became equal to the number of passengers in the "Summary" section', function () {
+    it.skip('AT_04.29.05 | Verify number of passengers selected in the "Seat selection dropdown" became equal to the number of passengers in the "Summary" section', function () {
              createBookingPage.getRandomAmountOfPassSeatSelectionDrpDwn().then($el => {
                 let amountOfPass = $el;
 

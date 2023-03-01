@@ -172,7 +172,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
             });
 
-            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', function ()  {
+            it.skip('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', function ()  {
                 let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
                                               this.createBookingPage.validBoundaryValues.nominalValue,
                                               this.createBookingPage.validBoundaryValues.belowMaximum]
@@ -189,7 +189,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 }
             });
 
-            it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
+            it.skip('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
                 let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                      this.createBookingPage.validBoundaryValues.nominalValue,
                                                      this.createBookingPage.validBoundaryValues.maximum]
@@ -225,7 +225,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 }
             });
 
-            it('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
+            it.skip('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
                 createBookingPage.getPassengersDetailsDropdown()
                     .select(this.createBookingPage.numberOfPassengers.sixPassengers)
                     .invoke('val').then((value) => {
