@@ -13,13 +13,10 @@ describe('US_04.31 | Total UI', () => {
     });
 
     beforeEach(function () {
-        beforeEach(function () {
-            cy.fixture('colors').then(colors => {
-                this.colors = colors;
-            });
-            cy.intercept('/tools/ping/**').as('getToolsPing');
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
         });
-        });
+        cy.intercept('/tools/ping/**').as('getToolsPing');
 	});
 
     it('AT_04.31.01 | Verify that the text "Total " is visible', () => {
