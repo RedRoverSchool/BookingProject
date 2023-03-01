@@ -11,6 +11,6 @@
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
     "cy-verify-downloads": "^0.1.13",
-    "cypress": "^12.7.0"
+    "cypress": "^10.11.0"
   }
 }
