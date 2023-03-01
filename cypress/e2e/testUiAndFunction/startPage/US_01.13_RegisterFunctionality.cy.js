@@ -14,6 +14,7 @@ const randomPhoneNumber = faker.phone.number('+66##########')
 describe('US_01.13 | Register functionality', () => {
     
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/')
         startPage.clickRegisterAccountLink()
     });

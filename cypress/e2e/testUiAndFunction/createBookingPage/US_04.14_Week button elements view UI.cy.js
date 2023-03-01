@@ -9,8 +9,8 @@ describe('US_04.14 | Week button elements view ', () => {
     const AGENT = Cypress.env('agent');
 
     before(() =>{
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
     beforeEach(function() {

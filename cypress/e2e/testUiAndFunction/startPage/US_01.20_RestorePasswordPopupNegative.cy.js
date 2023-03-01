@@ -10,12 +10,14 @@ const restorePopup = new RestorePopup();
 
 describe ('US_01.20 | Start Page > Restore Password Negative', function() {
     beforeEach(function () {
-        cy.fixture('startPage').then(startPage => {
-            this.startPage = startPage;
-        });
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
         loginPopup.clickForgotYourPasswordLink();
+
+        cy.fixture('startPage').then(startPage => {
+            this.startPage = startPage;
+        });
     });
 
     it('AT_01.20.01 | Verify that the user is not able to restore the password with empty Email input', function() {

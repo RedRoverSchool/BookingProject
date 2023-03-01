@@ -9,8 +9,8 @@ const AGENT = Cypress.env('agent');
 describe('US_04.25 | Passengers details functionality - One passenger', () => {
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
 
         //Precondition
         createBookingPage.clickCalendarNextButton();

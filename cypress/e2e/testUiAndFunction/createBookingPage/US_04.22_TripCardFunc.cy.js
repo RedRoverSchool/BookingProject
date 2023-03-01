@@ -10,8 +10,8 @@ describe('US_04.22 | Trip card functionality', () => {
     const AGENT = Cypress.env('agent');
    
     beforeEach(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         createBookingPage.clickCalendarNextButton()
         waitForToolsPing()
         cy.fixture('createBookingPage').then(createBookingPage => {

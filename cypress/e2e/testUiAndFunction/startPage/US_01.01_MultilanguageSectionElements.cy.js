@@ -6,6 +6,7 @@ const startPage = new StartPage();
 
 describe('US_01.01 | Multilanguage section elements UI and functionality', () => {
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
     });
     

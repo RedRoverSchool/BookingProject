@@ -8,8 +8,8 @@ describe('US_04.23 | Passengers details default UI', () => {
     const AGENT = Cypress.env('agent');
 
     before(() =>{
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
     beforeEach(function() {

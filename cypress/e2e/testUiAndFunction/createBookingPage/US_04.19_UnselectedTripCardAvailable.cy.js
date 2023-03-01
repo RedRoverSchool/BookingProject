@@ -10,8 +10,8 @@ const AGENT = Cypress.env('agent');
 describe('US_04.19 | Unselected trip card available UI', function() {
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         createBookingPage.clickCalendarNextButton(); 
         waitForToolsPing();          
     });

@@ -10,8 +10,8 @@ describe('US_05.10 Excel button UI and functionality', () => {
     const AGENT = Cypress.env('agent');
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         leftMenuPanel.clickBookingManagementIcon();
     });
 

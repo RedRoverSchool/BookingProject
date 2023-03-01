@@ -27,8 +27,8 @@ const getPreviousWeekMonSundDays = (date) => {
 
 describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         leftMenuPanel.clickBookingIcon();
     });
 

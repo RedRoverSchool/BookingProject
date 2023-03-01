@@ -18,14 +18,23 @@ const sumOfArray = (array) => {
 describe.skip('US_04.30 | Summary UI', () => {
 
 	before(() => {
-		cy.visit('/')
-		cy.login(AGENT.email, AGENT.password)
+		cy.intercept('POST', '/booking**').as('booking')
+		cy.intercept('/tools/ping/**').as('getToolsPing')
+		
+		cy.cleanData();
+		cy.loginWithSession(AGENT.email, AGENT.password);
+
+        cy.visit('/');
+
 		createBookingPage.clickCalendarNextButton()
-		waitForToolsPing()
+		cy.wait('@booking')
+		cy.wait('@getToolsPing')
 		createBookingPage.clickFridayButton()
-		waitForToolsPing()
+		cy.wait('@booking')
+		cy.wait('@getToolsPing')
 		createBookingPage.clickSecondTripCard()
-		waitForToolsPing()
+		cy.wait('@booking')
+		cy.wait('@getToolsPing')
 	});
 
 	beforeEach(function() {
@@ -166,7 +175,7 @@ describe.skip('US_04.30 | Summary UI', () => {
         createBookingPage.getTotalSummaryLabel().should('be.visible');
 	})
 
-	describe('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
+	describe.skip('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
 		beforeEach(() => {
 			cy.visit('/')
 			cy.login(AGENT.email, AGENT.password)

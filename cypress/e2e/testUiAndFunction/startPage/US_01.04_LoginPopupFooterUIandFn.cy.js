@@ -10,6 +10,7 @@ const registerPopup = new RegisterPopup()
 
 describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
     beforeEach(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
 

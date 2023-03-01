@@ -8,11 +8,13 @@ const loginPopup = new LoginPopup();
 
 describe('US_01.07 | Login by email tab negative', () => {
     beforeEach(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
+        cy.visit('/');
+        startPage.clickLoginButton();
+
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
         });
-        cy.visit('/');
-        startPage.clickLoginButton();
     });
 
     it('AT_01.07.01 | Verify error message after click SignIn with empty login fields', function () {

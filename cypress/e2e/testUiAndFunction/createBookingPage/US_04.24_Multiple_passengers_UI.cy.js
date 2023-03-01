@@ -14,8 +14,8 @@ describe('US_04.24 | Multiple passengers UI', () => {
     });
 
     before(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
 
         createBookingPage.clickCalendarNextButton();
         createBookingPage.clickFridayButton();

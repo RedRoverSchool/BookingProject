@@ -13,8 +13,8 @@ describe('US_02.01 | Left Logo UI and functionality', function() {
     const AGENT = Cypress.env('agent');
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
     beforeEach(function() {

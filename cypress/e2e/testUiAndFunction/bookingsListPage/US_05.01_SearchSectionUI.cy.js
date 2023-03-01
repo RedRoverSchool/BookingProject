@@ -13,11 +13,13 @@ describe('US_05.01 Booking list page >Top Section> Search Form UI', () => {
     let bodyXHR = '';
 
     before(() => {
-        cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         cy.intercept('POST', 'orders').as('orders')
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');
+       
         leftMenuPanel.clickBookingManagementIcon()
         cy.wait("@orders")
+
         cy.get("@orders").should(({ response }) => {
             bodyXHR = JSON.parse(response.body);
         });

@@ -21,8 +21,8 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
     });
 
     before(function() {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');
         
         createBookingPage.clickCalendarNextButton()
         waitForToolsPing()

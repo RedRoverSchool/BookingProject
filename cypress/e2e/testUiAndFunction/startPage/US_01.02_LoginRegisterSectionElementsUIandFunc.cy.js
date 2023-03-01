@@ -10,6 +10,7 @@ const registerPopup = new RegisterPopup();
 describe('US_01.02 | Login-register section elements UI and functionality | Login only', () => {
 
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
     });
     

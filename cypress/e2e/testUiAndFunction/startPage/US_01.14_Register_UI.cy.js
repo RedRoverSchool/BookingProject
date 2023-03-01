@@ -6,6 +6,11 @@ const startPage = new StartPage();
 const registerPopup = new RegisterPopup();
 
 describe('US_01.14 | Register UI', () => {
+    before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
+        cy.visit('/')
+        startPage.clickRegisterAccountLink()
+    });
 
     beforeEach(function () {
         cy.fixture('startPage').then(startPage => {
@@ -15,11 +20,6 @@ describe('US_01.14 | Register UI', () => {
             this.colors = colors;
         });
 	});
-
-    before(() => {
-        cy.visit('/')
-        startPage.clickRegisterAccountLink()
-    });
 
     it('AT_01.14.01 | Verify that the label "Your name" is visible in the modal body, has the #999 color and font size: 14px' , function () {
         registerPopup

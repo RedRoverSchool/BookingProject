@@ -15,8 +15,8 @@ describe('US_04.12 | Calendar month functionality', () => {
             this.createBookingPage = createBookingPage;
         })
 
-		cy.visit('/')
-		cy.login(AGENT.email, AGENT.password)
+		cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');
 		
 		createBookingPage.clickMonthBtn()
 		waitForToolsPing()

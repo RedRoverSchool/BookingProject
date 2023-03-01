@@ -9,12 +9,14 @@ const registerPopup = new RegisterPopup();
 
 describe ('US 01.18 | Restore password Popup > Footer UI and functionality', () => {
     beforeEach(function () {
-        cy.fixture('startPage').then(startPage => {
-            this.startPage = startPage;
-        });
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
         loginPopup.clickForgotYourPasswordLink();
+
+        cy.fixture('startPage').then(startPage => {
+            this.startPage = startPage;
+        });
     });
 
     it('AT_01.18.01 | Verify the link "Register" is clickable and redirects to the "Register agent account" popup', function () {

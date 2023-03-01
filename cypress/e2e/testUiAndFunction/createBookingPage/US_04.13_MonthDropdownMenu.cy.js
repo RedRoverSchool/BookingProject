@@ -8,8 +8,8 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
     const AGENT = Cypress.env('agent');
 
     before(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         createBookingPage.clickMonthBtn();
     })
 

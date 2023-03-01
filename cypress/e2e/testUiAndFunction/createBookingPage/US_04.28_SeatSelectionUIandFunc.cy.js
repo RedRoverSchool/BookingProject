@@ -33,8 +33,8 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     describe('US_04.28 | Seat selection UI', () => {
 
         before(() => {
-            cy.visit('/')
-            cy.login(AGENT.email, AGENT.password)
+            cy.loginWithSession(AGENT.email, AGENT.password);
+            cy.visit('/');
             
             createBookingPage.clickCalendarNextButton()
             waitForToolsPing()
@@ -114,8 +114,8 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         describe('Trip "Bangkok Khao San - Chonburi"', () => {
 
             before(() => {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
         
                 createBookingPage.selectDepartureStation('Bangkok Khao San')
                 createBookingPage.selectArrivalStation('Chonburi')
@@ -159,8 +159,8 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
         describe('Testcases without booking/reservation', () => {
             beforeEach(function () {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
         
                 createBookingPage.selectDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[7])
                 waitForToolsPing()
@@ -278,8 +278,8 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         describe('Testcases with booking/reservation', () => {
            
             beforeEach(() => {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
                 
                 createBookingPage.clickCalendarNextButton()
                 waitForToolsPing()

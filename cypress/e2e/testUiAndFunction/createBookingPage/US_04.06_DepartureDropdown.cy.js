@@ -19,8 +19,8 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
     });
 
     before(() => {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)        
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');       
     });
 
     it('AT_04.06.01 | Verify that the Departure station dropdown menu displays required list of stations', function () {
