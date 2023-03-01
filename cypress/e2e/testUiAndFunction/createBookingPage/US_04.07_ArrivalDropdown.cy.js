@@ -8,8 +8,8 @@ const AGENT = Cypress.env('agent');
 describe('US_04.07_Arrival Dropdown UI and functionality ', () => {
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
     
     beforeEach(function () {
@@ -37,6 +37,16 @@ describe('US_04.07_Arrival Dropdown UI and functionality ', () => {
             if($el.text() == this.createBookingPage.dropdowns.arrivalStation.stationsNames[2]){ 
                               
                 expect($el).to.have.css('background-color', this.colors.greyDropdownBack)
+            }
+        })
+    })
+
+    it('AT_04.07.04 | Verify that the background of the newly selected item changes color to green(#00A65A) when the item is selected.', function() {
+        createBookingPage.hoverNeedArrivalStation(this.createBookingPage.dropdowns.arrivalStation.stationsNames[1])
+        createBookingPage.getArrivalStationList().each($el => {
+            if($el.text() == this.createBookingPage.dropdowns.arrivalStation.stationsNames[1]) {
+
+                expect($el).to.have.css('background-color', this.colors.greenBookingPage)
             }
         })
     })

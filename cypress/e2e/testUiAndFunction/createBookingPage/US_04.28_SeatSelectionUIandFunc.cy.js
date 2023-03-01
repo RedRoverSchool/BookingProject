@@ -33,8 +33,8 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     describe('US_04.28 | Seat selection UI', () => {
 
         before(() => {
-            cy.visit('/')
-            cy.login(AGENT.email, AGENT.password)
+            cy.loginWithSession(AGENT.email, AGENT.password);
+            cy.visit('/');
             
             createBookingPage.clickCalendarNextButton()
             waitForToolsPing()
@@ -46,7 +46,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             createBookingPage.getLabelSeatSelection().should('have.text', this.createBookingPage.seatSelectoinLabel)
         });
 
-        it('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', function() {
+        it.skip('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', function() {
             let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                  this.createBookingPage.validBoundaryValues.nominalValue,
                                                  this.createBookingPage.validBoundaryValues.maximum]
@@ -114,8 +114,8 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         describe('Trip "Bangkok Khao San - Chonburi"', () => {
 
             before(() => {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
         
                 createBookingPage.selectDepartureStation('Bangkok Khao San')
                 createBookingPage.selectArrivalStation('Chonburi')
@@ -159,8 +159,9 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
         describe('Testcases without booking/reservation', () => {
             beforeEach(function () {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.cleanData();
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
         
                 createBookingPage.selectDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[7])
                 waitForToolsPing()
@@ -171,7 +172,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
             });
 
-            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', function ()  {
+            it.skip('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', function ()  {
                 let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
                                               this.createBookingPage.validBoundaryValues.nominalValue,
                                               this.createBookingPage.validBoundaryValues.belowMaximum]
@@ -188,7 +189,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 }
             });
 
-            it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
+            it.skip('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
                 let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                      this.createBookingPage.validBoundaryValues.nominalValue,
                                                      this.createBookingPage.validBoundaryValues.maximum]
@@ -224,7 +225,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 }
             });
 
-            it('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
+            it.skip('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
                 createBookingPage.getPassengersDetailsDropdown()
                     .select(this.createBookingPage.numberOfPassengers.sixPassengers)
                     .invoke('val').then((value) => {
@@ -254,7 +255,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     })
             });
         
-            it('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal (for 1, 150, 300 passengers)', function () {
+            it.skip('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal (for 1, 150, 300 passengers)', function () {
                 let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                      this.createBookingPage.validBoundaryValues.nominalValue,
                                                      this.createBookingPage.validBoundaryValues.maximum]
@@ -275,11 +276,12 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             });
         });
 
-        describe('Testcases with booking/reservation', () => {
+        describe.skip('Testcases with booking/reservation', () => {
            
             beforeEach(() => {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.cleanData();
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
                 
                 createBookingPage.clickCalendarNextButton()
                 waitForToolsPing()

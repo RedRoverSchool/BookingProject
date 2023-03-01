@@ -14,8 +14,8 @@ describe('US_04.24 | Multiple passengers UI', () => {
     });
 
     before(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
 
         createBookingPage.clickCalendarNextButton();
         createBookingPage.clickFridayButton();
@@ -49,5 +49,11 @@ describe('US_04.24 | Multiple passengers UI', () => {
             .getNotesInputField()
             .should('be.visible')
             .and('have.attr', 'placeholder', this.createBookingPage.placeholder.notes);
+    });
+
+    it('AT_04.24.05 | Verify email input field has an “Email” text placeholder.', function ()  {
+        createBookingPage
+            .getEmailInputField()
+            .should('have.attr', 'placeholder', this.createBookingPage.placeholder.email);
     });
 });    

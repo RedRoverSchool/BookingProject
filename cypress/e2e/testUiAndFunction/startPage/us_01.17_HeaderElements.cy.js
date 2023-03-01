@@ -10,6 +10,7 @@ const restorePopup = new RestorePopup();
 
 describe('US_01.17 | Header elements', () => {
     beforeEach(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
         loginPopup.clickForgotYourPasswordLink();

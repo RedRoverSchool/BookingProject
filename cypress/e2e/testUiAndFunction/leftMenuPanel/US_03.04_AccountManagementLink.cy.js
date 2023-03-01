@@ -10,8 +10,8 @@ const accountManagementPage = new AccountManagementPage();
 describe('US_03.04 Account management link', () => {
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
     beforeEach(function () {

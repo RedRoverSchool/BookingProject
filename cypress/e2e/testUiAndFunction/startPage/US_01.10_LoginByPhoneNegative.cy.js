@@ -10,6 +10,7 @@ const randomPhoneNumber = faker.phone.number('##########');
 
 describe('US_01.10 | Login by phone negative', () => {
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
         loginPopup.clickLoginByPhoneNumberTab();

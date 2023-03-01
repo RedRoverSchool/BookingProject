@@ -22,6 +22,7 @@ const randomInvalidPhoneNumber = faker.random.alphaNumeric(12);
 describe('US_01.15 | Register Agent Negative', function () {
 
     before(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickRegisterAccountLink();
     })

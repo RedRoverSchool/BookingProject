@@ -1,7 +1,6 @@
 /// <reference types = "Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage.js";
-import createArrayOfConsetutiveMonths from "../../../support/utilities/createArrayOfConsetutiveMonths";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -9,8 +8,8 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
     const AGENT = Cypress.env('agent');
 
     before(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         createBookingPage.clickMonthBtn();
     })
 
@@ -48,7 +47,7 @@ describe('US_04.13 | Create booking page > Departure date > Month dropdown UI an
 
     it('AT_04.13.04 | Verify month dropdown menu has 13 consecutive months and year options starting from current month and year', function () {
         createBookingPage.getMonthDropdownList().each(($el, i) => {
-            expect($el.text()).to.eq(createArrayOfConsetutiveMonths()[i])
+            expect($el.text()).to.eq(createBookingPage.createArrayOfConsetutiveMonths()[i])
         })
     })
 

@@ -15,6 +15,7 @@ const randomCompanyName = faker.company.name();
 
 describe('US_AC_01 | Register new agent', () => {
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
     });
     beforeEach(function () {

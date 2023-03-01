@@ -160,7 +160,9 @@ export class RegisterPopup {
     getRegisterPopupCloseButton = () => cy.get('#registerModal .close');
     getRegisterPopupModal = () => cy.get('div#registerModal');
     getYourNameLabel = () => cy.get('#registerModal .modal-body div:first-child label');
-
+    getRegisterCongratulationsHeader = () => cy.get('#registerModal .modal-dialog .modal-header h2.text-center');
+    getCompanyNameLabel = () => cy.get('#registerModal .modal-body div:nth-child(2) label');
+    
     // Methods
 
     clickRegisterButton() {
