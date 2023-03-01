@@ -15,6 +15,7 @@ describe('US_04.31 | Total UI', () => {
     beforeEach(function () {
         cy.fixture('colors').then(colors => {
             this.colors = colors;
+        cy.intercept('/tools/ping/**').as('getToolsPing');
         });
 	});
 
@@ -51,13 +52,15 @@ describe('US_04.31 | Total UI', () => {
     });
 
     it('AT_04.31.09 | Verify that the pop up button "Reserve tickets" is visible', () => {
+        cy.wait('@getToolsPing')
         createBookingPage.clickCalendarNextButton()
         createBookingPage.clickSaturdayButton()
-        waitForToolsPing()
+        cy.wait('@getToolsPing')
         createBookingPage.clickSecondTripCard()
+        cy.wait('@getToolsPing')
         createBookingPage.clickReservationTicketArrow()
         createBookingPage.getReservationTicketButton().should('be.visible')
-});
+    });
 
     it('AT_04.31.10 | Verify that the pop-up button “Reserve tickets” has a background color (#f4f4f4)', function () {
         createBookingPage.getReservationTicketButton().should('have.css', 'background-color', this.colors.lightGrey)
