@@ -37,16 +37,19 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             cy.visit('/');
             
             createBookingPage.clickCalendarNextButton()
-            waitForToolsPing()
-            createBookingPage.clickFirstTripCard()
-            waitForToolsPing()
+            cy.intercept('/tools/**').as('getTrip')
+            cy.wait('@getTrip')
+            createBookingPage.clickOnFirstAvailableTripCard()
+            createBookingPage.getLabelSeatSelection()
+                .should('be.visible')
+                .and('have.text', 'Seat selection')
         });
 
         it('AT_04.28.01|The section name "Seat selection" is visible', function (){
             createBookingPage.getLabelSeatSelection().should('have.text', this.createBookingPage.seatSelectoinLabel)
         });
 
-        it.skip('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', function() {
+        it('AT_04.28.02 | "Seat selection dropdown" is visible and displays the amount of passengers, selected in the "Passengers details dropdown"', function() {
             let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                  this.createBookingPage.validBoundaryValues.nominalValue,
                                                  this.createBookingPage.validBoundaryValues.maximum]
@@ -120,11 +123,14 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 createBookingPage.selectDepartureStation('Bangkok Khao San')
                 createBookingPage.selectArrivalStation('Chonburi')
                 createBookingPage.clickCalendarNextButton()
-                waitForToolsPing()
+                cy.intercept('/tools/**').as('getTrip')
+                cy.wait('@getTrip')
                 createBookingPage.clickSaturdayButton()
-                waitForToolsPing()
-                createBookingPage.clickFirstTripCard()
-                waitForToolsPing()
+                cy.wait('@getTrip')
+                createBookingPage.clickOnFirstAvailableTripCard()
+                createBookingPage.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
             });
         
             it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
@@ -164,15 +170,18 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 cy.visit('/');
         
                 createBookingPage.selectDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[7])
-                waitForToolsPing()
+                cy.intercept('/tools/**').as('getTrip')
+                cy.wait('@getTrip')
                 createBookingPage.clickCalendarNextButton()
-                waitForToolsPing()
-                createBookingPage.clickFirstTripCard()
-                waitForToolsPing()
+                cy.wait('@getTrip')
+                createBookingPage.clickOnFirstAvailableTripCard()
+                createBookingPage.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
 
             });
 
-            it.skip('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', function ()  {
+            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', function ()  {
                 let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
                                               this.createBookingPage.validBoundaryValues.nominalValue,
                                               this.createBookingPage.validBoundaryValues.belowMaximum]
@@ -189,7 +198,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 }
             });
 
-            it.skip('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
+            it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
                 let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                      this.createBookingPage.validBoundaryValues.nominalValue,
                                                      this.createBookingPage.validBoundaryValues.maximum]
@@ -225,7 +234,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 }
             });
 
-            it.skip('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
+            it('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
                 createBookingPage.getPassengersDetailsDropdown()
                     .select(this.createBookingPage.numberOfPassengers.sixPassengers)
                     .invoke('val').then((value) => {
@@ -255,7 +264,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     })
             });
         
-            it.skip('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal (for 1, 150, 300 passengers)', function () {
+            it('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal (for 1, 150, 300 passengers)', function () {
                 let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                      this.createBookingPage.validBoundaryValues.nominalValue,
                                                      this.createBookingPage.validBoundaryValues.maximum]
@@ -284,11 +293,14 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 cy.visit('/');
                 
                 createBookingPage.clickCalendarNextButton()
-                waitForToolsPing()
+                cy.intercept('/tools/**').as('getTrip')
+                cy.wait('@getTrip')
                 createBookingPage.clickCalendarNextButton()
-                waitForToolsPing()
-                createBookingPage.clickFirstTripCard()
-                waitForToolsPing()
+                cy.wait('@getTrip')
+                createBookingPage.clickOnFirstAvailableTripCard()
+                createBookingPage.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
             });
 
             it.skip('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {      
