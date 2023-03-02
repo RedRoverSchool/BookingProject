@@ -106,6 +106,7 @@ class CreateBookingPage {
     getPricesSummary = () => cy.get('.total-wrapper > div.total-row span');
     getTotalPriceSummary = () => cy.get('.box-footer span.total-price.right');
     getTotalSummaryLabel = () => cy.get('div.box-footer > span:nth-child(1) > b');
+    getFareTypeColumnSummary = () => cy.get('div.total-row > div:nth-child(1)')
 
     //Total - Footer section                  
     getReservationTicketArrow = () => cy.get('.btn-group .caret');
@@ -376,7 +377,16 @@ class CreateBookingPage {
 
    clickRemovePassengerBtn(passengerNumber) {
     this.getRemovePassengerBtns().eq(passengerNumber - 1).click()
-   }
+    }
+    
+    clickOnLastAvailiableTripCard() {
+        this.getDepartureTripCardsList().each(($el) => {
+            const statusText = $el.text();
+            if (statusText !== 'Overdue') {
+                cy.wrap($el).last().click();
+            }
+        })
+    }
 
     /**
      * pass needed fareType in a function ('Adult, Child, Elder) to select option in dropdown
