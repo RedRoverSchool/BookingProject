@@ -28,7 +28,7 @@ describe('US_04.30 | Summary UI', () => {
 
 	describe('US_04.30 | Summary  section UI', () => {
 		beforeEach(() => {
-			//cy.cleanData()
+			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/');
 			createBookingPage.clickCalendarNextButton()
@@ -173,6 +173,7 @@ describe('US_04.30 | Summary UI', () => {
 		
 	describe('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
 		beforeEach(() => {
+			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/')
 			createBookingPage.clickCalendarNextButton()
@@ -188,8 +189,6 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.selectFareType('Adult')
 			createBookingPage.clickBookTicketsBtn();
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.adultFare)
-
-			cy.cleanData()
 		});
 
 		it('AT_04.30.06 | Verify that selected passenger fare type "Child" matches the amount on Booking Popup', function () {
@@ -199,8 +198,6 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.selectFareType('Child')
 			createBookingPage.clickBookTicketsBtn();
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
-
-			cy.cleanData()
 		});
 
 		it('AT_04.30.07 | Verify that selected passenger fare type "Elder" matches the amount on Booking Popup', function () {
@@ -210,8 +207,6 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.selectFareType('Elder')
 			createBookingPage.clickBookTicketsBtn();
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
-			
-			cy.cleanData()
 		});
 	})
 });
