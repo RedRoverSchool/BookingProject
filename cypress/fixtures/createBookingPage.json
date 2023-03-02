@@ -149,5 +149,9 @@
 
     "labelDepartureStationMargin": "0px 0px 5px",
 
-    "weekButtonText": "Week"
+    "weekButtonText": "Week",
+
+    "labelArrivalStationFont": "15px",
+       
+    "labelArrivalStationMargin": "0px 0px 5px"
 }

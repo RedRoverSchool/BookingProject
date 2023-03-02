@@ -55,4 +55,11 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
 
         createBookingPage.getLabelDepartureStation().should('have.css', 'margin', this.createBookingPage.labelDepartureStationMargin)
     });
+
+    it('AT_04.05.08 |Verify that the "Arrival station" label has font - 15px sans-serif and  margin - 0px 0px 5px', function() {
+
+        createBookingPage.getLabelArrivalStation()
+       .should('have.css', 'margin', this.createBookingPage.labelArrivalStationMargin)
+       .and('have.css', 'font-size', this.createBookingPage.labelArrivalStationFont)
+    });
 });    
