@@ -39,7 +39,7 @@ describe('US_04.19 | Unselected trip card available UI', function() {
         })
     });
 
-    it('AT_04.19.03 | Verify "Class" icon is visible as the icon of available vehicle (bus or ferry) and displayed on the left-top corner', function() {
+    it('AT_04.19.03 | Verify "Class name" is bus or ferry name in a dark gray color (#4B4B4B) and visible below Departure time', function() {
         createBookingPage.getClassUnselectedTripCards().each($el => {
             let text = $el.text().match(/\D/g).join('').trim()
             let allClasses = `${this.createBookingPage.seatsTableTitle[0]} ${this.createBookingPage.seatsTableTitle[1]} ${this.createBookingPage.seatsTableTitle[2]}`
