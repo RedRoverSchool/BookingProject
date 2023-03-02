@@ -36,7 +36,7 @@ describe('US_04.30 | Summary UI', () => {
 			cy.wait('@getToolsPing')
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
-			createBookingPage.clickOnLastAvailiableTripCard()
+			createBookingPage.clickOnFirstAvailableTripCard()
 			cy.wait('@getToolsPing')
 		});
 
