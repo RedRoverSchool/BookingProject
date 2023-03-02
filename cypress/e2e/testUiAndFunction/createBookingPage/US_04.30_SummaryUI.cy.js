@@ -28,6 +28,7 @@ describe('US_04.30 | Summary UI', () => {
 
 	describe('US_04.30 | Summary  section UI', () => {
 		beforeEach(() => {
+			//cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/');
 			createBookingPage.clickCalendarNextButton()
@@ -170,10 +171,10 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	});
 		
-	describe.skip('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
+	describe('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
 		beforeEach(() => {
-			cy.visit('/')
 			cy.loginWithSession(AGENT.email, AGENT.password)
+			cy.visit('/')
 			createBookingPage.clickCalendarNextButton()
 			createBookingPage.clickFridayButton()
 			waitForToolsPing()
@@ -187,6 +188,7 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.selectFareType('Adult')
 			createBookingPage.clickBookTicketsBtn();
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.adultFare)
+
 			cy.cleanData()
 		});
 
@@ -197,6 +199,7 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.selectFareType('Child')
 			createBookingPage.clickBookTicketsBtn();
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
+
 			cy.cleanData()
 		});
 
@@ -207,6 +210,7 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.selectFareType('Elder')
 			createBookingPage.clickBookTicketsBtn();
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
+			
 			cy.cleanData()
 		});
 	})
