@@ -3,7 +3,7 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../../pageObjects/BookingPopup";
 import getArray from "../../../support/utilities/getArray";
-import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
+
 
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
@@ -31,11 +31,12 @@ describe('US_04.30 | Summary UI', () => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/');
-			cy.intercept('/tools/ping/**').as('getToolsPing')
+			cy.intercept('/tools/**').as('getTrip');
+			cy.wait('@getTrip');
 			createBookingPage.clickCalendarNextButton()
-			cy.wait('@getToolsPing')
+			cy.wait('@getTrip');
 			createBookingPage.clickFridayButton()
-			cy.wait('@getToolsPing')
+			cy.wait('@getTrip');
 			createBookingPage.clickOnLastAvailiableTripCard()
 		});
 
@@ -175,11 +176,11 @@ describe('US_04.30 | Summary UI', () => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/')
-			cy.intercept('/tools/ping/**').as('getToolsPing')
+			cy.intercept('/tools/**').as('getTrip');
 			createBookingPage.clickCalendarNextButton()
-			cy.wait('@getToolsPing')
+			cy.wait('@getTrip')
 			createBookingPage.clickFridayButton()
-			cy.wait('@getToolsPing')
+			cy.wait('@getTrip')
 			createBookingPage.clickOnLastAvailiableTripCard()
 		});
 
