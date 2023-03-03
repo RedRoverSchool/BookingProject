@@ -31,8 +31,8 @@ describe('US_04.30 | Summary UI', () => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/');
-			createBookingPage.clickCalendarNextButton()
 			cy.intercept('/tools/ping/**').as('getToolsPing')
+			createBookingPage.clickCalendarNextButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
@@ -175,10 +175,12 @@ describe('US_04.30 | Summary UI', () => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/')
+			cy.intercept('/tools/ping/**').as('getToolsPing')
 			createBookingPage.clickCalendarNextButton()
+			cy.wait('@getToolsPing')
 			createBookingPage.clickFridayButton()
-			waitForToolsPing()
-			createBookingPage.clickSecondTripCard()
+			cy.wait('@getToolsPing')
+			createBookingPage.clickOnLastAvailiableTripCard()
 		});
 
 		it('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
@@ -187,6 +189,8 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Adult')
 			createBookingPage.clickBookTicketsBtn();
+			cy.intercept('/tools/ping/**').as('getPopUp');
+			cy.wait('@getPopUp');
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.adultFare)
 		});
 
@@ -196,6 +200,8 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Child')
 			createBookingPage.clickBookTicketsBtn();
+			cy.intercept('/tools/ping/**').as('getPopUp');
+			cy.wait('@getPopUp');
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
 		});
 
@@ -205,6 +211,8 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Elder')
 			createBookingPage.clickBookTicketsBtn();
+			cy.intercept('/tools/ping/**').as('getPopUp');
+			cy.wait('@getPopUp');
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
 		});
 	})
