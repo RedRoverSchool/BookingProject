@@ -37,7 +37,6 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickOnLastAvailiableTripCard()
-			cy.wait('@getToolsPing')
 		});
 
 		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
