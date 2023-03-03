@@ -163,6 +163,7 @@ export class RegisterPopup {
     getRegisterCongratulationsHeader = () => cy.get('#registerModal .modal-dialog .modal-header h2.text-center');
     getCompanyNameLabel = () => cy.get('#registerModal .modal-body div:nth-child(2) label');
     getEmailLabel = () => cy.get('#registerModal .modal-body div:nth-child(3) label');
+    getPhoneLabel = () => cy.get('#registerModal .modal-body div:nth-child(4) label');
     
     // Methods
 
