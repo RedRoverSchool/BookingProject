@@ -1,12 +1,11 @@
 /// <reference types="Cypress" />
 
-import { StartPage } from "../../../pageObjects/StartPage.js";
-import { LoginPopup } from "../../../pageObjects/StartPage.js";
-import { RegisterPopup } from "../../../pageObjects/StartPage.js"
+import { StartPage, LoginPopup, RegisterPopup, RestorePopup } from "../../../pageObjects/StartPage.js";
 
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
-const registerPopup = new RegisterPopup()
+const registerPopup = new RegisterPopup();
+const restorePopup = new RestorePopup();
 
 describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
     beforeEach(function () {
@@ -36,5 +35,10 @@ describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
 
     it('AT_01.04.04 | Verify the text "No account yet?" is visible in the footer', function () {
         loginPopup.getNoAccountYet().should('be.visible')
+    });
+
+    it('AT_01.04.05 | Verify the Agent is able to click on the Forgot your password link in the footer', function () {
+        loginPopup.clickForgotYourPasswordLink()
+        restorePopup.getRestorePopupHeader().should('have.text', this.startPage.headers.restorePasswordHeaderText)
     });
 })
