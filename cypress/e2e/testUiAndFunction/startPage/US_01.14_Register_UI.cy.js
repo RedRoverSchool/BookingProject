@@ -66,7 +66,7 @@ describe('US_01.14 | Register UI', () => {
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
     }) 
      
-    it('AT_01.14.06 | Verify that the example(placeholder) "agent@qatest.site" is visible in the email field, has the #666 color, and font size: 14px' , function () {
+    it('AT_01.14.06 | Verify that the example(placeholder) "You will get your password by email" is visible in the email field, has the #666 color, and font size: 14px' , function () {
         registerPopup
             .getEmailInput()
             .should('be.visible')
@@ -75,4 +75,12 @@ describe('US_01.14 | Register UI', () => {
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
     })
     
+    it('AT_01.14.07 | Verify that the label "Phone number" is visible in the modal body, has the #999 color and font size: 14px' , function () {
+        registerPopup
+            .getPhoneLabel()
+            .should('be.visible')
+            .and('include.text', this.startPage.label.labelPhoneNumber.text)
+            .and('have.css', 'color', this.colors.greyLabel)
+            .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
+    }) 
 })

@@ -88,6 +88,7 @@ class CreateBookingPage {
     getDropdownPassengerDefault = () => cy.get('.passenger-wrapper option[value="1"]');
     getRemovePassengerBtns = () => cy.get('.passenger-row .btn-remove-passenger');
     getNotesRemarkLabel = () => cy.get('.notes-row > label');
+    getSelectionArrowFareType = () => cy.get('.div-fare-type .select2-selection__arrow')
 
     // Trip section
     getTrips = () => cy.get('div.trip');
