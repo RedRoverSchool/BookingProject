@@ -65,4 +65,14 @@ describe('US_01.14 | Register UI', () => {
             .and('have.css', 'color', this.colors.greyLabel)
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
     }) 
+     
+    it('AT_01.14.06 | Verify that the example(placeholder) "agent@qatest.site" is visible in the email field, has the #666 color, and font size: 14px' , function () {
+        registerPopup
+            .getEmailInput()
+            .should('be.visible')
+            .and('have.attr', 'placeholder', this.startPage.inputField.registerPopup.emailInputField)
+            .and('have.css', 'color', this.colors.greyHeader)
+            .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
+    })
+    
 })
