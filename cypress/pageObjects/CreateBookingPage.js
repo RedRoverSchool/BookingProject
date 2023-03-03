@@ -346,7 +346,7 @@ class CreateBookingPage {
     };
 
     clickBookTicketsBtn() {
-        this.getBookTicketsButton().click({ force: true });
+        this.getBookTicketsButton().click();
     }
 
     getFirstAvailableForBookingDefaultDay() {                   
