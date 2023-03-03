@@ -115,5 +115,11 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         loginPopup
         .getRequestCodeButton()
         .should('have.css', 'color', this.colors.greenPopup)
-})
+    })
+
+    it('AT_01.08.17 | Verify `REQUEST CODE` button has border-color - #6CCD66', function () {
+        loginPopup
+            .getRequestCodeButton()
+            .should('have.css', 'border-color', this.colors.greenPopup)
+    })
 });
