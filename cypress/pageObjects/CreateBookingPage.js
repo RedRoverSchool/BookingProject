@@ -383,7 +383,7 @@ class CreateBookingPage {
         this.getDepartureTripCardsList().each(($el) => {
             const statusText = $el.text();
             if (statusText !== 'Overdue') {
-                cy.wrap($el).last().click();
+                cy.wrap($el).click();
             }
         })
     }
