@@ -32,6 +32,7 @@ describe('US_04.30 | Summary UI', () => {
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/');
 			cy.intercept('/tools/**').as('getToolsPing')
+			cy.wait('@getToolsPing')
 			createBookingPage.clickCalendarNextButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickFridayButton()
