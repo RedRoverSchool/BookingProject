@@ -91,7 +91,7 @@ describe('US_04.30 | Summary UI', () => {
 
 					createBookingPage.getRowsSummary().then(($el) => {
 						let numberOfRows = $el
-						expect(parseInt(numberOfPassengers)).to.eq(numberOfRows.length)
+						expect(parseInt(this.createBookingPage.validBoundaryValues.aboveMinimum)).to.eq(numberOfRows.length)
 					})
 				})
 		});
@@ -105,7 +105,7 @@ describe('US_04.30 | Summary UI', () => {
 
 					createBookingPage.getRowsSummary().then(($el) => {
 						let numberOfRows = $el
-						expect(parseInt(numberOfPassengers)).to.eq(numberOfRows.length)
+						expect(parseInt(this.createBookingPage.validBoundaryValues.nominalValue)).to.eq(numberOfRows.length)
 					})
 				})
 		});
@@ -119,7 +119,7 @@ describe('US_04.30 | Summary UI', () => {
 
 					createBookingPage.getRowsSummary().then(($el) => {
 						let numberOfRows = $el
-						expect(parseInt(numberOfPassengers)).to.eq(numberOfRows.length)
+						expect(parseInt(this.createBookingPage.validBoundaryValues.belowMaximum)).to.eq(numberOfRows.length)
 					})
 				})
 		});
@@ -220,6 +220,7 @@ describe('US_04.30 | Summary UI', () => {
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/')
 			cy.intercept('/tools/**').as('getToolsPing')
+			cy.wait('@getToolsPing')
 			createBookingPage.clickCalendarNextButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickFridayButton()
