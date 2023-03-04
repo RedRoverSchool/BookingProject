@@ -140,7 +140,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
 
     it('AT_04.08.11 | Verify that month format label is "Oct 2023"',  function () {
         createBookingPage.clickMonthBtn();
-        createBookingPage.selectMonthFromMonthDropdown(this.createBookingPage.oct2023);
+        createBookingPage.selectMonthFromMonthDropdown(this.createBookingPage.oct);
         createBookingPage.getLabelCalendar().should('include.text', this.createBookingPage.oct2023);
     });
 });
