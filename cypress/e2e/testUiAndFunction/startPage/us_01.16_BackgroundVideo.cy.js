@@ -6,6 +6,7 @@ const startPage = new StartPage();
 
 describe('US_01.16 Background Video', () => {
     before (function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
     });
 

@@ -9,8 +9,8 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
     const AGENT = Cypress.env('agent');
 
     before(() =>{
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
     beforeEach(function() {
@@ -54,5 +54,12 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
     it('AT_04.05.05 | Verify that the Departure station label has margin - 0px 0px 5px', function() {
 
         createBookingPage.getLabelDepartureStation().should('have.css', 'margin', this.createBookingPage.labelDepartureStationMargin)
+    });
+
+    it('AT_04.05.08 |Verify that the "Arrival station" label has font - 15px sans-serif and  margin - 0px 0px 5px', function() {
+
+        createBookingPage.getLabelArrivalStation()
+       .should('have.css', 'margin', this.createBookingPage.labelArrivalStationMargin)
+       .and('have.css', 'font-size', this.createBookingPage.labelArrivalStationFont)
     });
 });    

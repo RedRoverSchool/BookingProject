@@ -16,8 +16,8 @@ describe('US_02.04 | User dropdown menu button UI and functionality', function()
     });
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
     it('AT_02.04.01 | "User dropdown menu" button contains an "Operator Image"', function() {

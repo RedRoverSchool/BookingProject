@@ -13,13 +13,14 @@ describe('US_01.06 | Login by email tub functionality', () => {
     const AGENT = Cypress.env('agent');
 
     beforeEach(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
+        cy.visit('/');
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage
         });
         cy.fixture('colors').then(colors => {
             this.colors = colors;
         });
-        cy.visit('/');  
     });
 
     it('AT_01.06.01 | Verify Sign In Button redirect to the Create Booking Page', function () {

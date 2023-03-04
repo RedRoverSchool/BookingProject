@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 class BookingsListPage {
 
     getBookingListHeader = () => cy.get('.page-title');
@@ -53,7 +55,7 @@ class BookingsListPage {
     }
 
     clickClearLink() {
-        this.clickClearLink().click();
+        this.getClearLink().click();
     };
 
     clickDatesRangeDropdown() {
@@ -79,10 +81,32 @@ class BookingsListPage {
     getDateFromCurrentDDMMMYYYY(days) {
         const date = this.getDate(days)
         const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' }
-        return date.toLocaleString('en-US', optionsDate)
+        return date.toLocaleDateString('en-US', optionsDate)
             .replace(/(\S{3}).(\d{1,2})(.).(\d{4})/, "$2 $1$3 $4")
     }
+   
+    typeRandomWordInSearchField(){
+        const randomWord = faker.word.adjective(5);
+
+        return this.getSearchField().type(randomWord);
+    }
     
+    clickExcelButton(){
+        this.getExcelButton().click();
+    }
+
+    getDateYYYYMMDD(date) {
+        const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        return date.toLocaleDateString('en-US', optionsDate)
+                   .replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$3-$1-$2');
+    }
+
+    formatteddDatesRangeYYYYMMDD(dates) {
+        const [startDate, endDate] = dates.split(' - ');
+        const formattedStartDate = this.getDateYYYYMMDD(new Date(startDate));
+        const formattedEndDate = this.getDateYYYYMMDD(new Date(endDate));
+        return `${formattedStartDate} - ${formattedEndDate}`;
+    }
 }
 
 export default BookingsListPage;

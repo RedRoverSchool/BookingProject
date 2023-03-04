@@ -11,8 +11,8 @@ describe('US_04.26 | Passengers details functionality - Multiple passengers', ()
     const chosenAmountPassengers = 4
 
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
         
         //Precondition
         createBookingPage.clickCalendarNextButton();

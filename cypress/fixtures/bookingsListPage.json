@@ -53,5 +53,10 @@
             ]
         },
         "statusNoResult": "No results found"        
-    }                                                                                                                            
+    },
+    
+    "excelFile": {
+        "name": "Bookings ",
+        "extension": ".csv"
+    }
 }

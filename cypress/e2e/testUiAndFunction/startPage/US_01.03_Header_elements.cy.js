@@ -8,6 +8,7 @@ const loginPopup = new LoginPopup();
 describe('US_01.03 |  Header elements', () => {
 
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/')
         startPage.clickLoginButton()
     });

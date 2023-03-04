@@ -10,8 +10,8 @@ const AGENT = Cypress.env('agent');
 
 describe('US_02.03 Header Envelope icon UI and functionality', () => {
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
     
     beforeEach(function () {

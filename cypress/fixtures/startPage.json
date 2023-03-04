@@ -21,7 +21,8 @@
         "loginBtnText": "login",
         "thLoginBtnText": "เข้าสู่ระบบ",
         "rusLoginBtnText": "Войти",
-        "signInBtnText": "SIGN IN"
+        "signInBtnText": "SIGN IN",
+        "requestCodeButtonText": "REQUEST CODE"
     },
     "headers": {
         "header_Login_Popup": {
@@ -50,7 +51,7 @@
             "front_size": "14px",
             "yourNameInputField": "John Doe",
             "companyNameInputField": "Transportation Co",
-            "emailInputField": "agent@qatest.site",
+            "emailInputField": "You will get your password by email",
             "phoneNumberInputField": "Country code and phone number"
         }
     },

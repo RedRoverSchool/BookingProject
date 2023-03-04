@@ -9,8 +9,8 @@ const createBookingPage = new CreateBookingPage();
 describe('US_04.16 | Departure On UI by default', () => {
 
     before(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     })
 
     beforeEach(function () {

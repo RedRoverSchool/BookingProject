@@ -8,8 +8,8 @@ describe('US_04.23 | Passengers details default UI', () => {
     const AGENT = Cypress.env('agent');
 
     before(() =>{
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     });
 
     beforeEach(function() {
@@ -84,5 +84,10 @@ describe('US_04.23 | Passengers details default UI', () => {
         createBookingPage
             .getFareTypeDropdown()
             .should('have.text', this.createBookingPage.dropdowns.fareType.fareTypesNames[0]);
+    });
+
+    it('AT_04.23.14 | Fare type selection arrow is present and visible', () =>{
+
+        createBookingPage.getSelectionArrowFareType().should('be.visible')
     });
 });

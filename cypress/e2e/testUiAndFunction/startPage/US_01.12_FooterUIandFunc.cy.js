@@ -9,17 +9,17 @@ const registerPopup = new RegisterPopup();
 const restorePopup = new RestorePopup();
 
 describe('US_01.12 | Footer UI and functionality', () => {
+    before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
+        cy.visit('/')
+        startPage.clickRegisterAccountLink()
+    });
 
     beforeEach(function () {
 		cy.fixture('colors').then(colors => {
             this.colors = colors;
         });
 	});
-
-    before(() => {
-        cy.visit('/')
-        startPage.clickRegisterAccountLink()
-    });
 
     it('AT_01.12.02 | Verify Footer elements are visible' , function () {
         registerPopup.getForgotYourPasswordLink().should('be.visible').should('have.css','color', this.colors.blue);

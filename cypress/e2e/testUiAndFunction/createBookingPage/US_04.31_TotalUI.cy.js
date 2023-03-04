@@ -8,14 +8,15 @@ const AGENT = Cypress.env('agent');
 
 describe('US_04.31 | Total UI', () => {
     before(() => {
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-		cy.login(AGENT.email, AGENT.password);
     });
 
     beforeEach(function () {
         cy.fixture('colors').then(colors => {
             this.colors = colors;
         });
+        cy.intercept('/tools/ping/**').as('getToolsPing');
 	});
 
     it('AT_04.31.01 | Verify that the text "Total " is visible', () => {
@@ -50,14 +51,16 @@ describe('US_04.31 | Total UI', () => {
         createBookingPage.getDropdownToggleButton().should('have.css', 'color',  this.colors.white)
     });
 
-    it.skip('AT_04.31.09 | Verify that the pop up button "Reserve tickets" is visible', () => {
-        waitForToolsPing()
+    it('AT_04.31.09 | Verify that the pop up button "Reserve tickets" is visible', () => {
+        cy.wait('@getToolsPing')
         createBookingPage.clickCalendarNextButton()
         createBookingPage.clickSaturdayButton()
+        cy.wait('@getToolsPing')
         createBookingPage.clickSecondTripCard()
+        cy.wait('@getToolsPing')
         createBookingPage.clickReservationTicketArrow()
         createBookingPage.getReservationTicketButton().should('be.visible')
-});
+    });
 
     it('AT_04.31.10 | Verify that the pop-up button “Reserve tickets” has a background color (#f4f4f4)', function () {
         createBookingPage.getReservationTicketButton().should('have.css', 'background-color', this.colors.lightGrey)

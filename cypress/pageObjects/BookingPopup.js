@@ -6,8 +6,11 @@ class BookingPopup {
     getPassengersList = () => cy.get('.popup .passengers-box .passenger-info');
     getCloseBtnBookingPopup = () => cy.get('.close-button');
 
+    // Booking Details
+    getBookingDetailsTitle = () => cy.get('.popup-booking > h3')
+
     //Passenger prices section
-    
+
     getFirstFareType = () => cy.get('.passengers-prices div:nth-child(1) label');
     getSecondFareType = () => cy.get('.passengers-prices div:nth-child(2) label');
     getThirdFareType = () => cy.get('.passengers-prices div:nth-child(3) label');

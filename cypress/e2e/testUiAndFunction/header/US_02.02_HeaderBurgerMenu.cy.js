@@ -13,8 +13,8 @@ describe('US_02.02 header burger menu functionality', () => {
         cy.fixture('leftMenuPanel').then(leftMenuPanel => {
             this.leftMenuPanel = leftMenuPanel;
         })
+        cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
-        cy.login(AGENT.email, AGENT.password);
     })
 
     it('AT_02.02.01 Link names on the left side panel reveal after clicking on the burger menu, after second clicking on the burger menu the link names become hidden', function () {

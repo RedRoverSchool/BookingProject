@@ -9,6 +9,7 @@ const createBookingPage = new CreateBookingPage();
 
 describe('US_01.09 | Login by phone number tab functionality', () => {
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
         loginPopup.clickLoginByPhoneNumberTab();

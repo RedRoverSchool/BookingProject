@@ -16,8 +16,8 @@ describe("US_04.04 | Credit balance button UI and functionality", () => {
     cy.fixture("createBookingPage").then((createBookingPage) => {
       this.createBookingPage = createBookingPage;
     });
-    cy.visit("/");
-    cy.login(AGENT.email, AGENT.password);
+    cy.loginWithSession(AGENT.email, AGENT.password);
+    cy.visit('/');
   });
 
   it.skip("AT_04.04.01 | Create booking page > Verify that week/month format lable", function () {

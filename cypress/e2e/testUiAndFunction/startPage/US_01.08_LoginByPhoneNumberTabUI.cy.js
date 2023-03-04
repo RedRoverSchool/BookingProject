@@ -7,6 +7,13 @@ const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 
 describe('US_01.08 | Login by phone number tab UI', () => {
+    before(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
+        cy.visit('/');
+        startPage.clickLoginButton();
+        loginPopup.clickLoginByPhoneNumberTab();
+    });
+    
     beforeEach(function () {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
@@ -16,12 +23,6 @@ describe('US_01.08 | Login by phone number tab UI', () => {
             this.colors = colors;
         });
     })
-
-    before(function () {
-        cy.visit('/');
-        startPage.clickLoginButton();
-        loginPopup.clickLoginByPhoneNumberTab();
-    });
 
     it('AT_01.08.01 | Verify "Phone number" label is visible', () => {
         loginPopup.getPhoneNumberLabel().should('be.visible');
@@ -114,5 +115,17 @@ describe('US_01.08 | Login by phone number tab UI', () => {
         loginPopup
         .getRequestCodeButton()
         .should('have.css', 'color', this.colors.greenPopup)
-})
+    })
+    
+     it('AT_01.08.16 | Verify `REQUEST CODE` button has text REQUEST CODE', function () {
+        loginPopup
+            .getRequestCodeButton()
+            .should('have.value', this.startPage.buttons.requestCodeButtonText)
+    })
+
+    it('AT_01.08.17 | Verify `REQUEST CODE` button has border-color - #6CCD66', function () {
+        loginPopup
+            .getRequestCodeButton()
+            .should('have.css', 'border-color', this.colors.greenPopup)
+    })
 });

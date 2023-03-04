@@ -5,13 +5,21 @@ import getNameOfDay from "../../../support/utilities/getNameOfDay";
 
 const createBookingPage = new CreateBookingPage();
 
+const weekFirstDay = (string) => {
+	return string.split(" ")[0]
+}
+
+const weekLastDay = (string) => {
+	return string.split(" ")[3]
+}
+
 describe('US_04.09 | Calendar available days week UI', () => {
 
 	const AGENT = Cypress.env('agent');
 
 	before(() => {
-		cy.visit('/');
-		cy.login(AGENT.email, AGENT.password)
+		cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');
 	});
 
 	beforeEach(function () {
@@ -30,8 +38,8 @@ describe('US_04.09 | Calendar available days week UI', () => {
 
 	it('AT_04.09.01 | Verify calendar-day-selection-wrapper starts and ends with same dates as label calendar week', function () {
 		createBookingPage.getLabelCalendar().then(($el) => {
-			let firstDayOfWeek = $el.text().split(" ")[0]
-			let lastDayOfWeek = $el.text().split(" ")[3]
+			let firstDayOfWeek = weekFirstDay($el.text())
+			let lastDayOfWeek = weekLastDay($el.text())
 
 			createBookingPage.getCalendarDays().eq(0).then(($el) => {
 				expect($el.text()).to.eq(firstDayOfWeek)

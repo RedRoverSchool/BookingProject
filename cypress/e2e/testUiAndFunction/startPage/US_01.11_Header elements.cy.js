@@ -9,6 +9,7 @@ const registerPopup = new RegisterPopup();
 describe('US_01.11 | Header elements', () => {
 
     before(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
 	    cy.visit('/');
         startPage.clickRegisterAccountLink();
 	});

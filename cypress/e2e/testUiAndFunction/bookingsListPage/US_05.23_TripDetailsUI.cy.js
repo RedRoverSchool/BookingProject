@@ -1,26 +1,26 @@
 /// <reference types="Cypress" />
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
-import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env("agent");
 
 
 function createReservation(passengerName) {
+  cy.intercept('/tools/ping/**').as('getToolsPing')
+    
   createBookingPage.clickCalendarNextButton();
   createBookingPage.clickSaturdayButton();
 
-  waitForToolsPing();
+  cy.wait('@getToolsPing')
 
   createBookingPage.clickFirstTripCard();
-  waitForToolsPing();
+  cy.wait('@getToolsPing')
   createBookingPage.typeIntoMainPassengerNameField(passengerName);
-  waitForToolsPing();
+  
   createBookingPage.clickReservationTicketArrow();
-  waitForToolsPing();
   createBookingPage.clickReservationTicketButton();
-  waitForToolsPing();
+  cy.wait('@getToolsPing')
 }
 
 describe.skip("US_05.23 | Trip detais UI", () => {
@@ -28,20 +28,20 @@ describe.skip("US_05.23 | Trip detais UI", () => {
     cy.fixture("createBookingPage").then((createBookingPage) => {
       this.createBookingPage = createBookingPage;
     });
-
-    cy.cleanData();
   });
 
   beforeEach(function () {
-    cy.visit("/");
-    cy.login(AGENT.email, AGENT.password);
+    cy.cleanData()
 
+    cy.loginWithSession(AGENT.email, AGENT.password)
+    cy.visit('/')
+    
     createReservation(
       this.createBookingPage.inputField.main_passenger.name
     );
   });
 
-  it.skip('AT_05.23.01 | Verify departure time is in 24-hour notation HH:MM', function () {
+  it('AT_05.23.01 | Verify departure time is in 24-hour notation HH:MM', function () {
     const timeFormat = this.createBookingPage.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
@@ -51,7 +51,7 @@ describe.skip("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it.skip('AT_05.23.02 | Verify departure date has format DD-MM-YYYY', function () {
+  it('AT_05.23.02 | Verify departure date has format DD-MM-YYYY', function () {
     const dateFormat = this.createBookingPage.dateFormat;
     const dateFormatRegExp = new RegExp(dateFormat);
 
@@ -61,7 +61,7 @@ describe.skip("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it.skip('AT_05.23.03 | Verify arrival time is in 24-hour notation HH:MM', function () {
+  it('AT_05.23.03 | Verify arrival time is in 24-hour notation HH:MM', function () {
     const timeFormat = this.createBookingPage.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
@@ -71,7 +71,7 @@ describe.skip("US_05.23 | Trip detais UI", () => {
     });
   });
 
-  it.skip('AT_05.23.04 | Verify arrival time label is visible', function () {
+  it('AT_05.23.04 | Verify arrival time label is visible', function () {
     createBookingPage.getArrivalTimeLabel().should('be.visible');
   });
 });

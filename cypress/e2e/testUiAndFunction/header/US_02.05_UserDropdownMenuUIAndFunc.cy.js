@@ -22,8 +22,8 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 
 	describe('Verify user dropdown menu UI', () => {
 		before(() => {
-			cy.visit('/')
-			cy.login(AGENT.email, AGENT.password)
+			cy.loginWithSession(AGENT.email, AGENT.password);
+        	cy.visit('/');
 			header.clickUserDropDownMenu()
 		});
 
@@ -81,8 +81,8 @@ describe('US_02.05 | User dropdown menu UI and functionality', () => {
 
 	describe('Verify user dropdown menu functionality', () => {
 		beforeEach(function () {
-			cy.visit('/')
-			cy.login(AGENT.email, AGENT.password)
+			cy.loginWithSession(AGENT.email, AGENT.password);
+        	cy.visit('/');
 			header.clickUserDropDownMenu()
 		});
 

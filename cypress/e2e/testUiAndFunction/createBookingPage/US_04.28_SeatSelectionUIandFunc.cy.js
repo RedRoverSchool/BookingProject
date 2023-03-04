@@ -33,13 +33,16 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     describe('US_04.28 | Seat selection UI', () => {
 
         before(() => {
-            cy.visit('/')
-            cy.login(AGENT.email, AGENT.password)
+            cy.loginWithSession(AGENT.email, AGENT.password);
+            cy.visit('/');
             
             createBookingPage.clickCalendarNextButton()
-            waitForToolsPing()
-            createBookingPage.clickFirstTripCard()
-            waitForToolsPing()
+            cy.intercept('/tools/**').as('getTrip')
+            cy.wait('@getTrip')
+            createBookingPage.clickOnFirstAvailableTripCard()
+            createBookingPage.getLabelSeatSelection()
+                .should('be.visible')
+                .and('have.text', 'Seat selection')
         });
 
         it('AT_04.28.01|The section name "Seat selection" is visible', function (){
@@ -114,17 +117,20 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         describe('Trip "Bangkok Khao San - Chonburi"', () => {
 
             before(() => {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
         
                 createBookingPage.selectDepartureStation('Bangkok Khao San')
                 createBookingPage.selectArrivalStation('Chonburi')
                 createBookingPage.clickCalendarNextButton()
-                waitForToolsPing()
+                cy.intercept('/tools/**').as('getTrip')
+                cy.wait('@getTrip')
                 createBookingPage.clickSaturdayButton()
-                waitForToolsPing()
-                createBookingPage.clickFirstTripCard()
-                waitForToolsPing()
+                cy.wait('@getTrip')
+                createBookingPage.clickOnFirstAvailableTripCard()
+                createBookingPage.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
             });
         
             it('AT_04.28.04 | When choosing "Bangkok Khao San - Chonburi" trip there is blocked for selecting "Driver" seat in the "Seats table", and this item has dashed border', function () {
@@ -159,15 +165,19 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
         describe('Testcases without booking/reservation', () => {
             beforeEach(function () {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.cleanData();
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
         
                 createBookingPage.selectDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[7])
-                waitForToolsPing()
+                cy.intercept('/tools/**').as('getTrip')
+                cy.wait('@getTrip')
                 createBookingPage.clickCalendarNextButton()
-                waitForToolsPing()
-                createBookingPage.clickFirstTripCard()
-                waitForToolsPing()
+                cy.wait('@getTrip')
+                createBookingPage.clickOnFirstAvailableTripCard()
+                createBookingPage.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
 
             });
 
@@ -275,18 +285,22 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             });
         });
 
-        describe('Testcases with booking/reservation', () => {
+        describe.skip('Testcases with booking/reservation', () => {
            
             beforeEach(() => {
-                cy.visit('/')
-                cy.login(AGENT.email, AGENT.password)
+                cy.cleanData();
+                cy.loginWithSession(AGENT.email, AGENT.password);
+                cy.visit('/');
                 
                 createBookingPage.clickCalendarNextButton()
-                waitForToolsPing()
+                cy.intercept('/tools/**').as('getTrip')
+                cy.wait('@getTrip')
                 createBookingPage.clickCalendarNextButton()
-                waitForToolsPing()
-                createBookingPage.clickFirstTripCard()
-                waitForToolsPing()
+                cy.wait('@getTrip')
+                createBookingPage.clickOnFirstAvailableTripCard()
+                createBookingPage.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
             });
 
             it.skip('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {      

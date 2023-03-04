@@ -21,13 +21,17 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
     });
 
     before(function() {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)
+        cy.cleanData();
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');
         
         createBookingPage.clickCalendarNextButton()
-        waitForToolsPing()
-        createBookingPage.clickFirstTripCard()
-        waitForToolsPing
+        cy.intercept('/tools/**').as('getTrip')
+        cy.wait('@getTrip')
+        createBookingPage.clickOnFirstAvailableTripCard()
+        createBookingPage.getLabelSeatSelection()
+            .should('be.visible')
+            .and('have.text', 'Seat selection')
     });
 
     it('AT_04.29.01 | The amount of passengers in the "Seat selection dropdown" is equal the number of available tickets in the selected trip', function() {
