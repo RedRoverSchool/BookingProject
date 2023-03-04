@@ -309,6 +309,7 @@ class CreateBookingPage {
 
     getCurrentMonthAndYear() {
         let date = new Date();
+        date.setDate(date.getDate() + 2)
         const currentMonthAndYear = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
         return currentMonthAndYear;
     }
