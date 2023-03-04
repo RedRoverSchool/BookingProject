@@ -55,10 +55,14 @@ describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
 });
 
 describe('US_04.08 | Calendar-selection block functionality week/month view', () => {
-    beforeEach(() => {
+    beforeEach(function () {    
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
         leftMenuPanel.clickBookingIcon();
+
+        cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage;
+        });
     });
 
     it('AT_04.08.04 | Verify that Click forward arrow works and switches month in correct order', () => {
@@ -132,5 +136,11 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
             let openedWeekMonday = $monday.text();
             expect(openedWeekMonday).to.deep.equal(createBookingPage.getCurrentMonday());
         });
+    });
+
+    it('AT_04.08.11 | Verify that month format label is "Oct 2023"',  function () {
+        createBookingPage.clickMonthBtn();
+        createBookingPage.selectMonthFromMonthDropdown('2023-10');
+        createBookingPage.getLabelCalendar().should('include.text', this.createBookingPage.oct2023)
     });
 });

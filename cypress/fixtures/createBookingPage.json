@@ -173,5 +173,7 @@
 
     "labelArrivalStationFont": "15px",
        
-    "labelArrivalStationMargin": "0px 0px 5px"
+    "labelArrivalStationMargin": "0px 0px 5px",
+
+    "oct2023": "Oct 2023"
 }
