@@ -4,7 +4,6 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import startAndEndOfWeek from "../../../support/utilities/getStartAndEndOfTheWeek";
 
-
 const leftMenuPanel = new LeftMenuPanel();
 const createBookingPage = new CreateBookingPage();
 
@@ -36,6 +35,13 @@ describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
         createBookingPage.getLabelCalendar().should('be.visible');
     });
 
+    it('AT_04.08.09 | Verify that Arrows is present for week view', () => {
+        createBookingPage
+            .getWeekButton().should('have.class', 'selected');
+        createBookingPage.getCalendarPrevButton().should('be.visible');
+        createBookingPage.getCalendarNextButton().should('be.visible');
+    });
+
     it('AT_04.08.01 | Verify that Label is present for month view', () => {
         createBookingPage.clickMonthBtn();
         createBookingPage.getLabelCalendar().should('be.visible')
@@ -55,9 +61,10 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         leftMenuPanel.clickBookingIcon();
     });
 
-    it.skip('AT_04.08.04 | Verify that Click forward arrow works and switches month in correct order', () => {
-        const date = new Date()
-        createBookingPage.clickMonthBtn()
+    it('AT_04.08.04 | Verify that Click forward arrow works and switches month in correct order', () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 2)
+        createBookingPage.clickMonthBtn();
         for (let i = 0; i < 12; i++) {
             createBookingPage.clickCalendarNextButton();
             createBookingPage.getLabelCalendar().then(($label) => {
@@ -71,18 +78,18 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         createBookingPage.clickCalendarNextButton();
         createBookingPage.getLabelCalendar().then(($el) => {
             let mondayWeekAhead = getDateAndMonth($el);
-                createBookingPage.clickCalendarPrevButton();
-               
-                createBookingPage.getLabelCalendar().then(($el) => {
-                    expect($el.text()).to.eq(getPreviousWeekMonSundDays(mondayWeekAhead));
-                });
-            })
-        });
-  
+            createBookingPage.clickCalendarPrevButton();
 
-    it.skip('AT_04.08.06 | Verify that Click back arrow works and switches month in correct order', () => {
+            createBookingPage.getLabelCalendar().then(($el) => {
+                expect($el.text()).to.eq(getPreviousWeekMonSundDays(mondayWeekAhead));
+            });
+        })
+    });
+
+    it('AT_04.08.06 | Verify that Click back arrow works and switches month in correct order', () => {
         createBookingPage.clickMonthBtn();
         const date = new Date()
+        date.setDate(date.getDate() + 2)
         date.setMonth(date.getMonth() + 12);
         for (let i = 1; i <= 12; i++) {
             createBookingPage.clickCalendarNextButton();
@@ -96,7 +103,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         }
     });
 
-    it.skip('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
+    it('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
         const date = new Date()
         let avalableForBookingDay = date.setDate(date.getDate() + 2);
         for (let i = 0; i < 10; i++) {
@@ -110,7 +117,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         }
     });
 
-    it.skip('AT_04.08.08 | Verify that back arrow click does not show the elapsed month', function() {
+    it('AT_04.08.08 | Verify that back arrow click does not show the elapsed month', function () {
         createBookingPage.clickMonthBtn();
         createBookingPage.clickCalendarPrevButton();
         createBookingPage.getLabelCalendar().then(($label) => {
@@ -119,19 +126,11 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         });
     });
 
-    it.skip('AT_04.08.07 | Verify that back arrow click does not show elapsed week', function () {
+    it('AT_04.08.07 | Verify that back arrow click does not show elapsed week', function () {
         createBookingPage.clickCalendarPrevButton();
         createBookingPage.getMondayButton().then(($monday) => {
-          let openedWeekMonday = $monday.text();
-    
-          expect(openedWeekMonday).to.deep.equal(createBookingPage.getCurrentMonday());
+            let openedWeekMonday = $monday.text();
+            expect(openedWeekMonday).to.deep.equal(createBookingPage.getCurrentMonday());
         });
-      });
-
-    it('AT_04.08.09 | Verify that Arrows is present for week view', () => {
-        createBookingPage
-        .getWeekButton().should('have.class', 'selected');
-        createBookingPage.getCalendarPrevButton().should('be.visible');
-        createBookingPage.getCalendarNextButton().should('be.visible');
     });
 });
