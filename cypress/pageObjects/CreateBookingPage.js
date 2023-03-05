@@ -51,6 +51,7 @@ class CreateBookingPage {
     getVehicleClassTripCards = () => cy.get('.trips-list-wrapper > div> span.class');
     getNumberTicketsAvailableSecondTripCard = () => cy.get('.trip:nth-child(2) span.availability .num');
     getClassUnselectedTripCards = () => cy.get('.trips-list-wrapper > div.trip .class');
+    getSelectedTripCard = () => cy.get('div.trip.selected');
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
