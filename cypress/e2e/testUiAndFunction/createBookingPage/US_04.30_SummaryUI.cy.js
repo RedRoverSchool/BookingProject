@@ -42,7 +42,7 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.getSelectedTripCard().should('be.visible')
 		});
 
-		it.skip('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
+		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.minimum)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
@@ -228,6 +228,7 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickOnLastAvailiableTripCard()
+			cy.wait('@getToolsPing')
 		});
 
 		it('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
