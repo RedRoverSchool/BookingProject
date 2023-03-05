@@ -15,7 +15,7 @@ const sumOfArray = (array) => {
 		.reduce((total, el) => total += +el, 0)
 }
 
-describe.skip('US_04.30 | Summary UI', () => {
+describe('US_04.30 | Summary UI', () => {
 
 	beforeEach(function () {
 		cy.fixture('bookingPopup').then(bookingPopup => {
