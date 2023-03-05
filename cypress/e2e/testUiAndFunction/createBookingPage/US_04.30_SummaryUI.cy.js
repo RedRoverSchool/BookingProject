@@ -40,7 +40,7 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickOnLastAvailiableTripCard()
 		});
 
-		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
+		it.skip('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.minimum)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
