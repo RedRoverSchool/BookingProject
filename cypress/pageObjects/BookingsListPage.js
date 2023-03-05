@@ -29,6 +29,8 @@ class BookingsListPage {
     
     // Booking list section
     getTableHeaders = () => cy.get('.table thead tr');
+    getTableHeadersColumnsList = () => cy.get('.dataTables_scrollHeadInner .table thead tr th');
+    getTableBody = () => cy.get('.dataTables_scrollBody .table>tbody tr td');
     getColumnsSettingButton = () => cy.get('.table-columns-settings-link');
     getColumnsCheckbox = () => cy.get('input[type="checkbox');
     getColumnsOkButton = () => cy.get('.popup-table-columns-settings .btn-success');
@@ -106,6 +108,10 @@ class BookingsListPage {
         const formattedStartDate = this.getDateYYYYMMDD(new Date(startDate));
         const formattedEndDate = this.getDateYYYYMMDD(new Date(endDate));
         return `${formattedStartDate} - ${formattedEndDate}`;
+    }
+
+    typeInSearchField(searchWord) {
+        this.getSearchField().type(searchWord)
     }
 }
 

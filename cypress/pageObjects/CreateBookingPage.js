@@ -555,5 +555,39 @@ class CreateBookingPage {
         const currentMonthAndYearThailand = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
         return currentMonthAndYearThailand;
     }
+
+    createCustomBooking({departureStationName, arrivalStationName, passengerName, passengerAmount, fareType}) {
+        cy.intercept('/tools/**').as('getTrip')
+        
+        this.selectDepartureStation(departureStationName)
+        cy.wait('@getTrip')
+        
+        this.selectArrivalStation(arrivalStationName)
+        if (departureStationName === 'Bangkok Khao San' && arrivalStationName === 'Chonburi') {
+            this.clickCalendarNextButton()
+            cy.wait('@getTrip')
+            this.clickSaturdayButton()
+        } else {
+            this.clickCalendarNextButton()
+            cy.wait('@getTrip')
+            this.clickFridayButton()
+        }
+        cy.wait('@getTrip')
+        
+        this.selectAmountPassengersDetailsDropdown(passengerAmount)
+        cy.wait('@getTrip')
+        
+        this.clickTripCard()
+        this.getLabelSeatSelection()
+                .should('be.visible')
+                .and('have.text', 'Seat selection')
+        
+        this.typePassengerNames(passengerName)
+    
+        this.selectFareTypes(fareType)
+        
+        this.clickBookTicketsBtn()
+        
+    }
 }
 export default CreateBookingPage;

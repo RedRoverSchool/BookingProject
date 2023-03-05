@@ -177,5 +177,30 @@
 
     "oct2023": "Oct 2023",
 
-    "oct": "2023-10"
+    "oct": "2023-10",
+
+    "bookingDetails" : [
+        {
+            "departureStationName" : "Bangkok Khao San",
+            "arrivalStationName" : "Chonburi",
+            "passengerName" : "Paul Townsend",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+        }, 
+        {
+            "departureStationName" : "Naka Island",
+            "arrivalStationName" : "Ao Por Pier",
+            "passengerName" : "Shanna Lester",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+          }
+    ],
+
+    "bookingDetailsTest1" : {
+        "departureStationName" : "Rassada Pier",
+        "arrivalStationName" : "Naka Island",
+        "passengerName" : "Betty Hardy",
+        "passengerAmount" : "1",
+        "fareType" : "Adult"
+    }
 }
