@@ -102,7 +102,7 @@ class CreateBookingPage {
     getAllSeatsSeatSelection = () => cy.get('.seat-chart .seats td');
     getTitleOfSeatsTable = () => cy.get('.seats tbody th');
     getSeatInRow = () => cy.get('.seat-chart .seats tr:nth-child(2) td');
-    getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .available');
+    getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .seats td:not(.unavailable)');
     getLabelSeatSelection = () => cy.get('div.layout-wrapper div.title label')
 
     // Summary section 
@@ -135,12 +135,16 @@ class CreateBookingPage {
         this.clickFridayButton()
 
         this.selectAmountPassengersDetailsDropdown(passengerAmount)
+
+        this.clickTripCard()
+
+        this.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
     
         this.typePassengerNames(passengerNames)
     
         this.selectFareTypes(fareTypes)
-
-        this.clickTripCard()
 
         this.clickBookTicketsBtn()
     }
