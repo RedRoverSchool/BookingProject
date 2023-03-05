@@ -1,6 +1,5 @@
 /// <reference types ="cypress" />
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
-//import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const createBookingPage = new CreateBookingPage();
 
