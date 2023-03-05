@@ -3,7 +3,6 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from '../../../pageObjects/BookingPopup';
 import getArray from "../../../support/utilities/getArray";
-import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 
 const bookingPopup = new BookingPopup();
 const createBookingPage = new CreateBookingPage();
@@ -285,38 +284,31 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             });
         });
 
-        describe.skip('Testcases with booking/reservation', () => {
+        describe('Testcases with booking/reservation', () => {
            
             beforeEach(() => {
                 cy.cleanData();
                 cy.loginWithSession(AGENT.email, AGENT.password);
-                cy.visit('/');
-                
-                createBookingPage.clickCalendarNextButton()
-                cy.intercept('/tools/**').as('getTrip')
-                cy.wait('@getTrip')
-                createBookingPage.clickCalendarNextButton()
-                cy.wait('@getTrip')
-                createBookingPage.clickOnFirstAvailableTripCard()
+                cy.visit('/');         
+
+                cy.intercept('/tools/ping/**').as('getPopUp')
+ 
+            });
+
+            it('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {                             
+                createBookingPage.createBooking(this.createBookingPage.inputField.main_passenger.name, 4, this.createBookingPage.dropdowns.fareType.fareTypesNames[1])               
+                cy.wait('@getPopUp') 
+                bookingPopup.clickCloseBtnBookingPopup()             
+                createBookingPage.clickTripCard()
                 createBookingPage.getLabelSeatSelection()
                     .should('be.visible')
                     .and('have.text', 'Seat selection')
-            });
-
-            it.skip('AT_04.28.07 | The number of available seats in the "Seat selection" section is equal the number of available seats in the selected trip', function() {      
-                createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)         
-                createBookingPage.clickReservationTicketArrow();
-                createBookingPage.clickReservationTicketButton();   
-                cy.intercept('/tools/ping/**').as('getPopUp')
-                cy.wait('@getPopUp') 
-                bookingPopup.clickCloseBtnBookingPopup()             
-                createBookingPage.clickFirstTripCard()
         
                 let availableSeatsSeatSelection
                 createBookingPage.getAvailableSeatsSeatSelection().then($el => {
                     availableSeatsSeatSelection = $el.toArray().length                 
-                })       
-        
+                })   
+
                 createBookingPage.getTicketsAvailableFirstTripCard().then($el => {
                     let availableSeatsSelectedTrip = $el.text()
                     

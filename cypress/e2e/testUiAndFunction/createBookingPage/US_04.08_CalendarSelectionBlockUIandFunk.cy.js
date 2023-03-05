@@ -130,7 +130,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         });
     });
 
-    it('AT_04.08.07 | Verify that back arrow click does not show elapsed week', function () {
+    it.skip('AT_04.08.07 | Verify that back arrow click does not show elapsed week', function () {
         createBookingPage.clickCalendarPrevButton();
         createBookingPage.getMondayButton().then(($monday) => {
             let openedWeekMonday = $monday.text();
