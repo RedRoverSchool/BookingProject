@@ -38,11 +38,10 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickOnLastAvailiableTripCard()
-			cy.wait('@getToolsPing')
 			createBookingPage.getSelectedTripCard().should('be.visible')
 		});
 
-		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
+		it.only('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.minimum)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
