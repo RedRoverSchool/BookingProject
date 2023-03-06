@@ -68,4 +68,28 @@ describe("US_05.02_Search section functionality", () => {
       })
     })
   });
+
+  it('AT_05.02.02 | Verify that the agent is able to enter data in Booking ID input field and find booking', function () {
+    //Precondition
+    leftMenuPanel.clickBookingIcon()
+    createBookingPage.createCustomBooking(this.createBookingPage.bookingDetailsTest2)
+    cy.intercept('/tools/ping/**').as('getPopUp')
+    cy.wait('@getPopUp')
+    bookingPopup.getBookingID().then(($id) => {
+      let bookingID = $id.text()
+      bookingPopup.clickCloseBtnBookingPopup()
+      leftMenuPanel.clickBookingManagementIcon()
+      
+      bookingsListPage.typeInBookingIDField(`${bookingID}\n`)
+      bookingsListPage.getTableHeadersColumnsList().then(($el) => {
+        let tableHeaderArray = getArray($el)
+        let indexOfID = tableHeaderArray.indexOf(this.bookingsListPage.columns.id[1])
+        
+        bookingsListPage.getTableBody().then(($el) => {
+          let tableDataArray = getArray($el)
+          expect(tableDataArray[indexOfID]).to.eq(bookingID)
+        })
+      })
+    })
+  });
 });

@@ -62,4 +62,8 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
        .should('have.css', 'margin', this.createBookingPage.labelArrivalStationMargin)
        .and('have.css', 'font-size', this.createBookingPage.labelArrivalStationFont)
     });
+
+    it('AT_04.05.07 | Verify that the Departure station dropdown menu has "Selection arrow"', () => {
+        createBookingPage.getDepartureStationSelectionArrow().should('exist');
+    });
 });    
