@@ -202,5 +202,13 @@
         "passengerName" : "Betty Hardy",
         "passengerAmount" : "1",
         "fareType" : "Adult"
-    }
+    },
+
+    "bookingDetailsTest2" : {
+        "departureStationName" : "Phuket Town",
+        "arrivalStationName" : "Bangkok Khao San",
+        "passengerName" : "Clinton Cain",
+        "passengerAmount" : "1",
+        "fareType" : "Elder"
+      }
 }

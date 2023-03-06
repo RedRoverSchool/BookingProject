@@ -113,6 +113,10 @@ class BookingsListPage {
     typeInSearchField(searchWord) {
         this.getSearchField().type(searchWord)
     }
+
+    typeInBookingIDField(searchID) {
+        this.getBookingIdField().type(searchID)
+    }
 }
 
 export default BookingsListPage;
