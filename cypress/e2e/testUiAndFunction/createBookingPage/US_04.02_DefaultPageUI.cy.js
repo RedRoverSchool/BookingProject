@@ -48,4 +48,8 @@ describe('US_04.02_Default page UI', () => {
     it('AT_04.02.08 | Verify section title is "Departure on" and it is visible', function ()  {
         createBookingPage.getDepartureOnLabel().should('include.text', 'Departure on').and('be.visible');                           
     });
+
+    it('AT_04.02.09 | Verify Passenger details section exists/is visible.', function (){
+        createBookingPage.getLabelPassengerDetails().should('have.text', 'Passengers details').and('be.visible'); 
+    });
 })

@@ -132,6 +132,26 @@
 
    "departureStationLabelFont": "15px",
 
+   "passengers": [
+        {
+            "name": "Main Passenger Adult",
+            "fareType": "adult",
+            "phone": "phone",
+            "email": "email"
+        },
+    
+        {
+            "name": "Elder Extra Passenger",
+            "fareType": "elder"
+        },
+
+        {
+            "name": "Child Extra Passenger",
+            "fareType": "child"
+        }
+        
+   ],
+
     "validBoundaryValues": {
         "minimum" : "1 passenger",
         "aboveMinimum" : "2 passengers",
@@ -149,5 +169,46 @@
 
     "labelDepartureStationMargin": "0px 0px 5px",
 
-    "weekButtonText": "Week"
+    "weekButtonText": "Week",
+
+    "labelArrivalStationFont": "15px",
+       
+    "labelArrivalStationMargin": "0px 0px 5px",
+
+    "oct2023": "Oct 2023",
+
+    "oct": "2023-10",
+
+    "bookingDetails" : [
+        {
+            "departureStationName" : "Bangkok Khao San",
+            "arrivalStationName" : "Chonburi",
+            "passengerName" : "Paul Townsend",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+        }, 
+        {
+            "departureStationName" : "Naka Island",
+            "arrivalStationName" : "Ao Por Pier",
+            "passengerName" : "Shanna Lester",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+          }
+    ],
+
+    "bookingDetailsTest1" : {
+        "departureStationName" : "Rassada Pier",
+        "arrivalStationName" : "Naka Island",
+        "passengerName" : "Betty Hardy",
+        "passengerAmount" : "1",
+        "fareType" : "Adult"
+    },
+
+    "bookingDetailsTest2" : {
+        "departureStationName" : "Phuket Town",
+        "arrivalStationName" : "Bangkok Khao San",
+        "passengerName" : "Clinton Cain",
+        "passengerAmount" : "1",
+        "fareType" : "Elder"
+      }
 }

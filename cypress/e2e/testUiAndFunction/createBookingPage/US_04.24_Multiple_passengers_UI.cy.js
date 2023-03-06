@@ -56,4 +56,10 @@ describe('US_04.24 | Multiple passengers UI', () => {
             .getEmailInputField()
             .should('have.attr', 'placeholder', this.createBookingPage.placeholder.email);
     });
+
+    it('AT_04.24.06 | Verify phone number input field has a “Phone number” text placeholder.', function () {
+        createBookingPage
+            .getPlaceholderPhoneNumber()
+            .should('have.attr', 'placeholder', this.createBookingPage.placeholder.phone);
+    });
 });    

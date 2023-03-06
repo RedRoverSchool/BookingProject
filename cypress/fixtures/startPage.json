@@ -21,7 +21,8 @@
         "loginBtnText": "login",
         "thLoginBtnText": "เข้าสู่ระบบ",
         "rusLoginBtnText": "Войти",
-        "signInBtnText": "SIGN IN"
+        "signInBtnText": "SIGN IN",
+        "requestCodeButtonText": "REQUEST CODE"
     },
     "headers": {
         "header_Login_Popup": {
