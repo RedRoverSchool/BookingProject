@@ -14,6 +14,7 @@ class CreateBookingPage {
     getLabelDepartureStation = () => cy.get('.departure-wrapper label')
     getDepartureInputSelectSearchField = () => cy.get('.select2-search__field')
     getLabelArrivalStation = () => cy.get('.destination-wrapper label')
+    getDepartureStationSelectionArrow = () => cy.get('.departure-wrapper .select2-selection__arrow');
 
     //Departure date
     getDepartureDateSection = () => cy.get('.box-body.calendar-wrapper');
