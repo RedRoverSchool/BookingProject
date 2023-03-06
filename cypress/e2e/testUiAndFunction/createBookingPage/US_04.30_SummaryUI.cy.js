@@ -26,7 +26,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	})
 
-	describe.skip('US_04.30 | Summary  section UI', () => {
+	describe('US_04.30 | Summary  section UI', () => {
 		before(() => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
@@ -38,10 +38,11 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickOnLastAvailiableTripCard()
+			
 			createBookingPage.getSelectedTripCard().should('be.visible')
 		});
 
-		it.only('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
+		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.minimum)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
