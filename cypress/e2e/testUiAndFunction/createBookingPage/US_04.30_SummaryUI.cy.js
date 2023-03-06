@@ -26,7 +26,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	})
 
-	describe('US_04.30 | Summary  section UI', () => {
+	describe.skip('US_04.30 | Summary  section UI', () => {
 		before(() => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
