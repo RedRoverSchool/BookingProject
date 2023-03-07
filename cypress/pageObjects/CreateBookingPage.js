@@ -33,6 +33,7 @@ class CreateBookingPage {
     getDepartureDate = () => cy.get('.popup-trip div:nth-child(5) span');
     getDaySelected = () => cy.get('[class="day-wrapper selected"]');
     getMondayButton = () => cy.get('div .calendar-day-selection-wrapper :first-child');
+    getOctoberMondayButton = () => cy.get('.calendar-day-selection-wrapper > :nth-child(8)');
 
     //Departure on
     getDepartureOnSection = () => cy.get('.box-body.trips-wrapper');
@@ -592,6 +593,24 @@ class CreateBookingPage {
         
         this.clickBookTicketsBtn()
         
+    }
+
+    clickgetOctoberMondayButton() {
+        this.getOctoberMondayButton().click({ force: true })
+    }
+
+    /** 
+    * @returns boolean, checks if each three consecutive elements in array have same number with letters "A","B","C"
+    */
+    isSameRowSeatsA_B_C = (array) => {
+        let check = true
+        let expectedString = "ABC"
+        for (let i = 0; i < array.length; i += 3) {
+            let checkForA_B_C = array.slice(i, i + 3).map(el => el.replace(/^\d/g, '')).join("")
+            let checkForSameNumber = new Set(array.slice(i, i + 3).map(el => parseInt(el)))
+            check = check && (checkForSameNumber.size == 1) && (checkForA_B_C == expectedString)
+        }
+        return check
     }
 }
 export default CreateBookingPage;
