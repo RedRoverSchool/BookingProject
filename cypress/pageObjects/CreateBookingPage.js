@@ -33,6 +33,7 @@ class CreateBookingPage {
     getDepartureDate = () => cy.get('.popup-trip div:nth-child(5) span');
     getDaySelected = () => cy.get('[class="day-wrapper selected"]');
     getMondayButton = () => cy.get('div .calendar-day-selection-wrapper :first-child');
+    getOctoberMondayButton = () => cy.get('.calendar-day-selection-wrapper > :nth-child(8)');
 
     //Departure on
     getDepartureOnSection = () => cy.get('.box-body.trips-wrapper');
@@ -592,6 +593,10 @@ class CreateBookingPage {
         
         this.clickBookTicketsBtn()
         
+    }
+
+    clickgetOctoberMondayButton() {
+        this.getOctoberMondayButton().click({ force: true })
     }
 }
 export default CreateBookingPage;
