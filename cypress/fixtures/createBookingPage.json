@@ -134,22 +134,42 @@
 
    "passengers": [
         {
-            "name": "Main Passenger Adult",
+            "name": "Liam",
             "fareType": "adult",
             "phone": "phone",
             "email": "email"
         },
+
+        {
+            "name": "Isabella",
+            "fareType": "child"
+        },
+
+        {
+            "name": "Noah",
+            "fareType": "adult"
+        },
+
+        {
+            "name": "Sophia",
+            "fareType": "child"
+        },
     
         {
-            "name": "Elder Extra Passenger",
+            "name": "Mia",
             "fareType": "elder"
         },
 
         {
-            "name": "Child Extra Passenger",
+            "name": "Oliver",
             "fareType": "child"
+        },
+
+        {
+            "name": "Ava",
+            "fareType": "elder"
         }
-        
+
    ],
 
     "validBoundaryValues": {
