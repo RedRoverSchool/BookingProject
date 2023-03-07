@@ -13,7 +13,7 @@ const randomPhoneNumber = faker.phone.number('+66#########');
 const randomCompanyName = faker.company.name();
 
 
-describe('US_AC_01 | Register new agent', () => {
+describe('US_AC_01 | Register new agent', { tags: ['regression'] }, () => {
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');

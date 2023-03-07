@@ -6,7 +6,7 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 const header = new Header();
 const leftMenuPanel = new LeftMenuPanel();
 
-describe('US_02.02 header burger menu functionality', () => {
+describe('US_02.02 header burger menu functionality', { tags: ['smoke', 'regression'] }, () => {
     const AGENT = Cypress.env('agent');
 
     before(function () {

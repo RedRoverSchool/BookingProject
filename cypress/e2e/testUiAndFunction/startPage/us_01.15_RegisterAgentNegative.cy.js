@@ -19,7 +19,7 @@ const randomInvalidCompanyName = `${randomAlpha + randomNumeric}`;
 const randomInvalidPhoneNumber = faker.random.alphaNumeric(12);
 
 
-describe('US_01.15 | Register Agent Negative', function () {
+describe('US_01.15 | Register Agent Negative', { tags: ['regression'] }, function () {
 
     before(function () {
         cy.then(Cypress.session.clearCurrentSessionData);

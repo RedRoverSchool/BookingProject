@@ -5,7 +5,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_04.02_Default page UI', () => {
+describe('US_04.02_Default page UI', { tags: ['smoke'] }, () => {
 
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);

@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.14 | Week button elements view ', () => {
+describe('US_04.14 | Week button elements view ', { tags: ['smoke'] }, () => {
 
     const AGENT = Cypress.env('agent');
 

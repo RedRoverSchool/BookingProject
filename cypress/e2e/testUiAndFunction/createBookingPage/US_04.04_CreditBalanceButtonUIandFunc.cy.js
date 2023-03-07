@@ -9,7 +9,7 @@ const createBookingPage = new CreateBookingPage();
 const leftMenuPanel = new LeftMenuPanel();
 const accountManagementPage = new AccountManagementPage();
 
-describe("US_04.04 | Credit balance button UI and functionality", () => {
+describe("US_04.04 | Credit balance button UI and functionality", { tags: ['regression'] }, () => {
   const AGENT = Cypress.env("agent");
 
   beforeEach(function () {

@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.11 | Calendar week functionality', () => {
+describe('US_04.11 | Calendar week functionality', { tags: ['smoke', 'regression'] }, () => {
 
 	const AGENT = Cypress.env('agent');
 

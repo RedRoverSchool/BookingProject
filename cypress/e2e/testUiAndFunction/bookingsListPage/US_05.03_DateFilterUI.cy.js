@@ -7,7 +7,7 @@ const bookingsListPage = new BookingsListPage();
 const leftMenuPanel = new LeftMenuPanel();
 
 
-describe('US_05.03 | Date filter UI', () => {
+describe('US_05.03 | Date filter UI', { tags: ['smoke'] }, () => {
 
     const AGENT = Cypress.env('agent')
 

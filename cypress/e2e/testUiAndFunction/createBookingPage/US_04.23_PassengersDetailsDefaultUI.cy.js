@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.23 | Passengers details default UI', () => {
+describe('US_04.23 | Passengers details default UI', { tags: ['smoke'] }, () => {
     const AGENT = Cypress.env('agent');
 
     before(() =>{

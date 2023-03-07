@@ -6,7 +6,7 @@ import { sortAsc } from  "../../../support/utilities/sortArrayByDigit";
 const AGENT = Cypress.env('agent');
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.16 | Departure On UI by default', () => {
+describe('US_04.16 | Departure On UI by default', { tags: ['smoke'] }, () => {
 
     before(function () {
         cy.loginWithSession(AGENT.email, AGENT.password);

@@ -5,7 +5,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_04.24 | Multiple passengers UI', () => {
+describe('US_04.24 | Multiple passengers UI', { tags: ['smoke'] }, () => {
 
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {

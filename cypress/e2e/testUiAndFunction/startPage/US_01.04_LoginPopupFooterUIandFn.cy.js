@@ -7,7 +7,7 @@ const loginPopup = new LoginPopup();
 const registerPopup = new RegisterPopup();
 const restorePopup = new RestorePopup();
 
-describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
+describe('US_01.04 | Login Popup Footer UI and Functionality', { tags: ['smoke'] }, () => {
     beforeEach(function () {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
@@ -22,7 +22,7 @@ describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
         loginPopup.getForgotYourPasswordLink().should('be.visible')
     });
 
-    it('AT_01.04.03 | Verify the functionality of the Register link', function() {
+    it('AT_01.04.03 | Verify the functionality of the Register link', { tags: ['regression'] }, function() {
         loginPopup.clickRegisterLink()
 
         registerPopup.getRegisterPopupHeader()
@@ -37,7 +37,7 @@ describe('US_01.04 | Login Popup Footer UI and Functionality', () => {
         loginPopup.getNoAccountYet().should('be.visible')
     });
 
-    it('AT_01.04.05 | Verify the Agent is able to click on the Forgot your password link in the footer', function () {
+    it('AT_01.04.05 | Verify the Agent is able to click on the Forgot your password link in the footer', { tags: ['regression'] }, function () {
         loginPopup.clickForgotYourPasswordLink()
         restorePopup.getRestorePopupHeader().should('have.text', this.startPage.headers.restorePasswordHeaderText)
     });

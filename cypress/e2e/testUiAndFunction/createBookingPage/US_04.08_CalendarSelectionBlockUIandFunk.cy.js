@@ -24,7 +24,7 @@ const getPreviousWeekMonSundDays = (date) => {
     return previousWeekMonday + ' - ' + previousWeekSunday
 }
 
-describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
+describe('US_04.08 | Calendar-selection block UI  week/month view', { tags: ['smoke'] }, () => {
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
@@ -54,7 +54,7 @@ describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
     });
 });
 
-describe('US_04.08 | Calendar-selection block functionality week/month view', () => {
+describe('US_04.08 | Calendar-selection block functionality week/month view', { tags: ['smoke', 'regression'] }, () => {
     beforeEach(function () {    
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
@@ -138,7 +138,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         });
     });
 
-    it('AT_04.08.11 | Verify that month format label is "Oct 2023"',  function () {
+    it('AT_04.08.11 | Verify that month format label is "Oct 2023"', function () {
         createBookingPage.clickMonthBtn();
         createBookingPage.selectMonthFromMonthDropdown(this.createBookingPage.oct);
         createBookingPage.getLabelCalendar().should('include.text', this.createBookingPage.oct2023);

@@ -4,7 +4,7 @@ import { StartPage } from "../../../pageObjects/StartPage";
 
 const startPage = new StartPage();
 
-describe('US_01.16 Background Video', () => {
+describe('US_01.16 Background Video', { tags: ['smoke'] }, () => {
     before (function () {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');

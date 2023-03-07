@@ -7,7 +7,7 @@ const leftMenuPanel = new LeftMenuPanel();
 const bookingsListPage = new BookingsListPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_03.03 Bookings management link', () => {
+describe('US_03.03 Bookings management link', { tags: ['smoke'] }, () => {
     
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
@@ -23,7 +23,7 @@ describe('US_03.03 Bookings management link', () => {
         });
     });
 
-    it('AT_03.03.03 Verify Clicking "Booking management" opening the page with heading "Booking list"', function () {
+    it('AT_03.03.03 Verify Clicking "Booking management" opening the page with heading "Booking list"', { tags: ['regression'] }, function () {
         leftMenuPanel.clickBookingManagementIcon();
             
         bookingsListPage.getBookingListHeader()
