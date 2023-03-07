@@ -56,8 +56,10 @@ describe("US_05.02_Search section functionality", () => {
     cy.wait('@getPopUp') 
     bookingPopup.clickCloseBtnBookingPopup()
     leftMenuPanel.clickBookingManagementIcon()
+    bookingsListPage.clickDatesRangeDropdown()
+    bookingsListPage.clickDrpdDatesRangeThisMonth()
 
-    bookingsListPage.typeInSearchField(`${this.createBookingPage.bookingDetailsTest1.passengerName}\n`)
+    bookingsListPage.typeInSearchField(`${this.createBookingPage.bookingDetailsTest1.passengerName}{enter}`)
     bookingsListPage.getTableHeadersColumnsList().then(($el) => {
       let tableHeaderArray = getArray($el)
       let indexOfContact = tableHeaderArray.indexOf(this.bookingsListPage.columns.contact[1])
@@ -79,8 +81,10 @@ describe("US_05.02_Search section functionality", () => {
       let bookingID = $id.text()
       bookingPopup.clickCloseBtnBookingPopup()
       leftMenuPanel.clickBookingManagementIcon()
+      bookingsListPage.clickDatesRangeDropdown()
+      bookingsListPage.clickDrpdDatesRangeThisMonth()
       
-      bookingsListPage.typeInBookingIDField(`${bookingID}\n`)
+      bookingsListPage.typeInBookingIDField(`${bookingID}{enter}`)
       bookingsListPage.getTableHeadersColumnsList().then(($el) => {
         let tableHeaderArray = getArray($el)
         let indexOfID = tableHeaderArray.indexOf(this.bookingsListPage.columns.id[1])

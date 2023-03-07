@@ -10,9 +10,11 @@ const AGENT = Cypress.env('agent')
 
 describe('US_AC.03 | Create booking for 1 passenger', () => {
 
-    beforeEach(function () {
+    before(() => {
         cy.cleanData()
+    })
 
+    beforeEach(function () {
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/')
 
@@ -30,5 +32,16 @@ describe('US_AC.03 | Create booking for 1 passenger', () => {
 
         bookingPopup.getBookingDetailsTitle().contains('Booking details');
         bookingPopup.getFirstFareType().contains('Adult');
+    })
+
+    it('AT_AC.03.02| Create booking for 1 passenger: Child', function () {
+        const passengerName = this.createBookingPage.passengers[0].name
+        const adultFareType = this.createBookingPage.passengers.find((passenger) => passenger.fareType === 'child').fareType
+        const passengerAmount = 1
+
+        createBookingPage.createBooking(passengerName, passengerAmount, adultFareType)
+
+        bookingPopup.getBookingDetailsTitle().contains('Booking details');
+        bookingPopup.getFirstFareType().contains('Child');
     })
 })
