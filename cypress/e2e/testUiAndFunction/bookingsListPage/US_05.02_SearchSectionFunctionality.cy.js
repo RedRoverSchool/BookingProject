@@ -56,6 +56,8 @@ describe("US_05.02_Search section functionality", () => {
     cy.wait('@getPopUp') 
     bookingPopup.clickCloseBtnBookingPopup()
     leftMenuPanel.clickBookingManagementIcon()
+    bookingsListPage.clickDatesRangeDropdown()
+    bookingsListPage.clickDrpdDatesRangeThisMonth()
 
     bookingsListPage.typeInSearchField(`${this.createBookingPage.bookingDetailsTest1.passengerName}\n`)
     bookingsListPage.getTableHeadersColumnsList().then(($el) => {
@@ -79,6 +81,8 @@ describe("US_05.02_Search section functionality", () => {
       let bookingID = $id.text()
       bookingPopup.clickCloseBtnBookingPopup()
       leftMenuPanel.clickBookingManagementIcon()
+      bookingsListPage.clickDatesRangeDropdown()
+      bookingsListPage.clickDrpdDatesRangeThisMonth()
       
       bookingsListPage.typeInBookingIDField(`${bookingID}\n`)
       bookingsListPage.getTableHeadersColumnsList().then(($el) => {
