@@ -43,13 +43,13 @@
 
         "dialCode": {
             "byDefault": "+66"
-        },
+        } 
+    },
 
-        "tripClass": [
-            "VIP bus 24",
-            "Ferry 300",
-            "Economy bus 300"
-        ]
+    "tripClass": {
+       "VIP_Bus": "VIP bus 24",
+        "ferry": "Ferry 300",
+        "economyBus" :"Economy bus 300"
     },
     
     "headers": {
