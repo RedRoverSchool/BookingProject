@@ -26,7 +26,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	})
 
-	describe.skip('US_04.30 | Summary  section UI', () => {
+	describe('US_04.30 | Summary  section UI', () => {
 		before(() => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
@@ -38,9 +38,11 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickOnLastAvailiableTripCard()
+			
+			createBookingPage.getSelectedTripCard().should('be.visible')
 		});
 
-		it.skip('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
+		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.minimum)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
@@ -54,7 +56,7 @@ describe('US_04.30 | Summary UI', () => {
 				})
 		});
 
-		it.skip('AT_04.30.11 | Displayed seats match default seat selection from seat selection section for 150 passengers', function () {
+		it('AT_04.30.11 | Displayed seats match default seat selection from seat selection section for 150 passengers', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.nominalValue)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
@@ -68,7 +70,7 @@ describe('US_04.30 | Summary UI', () => {
 				})
 		});
 
-		it.skip('AT_04.30.12 | Displayed seats match default seat selection from seat selection section for 300 passengers', function () {
+		it('AT_04.30.12 | Displayed seats match default seat selection from seat selection section for 300 passengers', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.maximum)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
@@ -82,7 +84,7 @@ describe('US_04.30 | Summary UI', () => {
 				})
 		});
 
-		it.skip('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2 passengers) from dropdown menu', function () {
+		it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2 passengers) from dropdown menu', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.aboveMinimum)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
@@ -96,7 +98,7 @@ describe('US_04.30 | Summary UI', () => {
 				})
 		});
 
-		it.skip('AT_04.30.13 | Verify total number of rows equals number of chosen passengers (150 passengers) for dropdown menu', function () {
+		it('AT_04.30.13 | Verify total number of rows equals number of chosen passengers (150 passengers) for dropdown menu', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.nominalValue)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
@@ -110,7 +112,7 @@ describe('US_04.30 | Summary UI', () => {
 				})
 		});
 
-		it.skip('AT_04.30.14 | Verify total number of rows equals number of chosen passengers ( 299 passengers) from passenger dropdown menu', function () {
+		it('AT_04.30.14 | Verify total number of rows equals number of chosen passengers ( 299 passengers) from passenger dropdown menu', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.belowMaximum)
 			createBookingPage.getSelectedSeats()
 				.then(($el) => {
@@ -124,7 +126,7 @@ describe('US_04.30 | Summary UI', () => {
 				})
 		});
 
-		it.skip('AT_04.30.02 | Total price is correct', () => {
+		it('AT_04.30.02 | Total price is correct', () => {
 			createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
 				let arrayOfSeats = $el
 					.toArray()
@@ -152,7 +154,7 @@ describe('US_04.30 | Summary UI', () => {
 			})
 		});
 
-		it.skip('AT_04.30.05 | Verify total price for 6 passengers with custom fare types (2 "Adult", 2 "Child", 2 "Elder") is correct', function () {
+		it('AT_04.30.05 | Verify total price for 6 passengers with custom fare types (2 "Adult", 2 "Child", 2 "Elder") is correct', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown('6 passengers')
 			createBookingPage.getFareTypeDropdown().each(($el, index) => {
 				if (index <= 1) {
@@ -179,7 +181,7 @@ describe('US_04.30 | Summary UI', () => {
 			})
 		});
 
-		it.skip('AT_04.30.08 | Verify price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
+		it('AT_04.30.08 | Verify price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.numberOfPassengers.passengerDefault)
 			let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 
@@ -194,7 +196,7 @@ describe('US_04.30 | Summary UI', () => {
 			}
 		});
 
-		it.skip('AT_04.30.09 | Verify total price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
+		it('AT_04.30.09 | Verify total price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
 			createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.numberOfPassengers.passengerDefault)
 			let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 
@@ -214,7 +216,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	});
 
-	describe.skip('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
+	describe('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
 		beforeEach(() => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
@@ -226,9 +228,10 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickOnLastAvailiableTripCard()
+			cy.wait('@getToolsPing')
 		});
 
-		it.skip('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
+		it('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
 			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
@@ -251,7 +254,7 @@ describe('US_04.30 | Summary UI', () => {
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
 		});
 
-		it.skip('AT_04.30.07 | Verify that selected passenger fare type "Elder" matches the amount on Booking Popup', function () {
+		it('AT_04.30.07 | Verify that selected passenger fare type "Elder" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
 			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
