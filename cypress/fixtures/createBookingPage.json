@@ -230,9 +230,9 @@
         "passengerName" : "Clinton Cain",
         "passengerAmount" : "1",
         "fareType" : "Elder"
-      },
+    },
 
-      "octWeek": "2 Oct - 8 Oct",
+    "octWeek": "2 Oct - 8 Oct",
     
 
     "fareTypeDropdown" : [
