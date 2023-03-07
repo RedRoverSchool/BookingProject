@@ -43,13 +43,13 @@
 
         "dialCode": {
             "byDefault": "+66"
-        },
+        } 
+    },
 
-        "tripClass": [
-            "VIP bus 24",
-            "Ferry 300",
-            "Economy bus 300"
-        ]
+    "tripClass": {
+       "VIP_Bus": "VIP bus 24",
+        "ferry": "Ferry 300",
+        "economyBus" :"Economy bus 300"
     },
     
     "headers": {
@@ -134,22 +134,42 @@
 
    "passengers": [
         {
-            "name": "Main Passenger Adult",
+            "name": "Liam",
             "fareType": "adult",
             "phone": "phone",
             "email": "email"
         },
+
+        {
+            "name": "Isabella",
+            "fareType": "child"
+        },
+
+        {
+            "name": "Noah",
+            "fareType": "adult"
+        },
+
+        {
+            "name": "Sophia",
+            "fareType": "child"
+        },
     
         {
-            "name": "Elder Extra Passenger",
+            "name": "Mia",
             "fareType": "elder"
         },
 
         {
-            "name": "Child Extra Passenger",
+            "name": "Oliver",
             "fareType": "child"
+        },
+
+        {
+            "name": "Ava",
+            "fareType": "elder"
         }
-        
+
    ],
 
     "validBoundaryValues": {
@@ -203,6 +223,17 @@
         "passengerAmount" : "1",
         "fareType" : "Adult"
     },
+
+    "bookingDetailsTest2" : {
+        "departureStationName" : "Phuket Town",
+        "arrivalStationName" : "Bangkok Khao San",
+        "passengerName" : "Clinton Cain",
+        "passengerAmount" : "1",
+        "fareType" : "Elder"
+      },
+
+      "octWeek": "2 Oct - 8 Oct",
+    
 
     "fareTypeDropdown" : [
         "Adult",

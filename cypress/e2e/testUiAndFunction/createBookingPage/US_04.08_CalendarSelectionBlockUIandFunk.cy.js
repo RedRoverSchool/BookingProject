@@ -143,4 +143,14 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         createBookingPage.selectMonthFromMonthDropdown(this.createBookingPage.oct);
         createBookingPage.getLabelCalendar().should('include.text', this.createBookingPage.oct2023);
     });
+
+    it('AT_04.08.12 | Verify that week format label is "2 Oct - 8 Oct"', function ()  {
+        createBookingPage.clickMonthBtn();
+        createBookingPage.selectMonthFromMonthDropdown(this.createBookingPage.oct);
+
+        createBookingPage.clickgetOctoberMondayButton();
+
+        createBookingPage.clickWeekBtn();
+        createBookingPage.getLabelCalendar().should('include.text', this.createBookingPage.octWeek);
+    });
 });
