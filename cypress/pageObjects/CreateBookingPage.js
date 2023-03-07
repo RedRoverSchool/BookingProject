@@ -433,10 +433,12 @@ class CreateBookingPage {
     }
     
     clickOnLastAvailiableTripCard() {
+        cy.intercept('/tools/**').as('getToolsPing')
+        cy.wait('@getToolsPing')
         this.getDepartureTripCardsList().each(($el) => {
-            const statusText = $el.text();
-            if (statusText !== 'Overdue') {
-                cy.wrap($el).click();
+        const statusText = $el.text();
+         if (statusText !== 'Overdue') {
+            cy.wrap($el).trigger('mouseover').click();
             }
         })
     }

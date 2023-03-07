@@ -26,7 +26,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 	})
 
-	describe.skip('US_04.30 | Summary  section UI', () => {
+	describe('US_04.30 | Summary  section UI', () => {
 		before(() => {
 			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
@@ -38,7 +38,7 @@ describe('US_04.30 | Summary UI', () => {
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickOnLastAvailiableTripCard()
-			cy.wait('@getToolsPing')
+			
 			createBookingPage.getSelectedTripCard().should('be.visible')
 		});
 
