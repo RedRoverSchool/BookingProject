@@ -1,3 +1,7 @@
+import BookingPopup from "./BookingPopup";
+
+const bookingPopup = new BookingPopup();
+
 class CreateBookingPage {
     //Header
     getCreateBookingHeader = () => cy.get('div h1');
@@ -589,6 +593,21 @@ class CreateBookingPage {
         
         this.clickBookTicketsBtn()
         
+    }
+
+    createReservation(passengerAmount, passengerNames, fareTypes) {
+        cy.intercept('/tools/ping/**').as('getToolsPing');
+        
+        this.clickCalendarNextButton();
+        cy.wait('@getToolsPing'); 
+        this.clickSecondTripCard(); 
+        this.selectAmountPassengersDetailsDropdown(passengerAmount);
+        this.typePassengerNames(passengerNames);  
+        this.selectFareTypes(fareTypes);
+        this.clickReservationTicketArrow();
+        this.clickReservationTicketButton();
+        bookingPopup.getBookingDetailsTitle().should('include.text', 'Booking details')
+
     }
 }
 export default CreateBookingPage;

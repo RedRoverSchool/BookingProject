@@ -202,5 +202,11 @@
         "passengerName" : "Betty Hardy",
         "passengerAmount" : "1",
         "fareType" : "Adult"
-    }
+    },
+
+    "fareTypeDropdown" : [
+        "Adult",
+        "Child",
+        "Elder"
+    ]
 }

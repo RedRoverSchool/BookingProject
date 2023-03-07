@@ -1,10 +1,14 @@
 class BookingPopup {
+    getBookingPopupWindow = () => cy.get('.popup-content');
+
     //Elements
     getConfirmTicketButton = () => cy.get('.btn-confirm-ticket'); 
     getPassengerTitle = () => cy.get('.popup-passengers h3');
     getOnePassengerTypeLabel = () => cy.get('div.passenger-info div:first-child label');
     getPassengersList = () => cy.get('.popup .passengers-box .passenger-info');
     getCloseBtnBookingPopup = () => cy.get('.close-button');
+    getBtnExtend = () => cy.get('#button-extend');
+    getCountdownClock = () => cy.get('#countdown-clock');
 
     // Booking Details
     getBookingDetailsTitle = () => cy.get('.popup-booking > h3')
@@ -18,6 +22,10 @@ class BookingPopup {
     // methods
     clickCloseBtnBookingPopup() {
         this.getCloseBtnBookingPopup().click()
+    }
+
+    clickBtnExtend() {
+        this.getBtnExtend().click();
     }
 }
 export default BookingPopup;
