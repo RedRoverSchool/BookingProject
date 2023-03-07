@@ -44,8 +44,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.minimum)
-			createBookingPage.getSelectedSeats()
-				.then(($el) => {
+			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
 					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.minimum))
 
@@ -58,8 +57,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.11 | Displayed seats match default seat selection from seat selection section for 150 passengers', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.nominalValue)
-			createBookingPage.getSelectedSeats()
-				.then(($el) => {
+			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
 					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.nominalValue))
 
@@ -72,8 +70,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.12 | Displayed seats match default seat selection from seat selection section for 300 passengers', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.maximum)
-			createBookingPage.getSelectedSeats()
-				.then(($el) => {
+			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
 					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.maximum))
 
@@ -86,8 +83,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2 passengers) from dropdown menu', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.aboveMinimum)
-			createBookingPage.getSelectedSeats()
-				.then(($el) => {
+			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
 					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.aboveMinimum))
 
@@ -100,8 +96,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.13 | Verify total number of rows equals number of chosen passengers (150 passengers) for dropdown menu', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.nominalValue)
-			createBookingPage.getSelectedSeats()
-				.then(($el) => {
+			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
 					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.nominalValue))
 
@@ -114,8 +109,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.14 | Verify total number of rows equals number of chosen passengers ( 299 passengers) from passenger dropdown menu', function () {
 			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.belowMaximum)
-			createBookingPage.getSelectedSeats()
-				.then(($el) => {
+			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
 					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.belowMaximum))
 
@@ -155,28 +149,25 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 		it('AT_04.30.05 | Verify total price for 6 passengers with custom fare types (2 "Adult", 2 "Child", 2 "Elder") is correct', function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown('6 passengers')
-			createBookingPage.getFareTypeDropdown().each(($el, index) => {
-				if (index <= 1) {
-					cy.wrap($el).click()
-					createBookingPage.selectAdultFare()
-				} else if (index <= 3) {
-					cy.wrap($el).click()
-					createBookingPage.selectChildFare()
-				} else {
-					cy.wrap($el).click()
-					createBookingPage.selectElderFare()
-				}
-			})
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.numberOfPassengers.sixPassengers)
 
-			createBookingPage.getPricesSummary().then(($el) => {
-				const prices = getArray($el)
+			let fareTypes = [this.createBookingPage.dropdowns.fareType.fareTypesNames[0], this.createBookingPage.dropdowns.fareType.fareTypesNames[0],
+			                this.createBookingPage.dropdowns.fareType.fareTypesNames[1], this.createBookingPage.dropdowns.fareType.fareTypesNames[1],
+				            this.createBookingPage.dropdowns.fareType.fareTypesNames[2], this.createBookingPage.dropdowns.fareType.fareTypesNames[2]]
+			
+			createBookingPage.selectFareTypes(fareTypes)
+			createBookingPage.getFareTypeColumnSummary().each(($el, i) => {
+				expect($el.text()).to.include(fareTypes[i])
+				
+				createBookingPage.getPricesSummary().then(($el) => {
+					const prices = getArray($el)
 
-				const finalPrice = "USD" + " " + sumOfArray(prices)
+					const finalPrice = "USD" + " " + sumOfArray(prices)
 
-				createBookingPage.getTotalPriceSummary().then(($el) => {
-					let totalPrice = $el.text()
-					expect(finalPrice).to.deep.eq(totalPrice)
+					createBookingPage.getTotalPriceSummary().then(($el) => {
+						let totalPrice = $el.text()
+						expect(finalPrice).to.deep.eq(totalPrice)
+					})
 				})
 			})
 		});
@@ -197,7 +188,7 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 		it('AT_04.30.09 | Verify total price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
-			createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.numberOfPassengers.passengerDefault)
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.numberOfPassengers.passengerDefault)
 			let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
 
 			for (let i = 0; i < fareTypesArray.length; i++) {

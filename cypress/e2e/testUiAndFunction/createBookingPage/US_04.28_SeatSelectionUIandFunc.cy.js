@@ -9,18 +9,6 @@ const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
-const isSameRowSeatsA_B_C = (array) => {
-    let check = true
-    let expectedString = "ABC"
-    for (let i = 0; i < array.length; i += 3) {
-        let checkForA_B_C = array.slice(i, i + 3).map(el => el.replace(/^\d/g, '')).join("")
-        let checkForSameNumber = new Set(array.slice(i, i + 3).map(el => parseInt(el)))
-        check = check && (checkForSameNumber.size == 1) && (checkForA_B_C == expectedString)   
-    }
-    return check
-}
-
-
 describe('US_04.28 | Seat selection UI and functionality', () => {
         
     beforeEach(function () {
@@ -252,7 +240,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
                         createBookingPage.getSelectedSeats().then(($el) => {
                             let arrayOfCustomSeletedSeats = getArray($el)
-                            expect(isSameRowSeatsA_B_C(arrayOfCustomSeletedSeats)).to.be.true
+                            expect(createBookingPage.isSameRowSeatsA_B_C(arrayOfCustomSeletedSeats)).to.be.true
                             expect(arrayOfCustomSeletedSeats.length).to.eq(chosenNumOfPassengers)
 
                             createBookingPage.getPassengerDetailsAssignedSeats().each(($el, i) => {

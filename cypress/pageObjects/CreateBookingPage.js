@@ -593,5 +593,19 @@ class CreateBookingPage {
         this.clickBookTicketsBtn()
         
     }
+
+    /** 
+    * @returns boolean, checks if each three consecutive elements in array have same number with letters "A","B","C"
+    */
+    isSameRowSeatsA_B_C = (array) => {
+        let check = true
+        let expectedString = "ABC"
+        for (let i = 0; i < array.length; i += 3) {
+            let checkForA_B_C = array.slice(i, i + 3).map(el => el.replace(/^\d/g, '')).join("")
+            let checkForSameNumber = new Set(array.slice(i, i + 3).map(el => parseInt(el)))
+            check = check && (checkForSameNumber.size == 1) && (checkForA_B_C == expectedString)
+        }
+        return check
+    }
 }
 export default CreateBookingPage;
