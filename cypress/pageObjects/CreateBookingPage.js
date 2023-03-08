@@ -628,8 +628,8 @@ class CreateBookingPage {
         this.selectFareTypes(fareTypes);
         this.clickReservationTicketArrow();
         this.clickReservationTicketButton();
-        bookingPopup.getBookingDetailsTitle().should('include.text', 'Booking details')
-
+        bookingPopup.getBookingPopupWindow().should('be.visible');
+        cy.intercept('/tools/ping/**').as('getToolsPing');
     }
 }
 export default CreateBookingPage;
