@@ -600,6 +600,7 @@ class CreateBookingPage {
         
     }
 
+<<<<<<<<< Temporary merge branch 1
     clickgetOctoberMondayButton() {
         this.getOctoberMondayButton().click({ force: true })
     }
