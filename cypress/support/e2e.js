@@ -15,8 +15,11 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import registerCypressGrep from '@cypress/grep'
+registerCypressGrep()
 
 Cypress.on('uncaught:exception', () => false)
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+require('cy-verify-downloads').addCustomCommand();

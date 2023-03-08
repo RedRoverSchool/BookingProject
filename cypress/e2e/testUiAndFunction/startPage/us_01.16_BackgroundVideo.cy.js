@@ -4,16 +4,17 @@ import { StartPage } from "../../../pageObjects/StartPage";
 
 const startPage = new StartPage();
 
-describe('US_01.16 Background Video', () => {
-    beforeEach(function () {
+describe('US_01.16 Background Video', { tags: ['smoke'] }, () => {
+    before (function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
     });
 
-it('AT_01.16.02 | Verify the Start Page has video', function() {
-cy.get('video').should('have.prop', 'ended', false)
-})
-
     it ('AT_01.16.01 Background video is visible', function() {
-    startPage.getBackgroungVideo().should('be.visible');
+        startPage.getBackgroundVideo().should('be.visible');
+    })
+
+    it('AT_01.16.02 | Verify the Start Page has video', function() {
+        startPage.getBackgroundVideo().should('have.prop', 'ended', false)
     })
 })

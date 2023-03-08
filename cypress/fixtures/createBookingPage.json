@@ -32,39 +32,42 @@
                 "Adult",
                 "Child",
                 "Elder"
-            ]
+            ],
+            "labelName": "Fare type"
         },
 
         "seatSelection": {
             "onePassenger": "1 passenger",
             "passengers": "passengers"
-        }
+        },
+
+        "dialCode": {
+            "byDefault": "+66"
+        } 
     },
+
+    "tripClass": {
+       "VIP_Bus": "VIP bus 24",
+        "ferry": "Ferry 300",
+        "economyBus" :"Economy bus 300"
+    },
+    
     "headers": {
-        "mainHeaderPage": "Create booking"
+        "mainHeaderPage": "Create booking",
+        "creditBalance": "Credit balance:"
     },
+    
     "inputField": {
         "main_passenger": {
             "name": "Stephan",
+            "country": "United States",
+            "phoneCountryCode": "+1",
             "phone": "291234567",
             "email": "hello@test.plus",
             "placeholderPhoneNumberTh": "เบอร์โทรศัพท์",
             "placeholderPhoneNumberEn": "Phone number",
             "placeholderEmailViet": "|Email|"
         }
-    },
-
-    "calendarMonth" : {
-        "colorText": "rgb(0, 166, 90)"
-    },
-
-    "selectedDayField": {
-        "backgroundColor":"rgb(0, 166, 90)",
-        "color": "rgb(255, 255, 255)"
-    },
-
-    "notSelectedDayField": {
-        "colorNumbers": "rgb(51, 51, 51)"
     },
 
     "validDayField": {
@@ -78,19 +81,156 @@
         "unavailableClass": "unavailable"
     },
     "seatSelectionTable": {
-        "selectedSeatColor": "rgb(157, 208, 157)",
         "driverSeatText": "Driver"                
     },
     "placeholder":{
         "name": "Passenger name",
-        "phone": "Phone number"
+        "phone": "Phone number",
+        "email": "Email",
+        "notes": "Booking notes"
     },
 
     "weekDayFields": {
          "quantity": "7"
     }, 
 
-    "selectedMonthBtnBackgroundColor": "rgb(0, 166, 90)",
+    "departureDate": "Departure date",
 
-    "notSelectedWeekBtnBackgroundColor": "rgb(255, 255, 255)"
+    "seatsTableTitle": [
+        "VIP bus",
+        "Ferry",
+        "Economy bus"
+    ],
+
+    "summarySection": {
+        "seatsColumn": {
+            "warningText": "Select seat"
+        }
+    },
+
+    "dateFormat": "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-[0-9]{4}$",
+
+    "timeFormat": "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+
+    "nameOfDay":["M", "T", "W", "T", "F", "S", "S"],
+
+    "warningTexts": {
+        "notAvailableTripText": "Trips are not available. Try searching for another date or location."
+    },
+
+    "earliestBtnText": "Earliest",
+
+    "latestBtnText": "Latest",
+
+    "seatSelectoinLabel": "Seat selection", 
+
+    "selectedDateLabel": {
+        "front_size": "22.5px"
+    },
+
+   "pricesForFerryAdultChildElder" : ["USD 12.75", "USD 12", "USD 6"],
+
+   "departureStationLabelFont": "15px",
+
+   "passengers": [
+        {
+            "name": "Liam",
+            "fareType": "adult",
+            "phone": "phone",
+            "email": "email"
+        },
+
+        {
+            "name": "Isabella",
+            "fareType": "child"
+        },
+
+        {
+            "name": "Noah",
+            "fareType": "adult"
+        },
+
+        {
+            "name": "Sophia",
+            "fareType": "child"
+        },
+    
+        {
+            "name": "Mia",
+            "fareType": "elder"
+        },
+
+        {
+            "name": "Oliver",
+            "fareType": "child"
+        },
+
+        {
+            "name": "Ava",
+            "fareType": "elder"
+        }
+
+   ],
+
+    "validBoundaryValues": {
+        "minimum" : "1 passenger",
+        "aboveMinimum" : "2 passengers",
+        "nominalValue" : "150 passengers",
+        "belowMaximum" : "299 passengers",
+        "maximum" : "300 passengers"
+    }, 
+
+    "numberOfPassengers": {
+       "passengerDefault": "1 passenger",
+       "sixPassengers":  "6 passengers"   
+    },
+
+    "labelTicketsAvailableText": " tickets available",
+
+    "labelDepartureStationMargin": "0px 0px 5px",
+
+    "weekButtonText": "Week",
+
+    "labelArrivalStationFont": "15px",
+       
+    "labelArrivalStationMargin": "0px 0px 5px",
+
+    "oct2023": "Oct 2023",
+
+    "oct": "2023-10",
+
+    "bookingDetails" : [
+        {
+            "departureStationName" : "Bangkok Khao San",
+            "arrivalStationName" : "Chonburi",
+            "passengerName" : "Paul Townsend",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+        }, 
+        {
+            "departureStationName" : "Naka Island",
+            "arrivalStationName" : "Ao Por Pier",
+            "passengerName" : "Shanna Lester",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+          }
+    ],
+
+    "bookingDetailsTest1" : {
+        "departureStationName" : "Rassada Pier",
+        "arrivalStationName" : "Naka Island",
+        "passengerName" : "Betty Hardy",
+        "passengerAmount" : "1",
+        "fareType" : "Adult"
+    },
+
+    "bookingDetailsTest2" : {
+        "departureStationName" : "Phuket Town",
+        "arrivalStationName" : "Bangkok Khao San",
+        "passengerName" : "Clinton Cain",
+        "passengerAmount" : "1",
+        "fareType" : "Elder"
+      },
+
+      "octWeek": "2 Oct - 8 Oct"
 }

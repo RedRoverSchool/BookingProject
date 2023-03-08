@@ -1,7 +1,9 @@
 {
     "alert": {
         "restorePasswordPopup": {
-            "alertMessage": "Please check your email with the password restore instructions"
+            "alertMessage": "Please check your email with the password restore instructions",
+            "enterEmailAlert": "Please enter your email",
+            "wrongEmail": "Wrong email"
         },
         "registerPopupErrorMessage": {
             "emptyNameField": "Please enter your name",
@@ -11,24 +13,29 @@
             "emailIsPreviouslyUsed": "This Email is not allowed to use current website",
             "nameFieldSpecialCharacters": "Use latin letters, numbers and spaces"
         },
-        "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password"
+        "loginPopupMessageAlert": "Wrong email or passwordYou can REGISTER a new one or RESTORE a forgotten password",
+        "loginPopupByPhoneMessageAlert": "Please enter proper country code and phone number",
+        "loginPopupByPhoneWrongNumberAlert": "Wrong phone number"
     },
     "buttons": {
         "loginBtnText": "login",
         "thLoginBtnText": "เข้าสู่ระบบ",
-        "loginBtnTextColor": "rgb(0, 128, 0)",
         "rusLoginBtnText": "Войти",
-        "signInBtnTextColor": "rgb(108, 205, 102)",
-        "signInBtnText": "SIGN IN"
+        "signInBtnText": "SIGN IN",
+        "requestCodeButtonText": "REQUEST CODE"
     },
     "headers": {
         "header_Login_Popup": {
             "text": "Enter",
-            "color": "rgb(102, 102, 102)",
             "font_size": "30px",
             "headerText": "Enter QA Test OP"
         },
-        "registerAgentAccount": "Register agent account"
+        "header_Register_Popup": {
+            "front_size": "30px"
+        },
+        "registerAgentAccount": "Register agent account",
+        "congratulationsHeader": "Congratulations!",
+        "restorePasswordHeaderText": "Restore password"
     },
     "img": {
         "logoFileName": "logo-main.png"
@@ -39,6 +46,13 @@
             "passwordInputField": "Password",
             "phoneNumberPlaceholder": "1234567",
             "countryCode": "66"
+        },
+        "registerPopup": {
+            "front_size": "14px",
+            "yourNameInputField": "John Doe",
+            "companyNameInputField": "Transportation Co",
+            "emailInputField": "You will get your password by email",
+            "phoneNumberInputField": "Country code and phone number"
         }
     },
     "label": {
@@ -46,13 +60,23 @@
             "text": "Password"
         },
         "labelEmail": {
-            "color": "rgb(153, 153, 153)",
             "text": "Email"
         },
         "labelCountryCode": {
-            "color": "rgb(170, 170, 170)",
             "font_size": "10px",
             "text": "Country code"
+        },
+        "labelPhoneNumber": {
+            "text": "Phone number"
+        },
+        "labelYourName": {
+            "text": "Your name"
+        },
+        "labelCompanyName": {
+            "text": "Company name"
+        },
+        "labelsModalBody": {
+            "front_size": "14px"
         }
     },
     "links": {
@@ -64,6 +88,16 @@
         "phoneNumber": {
             "code": 66,
             "number": 616161616
-        }
+        },
+        "invalidEmail": "test@@qatest.site"
+    },
+    "dataInvalid": {
+        "errorMessage": "Something goes wrong. Please contact your country manager.",
+        "invalidEmail": "test@qatest.site",
+        "validPassword": "12345678", 
+        "lettersInCountryCode": "SK",
+        "letterInPhoneNumber": "61616161A",
+        "symbolsInCountryCode": "%@",
+        "missingDomainEmail": "test@"
     }
 }

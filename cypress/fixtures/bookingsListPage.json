@@ -36,10 +36,27 @@
         "bookingIdPlaceholder": "Booking ID",
         "statusPlaceholder": "Status",
         "routeText": "Route",
-        "vehicleText": "Vehicle"
+        "vehicleText": "Vehicle"      
     },
     "links": {
         "filterClear": "Clear"
+    },
+    
+    "dropDown":{
+        "datesRange": ["Today", "Tomorrow", "Yesterday", "Next 7 Days", "Last 7 Days", "Last 30 Days", "Next Month", "This Month", "Last Month", "Custom Range"],
+        "datesRangeType": {
+            "dateRangeTypeText": "By purchase date",
+            "datesRangeTypeNumber": 2,
+            "datesRangeTypeName": [
+                "By departure date",
+                "By purchase date"
+            ]
+        },
+        "statusNoResult": "No results found"        
+    },
+    
+    "excelFile": {
+        "name": "Bookings ",
+        "extension": ".csv"
     }
-  
 }

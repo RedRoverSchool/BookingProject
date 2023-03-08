@@ -8,28 +8,29 @@ const createBookingPage = new CreateBookingPage();
 const loginPopup = new LoginPopup();
 const startPage = new StartPage();
 
-describe('US_01.06 | Login by email tub functionality', () => {
+describe('US_01.06 | Login by email tub functionality', { tags: ['smoke'] }, () => {
 
     const AGENT = Cypress.env('agent');
 
     beforeEach(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
+        cy.visit('/');
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage
         });
-        cy.fixture('startPage').then(startPage => {
-            this.startPage = startPage
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
         });
-        cy.visit('/');  
     });
 
-    it('AT_01.06.01 | Verify Sign In Button redirect to the Create Booking Page', function () {
+    it('AT_01.06.01 | Verify Sign In Button redirect to the Create Booking Page', { tags: ['regression'] }, function () {
         cy.login(AGENT.email, AGENT.password);
         createBookingPage.getCreateBookingHeader().should('include.text', this.createBookingPage.headers.mainHeaderPage)
     });
 
     it('AT_01.06.02 | Color of Sign In Button', function () {
         startPage.clickLoginButton();
-        loginPopup.getByEmailSignInButton().should('have.css','color', this.startPage.buttons.signInBtnTextColor)
+        loginPopup.getByEmailSignInButton().should('have.css','color', this.colors.greenPopup)
     });
 });
 

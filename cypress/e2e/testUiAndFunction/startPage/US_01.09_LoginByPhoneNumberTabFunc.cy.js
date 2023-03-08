@@ -7,8 +7,9 @@ const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 const createBookingPage = new CreateBookingPage(); 
 
-describe('US_01.09 | Login by phone number tab functionality', () => {
+describe('US_01.09 | Login by phone number tab functionality', { tags: ['smoke', 'regression'] }, () => {
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
         loginPopup.clickLoginByPhoneNumberTab();

@@ -4,13 +4,13 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.11 | Calendar week functionality', () => {
+describe('US_04.11 | Calendar week functionality', { tags: ['smoke', 'regression'] }, () => {
 
 	const AGENT = Cypress.env('agent');
 
 	before(() => {
-		cy.visit('/');
-		cy.login(AGENT.email, AGENT.password)
+		cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');
 		
 		 //Precondition
 		createBookingPage.getWeekButton().should('have.class', 'selected');
@@ -19,7 +19,11 @@ describe('US_04.11 | Calendar week functionality', () => {
 	beforeEach(function () {
 		cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        })
+        });
+
+		cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
 	});
 
 	it('AT_04.11.01|Verify that you can click on last date field if it has not expired', function() {
@@ -36,15 +40,12 @@ describe('US_04.11 | Calendar week functionality', () => {
     });
 
 	it('AT_04.11.02 | Verify chosen date, current month and year are displayed in the Departure on section', function () {
-		const current = new Date()
-		const thailandCurrentMonthAndYear = current.toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Ho_Chi_Minh' })
-
 		createBookingPage.getCalendarDays().not('.unavailable').first().click().then(($date) => {
 			let dateChosen = $date.text()
 			createBookingPage.getLabelDepartureOnDate().then(($el) => {
 				let departureDateFullFormat = $el.text()
 
-				expect(departureDateFullFormat).to.deep.equal(dateChosen + " " + thailandCurrentMonthAndYear)
+				expect(departureDateFullFormat).to.deep.equal(dateChosen + " " + createBookingPage.getCurrentMonthAndYearThailand())
 			})
 		})
 	})
@@ -55,7 +56,7 @@ describe('US_04.11 | Calendar week functionality', () => {
 		createBookingPage.getCalendarDays().each(($el) => {
 			if($el.hasClass('unavailable')){
 
-				expect($el).to.have.css('cursor',this.createBookingPage.unavailableDayField.cursor);
+				expect($el).to.have.css('background-color',this.colors.greyUnavailableBack);
 			}
 		})
 	});
@@ -65,6 +66,27 @@ describe('US_04.11 | Calendar week functionality', () => {
 		createBookingPage.getCalendarDays().not('.unavailable').each(($el) => {
 			
 			expect($el).to.have.css('cursor',this.createBookingPage.validDayField.cursor);
+		});
+	});
+
+	it('AT_04.11.06|Verify that when you click on the first and last date, its value matches the date in the string in the Calendar-selection block', () => {
+
+		createBookingPage.clickCalendarNextButton();
+
+		createBookingPage.getLabelCalendar().then(($el) => {
+			let firstDate = $el.text().split(" ")[0];
+			let lastDate = $el.text().split(" - ")[1].split(" ")[0];
+						
+			createBookingPage.getCalendarDays().first().then(($date) =>{
+				let firstDateOFWeek = $date.text();
+				
+				expect(firstDateOFWeek).to.eq(firstDate);
+			});
+			createBookingPage.getCalendarDays().last().then(($date) =>{
+				let firstDateOFWeek = $date.text();
+				
+				expect(firstDateOFWeek).to.eq(lastDate);
+			});
 		});
 	});
 
@@ -78,4 +100,25 @@ describe('US_04.11 | Calendar week functionality', () => {
 			}
 		})
 	});
+
+	it('AT_04.11.05|Calendar week functionality >Verify that when you click an invalid date in the Departure on, the date does not change', function() {
+		createBookingPage.clickCalendarPrevButton();
+		createBookingPage.getCalendarDays().each($selDate => {
+			if($selDate.hasClass('selected')){
+				let selectedDay = $selDate.text();
+							
+				createBookingPage.getCalendarDays().each(($unDate) => {
+					if($unDate.hasClass('unavailable')){
+						cy.wrap($unDate).click();
+						
+						createBookingPage.getLabelDepartureOnDate().then(($onDate) =>{
+							let onDate = $onDate.text().split(' ')[0];
+					
+							expect(selectedDay).to.eq(onDate);
+						})
+					}
+				})
+			}
+		});
+	})
 });

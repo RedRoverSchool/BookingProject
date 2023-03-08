@@ -19,18 +19,21 @@ const randomInvalidCompanyName = `${randomAlpha + randomNumeric}`;
 const randomInvalidPhoneNumber = faker.random.alphaNumeric(12);
 
 
-describe('US_01.15 | Register Agent Negative', function () {
+describe('US_01.15 | Register Agent Negative', { tags: ['regression'] }, function () {
 
-    beforeEach(function () {
+    before(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickRegisterAccountLink();
-
-        cy.fixture('startPage').then(startPage => {
+    })
+        beforeEach(function () {
+            cy.fixture('startPage').then(startPage => {
             this.startPage = startPage
         });
     });
 
     it('AT_01.15.01 | Error message is displayed when trying to register without entering name', function () {
+        registerPopup.getNameInput().clear()
         registerPopup.enterCompanyName(randomCompanyName)
         registerPopup.enterEmail(randomEmail)
         registerPopup.enterPhoneNumber(randomPhoneNumber)
@@ -43,6 +46,7 @@ describe('US_01.15 | Register Agent Negative', function () {
 
     it('AT_01.15.02 | Error message is displayed when trying to register without company name', function () {
         registerPopup.enterName(randomFullName)
+        registerPopup.getCompanyInput().clear()
         registerPopup.enterEmail(randomEmail)
         registerPopup.enterPhoneNumber(randomPhoneNumber)
         registerPopup.clickRegisterButton()
@@ -55,6 +59,7 @@ describe('US_01.15 | Register Agent Negative', function () {
     it('AT_01.15.03 | Error message is displayed when trying to register without email', function () {
         registerPopup.enterName(randomFullName)
         registerPopup.enterCompanyName(randomCompanyName)
+        registerPopup.getEmailInput().clear()
         registerPopup.enterPhoneNumber(randomPhoneNumber)
         registerPopup.clickRegisterButton()
         registerPopup
@@ -78,6 +83,7 @@ describe('US_01.15 | Register Agent Negative', function () {
     it('AT_01.15.04 | Error message is displayed when trying to register without phone number', function () {
         registerPopup.enterName(randomFullName)
         registerPopup.enterCompanyName(randomCompanyName)
+        registerPopup.getPhoneInput().clear()
         registerPopup.enterEmail(randomEmail)
         registerPopup.clickRegisterButton()
         registerPopup.getErrorMessage()

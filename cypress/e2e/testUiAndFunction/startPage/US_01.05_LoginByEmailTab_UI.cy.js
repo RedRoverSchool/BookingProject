@@ -6,8 +6,9 @@ import {LoginPopup} from "../../../pageObjects/StartPage.js";
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 
-describe('US_01.05 | Login By Email Tab UI', () => {
+describe('US_01.05 | Login By Email Tab UI', { tags: ['smoke'] }, () => {
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
     });
@@ -15,6 +16,10 @@ describe('US_01.05 | Login By Email Tab UI', () => {
     beforeEach(function () {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
+        });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
         });
     });
 
@@ -39,7 +44,7 @@ describe('US_01.05 | Login By Email Tab UI', () => {
     it('AT_01.05.05 | Color of Email label', function () {
         loginPopup
             .getEmailLabel()
-            .should('have.css','color', this.startPage.label.labelEmail.color)
+            .should('have.css','color', this.colors.greyLabel)
     });
 
     it('AT_01.05.02 | Insure Email label text is "Email"', function () {
@@ -61,7 +66,7 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .should('have.value', this.startPage.buttons.signInBtnText)
     });
 
-    it('AT_01.05.10 | Verify SIGN IN button is visible and clickable', function() {
+    it('AT_01.05.10 | Verify SIGN IN button is visible and clickable', { tags: ['regression'] }, function() {
         loginPopup
             .clickByEmailSignInButton()
 
@@ -72,6 +77,24 @@ describe('US_01.05 | Login By Email Tab UI', () => {
     it('AT_01.05.06 | Verify SIGN IN button has color - #6CCD66', function () {
         loginPopup
             .getByEmailSignInButton()
-            .should('have.css', 'color', this.startPage.buttons.signInBtnTextColor);
+            .should('have.css', 'color', this.colors.greenPopup);
+    });
+
+    it('AT_01.05.08 | Verify SIGN IN button has border-color - #6CCD66', function () {
+        loginPopup
+            .getByEmailSignInButton()
+            .should('have.css', 'color', this.colors.greenPopup);
+    });
+
+    it('AT_01.05.11 | Verify Popup background color is #fff', function () {
+        loginPopup
+            .getLoginPopupModal()
+            .should('have.css', 'background-color', this.colors.white);
+    });
+
+    it('AT_01.05.12 | Verify Password label has color - #aaa', function () {
+        loginPopup
+            .getPasswordInput()
+            .should('have.css','color', this.colors.greyHeader)
     });
 });

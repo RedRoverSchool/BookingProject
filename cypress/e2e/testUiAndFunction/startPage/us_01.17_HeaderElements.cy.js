@@ -8,17 +8,28 @@ const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 const restorePopup = new RestorePopup();
 
-describe('US_01.17 | Header elements', () => {
+describe('US_01.17 | Header elements', { tags: ['smoke'] }, () => {
     beforeEach(function () {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
         startPage.clickLoginButton();
         loginPopup.clickForgotYourPasswordLink();
+
+        cy.fixture('startPage').then(startPage => {
+            this.startPage = startPage;
+        });
     });
 
-    it('AT_01.17.01 | Verify `X` button is visible, clickable and closing Popup', function () {
-        restorePopup.getCloseButton().should('be.visible');
-        restorePopup.clickCloseButton();
-        restorePopup.getRestorePopup().should('be.not.visible');
+    it('AT_01.17.01 | Verify `X` button is visible, clickable and closing Popup', { tags: ['regression'] }, function () {
+        restorePopup.getRestorePopupCloseButton().should('be.visible');
+        restorePopup.clickRestorePopupCloseButton();
+        restorePopup.getRestorePopupModal().should('be.not.visible');
         startPage.getModalBackdrop().should('not.exist');
+    });
+
+    it('AT_01.17.02 | Verify an Agent/User is able to see the heading `Restore password`', function () {
+        restorePopup.getRestorePopupHeader()
+        .should('be.visible')
+        .and('have.text', this.startPage.headers.restorePasswordHeaderText);
     });
 });

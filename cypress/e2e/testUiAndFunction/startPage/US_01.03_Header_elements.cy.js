@@ -5,9 +5,10 @@ import { StartPage, LoginPopup } from "../../../pageObjects/StartPage.js";
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 
-describe('US_01.03 |  Header elements', () => {
+describe('US_01.03 |  Header elements', { tags: ['smoke'] }, () => {
 
     before(() => {
+        cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/')
         startPage.clickLoginButton()
     });
@@ -15,6 +16,10 @@ describe('US_01.03 |  Header elements', () => {
     beforeEach(function () {
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
+        });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
         });
     });
 
@@ -24,7 +29,7 @@ describe('US_01.03 |  Header elements', () => {
             .getLoginPopupHeader()
             .should('be.visible')
             .and('include.text', this.startPage.headers.header_Login_Popup.text)
-            .and('have.css', 'color', this.startPage.headers.header_Login_Popup.color)
+            .and('have.css', 'color', this.colors.greyHeader)
             .and('have.css', 'font-size', this.startPage.headers.header_Login_Popup.font_size)
     });
 
@@ -33,7 +38,7 @@ describe('US_01.03 |  Header elements', () => {
         loginPopup
             .getLoginPopupHeader()
             .should('include.text', this.startPage.headers.header_Login_Popup.text);
-        loginPopup.clickCloseBtn();
+        loginPopup.clickLoginPopupCloseButton();
         loginPopup.getLoginPopupHeader().should('not.be.visible');
     });
 })

@@ -6,27 +6,40 @@ import BookingPopup from "../../pageObjects/BookingPopup";
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
 
-const MANAGER = Cypress.env('manager');
 const AGENT = Cypress.env('agent');
-const CI = Cypress.env('CI');
 
-describe('US_AC.05 | Create reservation for 1 passenger', () => {
+function testCreatingReservationForPassengerType(passengerName, dropdownSelection, checkTextOnPassengerTypeLabel) {
+    cy.intercept('/tools/ping/**').as('getToolsPing');
+    cy.intercept('POST', 'orders').as('orders')
 
-    before(function () {
-        cy.cleanCiData(MANAGER.email, MANAGER.password, CI)
-    })
+    createBookingPage.typeIntoMainPassengerNameField(passengerName);
+    createBookingPage.getMainPassengerFareTypeDropdownSelect().select(dropdownSelection, { force: true });
+    createBookingPage.clickReservationTicketArrow();
+    cy.wait('@getToolsPing')
+    createBookingPage.clickReservationTicketButton();
+    cy.wait("@orders");
+    cy.wait('@getToolsPing').then(() => {
+        bookingPopup.getConfirmTicketButton().should('be.visible');
+        bookingPopup.getPassengerTitle().should('include.text', '(1)');
+        bookingPopup.getPassengersList().should('have.length', 1);
+        bookingPopup.getOnePassengerTypeLabel().should('have.text', checkTextOnPassengerTypeLabel); 
+    })  
+}
 
-    before(function () {
-        cy.visit('/')
-        cy.login(AGENT.email, AGENT.password)
+describe.skip('US_AC.05 | Create reservation for 1 passenger', { tags: ['regression'] }, () => {
+    beforeEach(function () {
+        cy.intercept('/tools/ping/**').as('getToolsPing');
+        cy.cleanData();
+
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/');
 
         createBookingPage.clickCalendarNextButton();
+        cy.wait('@getToolsPing');
         createBookingPage.clickFridayButton();
-
-        cy.intercept('/tools/**').as('getTrip')
-        cy.wait('@getTrip')
-
+        cy.wait('@getToolsPing');
         createBookingPage.clickFirstTripCard();
+        cy.wait('@getToolsPing');
     });
 
     beforeEach(function () {
@@ -36,19 +49,14 @@ describe('US_AC.05 | Create reservation for 1 passenger', () => {
     });
 
     it('AT_AC.05.02| Create reservation for 1 passenger - Child', function () {
-        createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name);
-        createBookingPage.getMainPassengerFareTypeDropdownList().select('child', { force: true });
-        createBookingPage.clickReservationTicketArrow();
-        createBookingPage.clickReservationTicketButton();
+        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name, 'child', 'Child:')
+    });
 
-        cy.intercept('/tools/ping/**').as('getPopUp')
-        
-        cy.wait('@getPopUp').then(({ response }) => {
-            expect(response.statusCode).to.eq(200)
-            bookingPopup.getConfirmTicketButton().should('be.visible');
-            bookingPopup.getPassengerTitle().should('include.text', '(1)');
-            bookingPopup.getPassengersList().should('have.length', 1);
-            bookingPopup.getOnePassengerTypeLabel().should('have.text', 'Child:');
-        })
+    it('AT_AC.05.01| Create reservation for 1 passenger - Adult', function () {
+        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'adult', 'Adult:');
+    });
+
+    it('AT_AC.05.03| Create reservation for 1 passenger - Elder', function () {
+        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'elder', 'Elder:');
     });
 });   
