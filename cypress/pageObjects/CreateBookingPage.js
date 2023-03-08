@@ -1,4 +1,9 @@
+import BookingPopup from "./BookingPopup";
+
+const bookingPopup = new BookingPopup();
+
 class CreateBookingPage {
+        
     //Header
     getCreateBookingHeader = () => cy.get('div h1');
 
@@ -589,6 +594,24 @@ class CreateBookingPage {
         
         this.clickBookTicketsBtn()
         
+    }
+
+    testCreatingReservationForPassengerType(passengerName, dropdownSelection, checkTextOnPassengerTypeLabel) {
+        cy.intercept('/tools/ping/**').as('getToolsPing');
+        cy.intercept('POST', 'orders').as('orders')
+    
+        this.typeIntoMainPassengerNameField(passengerName);
+        this.getMainPassengerFareTypeDropdownSelect().select(dropdownSelection, { force: true });
+        this.clickReservationTicketArrow();
+        cy.wait('@getToolsPing')
+        this.clickReservationTicketButton();
+        cy.wait("@getTrip");
+        cy.wait('@getToolsPing').then(() => {
+            bookingPopup.getConfirmTicketButton().should('be.visible');
+            bookingPopup.getPassengerTitle().should('include.text', '(1)');
+            bookingPopup.getPassengersList().should('have.length', 1);
+            bookingPopup.getOnePassengerTypeLabel().should('have.text', checkTextOnPassengerTypeLabel); 
+        })  
     }
 }
 export default CreateBookingPage;
