@@ -62,4 +62,10 @@ describe('US_04.24 | Multiple passengers UI', { tags: ['smoke'] }, () => {
             .getPlaceholderPhoneNumber()
             .should('have.attr', 'placeholder', this.createBookingPage.placeholder.phone);
     });
+
+    it('AT_04.24.07 | Verify passenger name input field has a “Passenger name” text placeholder', function () {
+        createBookingPage
+            .getPlaceholderPassengerName()
+            .should('have.attr', 'placeholder', this.createBookingPage.placeholder.name);
+    });
 });    
