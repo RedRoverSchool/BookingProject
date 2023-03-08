@@ -609,7 +609,7 @@ class CreateBookingPage {
         this.clickReservationTicketArrow();
         cy.wait('@getToolsPing')
         this.clickReservationTicketButton();
-        cy.wait("@getTrip");
+        cy.wait('@getToolsPing')
         cy.wait('@getToolsPing').then(() => {
             bookingPopup.getConfirmTicketButton().should('be.visible');
             bookingPopup.getPassengerTitle().should('include.text', '(1)');
