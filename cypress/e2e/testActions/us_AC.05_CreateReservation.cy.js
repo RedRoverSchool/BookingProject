@@ -9,7 +9,7 @@ const bookingPopup = new BookingPopup();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_AC.05 | Create reservation for 1 passenger', () => {
+describe('US_AC.05 | Create reservation for 1 passenger', { tags: ['regression'] }, () => {
     beforeEach(function () {
         cy.intercept('/tools/**').as('getTrip');
         
