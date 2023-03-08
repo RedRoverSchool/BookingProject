@@ -8,7 +8,7 @@ const bookingPopup = new BookingPopup()
 
 const AGENT = Cypress.env('agent')
 
-describe('US_AC.03 | Create booking for 1 passenger', () => {
+describe('US_AC.03 | Create booking for 1 passenger', { tags: ['regression'] }, () => {
 
     before(() => {
         cy.cleanData()

@@ -8,7 +8,7 @@ const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 const restorePopup = new RestorePopup();
 
-describe ('US_01.20 | Start Page > Restore Password Negative', function() {
+describe ('US_01.20 | Start Page > Restore Password Negative', { tags: ['regression'] }, function () {
     beforeEach(function () {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');

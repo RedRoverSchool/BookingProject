@@ -5,7 +5,7 @@ import { sortDesc, sortAsc } from "../../../support/utilities/sortArrayByDigit";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.22 | Trip card functionality', () => {
+describe('US_04.22 | Trip card functionality', { tags: ['smoke', 'regression'] }, () => {
     const AGENT = Cypress.env('agent');
    
     beforeEach(function () {

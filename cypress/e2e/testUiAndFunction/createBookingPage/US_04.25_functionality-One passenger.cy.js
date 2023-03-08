@@ -6,7 +6,7 @@ import getRandomElementOfArray from "../../../support/utilities/getRandomElement
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_04.25 | Passengers details functionality - One passenger', () => {
+describe('US_04.25 | Passengers details functionality - One passenger', { tags: ['smoke', 'regression'] }, () => {
 
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);

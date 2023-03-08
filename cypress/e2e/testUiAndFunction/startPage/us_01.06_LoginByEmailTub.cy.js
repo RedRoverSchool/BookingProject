@@ -8,7 +8,7 @@ const createBookingPage = new CreateBookingPage();
 const loginPopup = new LoginPopup();
 const startPage = new StartPage();
 
-describe('US_01.06 | Login by email tub functionality', () => {
+describe('US_01.06 | Login by email tub functionality', { tags: ['smoke'] }, () => {
 
     const AGENT = Cypress.env('agent');
 
@@ -23,7 +23,7 @@ describe('US_01.06 | Login by email tub functionality', () => {
         });
     });
 
-    it('AT_01.06.01 | Verify Sign In Button redirect to the Create Booking Page', function () {
+    it('AT_01.06.01 | Verify Sign In Button redirect to the Create Booking Page', { tags: ['regression'] }, function () {
         cy.login(AGENT.email, AGENT.password);
         createBookingPage.getCreateBookingHeader().should('include.text', this.createBookingPage.headers.mainHeaderPage)
     });

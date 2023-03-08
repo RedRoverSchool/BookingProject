@@ -6,7 +6,7 @@ import BookingsListPage from "../../../pageObjects/BookingsListPage";
 const leftMenuPanel = new LeftMenuPanel();
 const bookingListPage = new BookingsListPage();
 
-describe('US_05.10 Excel button UI and functionality', () => {
+describe('US_05.10 Excel button UI and functionality', { tags: ['smoke'] }, () => {
     const AGENT = Cypress.env('agent');
 
     before(() => {
@@ -36,7 +36,7 @@ describe('US_05.10 Excel button UI and functionality', () => {
             .should('have.attr', 'class', this.bookingsListPage.buttons.excelButtonIcon);    
     });
 
-    it('AT_05.10.03 | Verify the "Excel" button is clickable, downloads the file with extension ".csv" and its name contain defaullt dates range (dropdown) ', function () {
+    it('AT_05.10.03 | Verify the "Excel" button is clickable, downloads the file with extension ".csv" and its name contain defaullt dates range (dropdown) ', { tags: ['regression'] }, function () {
         bookingListPage.getDrdnDatesRangeDefaultValue()
             .then(($rangeDates) => {
                 let expectedFormattedRrangeDates = bookingListPage.formatteddDatesRangeYYYYMMDD($rangeDates.text())

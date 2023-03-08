@@ -12,7 +12,7 @@ function formatDate(date) {
         .replace(/(\S{3}).(\d{1,2})(.).(\d{4})/, "$2 $1$3 $4")
 }
 
-describe('US_05.03 | Date filter UI', () => {
+describe('US_05.04 | Date filter functionality', { tags: ['regression'] }, () => {
 
     const AGENT = Cypress.env('agent')
 

@@ -7,7 +7,7 @@ import getArray from "../../../support/utilities/getArray";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.12 | Calendar month functionality', () => {
+describe('US_04.12 | Calendar month functionality', { tags: ['smoke', 'regression'] }, () => {
 	const AGENT = Cypress.env('agent');
 
 	beforeEach(function () {

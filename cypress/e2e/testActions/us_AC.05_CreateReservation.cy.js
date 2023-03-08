@@ -26,7 +26,7 @@ function testCreatingReservationForPassengerType(passengerName, dropdownSelectio
     })  
 }
 
-describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
+describe.skip('US_AC.05 | Create reservation for 1 passenger', { tags: ['regression'] }, () => {
     beforeEach(function () {
         cy.intercept('/tools/ping/**').as('getToolsPing');
         cy.cleanData();
