@@ -13,7 +13,7 @@ const isEqualHeaders = (cySelector, expectedTableHeaders) => {
     });
 };
 
-describe('US_05.12 | Columns are filtered by selected criteria', () => {
+describe('US_05.12 | Columns are filtered by selected criteria', { tags: ['regression'] }, () => {
     const AGENT = Cypress.env('agent');
 
     before(() => {

@@ -6,7 +6,7 @@ import {RegisterPopup} from "../../../pageObjects/StartPage";
 const startPage = new StartPage();
 const registerPopup = new RegisterPopup();
 
-describe('US_01.11 | Header elements', () => {
+describe('US_01.11 | Header elements', { tags: ['smoke'] }, () => {
 
     before(function () {
         cy.then(Cypress.session.clearCurrentSessionData);
@@ -47,7 +47,7 @@ describe('US_01.11 | Header elements', () => {
             .and('have.css','position', 'static')
     });
 
-    it('AT_01.11.04 | Verify the functionality of the close button', () => {
+    it('AT_01.11.04 | Verify the functionality of the close button', { tags: ['regression'] }, () => {
         registerPopup
             .getRegisterPopupModal()
             .should('have.attr', 'aria-hidden', 'false')

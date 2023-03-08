@@ -6,7 +6,7 @@ import {LoginPopup} from "../../../pageObjects/StartPage.js";
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 
-describe('US_01.05 | Login By Email Tab UI', () => {
+describe('US_01.05 | Login By Email Tab UI', { tags: ['smoke'] }, () => {
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
@@ -66,7 +66,7 @@ describe('US_01.05 | Login By Email Tab UI', () => {
             .should('have.value', this.startPage.buttons.signInBtnText)
     });
 
-    it('AT_01.05.10 | Verify SIGN IN button is visible and clickable', function() {
+    it('AT_01.05.10 | Verify SIGN IN button is visible and clickable', { tags: ['regression'] }, function() {
         loginPopup
             .clickByEmailSignInButton()
 

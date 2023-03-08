@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "smoke:test": "npx cypress run --env grepTags=smoke --browser chrome",
+    "regression:test": "npx cypress run --env grepTags=regression --browser chrome",
+    "all:test": "npx cypress run --env grepTags=\"smoke regression\" --browser chrome"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@cypress/grep": "^3.1.4",
     "@faker-js/faker": "^7.6.0",
     "cy-verify-downloads": "^0.1.13",
     "cypress": "^10.11.0"

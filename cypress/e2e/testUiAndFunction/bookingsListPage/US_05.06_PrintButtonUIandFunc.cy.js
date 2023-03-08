@@ -6,7 +6,7 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 const bookingsListPage = new BookingsListPage();
 const leftMenuPanel = new LeftMenuPanel();
 
-describe('US_05.06 Print Button UI and functionality', () => {
+describe('US_05.06 Print Button UI and functionality', { tags: ['smoke'] }, () => {
 
     const AGENT = Cypress.env('agent');
 

@@ -28,12 +28,18 @@ module.exports = defineConfig({
           },
         }),
         on('task', verifyDownloadTasks)
+        require('@cypress/grep/src/plugin')(config)
+        return config
     },
   },
   video: false,
   reporter: 'junit',
   reporterOptions: {
     mochaFile: 'reports/test-results-[hash].xml',
+  },
+  "env": {
+    "grepFilterSpecs": true,
+    "grepOmitFiltered": true
   },
 });
 

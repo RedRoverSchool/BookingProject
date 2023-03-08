@@ -8,7 +8,7 @@ const header = new Header();
 const createBookingPage = new CreateBookingPage();
 const startPage = new StartPage();
 
-describe('US_02.05 | User dropdown menu UI and functionality', () => {
+describe('US_02.05 | User dropdown menu UI and functionality', { tags: ['smoke', 'regression'] }, () => {
 	const AGENT = Cypress.env('agent');
 
 	beforeEach(function () {

@@ -7,7 +7,7 @@ const loginPopup = new LoginPopup();
 const restorePopup = new RestorePopup();
 const registerPopup = new RegisterPopup();
 
-describe ('US 01.18 | Restore password Popup > Footer UI and functionality', () => {
+describe ('US 01.18 | Restore password Popup > Footer UI and functionality', { tags: ['smoke', 'regression'] }, () => {
     beforeEach(function () {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');

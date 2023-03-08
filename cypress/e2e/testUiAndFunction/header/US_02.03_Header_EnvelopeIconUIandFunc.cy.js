@@ -8,7 +8,7 @@ const helpdeskPage = new HelpdeskPage();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_02.03 Header Envelope icon UI and functionality', () => {
+describe('US_02.03 Header Envelope icon UI and functionality', { tags: ['smoke', 'regression'] }, () => {
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
