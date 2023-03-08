@@ -6,7 +6,7 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing.js";
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_04.26 | Passengers details functionality - Multiple passengers', () => { 
+describe('US_04.26 | Passengers details functionality - Multiple passengers', { tags: ['smoke', 'regression'] }, () => { 
 
     const chosenAmountPassengers = 4
 

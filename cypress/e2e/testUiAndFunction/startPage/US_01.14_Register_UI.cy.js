@@ -5,7 +5,7 @@ import {StartPage, RegisterPopup} from "../../../pageObjects/StartPage";
 const startPage = new StartPage();
 const registerPopup = new RegisterPopup();
 
-describe('US_01.14 | Register UI', () => {
+describe('US_01.14 | Register UI', { tags: ['smoke'] }, () => {
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/')

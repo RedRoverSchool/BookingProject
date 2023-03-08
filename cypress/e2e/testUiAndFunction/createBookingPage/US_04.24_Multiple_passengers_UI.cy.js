@@ -5,7 +5,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_04.24 | Multiple passengers UI', () => {
+describe('US_04.24 | Multiple passengers UI', { tags: ['smoke'] }, () => {
 
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
@@ -61,5 +61,11 @@ describe('US_04.24 | Multiple passengers UI', () => {
         createBookingPage
             .getPlaceholderPhoneNumber()
             .should('have.attr', 'placeholder', this.createBookingPage.placeholder.phone);
+    });
+
+    it('AT_04.24.07 | Verify passenger name input field has a “Passenger name” text placeholder', function () {
+        createBookingPage
+            .getPlaceholderPassengerName()
+            .should('have.attr', 'placeholder', this.createBookingPage.placeholder.name);
     });
 });    

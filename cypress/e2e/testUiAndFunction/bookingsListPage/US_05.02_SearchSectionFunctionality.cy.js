@@ -13,7 +13,7 @@ const bookingPopup = new BookingPopup();
 const AGENT = Cypress.env("agent");
 const BOOKING = require('../../../fixtures/createBookingPage.json')
 
-describe("US_05.02_Search section functionality", () => {
+describe("US_05.02_Search section functionality", { tags: ['regression'] }, () => {
 
   beforeEach(function () {
     cy.fixture('createBookingPage').then(createBookingPage => {

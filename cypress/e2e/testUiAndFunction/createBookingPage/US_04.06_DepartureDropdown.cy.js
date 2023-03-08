@@ -6,7 +6,7 @@ const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_04.06 | Departure dropdown UI and functionality', () => {   
+describe('US_04.06 | Departure dropdown UI and functionality', { tags: ['smoke'] }, () => {   
 
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
@@ -34,7 +34,7 @@ describe('US_04.06 | Departure dropdown UI and functionality', () => {
         })
     });
 
-    it('AT_04.06.02 | Verify that the Agent can choose stations from the Dropdown Menu', function(){
+    it('AT_04.06.02 | Verify that the Agent can choose stations from the Dropdown Menu', { tags: ['regression'] }, function () {
         createBookingPage.selectNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[6])
 
         createBookingPage.getDepartureStationDropdown()

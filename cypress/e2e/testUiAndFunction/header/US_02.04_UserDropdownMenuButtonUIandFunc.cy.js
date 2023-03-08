@@ -7,7 +7,7 @@ const header = new Header();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_02.04 | User dropdown menu button UI and functionality', function() { 
+describe('US_02.04 | User dropdown menu button UI and functionality', { tags: ['smoke'] }, function () { 
     
     beforeEach(function () {
         cy.fixture('header').then(header => {
@@ -24,7 +24,7 @@ describe('US_02.04 | User dropdown menu button UI and functionality', function()
         header.getOperatorImage().should('be.visible');
     });
 
-    it('AT_02.04.02 |"User dropdown menu" button is clickable and opens up the dropdown menu', function() {
+    it('AT_02.04.02 |"User dropdown menu" button is clickable and opens up the dropdown menu', { tags: ['regression'] }, function() {
         header.clickUserDropDownMenu()
         header.getUserMenu().should('be.visible')
     });

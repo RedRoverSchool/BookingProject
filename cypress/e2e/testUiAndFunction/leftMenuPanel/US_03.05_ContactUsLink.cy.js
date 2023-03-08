@@ -7,7 +7,7 @@ const leftMenuPanel = new LeftMenuPanel();
 const helpdeskPage = new HelpdeskPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_03.05 | Contact us link', () => {
+describe('US_03.05 | Contact us link', { tags: ['smoke'] }, () => {
 
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
@@ -23,7 +23,7 @@ describe('US_03.05 | Contact us link', () => {
         });
     });
 
-    it('AT_03.05.03 | Clicking "Contact us" opening Helpdesk page with a header "Helpdesk", () => ', function () {  
+    it('AT_03.05.03 | Clicking "Contact us" opening Helpdesk page with a header "Helpdesk", () => ', { tags: ['regression'] }, function () {  
         leftMenuPanel.clickContactUsIcon();
         
         helpdeskPage

@@ -23,7 +23,7 @@ function createReservation(passengerName) {
   cy.wait('@getToolsPing')
 }
 
-describe.skip("US_05.23 | Trip detais UI", () => {
+describe.skip("US_05.23 | Trip detais UI", { tags: ['smoke'] }, () => {
   beforeEach(function () {
     cy.fixture("createBookingPage").then((createBookingPage) => {
       this.createBookingPage = createBookingPage;

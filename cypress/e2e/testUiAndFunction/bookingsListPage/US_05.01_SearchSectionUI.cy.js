@@ -6,7 +6,7 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 const bookingsListPage = new BookingsListPage();
 const leftMenuPanel = new LeftMenuPanel();
 
-describe('US_05.01 Booking list page >Top Section> Search Form UI', () => {
+describe('US_05.01 Booking list page >Top Section> Search Form UI', { tags: ['smoke', 'regression'] }, () => {
 
     const AGENT = Cypress.env('agent');
 

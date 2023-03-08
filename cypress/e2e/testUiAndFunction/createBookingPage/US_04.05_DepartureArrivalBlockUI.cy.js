@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.05 | Departure / Arrival block UI', () => {
+describe('US_04.05 | Departure / Arrival block UI', { tags: ['smoke'] }, () => {
 
     const AGENT = Cypress.env('agent');
 
@@ -35,7 +35,7 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
         .should('have.css','color', this.colors.greyHeader)
     });
 
-    it('AT_04.05.03 | Verify that the Departure station dropdown menu has Input select-search field', () => {
+    it('AT_04.05.03 | Verify that the Departure station dropdown menu has Input select-search field', { tags: ['regression'] }, () => {
         
         createBookingPage.clickDepartureStationDropdown()
         createBookingPage.getDepartureInputSelectSearchField().should('be.visible')
@@ -63,7 +63,7 @@ describe('US_04.05 | Departure / Arrival block UI', () => {
        .and('have.css', 'font-size', this.createBookingPage.labelArrivalStationFont)
     });
 
-    it('AT_04.05.07 | Verify that the Departure station dropdown menu has "Selection arrow"', () => {
+    it('AT_04.05.07 | Verify that the Departure station dropdown menu has "Selection arrow"', { tags: ['regression'] }, () => {
         createBookingPage.getDepartureStationSelectionArrow().should('exist');
     });
 });    
