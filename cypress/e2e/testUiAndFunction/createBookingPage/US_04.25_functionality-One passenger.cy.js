@@ -6,7 +6,7 @@ import getRandomElementOfArray from "../../../support/utilities/getRandomElement
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_04.25 | Passengers details functionality - One passenger', { tags: ['smoke', 'regression'] }, () => {
+describe('US_04.25 | Passengers details functionality - One passenger', () => {
 
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
@@ -22,7 +22,7 @@ describe('US_04.25 | Passengers details functionality - One passenger', { tags: 
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        });
+        });        
     });
 
     it('AT_04.25.01 | Verify the opportunity to fill main passengers name in "Passenger name" input field', function () {
@@ -56,23 +56,30 @@ describe('US_04.25 | Passengers details functionality - One passenger', { tags: 
         })
     })
 
-    it.only('AT_04.25.04 | Verify email input doesnt  accept invalid emails ', function () {
-        const stub = cy.stub()
-        cy.wrap(null)
-            .then(() => {
-                createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name);
-                createBookingPage.typeIntoMainPassengerEmailField('qweqwe.123');
-                createBookingPage.clickBookTicketsBtn()
-            })
-        cy.on('window:alert', (stub) => {
+    it('AT_04.25.04 | Verify email input field doesnt  accept invalid emails and system displays alert', function () {
+        const expectedAlert = this.createBookingPage.alerts.invalidEmail
+        const invalidEmailsArray =
+            [this.createBookingPage.invalidEmail.emailWithoutAt,
+            this.createBookingPage.invalidEmail.emailWithoutDot,
+            this.createBookingPage.invalidEmail.emailWithWrongDomen,
+            this.createBookingPage.invalidEmail.emailTooLong75Symbl
+            ]
 
-            expect(stub).to.be.calledWith(this.createBookingPage.alerts.invalidEmail)
-        })
-
-        // expect(alert.getCall(0).getA).to.be.calledWith(this.createBookingPage.alerts.invalidEmail)
-
-        // cy.get(alert.getCall(0)).should('be.calledWith', this.createBookingPage.alerts.invalidEmail)
-        //cy.get('@alert').should('have.been.calledWithExactly', this.createBookingPage.alerts.invalidEmail)
-
+        for (let invalidEmail of invalidEmailsArray) {
+            cy.wrap(null)
+                .then(() => {
+                    createBookingPage.clickResetButton()
+                    createBookingPage.clickFirstTripCard();
+                    createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+                    createBookingPage.typeIntoMainPassengerEmailField(invalidEmail)
+                    createBookingPage.clickBookTicketsBtn()
+                })
+                .then(() => {
+                    cy.on('window:alert', (msg) => {
+                        expect(msg).to.eq(expectedAlert)
+                    })
+                })
+        }
     })
+
 })

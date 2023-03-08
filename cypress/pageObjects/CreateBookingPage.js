@@ -612,5 +612,9 @@ class CreateBookingPage {
         }
         return check
     }
+
+    clickResetButton() {
+        this.getResetButton().click();
+    }    
 }
 export default CreateBookingPage;
