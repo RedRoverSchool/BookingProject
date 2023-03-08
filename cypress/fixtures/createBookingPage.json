@@ -212,5 +212,9 @@
         "fareType" : "Elder"
       },
 
-      "octWeek": "2 Oct - 8 Oct"
+      "octWeek": "2 Oct - 8 Oct",
+
+      "alerts": {
+        "invalidEmail" : "Email isn`t correct Please try again"
+      }
 }

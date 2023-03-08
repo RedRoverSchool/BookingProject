@@ -55,4 +55,24 @@ describe('US_04.25 | Passengers details functionality - One passenger', () => {
                 )
         })
     })
+
+    it.only('AT_04.25.04 | Verify email input doesnt  accept invalid emails ', function () {
+        const stub = cy.stub()
+        cy.wrap(null)
+            .then(() => {
+                createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name);
+                createBookingPage.typeIntoMainPassengerEmailField('qweqwe.123');
+                createBookingPage.clickBookTicketsBtn()
+            })
+        cy.on('window:alert', (stub) => {
+
+            expect(stub).to.be.calledWith(this.createBookingPage.alerts.invalidEmail)
+        })
+
+        // expect(alert.getCall(0).getA).to.be.calledWith(this.createBookingPage.alerts.invalidEmail)
+
+        // cy.get(alert.getCall(0)).should('be.calledWith', this.createBookingPage.alerts.invalidEmail)
+        //cy.get('@alert').should('have.been.calledWithExactly', this.createBookingPage.alerts.invalidEmail)
+
+    })
 })
