@@ -615,7 +615,8 @@ class CreateBookingPage {
             bookingPopup.getPassengerTitle().should('include.text', '(1)');
             bookingPopup.getPassengersList().should('have.length', 1);
             bookingPopup.getOnePassengerTypeLabel().should('have.text', checkTextOnPassengerTypeLabel); 
-        })  
+        })
+    }
     clickgetOctoberMondayButton() {
         this.getOctoberMondayButton().click({ force: true })
     }
