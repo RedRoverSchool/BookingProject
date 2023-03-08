@@ -31,6 +31,7 @@ module.exports = defineConfig({
         require('@cypress/grep/src/plugin')(config)
         return config
     },
+   
   },
   video: false,
   reporter: 'junit',
