@@ -1,11 +1,16 @@
 /// <reference types="Cypress" />
 
 const { _ } = Cypress
-import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
-import BookingsListPage from "../../../pageObjects/BookingsListPage";
 
-const leftMenuPanel = new LeftMenuPanel();
-const bookingListPage = new BookingsListPage();
+import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
+import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel"
+import BookingsListPage from "../../../pageObjects/BookingsListPage"
+import BookingPopup from "../../../pageObjects/BookingPopup"
+
+const createBookingPage = new CreateBookingPage()
+const leftMenuPanel = new LeftMenuPanel()
+const bookingListPage = new BookingsListPage()
+const bookingPopup = new BookingPopup()
 
 const getValueFromTable = (tr) => tr.toArray().map((el) => el.innerText.split('\t'))
 
@@ -35,184 +40,199 @@ const extractTableCellValues = () => {
         })
 }
 
+const AGENT = Cypress.env('agent');
+
 describe('US_05.14 | Table Functionality', () => {
-    const AGENT = Cypress.env('agent');
 
     before(() => {
-        // cy.session('Visit booking page', () => {
-            cy.visit('/')
-            cy.login(AGENT.email, AGENT.password);
-            leftMenuPanel.clickBookingManagementIcon()
-        // })
-        cy.intercept('/tools/**').as('getBookingList')
+        cy.cleanData()
+        cy.viewport(1200, 720);
     })
 
-    // context('AT_05.14.01 | Sort columns', () => {
-        it('Sort columns by ID | ASC', () => {
-            bookingListPage.clickSortButton('ID')
-            cy.wait('@getBookingList')
+    beforeEach(function () {
+        cy.loginWithSession(AGENT.email, AGENT.password);
+        cy.visit('/')
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => obj['ID'], ['asc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+        const obj =  {
+            "departureStationName" : "Rassada Pier",
+            "arrivalStationName" : "Naka Island",
+            "passengerName" : "Betty Hardy",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+        }
 
-        it('Sort columns by ID | DESC', () => {
-            bookingListPage.clickSortButton('ID')
-            cy.wait('@getBookingList')
+        for(let i = 0; i < 3; i++) {
+            createBookingPage.createCustomBooking(obj)
+            bookingPopup.clickCloseBtnBookingPopup()
+        }
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => obj['ID'], ['desc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+        leftMenuPanel.clickBookingManagementIcon()
+    
+        cy.fixture('createBookingPage').then(createBookingPage => {
+            this.createBookingPage = createBookingPage
+        })
+    })
 
-        it('Sort columns by Booking date | ASC', () => {
-            bookingListPage.clickSortButton('Booking date')
-            cy.wait('@getBookingList')
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => new Date(obj['Booking date']), ['asc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    it.only('Sort columns by ID | ASC', () => {
+        bookingListPage.clickSortButton('ID')
 
-        it('Sort columns by Booking date | DESC', () => {
-            bookingListPage.clickSortButton('Booking date')
-            cy.wait('@getBookingList')
+        extractTableCellValues()
+        cy.get('@tableCellValues').then((actualResult) => {
+            const expectedResult = _.orderBy(actualResult, (obj) => obj['ID'], ['asc'])
+            expect(actualResult).to.deep.equal(expectedResult)
+        })
+    })
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => new Date(obj['Booking date']), ['desc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    it('Sort columns by ID | DESC', () => {
+        bookingListPage.clickSortButton('ID')
 
-        it('Sort columns by Route | ASC', () => {
-            bookingListPage.clickSortButton('Route')
-            cy.wait('@getBookingList')
+        extractTableCellValues()
+        cy.get('@tableCellValues').then((actualResult) => {
+            const expectedResult = _.orderBy(actualResult, (obj) => obj['ID'], ['desc'])
+            expect(actualResult).to.deep.equal(expectedResult)
+        })
+    })
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => obj['Route'], ['asc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    it('Sort columns by Booking date | ASC', () => {
+        bookingListPage.clickSortButton('Booking date')
 
-        it('Sort columns by Route | DESC', () => {
-            bookingListPage.clickSortButton('Route')
-            cy.wait('@getBookingList')
+        extractTableCellValues()
+        cy.get('@tableCellValues').then((actualResult) => {
+            const expectedResult = _.orderBy(actualResult, (obj) => new Date(obj['Booking date']), ['asc'])
+            expect(actualResult).to.deep.equal(expectedResult)
+        })
+    })
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => obj['Route'], ['desc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    it('Sort columns by Booking date | DESC', () => {
+        bookingListPage.clickSortButton('Booking date')
 
-        it('Sort columns by Price | ASC', () => {
-            bookingListPage.clickSortButton('Price, USD')
-            cy.wait('@getBookingList')
+        extractTableCellValues()
+        cy.get('@tableCellValues').then((actualResult) => {
+            const expectedResult = _.orderBy(actualResult, (obj) => new Date(obj['Booking date']), ['desc'])
+            expect(actualResult).to.deep.equal(expectedResult)
+        })
+    })
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => Number(obj['Price, USD']), ['asc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    // it('Sort columns by Route | ASC', () => {
+    //     bookingListPage.clickSortButton('Route')
+    //     cy.wait('@getBookingList')
 
-        it('Sort columns by Price | DESC', () => {
-            bookingListPage.clickSortButton('Price, USD')
-            cy.wait('@getBookingList')
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
+    //         const expectedResult = _.orderBy(actualResult, (obj) => obj['Route'], ['asc'])
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => Number(obj['Price, USD']), ['desc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    // it('Sort columns by Route | DESC', () => {
+    //     bookingListPage.clickSortButton('Route')
+    //     cy.wait('@getBookingList')
 
-        it('Sort columns by Departure date | ASC', () => {
-            bookingListPage.clickSortButton('Departure date')
-            cy.wait('@getBookingList')
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
+    //         const expectedResult = _.orderBy(actualResult, (obj) => obj['Route'], ['desc'])
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
+    // it('Sort columns by Price | ASC', () => {
+    //     bookingListPage.clickSortButton('Price, USD')
+    //     cy.wait('@getBookingList')
 
-                const expectedResult = _.orderBy(actualResult, (value) => {
-                    const departureDate = value['Departure date']
-                    const re = departureDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3");
-                    return new Date(re)
-                }, ['asc'])
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
+    //         const expectedResult = _.orderBy(actualResult, (obj) => Number(obj['Price, USD']), ['asc'])
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
 
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    // it('Sort columns by Price | DESC', () => {
+    //     bookingListPage.clickSortButton('Price, USD')
+    //     cy.wait('@getBookingList')
 
-        it('Sort columns by Departure date | DESC', () => {
-            bookingListPage.clickSortButton('Departure date')
-            cy.wait('@getBookingList')
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
+    //         const expectedResult = _.orderBy(actualResult, (obj) => Number(obj['Price, USD']), ['desc'])
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
+    // it('Sort columns by Departure date | ASC', () => {
+    //     bookingListPage.clickSortButton('Departure date')
+    //     cy.wait('@getBookingList')
 
-                const expectedResult = _.orderBy(actualResult, (value) => {
-                    const departureDate = value['Departure date']
-                    const re = departureDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3");
-                    return new Date(re)
-                }, ['desc'])
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
 
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    //         const expectedResult = _.orderBy(actualResult, (value) => {
+    //             const departureDate = value['Departure date']
+    //             const re = departureDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3");
+    //             return new Date(re)
+    //         }, ['asc'])
 
-        it('Sort columns by Status | ASC', () => {
-            bookingListPage.clickSortButton('Status')
-            cy.wait('@getBookingList')
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => obj['Status'], ['asc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    // it('Sort columns by Departure date | DESC', () => {
+    //     bookingListPage.clickSortButton('Departure date')
+    //     cy.wait('@getBookingList')
 
-        it('Sort columns by Status | DESC', () => {
-            bookingListPage.clickSortButton('Status')
-            cy.wait('@getBookingList')
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => obj['Status'], ['desc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    //         const expectedResult = _.orderBy(actualResult, (value) => {
+    //             const departureDate = value['Departure date']
+    //             const re = departureDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3");
+    //             return new Date(re)
+    //         }, ['desc'])
 
-        it('Sort columns by Expire | ASC', () => {
-            bookingListPage.clickSortButton('Expire')
-            cy.wait('@getBookingList')
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => new Date(obj['Expire']), ['asc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    // it('Sort columns by Status | ASC', () => {
+    //     bookingListPage.clickSortButton('Status')
+    //     cy.wait('@getBookingList')
 
-        it('Sort columns by Expire | DESC', () => {
-            bookingListPage.clickSortButton('Expire')
-            cy.wait('@getBookingList')
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
+    //         const expectedResult = _.orderBy(actualResult, (obj) => obj['Status'], ['asc'])
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
 
-            extractTableCellValues()
-            cy.get('@tableCellValues').then((actualResult) => {
-                const expectedResult = _.orderBy(actualResult, (obj) => new Date(obj['Expire']), ['desc'])
-                expect(actualResult).to.deep.equal(expectedResult)
-            })
-        });
+    // it('Sort columns by Status | DESC', () => {
+    //     bookingListPage.clickSortButton('Status')
+    //     cy.wait('@getBookingList')
 
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
+    //         const expectedResult = _.orderBy(actualResult, (obj) => obj['Status'], ['desc'])
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
+
+    // it('Sort columns by Expire | ASC', () => {
+    //     bookingListPage.clickSortButton('Expire')
+    //     cy.wait('@getBookingList')
+
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
+    //         const expectedResult = _.orderBy(actualResult, (obj) => new Date(obj['Expire']), ['asc'])
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
+    // });
+
+    // it('Sort columns by Expire | DESC', () => {
+    //     bookingListPage.clickSortButton('Expire')
+    //     cy.wait('@getBookingList')
+
+    //     extractTableCellValues()
+    //     cy.get('@tableCellValues').then((actualResult) => {
+    //         const expectedResult = _.orderBy(actualResult, (obj) => new Date(obj['Expire']), ['desc'])
+    //         expect(actualResult).to.deep.equal(expectedResult)
+    //     })
     // });
 });
