@@ -9,18 +9,6 @@ const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
-const isSameRowSeatsA_B_C = (array) => {
-    let check = true
-    let expectedString = "ABC"
-    for (let i = 0; i < array.length; i += 3) {
-        let checkForA_B_C = array.slice(i, i + 3).map(el => el.replace(/^\d/g, '')).join("")
-        let checkForSameNumber = new Set(array.slice(i, i + 3).map(el => parseInt(el)))
-        check = check && (checkForSameNumber.size == 1) && (checkForA_B_C == expectedString)   
-    }
-    return check
-}
-
-
 describe('US_04.28 | Seat selection UI and functionality', () => {
         
     beforeEach(function () {
@@ -29,7 +17,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         })
     });
 
-    describe('US_04.28 | Seat selection UI', () => {
+    describe('US_04.28 | Seat selection UI', { tags: ['smoke'] }, () => {
 
         before(() => {
             cy.loginWithSession(AGENT.email, AGENT.password);
@@ -44,7 +32,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 .and('have.text', 'Seat selection')
         });
 
-        it('AT_04.28.01|The section name "Seat selection" is visible', function (){
+        it('AT_04.28.01 | The section name "Seat selection" is visible', function (){
             createBookingPage.getLabelSeatSelection().should('have.text', this.createBookingPage.seatSelectoinLabel)
         });
 
@@ -180,7 +168,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
             });
 
-            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', function ()  {
+            it('AT_04.28.03 | Verify number of default selected seats equals number of selected passengers (2, 150, 299) from passenger details dropdown menu', { tags: ['smoke'] }, function ()  {
                 let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
                                               this.createBookingPage.validBoundaryValues.nominalValue,
                                               this.createBookingPage.validBoundaryValues.belowMaximum]
@@ -197,7 +185,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 }
             });
 
-            it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', function () {
+            it('AT_04.28.09 | When unselecting the seat in the "Seats table" in the "Summary" section the red color text "Select seat" appears', { tags: ['smoke'] }, function () {
                 let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                      this.createBookingPage.validBoundaryValues.nominalValue,
                                                      this.createBookingPage.validBoundaryValues.maximum]
@@ -233,7 +221,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                 }
             });
 
-            it('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', function () {
+            it('AT_04.28.11 | Verify custom seat selection by window and next two ones in 2 rows for 6 passengers watches assigned seats in passenger details section', { tags: ['regression'] }, function () {
                 createBookingPage.getPassengersDetailsDropdown()
                     .select(this.createBookingPage.numberOfPassengers.sixPassengers)
                     .invoke('val').then((value) => {
@@ -252,7 +240,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
 
                         createBookingPage.getSelectedSeats().then(($el) => {
                             let arrayOfCustomSeletedSeats = getArray($el)
-                            expect(isSameRowSeatsA_B_C(arrayOfCustomSeletedSeats)).to.be.true
+                            expect(createBookingPage.isSameRowSeatsA_B_C(arrayOfCustomSeletedSeats)).to.be.true
                             expect(arrayOfCustomSeletedSeats.length).to.eq(chosenNumOfPassengers)
 
                             createBookingPage.getPassengerDetailsAssignedSeats().each(($el, i) => {
@@ -263,7 +251,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
                     })
             });
         
-            it('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal (for 1, 150, 300 passengers)', function () {
+            it('AT_04.28.12 | Verify, that default numbers of the selected seats in the "Seats table" and the numbers of the seats in the "Passenger details" section are equal (for 1, 150, 300 passengers)', { tags: ['regression'] }, function () {
                 let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
                                                      this.createBookingPage.validBoundaryValues.nominalValue,
                                                      this.createBookingPage.validBoundaryValues.maximum]
@@ -284,7 +272,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             });
         });
 
-        describe('Testcases with booking/reservation', () => {
+        describe('Testcases with booking/reservation', { tags: ['smoke'] }, () => {
            
             beforeEach(() => {
                 cy.cleanData();

@@ -7,7 +7,7 @@ const leftMenuPanel = new LeftMenuPanel();
 const AGENT = Cypress.env('agent');
 const accountManagementPage = new AccountManagementPage();
 
-describe('US_03.04 Account management link', () => {
+describe('US_03.04 Account management link', { tags: ['smoke'] }, () => {
 
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
@@ -23,7 +23,7 @@ describe('US_03.04 Account management link', () => {
         });
     });
 
-    it('AT_03.04.03 Clicking "Account management" opening the page with heading "Account management"', function () {
+    it('AT_03.04.03 Clicking "Account management" opening the page with heading "Account management"', { tags: ['regression'] }, function () {
         leftMenuPanel.clickAccountManagementIcon() 
 
         accountManagementPage 

@@ -9,7 +9,7 @@ const header = new Header();
 const createBookingPage = new CreateBookingPage();
 const leftMenuPanel = new LeftMenuPanel();
 
-describe('US_02.01 | Left Logo UI and functionality', function() { 
+describe('US_02.01 | Left Logo UI and functionality', { tags: ['smoke'] }, function() { 
     const AGENT = Cypress.env('agent');
 
     before(() => {
@@ -27,7 +27,7 @@ describe('US_02.01 | Left Logo UI and functionality', function() {
         });
     });
 
-    it('AT_02.01.02 | Verify logo is clickable and redirects to default page', function() {
+    it('AT_02.01.02 | Verify logo is clickable and redirects to default page', { tags: ['regression'] }, function() {
         leftMenuPanel.clickContactUsIcon();
         header.clickLogoImg();
         createBookingPage

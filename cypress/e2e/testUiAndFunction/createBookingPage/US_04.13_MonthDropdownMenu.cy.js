@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage.js";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.13 | Create booking page > Departure date > Month dropdown UI and functionality', () => {
+describe('US_04.13 | Create booking page > Departure date > Month dropdown UI and functionality', { tags: ['smoke', 'regression'] }, () => {
     const AGENT = Cypress.env('agent');
 
     before(function () {

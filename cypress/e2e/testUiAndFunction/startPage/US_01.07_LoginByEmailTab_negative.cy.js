@@ -6,7 +6,7 @@ import {LoginPopup} from "../../../pageObjects/StartPage.js";
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 
-describe('US_01.07 | Login by email tab negative', () => {
+describe('US_01.07 | Login by email tab negative', { tags: ['regression'] }, () => {
     beforeEach(function () {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');

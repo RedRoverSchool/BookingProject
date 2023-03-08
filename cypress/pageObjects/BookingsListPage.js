@@ -26,6 +26,7 @@ class BookingsListPage {
     getDateRangeTypeDefault = () => cy.get('div #filterDateType [selected]');
     getDrdnDatesRangeDefaultValue = () => cy.get('#filterDateType ~ span');
     getDrpdDatesRangeList = () => cy.get('.ranges ul li');
+    getDrpdDatesRangeThisMonth = () => cy.get('.ranges ul li[data-range-key="This Month"]');
     
     // Booking list section
     getTableHeaders = () => cy.get('.table thead tr');
@@ -112,6 +113,14 @@ class BookingsListPage {
 
     typeInSearchField(searchWord) {
         this.getSearchField().type(searchWord)
+    }
+
+    typeInBookingIDField(searchID) {
+        this.getBookingIdField().type(searchID)
+    }
+
+    clickDrpdDatesRangeThisMonth() {
+        this.getDrpdDatesRangeThisMonth().click()
     }
 }
 

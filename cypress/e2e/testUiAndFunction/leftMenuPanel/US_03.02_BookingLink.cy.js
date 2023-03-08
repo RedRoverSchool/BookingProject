@@ -5,7 +5,7 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 const leftMenuPanel = new LeftMenuPanel();
 const AGENT = Cypress.env('agent');
 
-describe('US_03.02 Booking link', () => {
+describe('US_03.02 Booking link', { tags: ['smoke'] }, () => {
 
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
@@ -28,7 +28,7 @@ describe('US_03.02 Booking link', () => {
             .should('include.text', this.leftMenuPanel.menuLinks.bookingLink);
     });
 
-    it('AT_03.02.03 | Clicking "Booking" opening the page with heading "Create booking"', function () {
+    it('AT_03.02.03 | Clicking "Booking" opening the page with heading "Create booking"', { tags: ['regression'] }, function () {
         leftMenuPanel.getBookingMenuLink();
     });
 });

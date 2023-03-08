@@ -11,7 +11,7 @@ const randomEmail = faker.internet.email();
 const randomPhoneNumber = faker.phone.number('+66##########')
 
 
-describe('US_01.13 | Register functionality', () => {
+describe('US_01.13 | Register functionality', { tags: ['smoke', 'regression'] }, () => {
     
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);

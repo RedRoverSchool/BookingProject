@@ -4,7 +4,7 @@ import { StartPage } from "../../../pageObjects/StartPage";
 
 const startPage = new StartPage();
 
-describe('US_01.01 | Multilanguage section elements UI and functionality', () => {
+describe('US_01.01 | Multilanguage section elements UI and functionality', { tags: ['smoke'] }, () => {
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');

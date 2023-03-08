@@ -13,7 +13,7 @@ const weekLastDay = (string) => {
 	return string.split(" ")[3]
 }
 
-describe('US_04.09 | Calendar available days week UI', () => {
+describe('US_04.09 | Calendar available days week UI', { tags: ['smoke'] }, () => {
 
 	const AGENT = Cypress.env('agent');
 
@@ -36,7 +36,7 @@ describe('US_04.09 | Calendar available days week UI', () => {
 		createBookingPage.getWeekButton().should('have.class', 'selected');
 	});
 
-	it('AT_04.09.01 | Verify calendar-day-selection-wrapper starts and ends with same dates as label calendar week', function () {
+	it('AT_04.09.01 | Verify calendar-day-selection-wrapper starts and ends with same dates as label calendar week', { tags: ['regression'] }, function () {
 		createBookingPage.getLabelCalendar().then(($el) => {
 			let firstDayOfWeek = weekFirstDay($el.text())
 			let lastDayOfWeek = weekLastDay($el.text())
@@ -69,7 +69,7 @@ describe('US_04.09 | Calendar available days week UI', () => {
 		})
 	});
 
-	it('AT_04.09.05 | Seven fields are displayed for the week', function () {
+	it('AT_04.09.05 | Seven fields are displayed for the week', { tags: ['regression'] }, function () {
 		createBookingPage.getCalendarDays()
 			.should('have.length', this.createBookingPage.weekDayFields.quantity)
 	})

@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.21 | Not available trip card UI', () => {
+describe('US_04.21 | Not available trip card UI', { tags: ['smoke', 'regression'] }, () => {
     const AGENT = Cypress.env('agent');
 
     before(function () {

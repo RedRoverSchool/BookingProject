@@ -13,7 +13,7 @@ const bookingPopup = new BookingPopup();
 const AGENT = Cypress.env("agent");
 const BOOKING = require('../../../fixtures/createBookingPage.json')
 
-describe("US_05.02_Search section functionality", () => {
+describe("US_05.02_Search section functionality", { tags: ['regression'] }, () => {
 
   beforeEach(function () {
     cy.fixture('createBookingPage').then(createBookingPage => {
@@ -56,8 +56,10 @@ describe("US_05.02_Search section functionality", () => {
     cy.wait('@getPopUp') 
     bookingPopup.clickCloseBtnBookingPopup()
     leftMenuPanel.clickBookingManagementIcon()
+    bookingsListPage.clickDatesRangeDropdown()
+    bookingsListPage.clickDrpdDatesRangeThisMonth()
 
-    bookingsListPage.typeInSearchField(`${this.createBookingPage.bookingDetailsTest1.passengerName}\n`)
+    bookingsListPage.typeInSearchField(`${this.createBookingPage.bookingDetailsTest1.passengerName}{enter}`)
     bookingsListPage.getTableHeadersColumnsList().then(($el) => {
       let tableHeaderArray = getArray($el)
       let indexOfContact = tableHeaderArray.indexOf(this.bookingsListPage.columns.contact[1])
@@ -65,6 +67,32 @@ describe("US_05.02_Search section functionality", () => {
       bookingsListPage.getTableBody().then(($el) => {
         let tableDataArray = getArray($el)
         expect(tableDataArray[indexOfContact]).to.eq(this.createBookingPage.bookingDetailsTest1.passengerName)
+      })
+    })
+  });
+
+  it('AT_05.02.02 | Verify that the agent is able to enter data in Booking ID input field and find booking', function () {
+    //Precondition
+    leftMenuPanel.clickBookingIcon()
+    createBookingPage.createCustomBooking(this.createBookingPage.bookingDetailsTest2)
+    cy.intercept('/tools/ping/**').as('getPopUp')
+    cy.wait('@getPopUp')
+    bookingPopup.getBookingID().then(($id) => {
+      let bookingID = $id.text()
+      bookingPopup.clickCloseBtnBookingPopup()
+      leftMenuPanel.clickBookingManagementIcon()
+      bookingsListPage.clickDatesRangeDropdown()
+      bookingsListPage.clickDrpdDatesRangeThisMonth()
+      
+      bookingsListPage.typeInBookingIDField(`${bookingID}{enter}`)
+      bookingsListPage.getTableHeadersColumnsList().then(($el) => {
+        let tableHeaderArray = getArray($el)
+        let indexOfID = tableHeaderArray.indexOf(this.bookingsListPage.columns.id[1])
+        
+        bookingsListPage.getTableBody().then(($el) => {
+          let tableDataArray = getArray($el)
+          expect(tableDataArray[indexOfID]).to.eq(bookingID)
+        })
       })
     })
   });

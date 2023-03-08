@@ -7,7 +7,7 @@ const loginPopup = new LoginPopup();
 const registerPopup = new RegisterPopup();
 
 
-describe('US_01.02 | Login-register section elements UI and functionality | Login only', () => {
+describe('US_01.02 | Login-register section elements UI and functionality | Login only', { tags: ['smoke'] }, () => {
 
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
@@ -50,7 +50,7 @@ describe('US_01.02 | Login-register section elements UI and functionality | Logi
             .should('have.css', 'background-color', this.colors.whiteTransparent)
     });
 
-    it('AT_01.02.02 | Login button: visible / clickable / opening Login popup', function () {
+    it('AT_01.02.02 | Login button: visible / clickable / opening Login popup', { tags: ['regression'] }, function () {
         startPage.getLoginButton().should('be.visible');
         startPage.clickLoginButton();
         loginPopup
@@ -68,7 +68,7 @@ describe('US_01.02 | Login-register section elements UI and functionality | Logi
 /*
     Login and registration tests are separated to avoid going to the "/" before each test.
 */
-describe('US_01.02 | Login-register section elements UI and functionality | Registration only', () => {
+describe('US_01.02 | Login-register section elements UI and functionality | Registration only', { tags: ['smoke'] }, () => {
 
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
@@ -92,7 +92,7 @@ describe('US_01.02 | Login-register section elements UI and functionality | Regi
             .and('have.text', this.startPage.links.registerAccountNowEnglishText);
     });
 
-    it('AT_01.02.05 | Verify Link "Register account now" is visible, clickable and opens registration pop up', function() {
+    it('AT_01.02.05 | Verify Link "Register account now" is visible, clickable and opens registration pop up', { tags: ['regression'] }, function() {
         startPage.clickRegisterAccountLink()
         registerPopup.getRegisterPopupHeader().should('have.text', this.startPage.headers.registerAgentAccount);
     });
