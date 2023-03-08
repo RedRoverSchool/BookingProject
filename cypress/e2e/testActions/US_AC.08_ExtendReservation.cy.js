@@ -8,7 +8,7 @@ const bookingPopup = new BookingPopup();
 
 const AGENT = Cypress.env('agent')
 
-describe('US_AC.08 | ACTIONS > Extend reservation', function () {
+describe('US_AC.08 | ACTIONS > Extend reservation', { tags: ['regression'] }, function () {
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
@@ -22,7 +22,6 @@ describe('US_AC.08 | ACTIONS > Extend reservation', function () {
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
     })
-
 
     it('AT_AC.08.01 | Extend one time and verify the time counter in the text field "This reservation will expire in" is updated and starts counting down from 00:15:00', function () {
         cy.clock();
