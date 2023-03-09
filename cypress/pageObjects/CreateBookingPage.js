@@ -423,7 +423,19 @@ class CreateBookingPage {
     const currentMondayDate = currentMonday.toDateString();
     const currentMondayDayOnlyNumber = currentMondayDate.split(" ")[2];
     return currentMondayDayOnlyNumber;
-  }
+    }
+    
+    getCurrentDate() {
+        const date = new Date();
+        const currentDate = date.toLocaleDateString('en-US', { day: 'numeric' });
+        return currentDate
+    }
+
+    getCurrentDateInThailand() {
+        const date = new Date();
+        let currentDateThailand = date.toLocaleString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok' })
+        return currentDateThailand
+    }
     
    clickBalanceOnBookingPage() {
     this.getBalanceOnBookingPage().click();
@@ -616,5 +628,22 @@ class CreateBookingPage {
     clickResetButton() {
         this.getResetButton().click();
     }    
+
+    getValidBoundaryValuesMonthDropdownMinNomMax() {
+        let validBoundaryValueArrayMinNomMax = this.validBoundaryValuesMonthDropdownMinNomMax()
+        console.log(validBoundaryValueArrayMinNomMax)
+      
+        if (this.getFirstAvailableForBookingDefaultDay() === "1" || this.getFirstAvailableForBookingDefaultDay() === "2") {
+            this.clickCalendarPrevButton()
+            return validBoundaryValueArrayMinNomMax
+        }
+        if (this.getCurrentDateInThailand() === "1" && this.getCurrentDate() !== "1") {
+            validBoundaryValueArrayMinNomMax[0] = this.createArrayOfConsetutiveMonths()[1]
+           return  validBoundaryValueArrayMinNomMax
+        }
+        else {
+            return validBoundaryValueArrayMinNomMax
+        }
+    }
 }
 export default CreateBookingPage;

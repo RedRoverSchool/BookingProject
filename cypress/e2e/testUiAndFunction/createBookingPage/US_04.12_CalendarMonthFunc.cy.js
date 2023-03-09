@@ -40,27 +40,16 @@ describe('US_04.12 | Calendar month functionality', { tags: ['smoke', 'regressio
 			expect(arrayofMonths).to.deep.eq(createBookingPage.createArrayOfConsetutiveMonths())
 		})
 		
-		let validBoundaryValueArrayMinNomMax = createBookingPage.validBoundaryValuesMonthDropdownMinNomMax()
-		const currentDateThailand = getCustomCalendarDay(0)
-		const firstAvailiableForBookingDay = getCustomCalendarDay(2)
-
-		if (firstAvailiableForBookingDay === "1" || firstAvailiableForBookingDay === "2") {
-			createBookingPage.clickCalendarPrevButton()	
-		}
-		
-		if (currentDateThailand === "1") {
-			validBoundaryValueArrayMinNomMax[0] = createBookingPage.validBoundaryValuesMonthDropdownMinNomMax()[1]
-		}
-
-		for (let monthsAndYear of validBoundaryValueArrayMinNomMax) {
+		for (let monthsAndYear of createBookingPage.getValidBoundaryValuesMonthDropdownMinNomMax()) {
+			console.log(createBookingPage.getValidBoundaryValuesMonthDropdownMinNomMax()[1])
 			createBookingPage
 				.selectMonthFromMonthDropdown(monthsAndYear)
 			createBookingPage
-				.clickCalendarDay(currentDateThailand)
+				.clickCalendarDay(createBookingPage.getCurrentDateInThailand())
 			       
 					createBookingPage.getLabelDepartureOnDate().then(($el) => {
 						let departureDate = $el.text()
-							expect(departureDate).to.eq(currentDateThailand + " " + monthsAndYear)
+						expect(departureDate).to.eq(createBookingPage.getCurrentDateInThailand() + " " + monthsAndYear)
 					})			
 		    }
 	});
