@@ -41,7 +41,6 @@ describe('US_04.12 | Calendar month functionality', { tags: ['smoke', 'regressio
 		})
 		
 		for (let monthsAndYear of createBookingPage.getValidBoundaryValuesMonthDropdownMinNomMax()) {
-			console.log(createBookingPage.getValidBoundaryValuesMonthDropdownMinNomMax()[1])
 			createBookingPage
 				.selectMonthFromMonthDropdown(monthsAndYear)
 			createBookingPage

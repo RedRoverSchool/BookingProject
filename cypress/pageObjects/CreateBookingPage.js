@@ -631,8 +631,7 @@ class CreateBookingPage {
 
     getValidBoundaryValuesMonthDropdownMinNomMax() {
         let validBoundaryValueArrayMinNomMax = this.validBoundaryValuesMonthDropdownMinNomMax()
-        console.log(validBoundaryValueArrayMinNomMax)
-      
+    
         if (this.getFirstAvailableForBookingDefaultDay() === "1" || this.getFirstAvailableForBookingDefaultDay() === "2") {
             this.clickCalendarPrevButton()
             return validBoundaryValueArrayMinNomMax
