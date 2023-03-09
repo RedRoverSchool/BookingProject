@@ -10,19 +10,6 @@ const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
 const getDateAndMonth = (el) => el.text().split('-')[0]
-const getPreviousWeekMonSundDays = (date) => {
-    let now = new Date()
-    const currentYear = now.toLocaleString('en-US', { year: 'numeric' });
-    const nextWeekMonday = new Date(date + " " + currentYear)
-    nextWeekMonday.setDate(nextWeekMonday.getDate() - 7)
-    let previousWeekMonday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
-    previousWeekMonday = previousWeekMonday[1] + " " + previousWeekMonday[0]
-
-    nextWeekMonday.setDate(nextWeekMonday.getDate() + 6)
-    let previousWeekSunday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
-    previousWeekSunday = previousWeekSunday[1] + " " + previousWeekSunday[0]
-    return previousWeekMonday + ' - ' + previousWeekSunday
-}
 
 describe('US_04.08 | Calendar-selection block UI  week/month view', { tags: ['smoke'] }, () => {
     before(() => {
@@ -85,7 +72,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', { 
             createBookingPage.clickCalendarPrevButton();
 
             createBookingPage.getLabelCalendar().then(($el) => {
-                expect($el.text()).to.eq(getPreviousWeekMonSundDays(mondayWeekAhead));
+                expect($el.text()).to.eq(createBookingPage.getPreviousWeekMonSundDays(mondayWeekAhead));
             });
         })
     });

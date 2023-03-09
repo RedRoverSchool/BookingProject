@@ -644,5 +644,19 @@ class CreateBookingPage {
             return validBoundaryValueArrayMinNomMax
         }
     }
+
+    getPreviousWeekMonSundDays = (date) => {
+        let now = new Date()
+        const currentYear = now.toLocaleString('en-US', { year: 'numeric' });
+        const nextWeekMonday = new Date(date + " " + currentYear)
+        nextWeekMonday.setDate(nextWeekMonday.getDate() - 7)
+        let previousWeekMonday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
+        previousWeekMonday = previousWeekMonday[1] + " " + previousWeekMonday[0]
+
+        nextWeekMonday.setDate(nextWeekMonday.getDate() + 6)
+        let previousWeekSunday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
+        previousWeekSunday = previousWeekSunday[1] + " " + previousWeekSunday[0]
+        return previousWeekMonday + ' - ' + previousWeekSunday
+    }
 }
 export default CreateBookingPage;
