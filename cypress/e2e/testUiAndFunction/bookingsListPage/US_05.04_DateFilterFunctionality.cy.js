@@ -33,7 +33,10 @@ describe('US_05.04 | Date filter functionality', { tags: ['regression'] }, () =>
     it('AT_05.04.01 Verify that the "filterDateType" dropdown is clickable', function() {  
         bookingsListPage.clickDateRangeType()
     });
-    
+
+    it('AT_05.04.03 | Verify that the Agent can switch and choose from "By purchase date" to "By departure date"', function() {
+        bookingsListPage.getDateRangeTypeDefault('include.text', this.bookingsListPage.view);
+    });
 });
 
 
