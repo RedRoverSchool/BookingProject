@@ -46,6 +46,9 @@ describe('US_04.12 | Calendar month functionality', { tags: ['smoke', 'regressio
 
 		if (firstAvailiableForBookingDay === "1" || firstAvailiableForBookingDay === "2") {
 			createBookingPage.clickCalendarPrevButton()	
+		}
+		
+		if (currentDateThailand === "1") {
 			validBoundaryValueArrayMinNomMax[0] = createBookingPage.validBoundaryValuesMonthDropdownMinNomMax()[1]
 		}
 
