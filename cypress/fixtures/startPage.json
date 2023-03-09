@@ -22,7 +22,9 @@
         "thLoginBtnText": "เข้าสู่ระบบ",
         "rusLoginBtnText": "Войти",
         "signInBtnText": "SIGN IN",
-        "requestCodeButtonText": "REQUEST CODE"
+        "requestCodeButtonText": "REQUEST CODE",
+        "registerBtnText": "Register",
+        "front_size": "18px"
     },
     "headers": {
         "header_Login_Popup": {

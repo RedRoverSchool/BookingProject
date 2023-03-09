@@ -93,4 +93,13 @@ describe('US_01.14 | Register UI', { tags: ['smoke'] }, () => {
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
     })
     
+    it ('AT_01.14.09 | Verify that the button "Register" is visible in the modal body before hover, has text "Register",color: #6CCD66, border-color: #6CCD66 and font size: 18px' , function () {
+        registerPopup
+            .getRegisterButton()
+            .should('be.visible')
+            .and('include.value', this.startPage.buttons.registerBtnText)
+            .and('have.css', 'color', this.colors.greenPopup)
+            .and('have.css', 'border-color', this.colors.greenPopup)
+            .and('have.css', 'font-size', this.startPage.buttons.front_size)
+    }) 
 })
