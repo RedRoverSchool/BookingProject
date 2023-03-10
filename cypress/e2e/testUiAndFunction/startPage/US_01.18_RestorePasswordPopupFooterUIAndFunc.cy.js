@@ -17,6 +17,10 @@ describe ('US 01.18 | Restore password Popup > Footer UI and functionality', { t
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage;
         });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });
     });
 
     it('AT_01.18.01 | Verify the link "Register" is clickable and redirects to the "Register agent account" popup', function () {
@@ -24,5 +28,12 @@ describe ('US 01.18 | Restore password Popup > Footer UI and functionality', { t
         registerPopup
             .getRegisterPopupHeader()
             .should('include.text', this.startPage.headers.registerAgentAccount)
-    })
+    });
+
+    it('AT_01.18.02 | Verify the text “No account yet?” has rgb(153, 153, 153) color and 14px font-size', function () {
+        loginPopup
+            .getNoAccountYet()
+            .should('have.css','color', this.colors.greyLabel)
+            .and('have.css', 'font-size', this.startPage.inputField.registerPopup.front_size)
+    });
 })
