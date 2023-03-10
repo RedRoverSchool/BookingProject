@@ -5,13 +5,15 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from '../../../pageObjects/BookingPopup';
 import getArray from "../../../support/utilities/getArray";
+import { faker } from '@faker-js/faker';
 
 const bookingsListPage = new BookingsListPage();
 const leftMenuPanel = new LeftMenuPanel();
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
 const AGENT = Cypress.env("agent");
-const BOOKING = require('../../../fixtures/createBookingPage.json')
+const BOOKING = require('../../../fixtures/createBookingPage.json');
+const randomWord = faker.word.adjective(5);
 
 describe("US_05.02_Search section functionality", { tags: ['regression'] }, () => {
 
@@ -41,8 +43,8 @@ describe("US_05.02_Search section functionality", { tags: ['regression'] }, () =
     leftMenuPanel.clickBookingManagementIcon();
   });
 
-  it("AT_05.02.03.01| Verify the Сlear anchor is clickable and removes all input data from the placeholder field Search", () => {
-    bookingsListPage.typeRandomWordInSearchField();
+  it("AT_05.02.03.01| Verify the Clear anchor is clickable and removes all input data from the placeholder field Search", () => {
+    bookingsListPage.typeInSearchField(randomWord);
     bookingsListPage.clickClearLink();
 
     bookingsListPage.getSearchField().should("be.empty");
