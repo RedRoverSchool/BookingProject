@@ -600,7 +600,6 @@ class CreateBookingPage {
         
     }
 
-<<<<<<<<< Temporary merge branch 1
     clickgetOctoberMondayButton() {
         this.getOctoberMondayButton().click({ force: true })
     }
@@ -617,24 +616,25 @@ class CreateBookingPage {
             check = check && (checkForSameNumber.size == 1) && (checkForA_B_C == expectedString)
         }
         return check
+    }    
+
+    reserveBooking(passengerNames, passengerAmount, fareTypes) {
+        this.clickCalendarNextButton();
+    
+        this.clickFridayButton();
+
+        this.selectAmountPassengersDetailsDropdown(passengerAmount);
+
+        this.clickTripCard();        
+    
+        this.typePassengerNames(passengerNames);
+    
+        this.selectFareTypes(fareTypes);
+
+        this.clickReservationTicketArrow();
+
+        this.clickReservationTicketButton();
     }
 
-    testCreatingReservationForPassengerType(passengerName, dropdownSelection, checkTextOnPassengerTypeLabel) {
-        cy.intercept('/tools/ping/**').as('getToolsPing');
-        cy.intercept('POST', 'orders').as('orders')
-    
-        this.typeIntoMainPassengerNameField(passengerName);
-        this.getMainPassengerFareTypeDropdownSelect().select(dropdownSelection, { force: true });
-        this.clickReservationTicketArrow();
-        cy.wait('@getToolsPing')
-        this.clickReservationTicketButton();
-        cy.wait("@getTrip");
-        cy.wait('@getToolsPing').then(() => {
-            bookingPopup.getConfirmTicketButton().should('be.visible');
-            bookingPopup.getPassengerTitle().should('include.text', '(1)');
-            bookingPopup.getPassengersList().should('have.length', 1);
-            bookingPopup.getOnePassengerTypeLabel().should('have.text', checkTextOnPassengerTypeLabel); 
-        })  
-    }
 }
 export default CreateBookingPage;
