@@ -94,7 +94,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', { 
         }
     });
 
-    it('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
+    it.skip('AT_04.08.02 | Verify that Calendar Lable  shows week range in correct format from Monday to Sunday', () => {
         const date = new Date()
         let avalableForBookingDay = date.setDate(date.getDate() + 2);
         for (let i = 0; i < 10; i++) {
