@@ -9,8 +9,8 @@ const AGENT = Cypress.env('agent');
 describe('US_04.06 | Departure dropdown UI and functionality', { tags: ['smoke'] }, () => {   
 
     beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
         
         cy.fixture('colors').then(colors => {
@@ -27,27 +27,27 @@ describe('US_04.06 | Departure dropdown UI and functionality', { tags: ['smoke']
         createBookingPage.clickDepartureStationDropdown()
 
         createBookingPage.getListDepartureStation()
-            .should('have.length', this.createBookingPage.dropdowns.departureStation.stationsNumber)            
+            .should('have.length', this.bookingData.dropdowns.departureStation.stationsNumber)            
         createBookingPage.getListDepartureStation().each(($el, i) => {
             cy.wrap($el).should('be.visible')
-            expect($el.text()).to.be.equal(this.createBookingPage.dropdowns.departureStation.stationsNames[i])
+            expect($el.text()).to.be.equal(this.bookingData.dropdowns.departureStation.stationsNames[i])
         })
     });
 
     it('AT_04.06.02 | Verify that the Agent can choose stations from the Dropdown Menu', { tags: ['regression'] }, function () {
-        createBookingPage.selectNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[6])
+        createBookingPage.selectNeedDepartureStation(this.bookingData.dropdowns.departureStation.stationsNames[6])
 
         createBookingPage.getDepartureStationDropdown()
-            .should('have.text', this.createBookingPage.dropdowns.departureStation.stationsNames[6])
+            .should('have.text', this.bookingData.dropdowns.departureStation.stationsNames[6])
             .and('be.visible')
     });
 
     it('AT_04.06.03 | Verify that the background of the selected item in the Dropdown Menu has gray color (#DDDDDD)', function() {
-        createBookingPage.selectNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[3])
+        createBookingPage.selectNeedDepartureStation(this.bookingData.dropdowns.departureStation.stationsNames[3])
 
-        createBookingPage.hoverNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[1])
+        createBookingPage.hoverNeedDepartureStation(this.bookingData.dropdowns.departureStation.stationsNames[1])
         createBookingPage.getListDepartureStation().each($el => {
-            if($el.text() == this.createBookingPage.dropdowns.departureStation.stationsNames[3]){ 
+            if($el.text() == this.bookingData.dropdowns.departureStation.stationsNames[3]){ 
                               
                 expect($el).to.have.css('background-color', this.colors.greyDropdownBack)
             }
@@ -58,10 +58,10 @@ describe('US_04.06 | Departure dropdown UI and functionality', { tags: ['smoke']
     it.skip('AT_04.06.04 | Verify that the background of the newly selected item changes color to green(#00A65A) when the item is selected', function() {
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/'); 
-        createBookingPage.hoverNeedDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[4])
+        createBookingPage.hoverNeedDepartureStation(this.bookingData.dropdowns.departureStation.stationsNames[4])
 
         createBookingPage.getListDepartureStation().each($el => {
-            if($el.text() == this.createBookingPage.dropdowns.departureStation.stationsNames[4]) {
+            if($el.text() == this.bookingData.dropdowns.departureStation.stationsNames[4]) {
 
                 expect($el).to.have.css('background-color', this.colors.greenBookingPage)
             }

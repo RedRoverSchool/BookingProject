@@ -24,8 +24,8 @@ describe('US_04.09 | Calendar available days week UI', { tags: ['smoke'] }, () =
 
 	beforeEach(function () {
 
-		cy.fixture('createBookingPage').then(createBookingPage => {
-			this.createBookingPage = createBookingPage;
+		cy.fixture('createBookingPage').then(bookingData => {
+			this.bookingData = bookingData;
 		});
 
 		cy.fixture('colors').then(colors => {
@@ -71,7 +71,7 @@ describe('US_04.09 | Calendar available days week UI', { tags: ['smoke'] }, () =
 
 	it('AT_04.09.05 | Seven fields are displayed for the week', { tags: ['regression'] }, function () {
 		createBookingPage.getCalendarDays()
-			.should('have.length', this.createBookingPage.weekDayFields.quantity)
+			.should('have.length', this.bookingData.weekDayFields.quantity)
 	})
 
 	it('AT_04.09.07 | Each field has a capital letter of the Latin alphabet', function () {
@@ -86,7 +86,7 @@ describe('US_04.09 | Calendar available days week UI', { tags: ['smoke'] }, () =
 		createBookingPage.getCalendarDays().each(($el,ind) => {
 			const nameOfDay = getNameOfDay($el).slice(1, -1);
 
-		expect(nameOfDay).to.eq(this.createBookingPage.nameOfDay[ind]);
+		expect(nameOfDay).to.eq(this.bookingData.nameOfDay[ind]);
 		});
 	});
 });

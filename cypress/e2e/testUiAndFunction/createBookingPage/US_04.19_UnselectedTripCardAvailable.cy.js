@@ -21,8 +21,8 @@ describe('US_04.19 | Unselected trip card available UI', { tags: ['smoke'] }, fu
             this.colors = colors;
         });
         
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
     });
 
@@ -42,7 +42,7 @@ describe('US_04.19 | Unselected trip card available UI', { tags: ['smoke'] }, fu
     it('AT_04.19.03 | Verify "Class name" is bus or ferry name in a dark gray color (#4B4B4B) and visible below Departure time', function () {
         createBookingPage.getClassUnselectedTripCards().each($el => {
             let text = $el.text().match(/\D/g).join('').trim()
-            let allClasses = `${this.createBookingPage.seatsTableTitle[0]} ${this.createBookingPage.seatsTableTitle[1]} ${this.createBookingPage.seatsTableTitle[2]}`
+            let allClasses = `${this.bookingData.seatsTableTitle[0]} ${this.bookingData.seatsTableTitle[1]} ${this.bookingData.seatsTableTitle[2]}`
 
             cy.wrap($el).should('be.visible')
                         .and('have.css', 'color', this.colors.darkGray)

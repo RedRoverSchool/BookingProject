@@ -20,25 +20,25 @@ describe('US_04.25 | Passengers details functionality - One passenger', { tags: 
     });
 
     beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });        
     });
 
     it('AT_04.25.01 | Verify the opportunity to fill main passengers name in "Passenger name" input field', function () {
-        createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name);
+        createBookingPage.typeIntoMainPassengerNameField(this.bookingData.inputField.main_passenger.name);
 
         createBookingPage
             .getMainPassengerNameField()
-            .should('have.value', this.createBookingPage.inputField.main_passenger.name);
+            .should('have.value', this.bookingData.inputField.main_passenger.name);
     });
 
     it('AT_04.25.02 | Verify the opportunity to fill main passengers phone in "Phone number" input field', function () {
-        createBookingPage.typeIntoMainPassengerPhoneField(this.createBookingPage.inputField.main_passenger.phone);
+        createBookingPage.typeIntoMainPassengerPhoneField(this.bookingData.inputField.main_passenger.phone);
 
         createBookingPage
             .getMainPassengerPhoneField()
-            .should('have.value', this.createBookingPage.inputField.main_passenger.phone);
+            .should('have.value', this.bookingData.inputField.main_passenger.phone);
     });
 
     it('AT_04.25.03 | Verify agent is able to choose main passenger fare type from "Fare type" dropdown menu', function () {
@@ -57,12 +57,12 @@ describe('US_04.25 | Passengers details functionality - One passenger', { tags: 
     })
 
     it('AT_04.25.04 | Verify email input field doesnt  accept invalid emails and system displays alert', function () {
-        const expectedAlert = this.createBookingPage.alerts.invalidEmail
+        const expectedAlert = this.bookingData.alerts.invalidEmail
         const invalidEmailsArray =
-            [this.createBookingPage.invalidEmail.emailWithoutAt,
-            this.createBookingPage.invalidEmail.emailWithoutDot,
-            this.createBookingPage.invalidEmail.emailWithWrongDomen,
-            this.createBookingPage.invalidEmail.emailTooLong75Symbl
+            [this.bookingData.invalidEmail.emailWithoutAt,
+            this.bookingData.invalidEmail.emailWithoutDot,
+            this.bookingData.invalidEmail.emailWithWrongDomen,
+            this.bookingData.invalidEmail.emailTooLong75Symbl
             ]
 
         for (let invalidEmail of invalidEmailsArray) {
@@ -70,7 +70,7 @@ describe('US_04.25 | Passengers details functionality - One passenger', { tags: 
                 .then(() => {
                     createBookingPage.clickResetButton()
                     createBookingPage.clickFirstTripCard();
-                    createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+                    createBookingPage.typeIntoMainPassengerNameField(this.bookingData.inputField.main_passenger.name)
                     createBookingPage.typeIntoMainPassengerEmailField(invalidEmail)
                     createBookingPage.clickBookTicketsBtn()
                 })

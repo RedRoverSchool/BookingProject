@@ -13,8 +13,8 @@ describe('US_04.15 | Create booking page > Month button elements view', { tags: 
     })
 
     beforeEach(function () {
-        cy.fixture('createBookingPage.json').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage.json').then(bookingData => {
+            this.bookingData = bookingData;
         });
 
         cy.fixture('colors').then(colors => {
@@ -65,7 +65,7 @@ describe('US_04.15 | Create booking page > Month button elements view', { tags: 
     })
 
     it('AT_04.15.04| Departure date section has the label "Departure date"', function () {
-        createBookingPage.getLableDepartureDate().should('have.text', this.createBookingPage.departureDate);
+        createBookingPage.getLableDepartureDate().should('have.text', this.bookingData.departureDate);
     });
 
     it('AT_04.15.07 | Selected day by default is according to requirements (current date by (GMT+7) + 2 days)', { tags: ['regression'] }, function () {

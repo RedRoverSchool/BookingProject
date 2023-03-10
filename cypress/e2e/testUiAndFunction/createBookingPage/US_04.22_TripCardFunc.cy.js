@@ -9,8 +9,8 @@ describe('US_04.22 | Trip card functionality', { tags: ['smoke', 'regression'] }
     const AGENT = Cypress.env('agent');
    
     beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         })
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
@@ -48,13 +48,13 @@ describe('US_04.22 | Trip card functionality', { tags: ['smoke', 'regression'] }
     });
 
     it('AT_04.22.04 | Trip cards are filtered by vehicle class "VIP bus 24" selected from trip class dropdown menu (Bangkok Khao San - Phuket Town trip)', function () {
-        createBookingPage.selectDepartureStation(this.createBookingPage.dropdowns.departureStation.stationsNames[2])
-        createBookingPage.selectArrivalStation(this.createBookingPage.dropdowns.arrivalStation.stationsNames[3])
+        createBookingPage.selectDepartureStation(this.bookingData.dropdowns.departureStation.stationsNames[2])
+        createBookingPage.selectArrivalStation(this.bookingData.dropdowns.arrivalStation.stationsNames[3])
         cy.wait('@getTrip')
-        createBookingPage.getTripClassDropdown().select(this.createBookingPage.tripClass.VIP_Bus)
+        createBookingPage.getTripClassDropdown().select(this.bookingData.tripClass.VIP_Bus)
 
         createBookingPage.getVehicleClassTripCards().filter(':visible').each(($el) => {
-            expect($el.text()).to.eq(this.createBookingPage.tripClass.VIP_Bus)
+            expect($el.text()).to.eq(this.bookingData.tripClass.VIP_Bus)
         })
     });
 

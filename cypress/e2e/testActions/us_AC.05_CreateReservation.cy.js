@@ -43,20 +43,20 @@ describe.skip('US_AC.05 | Create reservation for 1 passenger', { tags: ['regress
     });
 
     beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         })
     });
 
     it('AT_AC.05.02| Create reservation for 1 passenger - Child', function () {
-        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name, 'child', 'Child:')
+        testCreatingReservationForPassengerType(this.bookingData.inputField.main_passenger.name, 'child', 'Child:')
     });
 
     it('AT_AC.05.01| Create reservation for 1 passenger - Adult', function () {
-        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'adult', 'Adult:');
+        testCreatingReservationForPassengerType(this.bookingData.inputField.main_passenger.name,'adult', 'Adult:');
     });
 
     it('AT_AC.05.03| Create reservation for 1 passenger - Elder', function () {
-        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'elder', 'Elder:');
+        testCreatingReservationForPassengerType(this.bookingData.inputField.main_passenger.name,'elder', 'Elder:');
     });
 });   

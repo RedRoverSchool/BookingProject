@@ -11,8 +11,8 @@ describe('US_04.12 | Calendar month functionality', { tags: ['smoke', 'regressio
 	const AGENT = Cypress.env('agent');
 
 	beforeEach(function () {
-		cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+		cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         })
 
 		cy.loginWithSession(AGENT.email, AGENT.password);
@@ -29,7 +29,7 @@ describe('US_04.12 | Calendar month functionality', { tags: ['smoke', 'regressio
 		createBookingPage.getMonthDropdownSelect().select(currentMonthAndYear)
 		createBookingPage.getCalendarDays().not('.shaded').each(($el) => {
             if(+$el.text() < +dateThailand){
-                expect($el).to.have.class(this.createBookingPage.class.unavailableClass)
+                expect($el).to.have.class(this.bookingData.class.unavailableClass)
             }          
 		})		
 	});

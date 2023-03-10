@@ -47,8 +47,8 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', { 
         cy.visit('/');
         leftMenuPanel.clickBookingIcon();
 
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
     });
 
@@ -127,17 +127,17 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', { 
 
     it('AT_04.08.11 | Verify that month format label is "Oct 2023"', function () {
         createBookingPage.clickMonthBtn();
-        createBookingPage.selectMonthFromMonthDropdown(this.createBookingPage.oct);
-        createBookingPage.getLabelCalendar().should('include.text', this.createBookingPage.oct2023);
+        createBookingPage.selectMonthFromMonthDropdown(this.bookingData.oct);
+        createBookingPage.getLabelCalendar().should('include.text', this.bookingData.oct2023);
     });
 
     it('AT_04.08.12 | Verify that week format label is "2 Oct - 8 Oct"', function ()  {
         createBookingPage.clickMonthBtn();
-        createBookingPage.selectMonthFromMonthDropdown(this.createBookingPage.oct);
+        createBookingPage.selectMonthFromMonthDropdown(this.bookingData.oct);
 
         createBookingPage.clickgetOctoberMondayButton();
 
         createBookingPage.clickWeekBtn();
-        createBookingPage.getLabelCalendar().should('include.text', this.createBookingPage.octWeek);
+        createBookingPage.getLabelCalendar().should('include.text', this.bookingData.octWeek);
     });
 });

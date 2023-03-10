@@ -18,13 +18,13 @@ describe('US_AC.04 | Create booking for more then 1 passenger', { tags: ['regres
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/')
 
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData
         })
     })
 
     it('AT_AC.04.01| Create booking for more then 1 passenger: Adult + Adult', function () {
-        const filteredPassengers = this.createBookingPage.passengers.filter((passenger) => passenger.fareType === 'adult')
+        const filteredPassengers = this.bookingData.passengers.filter((passenger) => passenger.fareType === 'adult')
         const passengerNames = filteredPassengers.map((passenger) => passenger.name)
         const adultFareTypes = filteredPassengers.map((passenger) => passenger.fareType)
         const passengerAmount = 2
@@ -38,7 +38,7 @@ describe('US_AC.04 | Create booking for more then 1 passenger', { tags: ['regres
     })
 
     it('AT_AC.04.02| Create booking for more then 1 passenger: Child + Child', function () {
-        const filteredPassengers = this.createBookingPage.passengers.filter((passenger) => passenger.fareType === 'child')
+        const filteredPassengers = this.bookingData.passengers.filter((passenger) => passenger.fareType === 'child')
         const passengerNames = filteredPassengers.map((passenger) => passenger.name)
         const childFareTypes = filteredPassengers.map((passenger) => passenger.fareType)
         const passengerAmount = 2
@@ -52,7 +52,7 @@ describe('US_AC.04 | Create booking for more then 1 passenger', { tags: ['regres
     })
 
     it('AT_AC.04.03 | Create booking for 2 passengers: Elder + Elder', function () {
-        const filteredPassengers = this.createBookingPage.passengers.filter((passenger) => passenger.fareType === 'elder' );
+        const filteredPassengers = this.bookingData.passengers.filter((passenger) => passenger.fareType === 'elder' );
         const passengerNames = filteredPassengers.map((passenger) => passenger.name);
         const elderFareTypes = filteredPassengers.map((passenger) => passenger.fareType);
         const passengerAmount = 2;
