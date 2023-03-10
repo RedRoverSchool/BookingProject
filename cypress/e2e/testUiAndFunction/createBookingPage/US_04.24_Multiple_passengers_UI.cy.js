@@ -8,8 +8,8 @@ const AGENT = Cypress.env('agent');
 describe('US_04.24 | Multiple passengers UI', { tags: ['smoke'] }, () => {
 
     beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
     });
 
@@ -28,12 +28,12 @@ describe('US_04.24 | Multiple passengers UI', { tags: ['smoke'] }, () => {
         createBookingPage.clickFareTypeDropdown();
         createBookingPage
             .getMainPassengerFareTypeDropdownList()
-            .should('have.length', this.createBookingPage.dropdowns.fareType.faretypesNumber);
+            .should('have.length', this.bookingData.dropdowns.fareType.faretypesNumber);
 
         createBookingPage.getMainPassengerFareTypeDropdownList().each(($el, i) => {
             cy.wrap($el)
               .should('be.visible')
-              .and('have.text', this.createBookingPage.dropdowns.fareType.fareTypesNames[i]);
+              .and('have.text', this.bookingData.dropdowns.fareType.fareTypesNames[i]);
         });
     });
 
@@ -41,31 +41,31 @@ describe('US_04.24 | Multiple passengers UI', { tags: ['smoke'] }, () => {
         createBookingPage
             .getFareTypeDropdown()
             .should('have.attr', 'title')
-            .and('equal', this.createBookingPage.dropdowns.fareType.fareTypesNames[0]);
+            .and('equal', this.bookingData.dropdowns.fareType.fareTypesNames[0]);
     });
 
     it('AT_04.24.04 | Verify Notes/Remark input field has a “Booking notes” text placeholder and is visible', function ()  {
         createBookingPage
             .getNotesInputField()
             .should('be.visible')
-            .and('have.attr', 'placeholder', this.createBookingPage.placeholder.notes);
+            .and('have.attr', 'placeholder', this.bookingData.placeholder.notes);
     });
 
     it('AT_04.24.05 | Verify email input field has an “Email” text placeholder.', function ()  {
         createBookingPage
             .getEmailInputField()
-            .should('have.attr', 'placeholder', this.createBookingPage.placeholder.email);
+            .should('have.attr', 'placeholder', this.bookingData.placeholder.email);
     });
 
     it('AT_04.24.06 | Verify phone number input field has a “Phone number” text placeholder.', function () {
         createBookingPage
             .getPlaceholderPhoneNumber()
-            .should('have.attr', 'placeholder', this.createBookingPage.placeholder.phone);
+            .should('have.attr', 'placeholder', this.bookingData.placeholder.phone);
     });
 
     it('AT_04.24.07 | Verify passenger name input field has a “Passenger name” text placeholder', function () {
         createBookingPage
             .getPlaceholderPassengerName()
-            .should('have.attr', 'placeholder', this.createBookingPage.placeholder.name);
+            .should('have.attr', 'placeholder', this.bookingData.placeholder.name);
     });
 });    

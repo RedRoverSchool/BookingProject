@@ -18,14 +18,14 @@ describe('US_AC.03 | Create booking for 1 passenger', { tags: ['regression'] }, 
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/')
 
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData
         })
     })
 
     it('AT_AC.03.01| Create booking for 1 passenger: Adult', function () {
-        const passengerName = this.createBookingPage.passengers[0].name
-        const adultFareType = this.createBookingPage.passengers.find((passenger) => passenger.fareType === 'adult').fareType
+        const passengerName = this.bookingData.passengers[0].name
+        const adultFareType = this.bookingData.passengers.find((passenger) => passenger.fareType === 'adult').fareType
         const passengerAmount = 1
 
         createBookingPage.createBooking(passengerName, passengerAmount, adultFareType)
@@ -35,8 +35,8 @@ describe('US_AC.03 | Create booking for 1 passenger', { tags: ['regression'] }, 
     })
 
     it('AT_AC.03.02| Create booking for 1 passenger: Child', function () {
-        const passengerName = this.createBookingPage.passengers[0].name
-        const adultFareType = this.createBookingPage.passengers.find((passenger) => passenger.fareType === 'child').fareType
+        const passengerName = this.bookingData.passengers[0].name
+        const adultFareType = this.bookingData.passengers.find((passenger) => passenger.fareType === 'child').fareType
         const passengerAmount = 1
 
         createBookingPage.createBooking(passengerName, passengerAmount, adultFareType)
@@ -46,8 +46,8 @@ describe('US_AC.03 | Create booking for 1 passenger', { tags: ['regression'] }, 
     })
 
     it('AT_AC.03.03| Create booking for 1 passenger: Elder', function () {
-        const passengerName = this.createBookingPage.passengers[0].name
-        const adultFareType = this.createBookingPage.passengers.find((passenger) => passenger.fareType === 'elder').fareType
+        const passengerName = this.bookingData.passengers[0].name
+        const adultFareType = this.bookingData.passengers.find((passenger) => passenger.fareType === 'elder').fareType
         const passengerAmount = 1
 
         createBookingPage.createBooking(passengerName, passengerAmount, adultFareType)

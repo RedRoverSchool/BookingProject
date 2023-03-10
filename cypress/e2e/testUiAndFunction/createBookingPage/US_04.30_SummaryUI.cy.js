@@ -21,8 +21,8 @@ describe('US_04.30 | Summary UI', () => {
 		cy.fixture('bookingPopup').then(bookingPopup => {
 			this.bookingPopup = bookingPopup;
 		});
-		cy.fixture('createBookingPage').then(createBookingPage => {
-			this.createBookingPage = createBookingPage
+		cy.fixture('createBookingPage').then(bookingData => {
+			this.bookingData = bookingData
 		});
 	})
 
@@ -43,10 +43,10 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.minimum)
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.minimum)
 			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
-					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.minimum))
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.minimum))
 
 					createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
 						let seatsSummaryArray = getArray($el)
@@ -56,10 +56,10 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 		it('AT_04.30.11 | Displayed seats match default seat selection from seat selection section for 150 passengers', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.nominalValue)
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.nominalValue)
 			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
-					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.nominalValue))
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.nominalValue))
 
 					createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
 						let seatsSummaryArray = getArray($el)
@@ -69,10 +69,10 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 		it('AT_04.30.12 | Displayed seats match default seat selection from seat selection section for 300 passengers', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.maximum)
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.maximum)
 			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
-					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.maximum))
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.maximum))
 
 					createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
 						let seatsSummaryArray = getArray($el)
@@ -82,40 +82,40 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 		it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2 passengers) from dropdown menu', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.aboveMinimum)
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.aboveMinimum)
 			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
-					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.aboveMinimum))
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.aboveMinimum))
 
 					createBookingPage.getRowsSummary().then(($el) => {
 						let numberOfRows = $el
-						expect(parseInt(this.createBookingPage.validBoundaryValues.aboveMinimum)).to.eq(numberOfRows.length)
+						expect(parseInt(this.bookingData.validBoundaryValues.aboveMinimum)).to.eq(numberOfRows.length)
 					})
 				})
 		});
 
 		it('AT_04.30.13 | Verify total number of rows equals number of chosen passengers (150 passengers) for dropdown menu', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.nominalValue)
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.nominalValue)
 			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
-					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.nominalValue))
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.nominalValue))
 
 					createBookingPage.getRowsSummary().then(($el) => {
 						let numberOfRows = $el
-						expect(parseInt(this.createBookingPage.validBoundaryValues.nominalValue)).to.eq(numberOfRows.length)
+						expect(parseInt(this.bookingData.validBoundaryValues.nominalValue)).to.eq(numberOfRows.length)
 					})
 				})
 		});
 
 		it('AT_04.30.14 | Verify total number of rows equals number of chosen passengers ( 299 passengers) from passenger dropdown menu', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.validBoundaryValues.belowMaximum)
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.belowMaximum)
 			createBookingPage.getSelectedSeats().then(($el) => {
 					let defaultSelectedSeatsArray = getArray($el)
-					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.createBookingPage.validBoundaryValues.belowMaximum))
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.belowMaximum))
 
 					createBookingPage.getRowsSummary().then(($el) => {
 						let numberOfRows = $el
-						expect(parseInt(this.createBookingPage.validBoundaryValues.belowMaximum)).to.eq(numberOfRows.length)
+						expect(parseInt(this.bookingData.validBoundaryValues.belowMaximum)).to.eq(numberOfRows.length)
 					})
 				})
 		});
@@ -149,11 +149,11 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 		it('AT_04.30.05 | Verify total price for 6 passengers with custom fare types (2 "Adult", 2 "Child", 2 "Elder") is correct', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.numberOfPassengers.sixPassengers)
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.numberOfPassengers.sixPassengers)
 
-			let fareTypes = [this.createBookingPage.dropdowns.fareType.fareTypesNames[0], this.createBookingPage.dropdowns.fareType.fareTypesNames[0],
-			                this.createBookingPage.dropdowns.fareType.fareTypesNames[1], this.createBookingPage.dropdowns.fareType.fareTypesNames[1],
-				            this.createBookingPage.dropdowns.fareType.fareTypesNames[2], this.createBookingPage.dropdowns.fareType.fareTypesNames[2]]
+			let fareTypes = [this.bookingData.dropdowns.fareType.fareTypesNames[0], this.bookingData.dropdowns.fareType.fareTypesNames[0],
+			                this.bookingData.dropdowns.fareType.fareTypesNames[1], this.bookingData.dropdowns.fareType.fareTypesNames[1],
+				            this.bookingData.dropdowns.fareType.fareTypesNames[2], this.bookingData.dropdowns.fareType.fareTypesNames[2]]
 			
 			createBookingPage.selectFareTypes(fareTypes)
 			createBookingPage.getFareTypeColumnSummary().each(($el, i) => {
@@ -173,8 +173,8 @@ describe('US_04.30 | Summary UI', () => {
 		});
 
 		it('AT_04.30.08 | Verify price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.numberOfPassengers.passengerDefault)
-			let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.numberOfPassengers.passengerDefault)
+			let fareTypesArray = this.bookingData.dropdowns.fareType.fareTypesNames
 
 			for (let i = 0; i < fareTypesArray.length; i++) {
 				createBookingPage.selectFareTypeMainPassenger(fareTypesArray[i])
@@ -182,14 +182,14 @@ describe('US_04.30 | Summary UI', () => {
 
 				createBookingPage.getPricesSummary().then(($el) => {
 					let actualPrice = $el.text()
-					expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
+					expect(actualPrice).to.eq(this.bookingData.pricesForFerryAdultChildElder[i])
 				})
 			}
 		});
 
 		it('AT_04.30.09 | Verify total price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', { tags: ['regression'] }, function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.numberOfPassengers.passengerDefault)
-			let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.numberOfPassengers.passengerDefault)
+			let fareTypesArray = this.bookingData.dropdowns.fareType.fareTypesNames
 
 			for (let i = 0; i < fareTypesArray.length; i++) {
 				createBookingPage.selectFareTypeMainPassenger(fareTypesArray[i])
@@ -197,7 +197,7 @@ describe('US_04.30 | Summary UI', () => {
 
 				createBookingPage.getTotalPriceSummary().then(($el) => {
 					let actualPrice = $el.text()
-					expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
+					expect(actualPrice).to.eq(this.bookingData.pricesForFerryAdultChildElder[i])
 				})
 			}
 		});
@@ -224,7 +224,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
-			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.typeIntoMainPassengerNameField(this.bookingData.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Adult')
 			createBookingPage.clickBookTicketsBtn();
@@ -236,7 +236,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.06 | Verify that selected passenger fare type "Child" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
-			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.typeIntoMainPassengerNameField(this.bookingData.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Child')
 			createBookingPage.clickBookTicketsBtn();
@@ -247,7 +247,7 @@ describe('US_04.30 | Summary UI', () => {
 
 		it('AT_04.30.07 | Verify that selected passenger fare type "Elder" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
-			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.typeIntoMainPassengerNameField(this.bookingData.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Elder')
 			createBookingPage.clickBookTicketsBtn();

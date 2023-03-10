@@ -80,7 +80,7 @@ class CreateBookingPage {
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
-    getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
+    getEmailInputField = () => cy.get('.form-control[name="passenger-email"]');
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getLabelMainPassenger = () => cy.get('div.passenger-row > label');
     getPlaceholderPassengerName = () => cy.get('input[placeholder="Passenger name"]')
@@ -428,7 +428,19 @@ class CreateBookingPage {
     const currentMondayDate = currentMonday.toDateString();
     const currentMondayDayOnlyNumber = currentMondayDate.split(" ")[2];
     return currentMondayDayOnlyNumber;
-  }
+    }
+    
+    getCurrentDate() {
+        const date = new Date();
+        const currentDate = date.toLocaleDateString('en-US', { day: 'numeric' });
+        return currentDate
+    }
+
+    getCurrentDateInThailand() {
+        const date = new Date();
+        let currentDateThailand = date.toLocaleString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok' })
+        return currentDateThailand
+    }
     
    clickBalanceOnBookingPage() {
     this.getBalanceOnBookingPage().click();
@@ -636,5 +648,38 @@ class CreateBookingPage {
         this.clickReservationTicketButton();
     }
 
+    clickResetButton() {
+        this.getResetButton().click();
+    }    
+
+    getValidBoundaryValuesMonthDropdownMinNomMax() {
+        let validBoundaryValueArrayMinNomMax = this.validBoundaryValuesMonthDropdownMinNomMax()
+    
+        if (this.getFirstAvailableForBookingDefaultDay() === "1" || this.getFirstAvailableForBookingDefaultDay() === "2") {
+            this.clickCalendarPrevButton()
+            return validBoundaryValueArrayMinNomMax
+        }
+        if (this.getCurrentDateInThailand() === "1" && this.getCurrentDate() !== "1") {
+            validBoundaryValueArrayMinNomMax[0] = this.createArrayOfConsetutiveMonths()[1]
+           return  validBoundaryValueArrayMinNomMax
+        }
+        else {
+            return validBoundaryValueArrayMinNomMax
+        }
+    }
+
+    getPreviousWeekMonSundDays = (date) => {
+        let now = new Date()
+        const currentYear = now.toLocaleString('en-US', { year: 'numeric' });
+        const nextWeekMonday = new Date(date + " " + currentYear)
+        nextWeekMonday.setDate(nextWeekMonday.getDate() - 7)
+        let previousWeekMonday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
+        previousWeekMonday = previousWeekMonday[1] + " " + previousWeekMonday[0]
+
+        nextWeekMonday.setDate(nextWeekMonday.getDate() + 6)
+        let previousWeekSunday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
+        previousWeekSunday = previousWeekSunday[1] + " " + previousWeekSunday[0]
+        return previousWeekMonday + ' - ' + previousWeekSunday
+    }
 }
 export default CreateBookingPage;

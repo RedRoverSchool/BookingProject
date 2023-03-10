@@ -15,8 +15,8 @@ describe('US_02.05 | User dropdown menu UI and functionality', { tags: ['smoke',
 		cy.fixture('header').then(header => {
 			this.header = header
 		});
-		cy.fixture('createBookingPage').then(createBookingPage => {
-			this.createBookingPage = createBookingPage
+		cy.fixture('createBookingPage').then(bookingData => {
+			this.bookingData = bookingData
 		});
 	});
 
@@ -90,27 +90,27 @@ describe('US_02.05 | User dropdown menu UI and functionality', { tags: ['smoke',
 			header.clickFlagIconTh()
 			createBookingPage
 				.getPhoneNumberInputFild()
-				.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
+				.should('have.attr', 'placeholder', this.bookingData.inputField.main_passenger.placeholderPhoneNumberTh)
 		});
 
 		it('AT_02.05.04 |Verify UK flag  icon is clickable', function () {
 			header.clickFlagIconTh()
 			createBookingPage
 				.getPhoneNumberInputFild()
-				.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberTh)
+				.should('have.attr', 'placeholder', this.bookingData.inputField.main_passenger.placeholderPhoneNumberTh)
 			
 			header.clickUserDropDownMenu()
 			header.clickFlagIconEn()
 			createBookingPage
 				.getPhoneNumberInputFild()
-				.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderPhoneNumberEn)
+				.should('have.attr', 'placeholder', this.bookingData.inputField.main_passenger.placeholderPhoneNumberEn)
 		});
 
 		it('AT_02.05.15 | Verify the "Vietnamese flag" icon is clickable', function () {
 			header.clickFlagIconViet()
 			createBookingPage
 				.getEmailInputField()
-				.should('have.attr', 'placeholder', this.createBookingPage.inputField.main_passenger.placeholderEmailViet)
+				.should('have.attr', 'placeholder', this.bookingData.inputField.main_passenger.placeholderEmailViet)
 		});
 
 		it('AT_02.05.03 | Clicking "Sign out" button gets user signed out', function () {

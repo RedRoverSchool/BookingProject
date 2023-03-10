@@ -20,8 +20,8 @@ describe('US_01.09 | Login by phone number tab functionality', { tags: ['smoke',
         cy.fixture('startPage').then(startPage => {
             this.startPage = startPage
         });
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData
         });
     });
 
@@ -38,6 +38,6 @@ describe('US_01.09 | Login by phone number tab functionality', { tags: ['smoke',
         
         createBookingPage
             .getCreateBookingHeader()
-            .should('include.text', this.createBookingPage.headers.mainHeaderPage);
+            .should('include.text', this.bookingData.headers.mainHeaderPage);
     });
 });

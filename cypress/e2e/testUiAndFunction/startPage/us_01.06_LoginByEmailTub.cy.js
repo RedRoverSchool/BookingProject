@@ -15,8 +15,8 @@ describe('US_01.06 | Login by email tub functionality', { tags: ['smoke'] }, () 
     beforeEach(function () {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData
         });
         cy.fixture('colors').then(colors => {
             this.colors = colors;
@@ -25,7 +25,7 @@ describe('US_01.06 | Login by email tub functionality', { tags: ['smoke'] }, () 
 
     it('AT_01.06.01 | Verify Sign In Button redirect to the Create Booking Page', { tags: ['regression'] }, function () {
         cy.login(AGENT.email, AGENT.password);
-        createBookingPage.getCreateBookingHeader().should('include.text', this.createBookingPage.headers.mainHeaderPage)
+        createBookingPage.getCreateBookingHeader().should('include.text', this.bookingData.headers.mainHeaderPage)
     });
 
     it('AT_01.06.02 | Color of Sign In Button', function () {

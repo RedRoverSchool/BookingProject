@@ -19,8 +19,8 @@ describe('US_04.18 | Create booking page > Selected trip card UI', { tags: ['smo
             this.colors = colors;
         })
 
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
     })
 
@@ -34,7 +34,7 @@ describe('US_04.18 | Create booking page > Selected trip card UI', { tags: ['smo
     it('AT_04.18.02 | "Number available tickets" label contains the Number and "available tickets" text with color rgb(0, 166, 90) / background-color rgb(237, 248, 237)rgb(237, 248, 237)', function () {
         createBookingPage.getNumberTicketsAvailableSecondTripCard().then($el => {
             let number = $el.text();           
-            let labelText = number + this.createBookingPage.labelTicketsAvailableText;            
+            let labelText = number + this.bookingData.labelTicketsAvailableText;            
 
             createBookingPage.getLabelTicketsAvailableSecondTripCard()
                 .should('have.css', 'color', this.colors.greenBookingPage)
