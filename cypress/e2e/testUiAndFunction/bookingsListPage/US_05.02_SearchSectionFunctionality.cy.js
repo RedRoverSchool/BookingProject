@@ -60,13 +60,14 @@ describe("US_05.02_Search section functionality", { tags: ['regression'] }, () =
     leftMenuPanel.clickBookingManagementIcon()
     bookingsListPage.clickDatesRangeDropdown()
     bookingsListPage.clickDrpdDatesRangeThisMonth()
+    bookingsListPage.getTableBodyRows().should('have.length', 3)
 
     bookingsListPage.typeInSearchField(`${this.bookingData.bookingDetailsTest1.passengerName}{enter}`)
     bookingsListPage.getTableHeadersColumnsList().then(($el) => {
       let tableHeaderArray = getArray($el)
       let indexOfContact = tableHeaderArray.indexOf(this.bookingsListPage.columns.contact[1])
       
-      bookingsListPage.getTableBody().then(($el) => {
+      bookingsListPage.getTableBodyCells().then(($el) => {
         let tableDataArray = getArray($el)
         expect(tableDataArray[indexOfContact]).to.eq(this.bookingData.bookingDetailsTest1.passengerName)
       })
@@ -85,13 +86,14 @@ describe("US_05.02_Search section functionality", { tags: ['regression'] }, () =
       leftMenuPanel.clickBookingManagementIcon()
       bookingsListPage.clickDatesRangeDropdown()
       bookingsListPage.clickDrpdDatesRangeThisMonth()
+      bookingsListPage.getTableBodyRows().should('have.length', 4)
       
       bookingsListPage.typeInBookingIDField(`${bookingID}{enter}`)
       bookingsListPage.getTableHeadersColumnsList().then(($el) => {
         let tableHeaderArray = getArray($el)
         let indexOfID = tableHeaderArray.indexOf(this.bookingsListPage.columns.id[1])
         
-        bookingsListPage.getTableBody().then(($el) => {
+        bookingsListPage.getTableBodyCells().then(($el) => {
           let tableDataArray = getArray($el)
           expect(tableDataArray[indexOfID]).to.eq(bookingID)
         })

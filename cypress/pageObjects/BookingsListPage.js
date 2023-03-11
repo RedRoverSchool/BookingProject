@@ -29,7 +29,8 @@ class BookingsListPage {
     // Booking list section
     getTableHeaders = () => cy.get('.table thead tr');
     getTableHeadersColumnsList = () => cy.get('.dataTables_scrollHeadInner .table thead tr th');
-    getTableBody = () => cy.get('.dataTables_scrollBody .table>tbody tr td');
+    getTableBodyCells = () => cy.get('#data tbody tr td');
+    getTableBodyRows = () => cy.get('#data tbody tr');
     getColumnsSettingButton = () => cy.get('.table-columns-settings-link');
     getColumnsCheckbox = () => cy.get('input[type="checkbox');
     getColumnsOkButton = () => cy.get('.popup-table-columns-settings .btn-success');
