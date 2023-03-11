@@ -14,8 +14,8 @@ describe('US_04.05 | Departure / Arrival block UI', { tags: ['smoke'] }, () => {
     });
 
     beforeEach(function() {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
 
         cy.fixture('colors').then(colors => {
@@ -48,19 +48,19 @@ describe('US_04.05 | Departure / Arrival block UI', { tags: ['smoke'] }, () => {
 
     it('AT_04.05.04 | Verify that the Departure station label has font - 15px sans-serif', function() {
 
-        createBookingPage.getLabelDepartureStation().should('have.css', 'font-size', this.createBookingPage.departureStationLabelFont)
+        createBookingPage.getLabelDepartureStation().should('have.css', 'font-size', this.bookingData.departureStationLabelFont)
     });
 
     it('AT_04.05.05 | Verify that the Departure station label has margin - 0px 0px 5px', function() {
 
-        createBookingPage.getLabelDepartureStation().should('have.css', 'margin', this.createBookingPage.labelDepartureStationMargin)
+        createBookingPage.getLabelDepartureStation().should('have.css', 'margin', this.bookingData.labelDepartureStationMargin)
     });
 
     it('AT_04.05.08 |Verify that the "Arrival station" label has font - 15px sans-serif and  margin - 0px 0px 5px', function() {
 
         createBookingPage.getLabelArrivalStation()
-       .should('have.css', 'margin', this.createBookingPage.labelArrivalStationMargin)
-       .and('have.css', 'font-size', this.createBookingPage.labelArrivalStationFont)
+       .should('have.css', 'margin', this.bookingData.labelArrivalStationMargin)
+       .and('have.css', 'font-size', this.bookingData.labelArrivalStationFont)
     });
 
     it('AT_04.05.07 | Verify that the Departure station dropdown menu has "Selection arrow"', { tags: ['regression'] }, () => {

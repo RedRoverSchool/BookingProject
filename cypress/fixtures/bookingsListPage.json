@@ -58,5 +58,7 @@
     "excelFile": {
         "name": "Bookings ",
         "extension": ".csv"
-    }
+    },
+
+    "view": "By purchase date"
 }

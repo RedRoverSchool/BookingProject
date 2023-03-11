@@ -1,5 +1,3 @@
-import { faker } from '@faker-js/faker';
-
 class BookingsListPage {
 
     getBookingListHeader = () => cy.get('.page-title');
@@ -86,12 +84,6 @@ class BookingsListPage {
         const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' }
         return date.toLocaleDateString('en-US', optionsDate)
             .replace(/(\S{3}).(\d{1,2})(.).(\d{4})/, "$2 $1$3 $4")
-    }
-   
-    typeRandomWordInSearchField(){
-        const randomWord = faker.word.adjective(5);
-
-        return this.getSearchField().type(randomWord);
     }
     
     clickExcelButton(){

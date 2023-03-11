@@ -10,8 +10,8 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
     const AGENT = Cypress.env('agent');
     
     beforeEach(function() {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
 
         cy.fixture('colors').then(colors => {
@@ -52,20 +52,20 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
         createBookingPage.getSeatSelectionDropdownList().then(($el) => {
             const passengersArray = getArray($el)
                 
-            if (passengersArray[0] == this.createBookingPage.dropdowns.seatSelection.onePassenger) {
+            if (passengersArray[0] == this.bookingData.dropdowns.seatSelection.onePassenger) {
                 for (let i = passengersArray.length - 1; i > 0; i--) {
                     expect(passengersArray[i])
-                    .to.equal((parseInt(passengersArray[i - 1]) + 1) + ' ' + this.createBookingPage.dropdowns.seatSelection.passengers)
+                    .to.equal((parseInt(passengersArray[i - 1]) + 1) + ' ' + this.bookingData.dropdowns.seatSelection.passengers)
                 }
-                expect(passengersArray[0]).to.equal(this.createBookingPage.dropdowns.seatSelection.onePassenger)
+                expect(passengersArray[0]).to.equal(this.bookingData.dropdowns.seatSelection.onePassenger)
             }
         })
     });
 
     it('AT_04.29.03 | When selecting the required amount of passengers the corresponding number of seats in the "Seats table" will be rgb(157, 208, 157) color', { tags: ['smoke'] }, function() {
-        let passengersAmountBoundaryArray = [this.createBookingPage.validBoundaryValues.minimum,
-                                             this.createBookingPage.validBoundaryValues.nominalValue,
-                                             this.createBookingPage.validBoundaryValues.maximum]
+        let passengersAmountBoundaryArray = [this.bookingData.validBoundaryValues.minimum,
+                                             this.bookingData.validBoundaryValues.nominalValue,
+                                             this.bookingData.validBoundaryValues.maximum]
             
             for(let passengersAmount of passengersAmountBoundaryArray){
                 createBookingPage.getSeatSelectionDropdown()
@@ -121,9 +121,9 @@ describe('US_04.29 | Seat selection dropdown UI and functionality', () => {
 
     it('AT_04.29.06 |Verify that when you select a random number of passengers in the "Seat Selection" drop down list, it is equal to the number of passengers in the "Passenger Information" drop-down list', { tags: ['regression'] }, function () {
         let passengersAmountBoundaryArray = [
-          this.createBookingPage.validBoundaryValues.minimum,
-          this.createBookingPage.validBoundaryValues.nominalValue,
-          this.createBookingPage.validBoundaryValues.maximum,
+          this.bookingData.validBoundaryValues.minimum,
+          this.bookingData.validBoundaryValues.nominalValue,
+          this.bookingData.validBoundaryValues.maximum,
         ];
     
         for (let passengersAmount of passengersAmountBoundaryArray) {

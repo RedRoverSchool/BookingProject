@@ -18,8 +18,8 @@ describe('US_02.01 | Left Logo UI and functionality', { tags: ['smoke'] }, funct
     });
 
     beforeEach(function() {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         })
         
         cy.fixture('colors').then(colors => {
@@ -32,7 +32,7 @@ describe('US_02.01 | Left Logo UI and functionality', { tags: ['smoke'] }, funct
         header.clickLogoImg();
         createBookingPage
             .getCreateBookingHeader()
-            .should('include.text', this.createBookingPage.headers.mainHeaderPage);
+            .should('include.text', this.bookingData.headers.mainHeaderPage);
     });
 
     it('AT_02.01.01 | Verify logo is visible UI', function() {

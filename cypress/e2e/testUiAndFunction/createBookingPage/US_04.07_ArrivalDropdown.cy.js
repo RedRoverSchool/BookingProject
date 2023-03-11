@@ -13,8 +13,8 @@ describe('US_04.07_Arrival Dropdown UI and functionality ', { tags: ['smoke'] },
     });
     
     beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
     });
 
@@ -31,10 +31,10 @@ describe('US_04.07_Arrival Dropdown UI and functionality ', { tags: ['smoke'] },
     });
 
     it('AT_04.07.03 | Verify that the background of the selected item in the Dropdown Menu has gray color (#DDDDDD).', function() {
-        createBookingPage.selectNeedArrivalStation(this.createBookingPage.dropdowns.arrivalStation.stationsNames[2])
-        createBookingPage.hoverNeedArrivalStation(this.createBookingPage.dropdowns.arrivalStation.stationsNames[1])
+        createBookingPage.selectNeedArrivalStation(this.bookingData.dropdowns.arrivalStation.stationsNames[2])
+        createBookingPage.hoverNeedArrivalStation(this.bookingData.dropdowns.arrivalStation.stationsNames[1])
         createBookingPage.getArrivalStationList().each($el => {
-            if($el.text() == this.createBookingPage.dropdowns.arrivalStation.stationsNames[2]){ 
+            if($el.text() == this.bookingData.dropdowns.arrivalStation.stationsNames[2]){ 
                               
                 expect($el).to.have.css('background-color', this.colors.greyDropdownBack)
             }
@@ -42,9 +42,9 @@ describe('US_04.07_Arrival Dropdown UI and functionality ', { tags: ['smoke'] },
     })
 
     it('AT_04.07.04 | Verify that the background of the newly selected item changes color to green(#00A65A) when the item is selected.', function() {
-        createBookingPage.hoverNeedArrivalStation(this.createBookingPage.dropdowns.arrivalStation.stationsNames[1])
+        createBookingPage.hoverNeedArrivalStation(this.bookingData.dropdowns.arrivalStation.stationsNames[1])
         createBookingPage.getArrivalStationList().each($el => {
-            if($el.text() == this.createBookingPage.dropdowns.arrivalStation.stationsNames[1]) {
+            if($el.text() == this.bookingData.dropdowns.arrivalStation.stationsNames[1]) {
 
                 expect($el).to.have.css('background-color', this.colors.greenBookingPage)
             }

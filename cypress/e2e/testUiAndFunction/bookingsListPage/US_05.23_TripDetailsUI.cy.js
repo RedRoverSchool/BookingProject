@@ -25,8 +25,8 @@ function createReservation(passengerName) {
 
 describe.skip("US_05.23 | Trip detais UI", { tags: ['smoke'] }, () => {
   beforeEach(function () {
-    cy.fixture("createBookingPage").then((createBookingPage) => {
-      this.createBookingPage = createBookingPage;
+    cy.fixture("createBookingPage").then((bookingData) => {
+      this.bookingData = bookingData;
     });
   });
 
@@ -37,12 +37,12 @@ describe.skip("US_05.23 | Trip detais UI", { tags: ['smoke'] }, () => {
     cy.visit('/')
     
     createReservation(
-      this.createBookingPage.inputField.main_passenger.name
+      this.bookingData.inputField.main_passenger.name
     );
   });
 
   it('AT_05.23.01 | Verify departure time is in 24-hour notation HH:MM', function () {
-    const timeFormat = this.createBookingPage.timeFormat;
+    const timeFormat = this.bookingData.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
     createBookingPage.getDepartureTime().then(($span) => {
@@ -52,7 +52,7 @@ describe.skip("US_05.23 | Trip detais UI", { tags: ['smoke'] }, () => {
   });
 
   it('AT_05.23.02 | Verify departure date has format DD-MM-YYYY', function () {
-    const dateFormat = this.createBookingPage.dateFormat;
+    const dateFormat = this.bookingData.dateFormat;
     const dateFormatRegExp = new RegExp(dateFormat);
 
     createBookingPage.getDepartureDate().then(($span) => {
@@ -62,7 +62,7 @@ describe.skip("US_05.23 | Trip detais UI", { tags: ['smoke'] }, () => {
   });
 
   it('AT_05.23.03 | Verify arrival time is in 24-hour notation HH:MM', function () {
-    const timeFormat = this.createBookingPage.timeFormat;
+    const timeFormat = this.bookingData.timeFormat;
     const timeFormatRegExp = new RegExp(timeFormat);
 
     createBookingPage.getArrivalTime().then(($span) => {

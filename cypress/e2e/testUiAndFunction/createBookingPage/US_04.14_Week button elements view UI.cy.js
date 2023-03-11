@@ -14,8 +14,8 @@ describe('US_04.14 | Week button elements view ', { tags: ['smoke'] }, () => {
     });
 
     beforeEach(function() {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-           this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+           this.bookingData = bookingData;
         });
 
         cy.fixture('colors').then(colors => {
@@ -30,7 +30,7 @@ describe('US_04.14 | Week button elements view ', { tags: ['smoke'] }, () => {
     it('AT_04.14.02| The Week button is located in the upper right corner of the section Departure date, visible and have text "Week"', function () {
         createBookingPage.getWeekButton()
         .should('be.visible')
-        .and('have.text', this.createBookingPage.weekButtonText)
+        .and('have.text', this.bookingData.weekButtonText)
         .and('have.css','position', 'static')
     });
 });    
