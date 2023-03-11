@@ -243,5 +243,11 @@
         "emailWithoutDot" : "select@gmailcom",
         "emailWithWrongDomen" : "email@gmail.123",
         "emailTooLong75Symbl" : "SUPER.LONG.STRING.SUPER.LONG.STRING.SUPER.LONG.STRING.SUPER.LON75@gmail.com"
-      }
+      },
+
+    "fareTypeDropdown" : [
+        "Adult",
+        "Child",
+        "Elder"
+    ]
 }

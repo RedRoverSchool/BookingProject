@@ -183,7 +183,16 @@ class CreateBookingPage {
     };
 
     clickSecondTripCard() {
-        this.getSecondTripCard().click({ force: true })
+        this.getSecondTripCard().then(($el) => {
+            if ($el.text() == "Overdue") {
+                this.clickCalendarNextButton();
+                clickSecondTripCard();
+                return false;
+            } else {
+                cy.wrap($el).click();
+                return false;
+            }           
+        })
     }
 
     typePassengerNames = (names) => {
@@ -680,6 +689,21 @@ class CreateBookingPage {
         let previousWeekSunday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
         previousWeekSunday = previousWeekSunday[1] + " " + previousWeekSunday[0]
         return previousWeekMonday + ' - ' + previousWeekSunday
+    }
+
+    createReservation(passengerAmount, passengerNames, fareTypes) {
+        cy.intercept('/tools/ping/**').as('getToolsPing');
+        
+        this.clickCalendarNextButton();
+        cy.wait('@getToolsPing'); 
+        this.clickSecondTripCard(); 
+        this.selectAmountPassengersDetailsDropdown(passengerAmount);
+        this.typePassengerNames(passengerNames);  
+        this.selectFareTypes(fareTypes);
+        this.clickReservationTicketArrow();
+        this.clickReservationTicketButton();
+        bookingPopup.getBookingPopupWindow().should('be.visible');
+        cy.intercept('/tools/ping/**').as('getToolsPing');
     }
 }
 export default CreateBookingPage;

@@ -7,6 +7,9 @@ class BookingPopup {
     getCloseBtnBookingPopup = () => cy.get('.close-button');
     getBookingID = () => cy.get('.booking-id .booking-tracker');
     getPassengerTypeLabel = (labelTypeNumber) => cy.get(`.passengers-box > :nth-child(${labelTypeNumber}) > :nth-child(1) > label`)
+    getBookingPopupWindow = () => cy.get('.popup-content');
+    getBtnExtend = () => cy.get('#button-extend');
+    getCountdownClock = () => cy.get('#countdown-clock');
 
     // Booking Details
     getBookingDetailsTitle = () => cy.get('.popup-booking > h3')
@@ -20,6 +23,21 @@ class BookingPopup {
     // methods
     clickCloseBtnBookingPopup() {
         this.getCloseBtnBookingPopup().click()
+    }
+
+    clickBtnExtend() {
+
+    }
+
+    getTimeFromTimer() {
+        let extendTimeNumber;
+        this.getCountdownClock().then($el => {
+            let extendTimeArray = $el.text().split(":"); 
+            let extendTimeStr = extendTimeArray[1].trim() + "." + extendTimeArray[2].trim();
+            extendTimeNumber = parseFloat(extendTimeStr);
+            console.log(extendTimeNumber);
+            return extendTimeNumber;       
+        })     
     }
 }
 export default BookingPopup;
