@@ -232,7 +232,7 @@
         "fareType" : "Elder"
     },
 
-    "octWeek": "2 Oct - 8 Oct",
+      "octWeek": "2 Oct - 8 Oct",
 
       "alerts": {
         "invalidEmail" : "Email isn`t correct\nPlease try again"
@@ -244,7 +244,7 @@
         "emailWithWrongDomen" : "email@gmail.123",
         "emailTooLong75Symbl" : "SUPER.LONG.STRING.SUPER.LONG.STRING.SUPER.LONG.STRING.SUPER.LON75@gmail.com"
       },
-    
+   
     "fareTypeDropdown" : [
         "Adult",
         "Child",
