@@ -29,13 +29,11 @@ class BookingPopup {
 
     }
 
-    getTimeFromTimer() {
-        let extendTimeNumber;
-        this.getCountdownClock().then($el => {
+    getTimeFromTimer() {        
+        return this.getCountdownClock().then($el => {
             let extendTimeArray = $el.text().split(":"); 
             let extendTimeStr = extendTimeArray[1].trim() + "." + extendTimeArray[2].trim();
-            extendTimeNumber = parseFloat(extendTimeStr);
-            console.log(extendTimeNumber);
+            let extendTimeNumber = parseFloat(extendTimeStr);
             return extendTimeNumber;       
         })     
     }

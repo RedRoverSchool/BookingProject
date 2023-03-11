@@ -183,6 +183,9 @@ class CreateBookingPage {
     };
 
     clickSecondTripCard() {
+        cy.intercept('/tools/**').as('getTrip');
+        cy.wait('@getTrip');
+
         this.getSecondTripCard().then(($el) => {
             if ($el.text() == "Overdue") {
                 this.clickCalendarNextButton();
@@ -691,19 +694,14 @@ class CreateBookingPage {
         return previousWeekMonday + ' - ' + previousWeekSunday
     }
 
-    createReservation(passengerAmount, passengerNames, fareTypes) {
-        cy.intercept('/tools/ping/**').as('getToolsPing');
-        
-        this.clickCalendarNextButton();
-        cy.wait('@getToolsPing'); 
+    createReservationSecondTrip(passengerAmount, passengerNames, fareTypes) {
         this.clickSecondTripCard(); 
         this.selectAmountPassengersDetailsDropdown(passengerAmount);
         this.typePassengerNames(passengerNames);  
         this.selectFareTypes(fareTypes);
         this.clickReservationTicketArrow();
         this.clickReservationTicketButton();
-        bookingPopup.getBookingPopupWindow().should('be.visible');
-        cy.intercept('/tools/ping/**').as('getToolsPing');
+        bookingPopup.getBookingPopupWindow().should('be.visible');        
     }
 }
 export default CreateBookingPage;

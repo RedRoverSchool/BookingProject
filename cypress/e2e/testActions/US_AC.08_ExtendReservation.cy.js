@@ -25,17 +25,13 @@ describe('US_AC.08 | ACTIONS > Extend reservation', { tags: ['regression'] }, fu
         let numberOfPassengers = 1;
         let passengerName = this.createBookingPage.inputField.main_passenger.name;
         let passengerFareTypes = this.createBookingPage.fareTypeDropdown[0];
-        createBookingPage.createReservation(numberOfPassengers, passengerName, passengerFareTypes);
+        createBookingPage.createReservationSecondTrip(numberOfPassengers, passengerName, passengerFareTypes);
 
         bookingPopup.clickBtnExtend();
-  
-        bookingPopup.getCountdownClock().then($el => {
-            let extendTimeArray = $el.text().split(":");
-            let extendTimeStr = extendTimeArray[1].trim() + "." + extendTimeArray[2].trim();
-            let extendTimeNumber = +(extendTimeStr);
 
-            expect(extendTimeNumber).to.be.below(15);
-            expect(extendTimeNumber).to.be.above(14);
-        })
+        bookingPopup.getTimeFromTimer().then(extendTime => {
+            expect(extendTime).to.be.below(15);
+            expect(extendTime).to.be.above(14);
+        })  
     })
 })
