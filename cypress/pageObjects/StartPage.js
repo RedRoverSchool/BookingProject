@@ -128,7 +128,7 @@ export class RestorePopup {
     getRegisterLink = () => cy.get('.form-horizontal .modal-footer .pull-left a');
     getEnterEmailAlert = () => cy.get('div.help-block.error');
     getLoginLink = () => cy.get('.pull-right [title="SIGN IN"]');
-    getNoAccountYet = () => cy.get('#loginModal .pull-left');
+    getNoAccountYetLabel = () => cy.get('#loginModal .pull-left');
 
     // Methods
 
