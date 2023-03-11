@@ -79,7 +79,7 @@ class CreateBookingPage {
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
-    getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
+    getEmailInputField = () => cy.get('.form-control[name="passenger-email"]');
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getLabelMainPassenger = () => cy.get('div.passenger-row > label');
     getPlaceholderPassengerName = () => cy.get('input[placeholder="Passenger name"]')
@@ -182,7 +182,16 @@ class CreateBookingPage {
     };
 
     clickSecondTripCard() {
-        this.getSecondTripCard().click({ force: true })
+        this.getSecondTripCard().then(($el) => {
+            if ($el.text() == "Overdue") {
+                this.clickCalendarNextButton();
+                clickSecondTripCard();
+                return false;
+            } else {
+                cy.wrap($el).click();
+                return false;
+            }           
+        })
     }
 
     typePassengerNames = (names) => {
@@ -616,6 +625,10 @@ class CreateBookingPage {
         }
         return check
     }
+
+    clickResetButton() {
+        this.getResetButton().click();
+    }    
 
     createReservation(passengerAmount, passengerNames, fareTypes) {
         cy.intercept('/tools/ping/**').as('getToolsPing');

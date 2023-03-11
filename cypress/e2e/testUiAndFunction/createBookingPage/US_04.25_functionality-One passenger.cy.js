@@ -22,7 +22,7 @@ describe('US_04.25 | Passengers details functionality - One passenger', { tags: 
     beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
             this.createBookingPage = createBookingPage;
-        });
+        });        
     });
 
     it('AT_04.25.01 | Verify the opportunity to fill main passengers name in "Passenger name" input field', function () {
@@ -55,4 +55,31 @@ describe('US_04.25 | Passengers details functionality - One passenger', { tags: 
                 )
         })
     })
+
+    it('AT_04.25.04 | Verify email input field doesnt  accept invalid emails and system displays alert', function () {
+        const expectedAlert = this.createBookingPage.alerts.invalidEmail
+        const invalidEmailsArray =
+            [this.createBookingPage.invalidEmail.emailWithoutAt,
+            this.createBookingPage.invalidEmail.emailWithoutDot,
+            this.createBookingPage.invalidEmail.emailWithWrongDomen,
+            this.createBookingPage.invalidEmail.emailTooLong75Symbl
+            ]
+
+        for (let invalidEmail of invalidEmailsArray) {
+            cy.wrap(null)
+                .then(() => {
+                    createBookingPage.clickResetButton()
+                    createBookingPage.clickFirstTripCard();
+                    createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+                    createBookingPage.typeIntoMainPassengerEmailField(invalidEmail)
+                    createBookingPage.clickBookTicketsBtn()
+                })
+                .then(() => {
+                    cy.on('window:alert', (msg) => {
+                        expect(msg).to.eq(expectedAlert)
+                    })
+                })
+        }
+    })
+
 })
