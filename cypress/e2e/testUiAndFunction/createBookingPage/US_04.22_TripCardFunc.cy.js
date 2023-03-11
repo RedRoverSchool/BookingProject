@@ -2,6 +2,7 @@
 
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import { sortDesc, sortAsc } from "../../../support/utilities/sortArrayByDigit";
+import getArray from "../../../support/utilities/getArray";
 
 const createBookingPage = new CreateBookingPage();
 
@@ -75,5 +76,22 @@ describe('US_04.22 | Trip card functionality', { tags: ['smoke', 'regression'] }
                         expect(ordersSequence[i]).to.eq(ordersSortedAsc[i])
                     })
             })   
+    });
+
+    it('AT_04.22.07 | Verify when trip card is selected, “Summary” shows default selected seat number', function() {
+        createBookingPage.selectAmountPassengersDetailsDropdown(3)
+        createBookingPage.clickTripCard()
+        createBookingPage.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
+        let seatsSeatSelection
+        createBookingPage.getSelectedSeats().then($el => {
+            seatsSeatSelection = getArray($el)            
+        })
+        createBookingPage.getSeatsNumberColumnSummary().then($el => {
+            let seatsSummarySelection = getArray($el) 
+
+            expect(seatsSummarySelection).to.deep.eq(seatsSeatSelection)
+        })
     });
 });
