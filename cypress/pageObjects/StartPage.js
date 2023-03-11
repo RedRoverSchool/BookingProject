@@ -63,7 +63,8 @@ export class LoginPopup {
     getLoginPopupModal =() => cy.get('#loginModal .modal-content');
     getEmailErrorMessage = () => cy.get('.alert.alert-danger');
     getNoAccountYet = () => cy.get('#loginModal .pull-left');
-   
+    getLoginRestorePassword = () => cy.get('.pull-right [title="SIGN IN"]');
+     
     // Methods
 
     clickForgotYourPasswordLink() {

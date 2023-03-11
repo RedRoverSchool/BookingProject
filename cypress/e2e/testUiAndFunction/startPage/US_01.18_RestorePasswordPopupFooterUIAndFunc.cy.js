@@ -43,4 +43,11 @@ describe ('US 01.18 | Restore password Popup > Footer UI and functionality', { t
             .should('have.css','color', this.colors.blue)
             .and('have.css', 'font-size', this.startPage.inputField.registerPopup.front_size)
     });
+
+    it('AT_01.18.04 | Verify the link “login” has rgb(66, 139, 202) color and 14px font-size', function () {
+        loginPopup
+        .getLoginRestorePassword()
+        .should('have.css','color', this.colors.blue)
+        .and('have.css', 'font-size', this.startPage.inputField.registerPopup.front_size)
+    });
 })
