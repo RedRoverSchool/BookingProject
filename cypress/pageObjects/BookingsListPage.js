@@ -137,7 +137,7 @@ class BookingsListPage {
     /**
       * @returns two given dates in format, ex '10 Mar, 2023 - 12 Mar, 2023'
     */
-    formatteddDatesRangeDD_MMCommaYYYY(date1, date2) {
+    formattedDatesRangeDD_MMCommaYYYY(date1, date2) {
         return `${date1} - ${date2}`;
     }
 
@@ -154,37 +154,37 @@ class BookingsListPage {
       * @returns current date in format, ex '10 Mar, 2023 - 10 Mar, 2023'
     */
     today = () => {
-        let todayFormatted = this.formatteddDatesRangeDD_MMCommaYYYY(this.currentDD_MMCommaYYYY(), this.currentDD_MMCommaYYYY())
+        let todayFormatted = this.formattedDatesRangeDD_MMCommaYYYY(this.currentDD_MMCommaYYYY(), this.currentDD_MMCommaYYYY())
         return todayFormatted
     }
 
     /**
       * @returns tommorow's date in format, ex '10 Mar, 2023 - 10 Mar, 2023'
     */
-    tommorow = (date) => {
-        let now = new Date(date)
+    tommorow = () => {
+        let now = new Date()
         now.setDate(now.getDate() + 1)
         let tommorow = this.DD_MMCommaYYYYFormat(now)
-        tommorow = this.formatteddDatesRangeDD_MMCommaYYYY(tommorow ,tommorow)
+        tommorow = this.formattedDatesRangeDD_MMCommaYYYY(tommorow ,tommorow)
         return tommorow
     }
 
     /**
       * @returns yesterday date in format, ex '10 Mar, 2023 - 10 Mar, 2023'
     */
-    yesterday = (date) => {
-        let now = new Date(date)
+    yesterday = () => {
+        let now = new Date()
         now.setDate(now.getDate() - 1)
         let yesterday = this.DD_MMCommaYYYYFormat(now)
-        yesterday = this.formatteddDatesRangeDD_MMCommaYYYY(yesterday, yesterday)
+        yesterday = this.formattedDatesRangeDD_MMCommaYYYY(yesterday, yesterday)
         return yesterday
     }
 
     /**
       * @returns next week dates, starting from tommorow's date - 7 days from current date, in format, ex '12 Mar, 2023 - 18 Mar, 2023'
     */
-    nextWeek = (date) => {
-        let now = new Date(date)
+    nextWeek = () => {
+        let now = new Date()
         now.setDate(now.getDate() + 7)
         let nextWeekDays = this.DD_MMCommaYYYYFormat(now)
         nextWeekDays = this.tommorow(this.currentDD_MMCommaYYYY()).split('-')[0] + "- " + nextWeekDays
@@ -194,63 +194,63 @@ class BookingsListPage {
     /**
     * @returns date 6 days ago - current date in format, ex '12 Mar, 2023 - 18 Mar, 2023'
     */
-    lastWeekDates = (date) => {
-        let now = new Date(date)
+    lastWeekDates = () => {
+        let now = new Date()
         now.setDate(now.getDate() - 6)
         let lastWeekDays = this.DD_MMCommaYYYYFormat(now)
-        lastWeekDays = this.formatteddDatesRangeDD_MMCommaYYYY(lastWeekDays, this.currentDD_MMCommaYYYY())
+        lastWeekDays = this.formattedDatesRangeDD_MMCommaYYYY(lastWeekDays, this.currentDD_MMCommaYYYY())
         return lastWeekDays
     }
 
     /**
       * @returns date 29 days ago - current date, in format, ex '10 Feb, 2023 - 11 Mar, 2023'
     */
-    lastThirtyDays = (date) => {
-        let now = new Date(date)
+    lastThirtyDays = () => {
+        let now = new Date()
         now.setDate(now.getDate() - 29)
         let lastThirtyDays = this.DD_MMCommaYYYYFormat(now)
-        lastThirtyDays = this.formatteddDatesRangeDD_MMCommaYYYY(lastThirtyDays, this.currentDD_MMCommaYYYY())
+        lastThirtyDays = this.formattedDatesRangeDD_MMCommaYYYY(lastThirtyDays, this.currentDD_MMCommaYYYY())
         return lastThirtyDays
     }
 
     /**
       * @returns next month dates, starting from the 1st to the last date of the next month, in format, ex '1 Feb, 2023 - 28 Feb, 2023'
     */
-    nextMonthDates = (date) => {
-        let now = new Date(date)
+    nextMonthDates = () => {
+        let now = new Date()
         now.setDate(1)
         now.setMonth(now.getMonth() + 1)
         let indexOfMonth = now.getMonth()
         let nextMonthYear = now.getFullYear()
         let nextMonth = this.DD_MMCommaYYYYFormat(now)
-        nextMonth = this.formatteddDatesRangeDD_MMCommaYYYY(nextMonth, this.getNumberOfDaysInMonth(indexOfMonth, nextMonthYear) + " " + nextMonth.split(' ')[1] + " " + nextMonth.split(' ')[2])
+        nextMonth = this.formattedDatesRangeDD_MMCommaYYYY(nextMonth, this.getNumberOfDaysInMonth(indexOfMonth, nextMonthYear) + " " + nextMonth.split(' ')[1] + " " + nextMonth.split(' ')[2])
         return nextMonth
     }
 
     /**
       * @returns current month dates, starting from the 1st to the last date of the current month, in format, ex '1 Feb, 2023 - 28 Feb, 2023'
     */
-    thisMonthDates = (date) => {
-        let now = new Date(date)
+    thisMonthDates = () => {
+        let now = new Date()
         now.setDate(1)
         let indexOfCurrentMonth = now.getMonth()
         let thisMonthYear = now.getFullYear()
         let thisMonth = this.DD_MMCommaYYYYFormat(now)
-        thisMonth = this.formatteddDatesRangeDD_MMCommaYYYY(thisMonth, this.getNumberOfDaysInMonth(indexOfCurrentMonth, thisMonthYear) + " " + thisMonth.split(' ')[1] + " " + thisMonth.split(' ')[2])
+        thisMonth = this.formattedDatesRangeDD_MMCommaYYYY(thisMonth, this.getNumberOfDaysInMonth(indexOfCurrentMonth, thisMonthYear) + " " + thisMonth.split(' ')[1] + " " + thisMonth.split(' ')[2])
         return thisMonth
     }
 
     /**
       * @returns last month dates, starting from the 1st to the last date of the last month, in format, ex '1 Feb, 2023 - 28 Feb, 2023'
     */
-    lastMonthDates = (date) => {
-        let now = new Date(date)
+    lastMonthDates = () => {
+        let now = new Date()
         now.setDate(1)
         now.setMonth(now.getMonth() - 1)
         let indexOfLastMonth = now.getMonth()
         let lastMonthYear = now.getFullYear()
         let lastMonth = this.DD_MMCommaYYYYFormat(now)
-        lastMonth = this.formatteddDatesRangeDD_MMCommaYYYY(lastMonth, this.getNumberOfDaysInMonth(indexOfLastMonth, lastMonthYear) + " " + lastMonth.split(' ')[1] + " " + lastMonth.split(' ')[2])
+        lastMonth = this.formattedDatesRangeDD_MMCommaYYYY(lastMonth, this.getNumberOfDaysInMonth(indexOfLastMonth, lastMonthYear) + " " + lastMonth.split(' ')[1] + " " + lastMonth.split(' ')[2])
         return lastMonth
     }
 }
