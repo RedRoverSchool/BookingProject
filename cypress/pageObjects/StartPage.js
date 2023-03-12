@@ -63,7 +63,8 @@ export class LoginPopup {
     getLoginPopupModal =() => cy.get('#loginModal .modal-content');
     getEmailErrorMessage = () => cy.get('.alert.alert-danger');
     getNoAccountYet = () => cy.get('#loginModal .pull-left');
-   
+  
+     
     // Methods
 
     clickForgotYourPasswordLink() {
@@ -125,7 +126,9 @@ export class RestorePopup {
     getRestorePopupCloseButton = () => cy.get('div#restoreModal .modal-header .close');
     getRestorePopupModal = () => cy.get('div#restoreModal');
     getRegisterLink = () => cy.get('.form-horizontal .modal-footer .pull-left a');
-    getEnterEmailAlert = () => cy.get('div.help-block.error')
+    getEnterEmailAlert = () => cy.get('div.help-block.error');
+    getLoginLink = () => cy.get('.pull-right [title="SIGN IN"]');
+    getNoAccountYetLabel = () => cy.get('#loginModal .pull-left');
 
     // Methods
 

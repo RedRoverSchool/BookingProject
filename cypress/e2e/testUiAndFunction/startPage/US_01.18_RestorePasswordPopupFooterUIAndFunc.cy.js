@@ -31,9 +31,23 @@ describe ('US 01.18 | Restore password Popup > Footer UI and functionality', { t
     });
 
     it('AT_01.18.02 | Verify the text “No account yet?” has rgb(153, 153, 153) color and 14px font-size', function () {
-        loginPopup
-            .getNoAccountYet()
+        restorePopup
+            .getNoAccountYetLabel()
             .should('have.css','color', this.colors.greyLabel)
             .and('have.css', 'font-size', this.startPage.inputField.registerPopup.front_size)
+    });
+
+    it('AT_01.18.03 | Verify the link “Register” has rgb(66, 139, 202) color and 14px font-size', function () {
+        restorePopup
+            .getRegisterLink()
+            .should('have.css','color', this.colors.blue)
+            .and('have.css', 'font-size', this.startPage.inputField.registerPopup.front_size)
+    });
+
+    it('AT_01.18.04 | Verify the link “login” has rgb(66, 139, 202) color and 14px font-size', function () {
+        restorePopup
+        .getLoginLink()
+        .should('have.css','color', this.colors.blue)
+        .and('have.css', 'font-size', this.startPage.inputField.registerPopup.front_size)
     });
 })
