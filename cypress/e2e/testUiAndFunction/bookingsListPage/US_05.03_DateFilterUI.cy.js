@@ -65,7 +65,7 @@ describe('US_05.03 | Date filter UI', { tags: ['smoke'] }, () => {
     });
 
     it('AT_05.03.03 Verify that the "calendar" dropdown is displayed', function() {  
-        bookingsListPage.getDrdnDatesRangeDefaultValue().should('be.visible')
+        bookingsListPage.getDrdnDatesRangeValue().should('be.visible')
     });
 });
 

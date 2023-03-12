@@ -61,7 +61,7 @@ class BookingsListPage {
     };
 
     clickDatesRangeDropdown() {
-        this.getDrdnDatesRangeDefaultValue().click();
+        this.getDrdnDatesRangeValue().click();
     };
 
     clickDateRangeType() {
