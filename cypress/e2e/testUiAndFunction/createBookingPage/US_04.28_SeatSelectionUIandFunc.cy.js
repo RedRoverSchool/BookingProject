@@ -14,7 +14,7 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
     beforeEach(function () {
         cy.fixture('createBookingPage').then(bookingData => {
             this.bookingData = bookingData;
-        })
+        });
     });
 
     describe('US_04.28 | Seat selection UI', { tags: ['smoke'] }, () => {
@@ -320,12 +320,10 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             createBookingPage.clickOnFirstAvailableTripCard()
         });
 
-
         it('AT_04.28.14 | The title of "Seats table" is visible and matches to the class of the selected trip "Economy bus"', function () {
             createBookingPage.getEconomyBusLable()
             .should('be.visible')
-            .and('have.text', 'Economy bus')
+            .and('have.text', this.bookingData.tripClass.economBusTitle)
         });
     });
 });
-

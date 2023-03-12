@@ -49,7 +49,8 @@
     "tripClass": {
        "VIP_Bus": "VIP bus 24",
         "ferry": "Ferry 300",
-        "economyBus" :"Economy bus 300"
+        "economyBus" :"Economy bus 300",
+        "economBusTitle": "Economy bus"
     },
     
     "headers": {
