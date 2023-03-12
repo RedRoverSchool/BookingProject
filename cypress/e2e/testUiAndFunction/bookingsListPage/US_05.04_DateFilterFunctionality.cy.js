@@ -40,10 +40,10 @@ describe('US_05.04 | Date filter functionality', { tags: ['regression'] }, () =>
 
     it('AT_05.04.05 | Verify calendar dates are correct if clicking on corresponding date from date range dropdown menu', () => {
         let arrayOfDatesRange = [bookingsListPage.today(bookingsListPage.currentDD_MMCommaYYYY()), bookingsListPage.tommorow(bookingsListPage.currentDD_MMCommaYYYY()),
-            bookingsListPage.yesterday(bookingsListPage.currentDD_MMCommaYYYY()), bookingsListPage.nextWeek(bookingsListPage.currentDD_MMCommaYYYY()),
-            bookingsListPage.lastWeekDates(bookingsListPage.currentDD_MMCommaYYYY()), bookingsListPage.lastThirtyDays(bookingsListPage.currentDD_MMCommaYYYY()),
-            bookingsListPage.nextMonthDates(bookingsListPage.currentDD_MMCommaYYYY()), bookingsListPage.thisMonthDates(bookingsListPage.currentDD_MMCommaYYYY()),
-            bookingsListPage.lastMonthDates(bookingsListPage.currentDD_MMCommaYYYY())]
+                                bookingsListPage.yesterday(bookingsListPage.currentDD_MMCommaYYYY()), bookingsListPage.nextWeek(bookingsListPage.currentDD_MMCommaYYYY()),
+                                bookingsListPage.lastWeekDates(bookingsListPage.currentDD_MMCommaYYYY()), bookingsListPage.lastThirtyDays(bookingsListPage.currentDD_MMCommaYYYY()),
+                                bookingsListPage.nextMonthDates(bookingsListPage.currentDD_MMCommaYYYY()), bookingsListPage.thisMonthDates(bookingsListPage.currentDD_MMCommaYYYY()),
+                                bookingsListPage.lastMonthDates(bookingsListPage.currentDD_MMCommaYYYY())]
         
         bookingsListPage.getDrpdDatesRangeList().each(($el, i) => {
             bookingsListPage.clickDrdnDatesRangeArrow() 
