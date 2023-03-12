@@ -37,7 +37,7 @@ describe('US_05.10 Excel button UI and functionality', { tags: ['smoke'] }, () =
     });
 
     it('AT_05.10.03 | Verify the "Excel" button is clickable, downloads the file with extension ".csv" and its name contain defaullt dates range (dropdown) ', { tags: ['regression'] }, function () {
-        bookingListPage.getDrdnDatesRangeDefaultValue()
+        bookingListPage.getDrdnDatesRangeValue()
             .then(($rangeDates) => {
                 let expectedFormattedRrangeDates = bookingListPage.formatteddDatesRangeYYYYMMDD($rangeDates.text())
                 let expectedFilePath = this.bookingsListPage.excelFile.name + expectedFormattedRrangeDates + this.bookingsListPage.excelFile.extension

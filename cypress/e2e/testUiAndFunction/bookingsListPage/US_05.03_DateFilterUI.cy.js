@@ -33,7 +33,7 @@ describe('US_05.03 | Date filter UI', { tags: ['smoke'] }, () => {
         const todayFormatted = bookingsListPage.getDateFromCurrentDDMMMYYYY(0)
         const past7DateFormatted = bookingsListPage.getDateFromCurrentDDMMMYYYY(-6)
 
-        bookingsListPage.getDrdnDatesRangeDefaultValue()
+        bookingsListPage.getDrdnDatesRangeValue()
             .should('have.text', `${past7DateFormatted} - ${todayFormatted}`)
     })
 
