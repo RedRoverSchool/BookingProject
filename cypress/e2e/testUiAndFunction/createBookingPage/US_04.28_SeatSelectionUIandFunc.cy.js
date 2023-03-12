@@ -305,5 +305,27 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
             });
         });    
     });
+
+    describe('Trip "Bangkok Khao San - Ayutthaya" (economy)',  { tags: ['smoke'] }, () => {
+       
+        before(() => {
+            cy.loginWithSession(AGENT.email, AGENT.password);
+            cy.visit('/');
+            
+            createBookingPage.selectDepartureStation('Bangkok Khao San')
+            createBookingPage.selectArrivalStation('Ayutthaya')
+            createBookingPage.clickCalendarNextButton()
+            cy.intercept('/tools/**').as('getTrip')
+            cy.wait('@getTrip')
+            createBookingPage.clickOnFirstAvailableTripCard()
+        });
+
+
+        it('AT_04.28.14 | The title of "Seats table" is visible and matches to the class of the selected trip "Economy bus"', function () {
+            createBookingPage.getEconomyBusLable()
+            .should('be.visible')
+            .and('have.text', 'Economy bus')
+        });
+    });
 });
 

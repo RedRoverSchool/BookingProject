@@ -111,7 +111,8 @@ class CreateBookingPage {
     getTitleOfSeatsTable = () => cy.get('.seats tbody th');
     getSeatInRow = () => cy.get('.seat-chart .seats tr:nth-child(2) td');
     getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .seats td:not(.unavailable)');
-    getLabelSeatSelection = () => cy.get('div.layout-wrapper div.title label')
+    getLabelSeatSelection = () => cy.get('div.layout-wrapper div.title label');
+    getEconomyBusLable = () => cy.get('.seats [colspan="20"]')
 
     // Summary section 
     getSeatsNumberColumnSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)');
