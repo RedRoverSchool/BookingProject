@@ -26,7 +26,7 @@ class BookingPopup {
     }
 
     clickBtnExtend() {
-
+        this.getBtnExtend().click();
     }
 
     getTimeFromTimer() {        
