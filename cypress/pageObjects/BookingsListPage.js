@@ -29,6 +29,7 @@ class BookingsListPage {
 
     // Booking list section
     getTableHeaders = () => cy.get('.table thead tr');
+    getTableBody = () => cy.get('.table tbody tr');
     getTableHeadersColumnsList = () => cy.get('.dataTables_scrollHeadInner .table thead tr th');
     getTableBodyCells = () => cy.get('#data tbody tr td');
     getTableBodyRows = () => cy.get('#data tbody tr');
@@ -55,6 +56,14 @@ class BookingsListPage {
 
     clickColumnsOkButton() {
         this.getColumnsOkButton().click();
+    }
+
+    clickSortButton (value) {
+        this.getTableHeaders().contains(value).click();
+    }
+
+    dblClickSortButton (value) {
+        this.getTableHeaders().contains(value).dblclick();
     }
 
     clickClearLink() {
