@@ -321,9 +321,30 @@ describe('US_04.28 | Seat selection UI and functionality', () => {
         });
 
         it('AT_04.28.14 | The title of "Seats table" is visible and matches to the class of the selected trip "Economy bus"', function () {
-            createBookingPage.getEconomyBusLable()
+            createBookingPage.getSelectSeatLableTrip()
             .should('be.visible')
             .and('have.text', this.bookingData.tripClass.economBusTitle)
+        });
+    });
+
+    describe('Trip "Ao Por Pier - Naka Island" ("Ferry")',  { tags: ['smoke'] }, () => {
+       
+        before(() => {
+            cy.loginWithSession(AGENT.email, AGENT.password);
+            cy.visit('/');
+            
+            createBookingPage.selectDepartureStation('Ao Por Pier')
+            createBookingPage.selectArrivalStation('Naka Island')
+            createBookingPage.clickCalendarNextButton()
+            cy.intercept('/tools/**').as('getTrip')
+            cy.wait('@getTrip')
+            createBookingPage.clickOnFirstAvailableTripCard()
+        });
+
+        it('AT_04.28.15 | The title of "Seats table" is visible and matches to the class of the selected trip "Ferry"', function () {
+            createBookingPage.getSelectSeatLableTrip()
+            .should('be.visible')
+            .and('have.text', this.bookingData.tripClass.ferryTitle)
         });
     });
 });

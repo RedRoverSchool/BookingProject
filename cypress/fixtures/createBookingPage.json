@@ -50,7 +50,8 @@
        "VIP_Bus": "VIP bus 24",
         "ferry": "Ferry 300",
         "economyBus" :"Economy bus 300",
-        "economBusTitle": "Economy bus"
+        "economBusTitle": "Economy bus",
+        "ferryTitle": "Ferry"
     },
     
     "headers": {
