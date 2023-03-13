@@ -68,4 +68,16 @@ describe('US_04.06 | Departure dropdown UI and functionality', { tags: ['smoke']
         })
     });
 
+    it('AT_04.06.05 | Verify that the selection Arrow is clickable and turns up (drop-down menu opened) and down (drop-down menu closed) when clicking on it', { tags: ['regression'] }, function () {
+        createBookingPage.getLabelDepartureStation().click();
+        createBookingPage.getDepartureStationSelectionArrow().click();
+
+        createBookingPage.getListDepartureStation().should('exist');
+        createBookingPage.getDepartureStationDrpdwnComboBox().should('have.attr', 'aria-expanded', 'true');
+
+        createBookingPage.getDepartureStationSelectionArrow().click();
+
+        createBookingPage.getListDepartureStation().should('not.exist');
+        createBookingPage.getDepartureStationDrpdwnComboBox().should('have.attr', 'aria-expanded', 'false'); 
+    });
 });
