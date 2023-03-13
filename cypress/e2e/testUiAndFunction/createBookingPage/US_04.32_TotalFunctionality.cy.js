@@ -23,12 +23,6 @@ describe('US_04.32 | Total functionality', () => {
         createBookingPage.clickOnFirstAvailableTripCard()
     });
 
-    beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
-        });
-    });
-
     it('AT_04.32.01 | Verify that the "Reset" button is clickable',() => {
         createBookingPage.typeIntoMainPassengerNameField(randomFullName)
         createBookingPage.typeIntoMainPassengerEmailField(randomEmail)
