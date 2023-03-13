@@ -49,5 +49,13 @@ describe('US_04.07_Arrival Dropdown UI and functionality ', { tags: ['smoke'] },
                 expect($el).to.have.css('background-color', this.colors.greenBookingPage)
             }
         })
-    })
+    });
+
+    
+    it('AT_04.07.05 | Verify that the Agent can choose stations from the Dropdown Menu', { tags: ['regression'] }, function () {
+        createBookingPage.getArrivalStationDropdown(this.bookingData.dropdowns.departureStation.stationsNames[5])
+        createBookingPage.getArrivalStationSelectionDropdown()
+            .should('include.text', this.bookingData.dropdowns.departureStation.stationsNames[5])
+            .and('be.visible')
+    });
 })
