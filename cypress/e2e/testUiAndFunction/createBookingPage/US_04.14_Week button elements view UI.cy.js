@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage"
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.14 | Week button elements view ', () => {
+describe('US_04.14 | Week button elements view ', { tags: ['smoke'] }, () => {
 
     const AGENT = Cypress.env('agent');
 
@@ -14,8 +14,8 @@ describe('US_04.14 | Week button elements view ', () => {
     });
 
     beforeEach(function() {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-           this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+           this.bookingData = bookingData;
         });
 
         cy.fixture('colors').then(colors => {
@@ -30,7 +30,7 @@ describe('US_04.14 | Week button elements view ', () => {
     it('AT_04.14.02| The Week button is located in the upper right corner of the section Departure date, visible and have text "Week"', function () {
         createBookingPage.getWeekButton()
         .should('be.visible')
-        .and('have.text', this.createBookingPage.weekButtonText)
+        .and('have.text', this.bookingData.weekButtonText)
         .and('have.css','position', 'static')
     });
 });    

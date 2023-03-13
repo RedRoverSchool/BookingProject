@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.21 | Not available trip card UI', () => {
+describe('US_04.21 | Not available trip card UI', { tags: ['smoke', 'regression'] }, () => {
     const AGENT = Cypress.env('agent');
 
     before(function () {
@@ -17,8 +17,8 @@ describe('US_04.21 | Not available trip card UI', () => {
     })
 
     beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         })
 
         cy.fixture('colors').then(colors => {
@@ -30,7 +30,7 @@ describe('US_04.21 | Not available trip card UI', () => {
         cy
             .get('.nothing')
             .should('be.visible')
-            .and('have.text', this.createBookingPage.warningTexts.notAvailableTripText)
+            .and('have.text', this.bookingData.warningTexts.notAvailableTripText)
     })
 
     it('AT_04.21.02 | Verify that block has background-color: #F6EAEA and solid border-color: #B84D4D', function () {

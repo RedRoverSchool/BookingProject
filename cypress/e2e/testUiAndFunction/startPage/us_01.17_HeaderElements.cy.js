@@ -8,7 +8,7 @@ const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 const restorePopup = new RestorePopup();
 
-describe('US_01.17 | Header elements', () => {
+describe('US_01.17 | Header elements', { tags: ['smoke'] }, () => {
     beforeEach(function () {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
@@ -20,7 +20,7 @@ describe('US_01.17 | Header elements', () => {
         });
     });
 
-    it('AT_01.17.01 | Verify `X` button is visible, clickable and closing Popup', function () {
+    it('AT_01.17.01 | Verify `X` button is visible, clickable and closing Popup', { tags: ['regression'] }, function () {
         restorePopup.getRestorePopupCloseButton().should('be.visible');
         restorePopup.clickRestorePopupCloseButton();
         restorePopup.getRestorePopupModal().should('be.not.visible');

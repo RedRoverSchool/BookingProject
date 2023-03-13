@@ -8,7 +8,7 @@ const loginPopup = new LoginPopup();
 const randomPhoneNumber = faker.phone.number('##########');
 
 
-describe('US_01.10 | Login by phone negative', () => {
+describe('US_01.10 | Login by phone negative', { tags: ['regression'] }, () => {
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');

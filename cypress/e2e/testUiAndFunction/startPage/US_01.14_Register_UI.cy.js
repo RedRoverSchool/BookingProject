@@ -5,7 +5,7 @@ import {StartPage, RegisterPopup} from "../../../pageObjects/StartPage";
 const startPage = new StartPage();
 const registerPopup = new RegisterPopup();
 
-describe('US_01.14 | Register UI', () => {
+describe('US_01.14 | Register UI', { tags: ['smoke'] }, () => {
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/')
@@ -82,5 +82,24 @@ describe('US_01.14 | Register UI', () => {
             .and('include.text', this.startPage.label.labelPhoneNumber.text)
             .and('have.css', 'color', this.colors.greyLabel)
             .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
+    }) 
+
+    it('AT_01.14.08 | Verify that the example(placeholder) "Country code and phone number" is visible in the email field, has the #666 color, and font size: 14px' , function () {
+        registerPopup
+            .getPhoneInput()
+            .should('be.visible')
+            .and('have.attr', 'placeholder', this.startPage.inputField.registerPopup.phoneNumberInputField)
+            .and('have.css', 'color', this.colors.greyHeader)
+            .and('have.css', 'font-size', this.startPage.label.labelsModalBody.front_size)
+    })
+    
+    it ('AT_01.14.09 | Verify that the button "Register" is visible in the modal body before hover, has text "Register",color: #6CCD66, border-color: #6CCD66 and font size: 18px' , function () {
+        registerPopup
+            .getRegisterButton()
+            .should('be.visible')
+            .and('include.value', this.startPage.buttons.registerBtnText)
+            .and('have.css', 'color', this.colors.greenPopup)
+            .and('have.css', 'border-color', this.colors.greenPopup)
+            .and('have.css', 'font-size', this.startPage.buttons.front_size)
     }) 
 })

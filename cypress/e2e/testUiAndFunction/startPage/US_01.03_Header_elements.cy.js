@@ -5,7 +5,7 @@ import { StartPage, LoginPopup } from "../../../pageObjects/StartPage.js";
 const startPage = new StartPage();
 const loginPopup = new LoginPopup();
 
-describe('US_01.03 |  Header elements', () => {
+describe('US_01.03 |  Header elements', { tags: ['smoke'] }, () => {
 
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);

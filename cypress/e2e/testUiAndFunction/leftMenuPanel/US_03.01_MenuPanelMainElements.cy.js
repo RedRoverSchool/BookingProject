@@ -6,7 +6,7 @@ const leftMenuPanel = new LeftMenuPanel();
 
 const AGENT = Cypress.env('agent');
 
-describe('US_03.01 Menu panel main elements', () => {
+describe('US_03.01 Menu panel main elements', { tags: ['smoke'] }, () => {
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');

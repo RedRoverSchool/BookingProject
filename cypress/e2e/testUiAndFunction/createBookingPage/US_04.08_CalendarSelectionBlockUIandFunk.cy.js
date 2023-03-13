@@ -4,28 +4,14 @@ import LeftMenuPanel from "../../../pageObjects/LeftMenuPanel";
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import startAndEndOfWeek from "../../../support/utilities/getStartAndEndOfTheWeek";
 
-
 const leftMenuPanel = new LeftMenuPanel();
 const createBookingPage = new CreateBookingPage();
 
 const AGENT = Cypress.env('agent');
 
 const getDateAndMonth = (el) => el.text().split('-')[0]
-const getPreviousWeekMonSundDays = (date) => {
-    let now = new Date()
-    const currentYear = now.toLocaleString('en-US', { year: 'numeric' });
-    const nextWeekMonday = new Date(date + " " + currentYear)
-    nextWeekMonday.setDate(nextWeekMonday.getDate() - 7)
-    let previousWeekMonday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
-    previousWeekMonday = previousWeekMonday[1] + " " + previousWeekMonday[0]
 
-    nextWeekMonday.setDate(nextWeekMonday.getDate() + 6)
-    let previousWeekSunday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
-    previousWeekSunday = previousWeekSunday[1] + " " + previousWeekSunday[0]
-    return previousWeekMonday + ' - ' + previousWeekSunday
-}
-
-describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
+describe('US_04.08 | Calendar-selection block UI  week/month view', { tags: ['smoke'] }, () => {
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
@@ -34,6 +20,13 @@ describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
 
     it('AT_04.08.03 | Verify that Label is present for week view', () => {
         createBookingPage.getLabelCalendar().should('be.visible');
+    });
+
+    it('AT_04.08.09 | Verify that Arrows is present for week view', () => {
+        createBookingPage
+            .getWeekButton().should('have.class', 'selected');
+        createBookingPage.getCalendarPrevButton().should('be.visible');
+        createBookingPage.getCalendarNextButton().should('be.visible');
     });
 
     it('AT_04.08.01 | Verify that Label is present for month view', () => {
@@ -48,16 +41,21 @@ describe('US_04.08 | Calendar-selection block UI  week/month view', () => {
     });
 });
 
-describe('US_04.08 | Calendar-selection block functionality week/month view', () => {
-    beforeEach(() => {
+describe('US_04.08 | Calendar-selection block functionality week/month view', { tags: ['smoke', 'regression'] }, () => {
+    beforeEach(function () {    
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
         leftMenuPanel.clickBookingIcon();
+
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
+        });
     });
 
-    it.skip('AT_04.08.04 | Verify that Click forward arrow works and switches month in correct order', () => {
-        const date = new Date()
-        createBookingPage.clickMonthBtn()
+    it('AT_04.08.04 | Verify that Click forward arrow works and switches month in correct order', () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 2)
+        createBookingPage.clickMonthBtn();
         for (let i = 0; i < 12; i++) {
             createBookingPage.clickCalendarNextButton();
             createBookingPage.getLabelCalendar().then(($label) => {
@@ -71,18 +69,18 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         createBookingPage.clickCalendarNextButton();
         createBookingPage.getLabelCalendar().then(($el) => {
             let mondayWeekAhead = getDateAndMonth($el);
-                createBookingPage.clickCalendarPrevButton();
-               
-                createBookingPage.getLabelCalendar().then(($el) => {
-                    expect($el.text()).to.eq(getPreviousWeekMonSundDays(mondayWeekAhead));
-                });
-            })
-        });
-  
+            createBookingPage.clickCalendarPrevButton();
 
-    it.skip('AT_04.08.06 | Verify that Click back arrow works and switches month in correct order', () => {
+            createBookingPage.getLabelCalendar().then(($el) => {
+                expect($el.text()).to.eq(createBookingPage.getPreviousWeekMonSundDays(mondayWeekAhead));
+            });
+        })
+    });
+
+    it('AT_04.08.06 | Verify that Click back arrow works and switches month in correct order', () => {
         createBookingPage.clickMonthBtn();
         const date = new Date()
+        date.setDate(date.getDate() + 2)
         date.setMonth(date.getMonth() + 12);
         for (let i = 1; i <= 12; i++) {
             createBookingPage.clickCalendarNextButton();
@@ -110,7 +108,7 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
         }
     });
 
-    it.skip('AT_04.08.08 | Verify that back arrow click does not show the elapsed month', function() {
+    it('AT_04.08.08 | Verify that back arrow click does not show the elapsed month', function () {
         createBookingPage.clickMonthBtn();
         createBookingPage.clickCalendarPrevButton();
         createBookingPage.getLabelCalendar().then(($label) => {
@@ -122,16 +120,24 @@ describe('US_04.08 | Calendar-selection block functionality week/month view', ()
     it.skip('AT_04.08.07 | Verify that back arrow click does not show elapsed week', function () {
         createBookingPage.clickCalendarPrevButton();
         createBookingPage.getMondayButton().then(($monday) => {
-          let openedWeekMonday = $monday.text();
-    
-          expect(openedWeekMonday).to.deep.equal(createBookingPage.getCurrentMonday());
+            let openedWeekMonday = $monday.text();
+            expect(openedWeekMonday).to.deep.equal(createBookingPage.getCurrentMonday());
         });
-      });
+    });
 
-    it('AT_04.08.09 | Verify that Arrows is present for week view', () => {
-        createBookingPage
-        .getWeekButton().should('have.class', 'selected');
-        createBookingPage.getCalendarPrevButton().should('be.visible');
-        createBookingPage.getCalendarNextButton().should('be.visible');
+    it('AT_04.08.11 | Verify that month format label is "Oct 2023"', function () {
+        createBookingPage.clickMonthBtn();
+        createBookingPage.selectMonthFromMonthDropdown(this.bookingData.oct);
+        createBookingPage.getLabelCalendar().should('include.text', this.bookingData.oct2023);
+    });
+
+    it('AT_04.08.12 | Verify that week format label is "2 Oct - 8 Oct"', function ()  {
+        createBookingPage.clickMonthBtn();
+        createBookingPage.selectMonthFromMonthDropdown(this.bookingData.oct);
+
+        createBookingPage.clickgetOctoberMondayButton();
+
+        createBookingPage.clickWeekBtn();
+        createBookingPage.getLabelCalendar().should('include.text', this.bookingData.octWeek);
     });
 });

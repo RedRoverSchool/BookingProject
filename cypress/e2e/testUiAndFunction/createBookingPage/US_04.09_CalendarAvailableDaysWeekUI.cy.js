@@ -13,7 +13,7 @@ const weekLastDay = (string) => {
 	return string.split(" ")[3]
 }
 
-describe('US_04.09 | Calendar available days week UI', () => {
+describe('US_04.09 | Calendar available days week UI', { tags: ['smoke'] }, () => {
 
 	const AGENT = Cypress.env('agent');
 
@@ -24,8 +24,8 @@ describe('US_04.09 | Calendar available days week UI', () => {
 
 	beforeEach(function () {
 
-		cy.fixture('createBookingPage').then(createBookingPage => {
-			this.createBookingPage = createBookingPage;
+		cy.fixture('createBookingPage').then(bookingData => {
+			this.bookingData = bookingData;
 		});
 
 		cy.fixture('colors').then(colors => {
@@ -36,7 +36,7 @@ describe('US_04.09 | Calendar available days week UI', () => {
 		createBookingPage.getWeekButton().should('have.class', 'selected');
 	});
 
-	it('AT_04.09.01 | Verify calendar-day-selection-wrapper starts and ends with same dates as label calendar week', function () {
+	it('AT_04.09.01 | Verify calendar-day-selection-wrapper starts and ends with same dates as label calendar week', { tags: ['regression'] }, function () {
 		createBookingPage.getLabelCalendar().then(($el) => {
 			let firstDayOfWeek = weekFirstDay($el.text())
 			let lastDayOfWeek = weekLastDay($el.text())
@@ -69,9 +69,9 @@ describe('US_04.09 | Calendar available days week UI', () => {
 		})
 	});
 
-	it('AT_04.09.05 | Seven fields are displayed for the week', function () {
+	it('AT_04.09.05 | Seven fields are displayed for the week', { tags: ['regression'] }, function () {
 		createBookingPage.getCalendarDays()
-			.should('have.length', this.createBookingPage.weekDayFields.quantity)
+			.should('have.length', this.bookingData.weekDayFields.quantity)
 	})
 
 	it('AT_04.09.07 | Each field has a capital letter of the Latin alphabet', function () {
@@ -86,7 +86,7 @@ describe('US_04.09 | Calendar available days week UI', () => {
 		createBookingPage.getCalendarDays().each(($el,ind) => {
 			const nameOfDay = getNameOfDay($el).slice(1, -1);
 
-		expect(nameOfDay).to.eq(this.createBookingPage.nameOfDay[ind]);
+		expect(nameOfDay).to.eq(this.bookingData.nameOfDay[ind]);
 		});
 	});
 });

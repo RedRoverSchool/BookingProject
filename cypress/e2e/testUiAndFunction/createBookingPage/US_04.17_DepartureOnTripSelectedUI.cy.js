@@ -6,7 +6,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage.js";
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_04.17 | Departure on trip selected UI', function () {
+describe('US_04.17 | Departure on trip selected UI', { tags: ['smoke'] }, function () {
 
     before(function () {
         cy.loginWithSession(AGENT.email, AGENT.password);
@@ -18,8 +18,8 @@ describe('US_04.17 | Departure on trip selected UI', function () {
     });
 
     beforeEach(function () {
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         })
 
         cy.fixture('colors').then(colors => {
@@ -31,6 +31,6 @@ describe('US_04.17 | Departure on trip selected UI', function () {
         createBookingPage.getLabelDepartureOnDate()
             .should('have.css', 'color', this.colors.greenBookingPage)
             .and('have.css', 'background-color', this.colors.lightGreenBookingPage)
-            .and('have.css', 'font-size', this.createBookingPage.selectedDateLabel.front_size)
+            .and('have.css', 'font-size', this.bookingData.selectedDateLabel.front_size)
     });
 });

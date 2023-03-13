@@ -8,55 +8,57 @@ const bookingPopup = new BookingPopup();
 
 const AGENT = Cypress.env('agent');
 
-function testCreatingReservationForPassengerType(passengerName, dropdownSelection, checkTextOnPassengerTypeLabel) {
-    cy.intercept('/tools/ping/**').as('getToolsPing');
-    cy.intercept('POST', 'orders').as('orders')
-
-    createBookingPage.typeIntoMainPassengerNameField(passengerName);
-    createBookingPage.getMainPassengerFareTypeDropdownSelect().select(dropdownSelection, { force: true });
-    createBookingPage.clickReservationTicketArrow();
-    cy.wait('@getToolsPing')
-    createBookingPage.clickReservationTicketButton();
-    cy.wait("@orders");
-    cy.wait('@getToolsPing').then(() => {
-        bookingPopup.getConfirmTicketButton().should('be.visible');
-        bookingPopup.getPassengerTitle().should('include.text', '(1)');
-        bookingPopup.getPassengersList().should('have.length', 1);
-        bookingPopup.getOnePassengerTypeLabel().should('have.text', checkTextOnPassengerTypeLabel); 
-    })  
-}
-
-describe.skip('US_AC.05 | Create reservation for 1 passenger', () => {
-    beforeEach(function () {
-        cy.intercept('/tools/ping/**').as('getToolsPing');
+describe('US_AC.05 | Create reservation for 1 passenger', { tags: ['regression'] }, () => {
+    beforeEach(function () {          
         cy.cleanData();
 
         cy.loginWithSession(AGENT.email, AGENT.password);
         cy.visit('/');
 
-        createBookingPage.clickCalendarNextButton();
-        cy.wait('@getToolsPing');
-        createBookingPage.clickFridayButton();
-        cy.wait('@getToolsPing');
-        createBookingPage.clickFirstTripCard();
-        cy.wait('@getToolsPing');
-    });
-
-    beforeEach(function () {
         cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+            this.createBookingPage = createBookingPage
         })
+    });
+    
+    it('AT_AC.05.01| Create reservation for 1 passenger - Adult', function () {
+        const filteredPassengers = this.createBookingPage.passengers.filter((passenger) => passenger.fareType === 'adult');
+        const passengerNames = filteredPassengers.map((passenger) => passenger.name);
+        const adultFareTypes = filteredPassengers.map((passenger) => passenger.fareType);
+        const passengerAmount = 1;              
+               
+        createBookingPage.reserveBooking(passengerNames, passengerAmount, adultFareTypes);
+
+        bookingPopup.getConfirmTicketButton().should('be.visible');
+        bookingPopup.getPassengerTitle().should('include.text', '(1)');
+        bookingPopup.getPassengersList().should('have.length', 1);
+        bookingPopup.getOnePassengerTypeLabel().should('contain', 'Adult'); 
     });
 
     it('AT_AC.05.02| Create reservation for 1 passenger - Child', function () {
-        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name, 'child', 'Child:')
-    });
+        const filteredPassengers = this.createBookingPage.passengers.filter((passenger) => passenger.fareType === 'child');
+        const passengerNames = filteredPassengers.map((passenger) => passenger.name);
+        const childFareTypes = filteredPassengers.map((passenger) => passenger.fareType);
+        const passengerAmount = 1;              
+               
+        createBookingPage.reserveBooking(passengerNames, passengerAmount, childFareTypes);
 
-    it('AT_AC.05.01| Create reservation for 1 passenger - Adult', function () {
-        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'adult', 'Adult:');
-    });
+        bookingPopup.getConfirmTicketButton().should('be.visible');
+        bookingPopup.getPassengerTitle().should('include.text', '(1)');
+        bookingPopup.getPassengersList().should('have.length', 1);
+        bookingPopup.getOnePassengerTypeLabel().should('contain', 'Child');                          
+    });    
 
     it('AT_AC.05.03| Create reservation for 1 passenger - Elder', function () {
-        testCreatingReservationForPassengerType(this.createBookingPage.inputField.main_passenger.name,'elder', 'Elder:');
+        const filteredPassengers = this.createBookingPage.passengers.filter((passenger) => passenger.fareType === 'elder');
+        const passengerNames = filteredPassengers.map((passenger) => passenger.name);
+        const elderFareTypes = filteredPassengers.map((passenger) => passenger.fareType);
+        const passengerAmount = 1;              
+               
+        createBookingPage.reserveBooking(passengerNames, passengerAmount, elderFareTypes);
+
+        bookingPopup.getConfirmTicketButton().should('be.visible');
+        bookingPopup.getPassengerTitle().should('include.text', '(1)');
+        bookingPopup.getPassengersList().should('have.length', 1);
+        bookingPopup.getOnePassengerTypeLabel().should('contain', 'Elder'); 
     });
 });   

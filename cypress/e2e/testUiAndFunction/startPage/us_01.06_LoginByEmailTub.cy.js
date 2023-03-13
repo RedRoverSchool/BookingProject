@@ -8,29 +8,40 @@ const createBookingPage = new CreateBookingPage();
 const loginPopup = new LoginPopup();
 const startPage = new StartPage();
 
-describe('US_01.06 | Login by email tub functionality', () => {
+describe('US_01.06 | Login by email tub functionality', { tags: ['smoke'] }, () => {
+    const AGENT = Cypress.env('agent')
 
-    const AGENT = Cypress.env('agent');
-
-    beforeEach(function () {
+    before(function () {
         cy.then(Cypress.session.clearCurrentSessionData);
         cy.visit('/');
-        cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage
-        });
-        cy.fixture('colors').then(colors => {
-            this.colors = colors;
-        });
+        startPage.clickLoginButton();
     });
 
-    it('AT_01.06.01 | Verify Sign In Button redirect to the Create Booking Page', function () {
-        cy.login(AGENT.email, AGENT.password);
-        createBookingPage.getCreateBookingHeader().should('include.text', this.createBookingPage.headers.mainHeaderPage)
+    beforeEach(function () {
+        cy.fixture('startPage').then(startPage => {
+            this.startPage = startPage;
+        });
+
+        cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
+        });
+
+        cy.fixture('colors').then(colors => {
+            this.colors = colors;
+        });  
     });
 
     it('AT_01.06.02 | Color of Sign In Button', function () {
-        startPage.clickLoginButton();
         loginPopup.getByEmailSignInButton().should('have.css','color', this.colors.greenPopup)
+    });
+
+    it('AT_01.06.01 | Verify Sign In Button redirect to the Create Booking Page', { tags: ['regression'] }, function () {
+        loginPopup.enterEmail(AGENT.email)
+        loginPopup.enterPassword(AGENT.password)
+        loginPopup.clickByEmailSignInButton()
+        createBookingPage
+            .getCreateBookingHeader()
+            .should('include.text', this.bookingData.headers.mainHeaderPage)
     });
 });
 

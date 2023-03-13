@@ -11,7 +11,7 @@ const randomEmail = faker.internet.email();
 const randomPhoneNumber = faker.phone.number('+66##########')
 
 
-describe('US_01.13 | Register functionality', () => {
+describe('US_01.13 | Register functionality', { tags: ['smoke', 'regression'] }, () => {
     
     before(() => {
         cy.then(Cypress.session.clearCurrentSessionData);
@@ -35,5 +35,11 @@ describe('US_01.13 | Register functionality', () => {
         registerPopup
             .getRegisterCongratulationsHeader()
             .should('be.visible')
+    });
+
+    it('AT_01.13.02 | Close popup window clickable (click on X)', function () {
+        registerPopup.clickRegisterPopupCloseButton()
+        startPage.getLogo().should('be.visible')
+        startPage.getLoginButton().should('have.text', this.startPage.buttons.loginBtnText)
     });
 });

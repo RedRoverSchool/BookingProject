@@ -6,7 +6,7 @@ import { sortAsc } from  "../../../support/utilities/sortArrayByDigit";
 const AGENT = Cypress.env('agent');
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.16 | Departure On UI by default', () => {
+describe('US_04.16 | Departure On UI by default', { tags: ['smoke'] }, () => {
 
     before(function () {
         cy.loginWithSession(AGENT.email, AGENT.password);
@@ -14,8 +14,8 @@ describe('US_04.16 | Departure On UI by default', () => {
     })
 
     beforeEach(function () {
-        cy.fixture('createBookingPage.json').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage.json').then(bookingData => {
+            this.bookingData = bookingData;
         });
 
         cy.fixture('colors').then(colors => {
@@ -43,7 +43,7 @@ describe('US_04.16 | Departure On UI by default', () => {
 
     it('AT_04.16.04 | "Earliest" button has text "Earliest" in white color rgb(255, 255, 255)', function() {
         createBookingPage.getBtnErliest()
-        .should('have.text', this.createBookingPage.earliestBtnText)
+        .should('have.text', this.bookingData.earliestBtnText)
         .and('have.css', 'color', this.colors.white);
     })
 
@@ -56,7 +56,7 @@ describe('US_04.16 | Departure On UI by default', () => {
 
     it('AT_04.16.06 | "Latest" button has text "Latest" in green color (#00a65a)', function() {
         createBookingPage.getDepartureLatestButton()
-        .should('have.text', this.createBookingPage.latestBtnText)
+        .should('have.text', this.bookingData.latestBtnText)
         .and('have.css', 'color', this.colors.greenBookingPage);
     })
 

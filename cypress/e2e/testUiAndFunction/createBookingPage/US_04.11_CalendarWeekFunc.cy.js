@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 
-describe('US_04.11 | Calendar week functionality', () => {
+describe('US_04.11 | Calendar week functionality', { tags: ['smoke', 'regression'] }, () => {
 
 	const AGENT = Cypress.env('agent');
 
@@ -17,8 +17,8 @@ describe('US_04.11 | Calendar week functionality', () => {
 	});
 
 	beforeEach(function () {
-		cy.fixture('createBookingPage').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+		cy.fixture('createBookingPage').then(bookingData => {
+            this.bookingData = bookingData;
         });
 
 		cy.fixture('colors').then(colors => {
@@ -65,7 +65,7 @@ describe('US_04.11 | Calendar week functionality', () => {
 		
 		createBookingPage.getCalendarDays().not('.unavailable').each(($el) => {
 			
-			expect($el).to.have.css('cursor',this.createBookingPage.validDayField.cursor);
+			expect($el).to.have.css('cursor',this.bookingData.validDayField.cursor);
 		});
 	});
 
@@ -96,7 +96,7 @@ describe('US_04.11 | Calendar week functionality', () => {
 		createBookingPage.getCalendarDays().each(($el) => {
 			if($el.hasClass('unavailable')){
 
-				expect($el).to.have.css('cursor',this.createBookingPage.unavailableDayField.cursor);
+				expect($el).to.have.css('cursor',this.bookingData.unavailableDayField.cursor);
 			}
 		})
 	});

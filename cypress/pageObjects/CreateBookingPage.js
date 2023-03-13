@@ -1,4 +1,9 @@
+import BookingPopup from "./BookingPopup";
+
+const bookingPopup = new BookingPopup();
+
 class CreateBookingPage {
+        
     //Header
     getCreateBookingHeader = () => cy.get('div h1');
 
@@ -14,6 +19,7 @@ class CreateBookingPage {
     getLabelDepartureStation = () => cy.get('.departure-wrapper label')
     getDepartureInputSelectSearchField = () => cy.get('.select2-search__field')
     getLabelArrivalStation = () => cy.get('.destination-wrapper label')
+    getDepartureStationSelectionArrow = () => cy.get('.departure-wrapper .select2-selection__arrow');
 
     //Departure date
     getDepartureDateSection = () => cy.get('.box-body.calendar-wrapper');
@@ -32,6 +38,7 @@ class CreateBookingPage {
     getDepartureDate = () => cy.get('.popup-trip div:nth-child(5) span');
     getDaySelected = () => cy.get('[class="day-wrapper selected"]');
     getMondayButton = () => cy.get('div .calendar-day-selection-wrapper :first-child');
+    getOctoberMondayButton = () => cy.get('.calendar-day-selection-wrapper > :nth-child(8)');
 
     //Departure on
     getDepartureOnSection = () => cy.get('.box-body.trips-wrapper');
@@ -51,6 +58,7 @@ class CreateBookingPage {
     getVehicleClassTripCards = () => cy.get('.trips-list-wrapper > div> span.class');
     getNumberTicketsAvailableSecondTripCard = () => cy.get('.trip:nth-child(2) span.availability .num');
     getClassUnselectedTripCards = () => cy.get('.trips-list-wrapper > div.trip .class');
+    getSelectedTripCard = () => cy.get('div.trip.selected');
 
     //Arrival on
     getArrivalTime = () => cy.get('.popup-trip div:nth-child(7) span');
@@ -72,7 +80,7 @@ class CreateBookingPage {
     getMainPassengerFareTypeDropdownList = () => cy.get('div.passenger-row:not(.passenger-add) .div-fare-type select option');
     getAddedPassengersFareTypeDropdownLists = () => cy.get('div.passenger-row.passenger-add .div-fare-type select');
     getAddedPassengerFareTypeDropdownListOptions = () => cy.get('[class="select2-results__options"] li');
-    getEmailInputField = () => cy.get(':nth-child(4) > .form-control');
+    getEmailInputField = () => cy.get('.form-control[name="passenger-email"]');
     getAmountOfChosenPass = () => cy.get('.box-default .passenger-wrapper .passenger-row');
     getLabelMainPassenger = () => cy.get('div.passenger-row > label');
     getPlaceholderPassengerName = () => cy.get('input[placeholder="Passenger name"]')
@@ -102,8 +110,9 @@ class CreateBookingPage {
     getAllSeatsSeatSelection = () => cy.get('.seat-chart .seats td');
     getTitleOfSeatsTable = () => cy.get('.seats tbody th');
     getSeatInRow = () => cy.get('.seat-chart .seats tr:nth-child(2) td');
-    getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .available');
-    getLabelSeatSelection = () => cy.get('div.layout-wrapper div.title label')
+    getAvailableSeatsSeatSelection = () => cy.get('.seat-chart .seats td:not(.unavailable)');
+    getLabelSeatSelection = () => cy.get('div.layout-wrapper div.title label');
+    getEconomyBusLable = () => cy.get('.seats [colspan]')
 
     // Summary section 
     getSeatsNumberColumnSummary = () => cy.get('.total-wrapper > div.total-row :nth-child(3)');
@@ -135,12 +144,16 @@ class CreateBookingPage {
         this.clickFridayButton()
 
         this.selectAmountPassengersDetailsDropdown(passengerAmount)
+
+        this.clickTripCard()
+
+        this.getLabelSeatSelection()
+                    .should('be.visible')
+                    .and('have.text', 'Seat selection')
     
         this.typePassengerNames(passengerNames)
     
         this.selectFareTypes(fareTypes)
-
-        this.clickTripCard()
 
         this.clickBookTicketsBtn()
     }
@@ -171,7 +184,19 @@ class CreateBookingPage {
     };
 
     clickSecondTripCard() {
-        this.getSecondTripCard().click({ force: true })
+        cy.intercept('/tools/**').as('getTrip');
+        cy.wait('@getTrip');
+
+        this.getSecondTripCard().then(($el) => {
+            if ($el.text() == "Overdue") {
+                this.clickCalendarNextButton();
+                clickSecondTripCard();
+                return false;
+            } else {
+                cy.wrap($el).click();
+                return false;
+            }           
+        })
     }
 
     typePassengerNames = (names) => {
@@ -420,7 +445,19 @@ class CreateBookingPage {
     const currentMondayDate = currentMonday.toDateString();
     const currentMondayDayOnlyNumber = currentMondayDate.split(" ")[2];
     return currentMondayDayOnlyNumber;
-  }
+    }
+    
+    getCurrentDate() {
+        const date = new Date();
+        const currentDate = date.toLocaleDateString('en-US', { day: 'numeric' });
+        return currentDate
+    }
+
+    getCurrentDateInThailand() {
+        const date = new Date();
+        let currentDateThailand = date.toLocaleString('en-US', { day: 'numeric', timeZone: 'Asia/Bangkok' })
+        return currentDateThailand
+    }
     
    clickBalanceOnBookingPage() {
     this.getBalanceOnBookingPage().click();
@@ -431,10 +468,12 @@ class CreateBookingPage {
     }
     
     clickOnLastAvailiableTripCard() {
+        cy.intercept('/tools/**').as('getToolsPing')
+        cy.wait('@getToolsPing')
         this.getDepartureTripCardsList().each(($el) => {
-            const statusText = $el.text();
-            if (statusText !== 'Overdue') {
-                cy.wrap($el).last().click();
+        const statusText = $el.text();
+         if (statusText !== 'Overdue') {
+            cy.wrap($el).trigger('mouseover').click();
             }
         })
     }
@@ -554,6 +593,120 @@ class CreateBookingPage {
         let date = new Date();
         const currentMonthAndYearThailand = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'Asia/Bangkok' });
         return currentMonthAndYearThailand;
+    }
+
+    createCustomBooking({departureStationName, arrivalStationName, passengerName, passengerAmount, fareType}) {
+        cy.intercept('/tools/**').as('getTrip')
+        
+        this.selectDepartureStation(departureStationName)
+        cy.wait('@getTrip')
+        
+        this.selectArrivalStation(arrivalStationName)
+        if (departureStationName === 'Bangkok Khao San' && arrivalStationName === 'Chonburi') {
+            this.clickCalendarNextButton()
+            cy.wait('@getTrip')
+            this.clickSaturdayButton()
+        } else {
+            this.clickCalendarNextButton()
+            cy.wait('@getTrip')
+            this.clickFridayButton()
+        }
+        cy.wait('@getTrip')
+        
+        this.selectAmountPassengersDetailsDropdown(passengerAmount)
+        cy.wait('@getTrip')
+        
+        this.clickTripCard()
+        this.getLabelSeatSelection()
+                .should('be.visible')
+                .and('have.text', 'Seat selection')
+        
+        this.typePassengerNames(passengerName)
+    
+        this.selectFareTypes(fareType)
+        
+        this.clickBookTicketsBtn()
+        
+    }
+
+    clickgetOctoberMondayButton() {
+        this.getOctoberMondayButton().click({ force: true })
+    }
+
+    /** 
+    * @returns boolean, checks if each three consecutive elements in array have same number with letters "A","B","C"
+    */
+    isSameRowSeatsA_B_C = (array) => {
+        let check = true
+        let expectedString = "ABC"
+        for (let i = 0; i < array.length; i += 3) {
+            let checkForA_B_C = array.slice(i, i + 3).map(el => el.replace(/^\d/g, '')).join("")
+            let checkForSameNumber = new Set(array.slice(i, i + 3).map(el => parseInt(el)))
+            check = check && (checkForSameNumber.size == 1) && (checkForA_B_C == expectedString)
+        }
+        return check
+    }    
+
+    reserveBooking(passengerNames, passengerAmount, fareTypes) {
+        this.clickCalendarNextButton();
+    
+        this.clickFridayButton();
+
+        this.selectAmountPassengersDetailsDropdown(passengerAmount);
+
+        this.clickTripCard();        
+    
+        this.typePassengerNames(passengerNames);
+    
+        this.selectFareTypes(fareTypes);
+
+        this.clickReservationTicketArrow();
+
+        this.clickReservationTicketButton();
+    }
+
+    clickResetButton() {
+        this.getResetButton().click();
+    }    
+
+    getValidBoundaryValuesMonthDropdownMinNomMax() {
+        let validBoundaryValueArrayMinNomMax = this.validBoundaryValuesMonthDropdownMinNomMax()
+    
+        if (this.getFirstAvailableForBookingDefaultDay() === "1" || this.getFirstAvailableForBookingDefaultDay() === "2") {
+            this.clickCalendarPrevButton()
+            return validBoundaryValueArrayMinNomMax
+        }
+        if (this.getCurrentDateInThailand() === "1" && this.getCurrentDate() !== "1") {
+            validBoundaryValueArrayMinNomMax[0] = this.createArrayOfConsetutiveMonths()[1]
+           return  validBoundaryValueArrayMinNomMax
+        }
+        else {
+            return validBoundaryValueArrayMinNomMax
+        }
+    }
+
+    getPreviousWeekMonSundDays = (date) => {
+        let now = new Date()
+        const currentYear = now.toLocaleString('en-US', { year: 'numeric' });
+        const nextWeekMonday = new Date(date + " " + currentYear)
+        nextWeekMonday.setDate(nextWeekMonday.getDate() - 7)
+        let previousWeekMonday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
+        previousWeekMonday = previousWeekMonday[1] + " " + previousWeekMonday[0]
+
+        nextWeekMonday.setDate(nextWeekMonday.getDate() + 6)
+        let previousWeekSunday = nextWeekMonday.toLocaleString('en-US', { month: 'short', day: 'numeric' }).split(" ")
+        previousWeekSunday = previousWeekSunday[1] + " " + previousWeekSunday[0]
+        return previousWeekMonday + ' - ' + previousWeekSunday
+    }
+
+    createReservationSecondTrip(passengerAmount, passengerNames, fareTypes) {
+        this.clickSecondTripCard(); 
+        this.selectAmountPassengersDetailsDropdown(passengerAmount);
+        this.typePassengerNames(passengerNames);  
+        this.selectFareTypes(fareTypes);
+        this.clickReservationTicketArrow();
+        this.clickReservationTicketButton();
+        bookingPopup.getBookingPopupWindow().should('be.visible');        
     }
 }
 export default CreateBookingPage;

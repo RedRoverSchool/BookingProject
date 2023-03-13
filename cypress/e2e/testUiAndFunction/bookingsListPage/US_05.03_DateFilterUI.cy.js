@@ -7,7 +7,7 @@ const bookingsListPage = new BookingsListPage();
 const leftMenuPanel = new LeftMenuPanel();
 
 
-describe('US_05.03 | Date filter UI', () => {
+describe('US_05.03 | Date filter UI', { tags: ['smoke'] }, () => {
 
     const AGENT = Cypress.env('agent')
 
@@ -33,7 +33,7 @@ describe('US_05.03 | Date filter UI', () => {
         const todayFormatted = bookingsListPage.getDateFromCurrentDDMMMYYYY(0)
         const past7DateFormatted = bookingsListPage.getDateFromCurrentDDMMMYYYY(-6)
 
-        bookingsListPage.getDrdnDatesRangeDefaultValue()
+        bookingsListPage.getDrdnDatesRangeValue()
             .should('have.text', `${past7DateFormatted} - ${todayFormatted}`)
     })
 
@@ -65,7 +65,7 @@ describe('US_05.03 | Date filter UI', () => {
     });
 
     it('AT_05.03.03 Verify that the "calendar" dropdown is displayed', function() {  
-        bookingsListPage.getDrdnDatesRangeDefaultValue().should('be.visible')
+        bookingsListPage.getDrdnDatesRangeValue().should('be.visible')
     });
 });
 

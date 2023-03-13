@@ -3,7 +3,7 @@
 import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 import BookingPopup from "../../../pageObjects/BookingPopup";
 import getArray from "../../../support/utilities/getArray";
-import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
+
 
 const createBookingPage = new CreateBookingPage();
 const bookingPopup = new BookingPopup();
@@ -21,66 +21,106 @@ describe('US_04.30 | Summary UI', () => {
 		cy.fixture('bookingPopup').then(bookingPopup => {
 			this.bookingPopup = bookingPopup;
 		});
-		cy.fixture('createBookingPage').then(createBookingPage => {
-			this.createBookingPage = createBookingPage
-		});	
+		cy.fixture('createBookingPage').then(bookingData => {
+			this.bookingData = bookingData
+		});
 	})
 
 	describe('US_04.30 | Summary  section UI', () => {
-		beforeEach(() => {
+		before(() => {
+			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
 			cy.visit('/');
+			cy.intercept('/tools/**').as('getToolsPing')
+			cy.wait('@getToolsPing')
 			createBookingPage.clickCalendarNextButton()
-			cy.intercept('/tools/ping/**').as('getToolsPing')
 			cy.wait('@getToolsPing')
 			createBookingPage.clickFridayButton()
 			cy.wait('@getToolsPing')
 			createBookingPage.clickOnLastAvailiableTripCard()
-			cy.wait('@getToolsPing')
-		});
-
-		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1, 150, 300 chosen passengers', function () {
-			let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.minimum,
-			                              this.createBookingPage.validBoundaryValues.nominalValue,
-				                          this.createBookingPage.validBoundaryValues.maximum]
 			
-			for (let numberOfPassengers of numberOfPassengersArray) {
-				createBookingPage.selectAmountPassengersDetailsDropdown(numberOfPassengers)
-
-				createBookingPage.getSelectedSeats()
-					.then(($el) => {
-						let defaultSelectedSeatsArray = getArray($el)
-						expect(defaultSelectedSeatsArray.length).to.eq(parseInt(numberOfPassengers))
-				
-						createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
-							let seatsSummaryArray = getArray($el)
-							expect(defaultSelectedSeatsArray).to.deep.eq(seatsSummaryArray)
-						})
-					})
-			}
+			createBookingPage.getSelectedTripCard().should('be.visible')
 		});
 
-		it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2, 150, 299) from passenger dropdown menu', function () {
-			let numberOfPassengersArray = [this.createBookingPage.validBoundaryValues.aboveMinimum,
-			                               this.createBookingPage.validBoundaryValues.nominalValue,
-				                           this.createBookingPage.validBoundaryValues.belowMaximum]
-			
-			for (let numberOfPassengers of numberOfPassengersArray) {
-				createBookingPage.selectAmountPassengersDetailsDropdown(numberOfPassengers)
-				createBookingPage.getSelectedSeats()
-					.then(($el) => {
-						let defaultSelectedSeatsArray = getArray($el)
-						expect(defaultSelectedSeatsArray.length).to.eq(parseInt(numberOfPassengers))
+		it('AT_04.30.01 | Displayed seats match default seat selection from seat selection section for 1 passenger', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.minimum)
+			createBookingPage.getSelectedSeats().then(($el) => {
+					let defaultSelectedSeatsArray = getArray($el)
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.minimum))
 
-						createBookingPage.getRowsSummary().then(($el) => {
-							let numberOfRows = $el
-							expect(parseInt(numberOfPassengers)).to.eq(numberOfRows.length)
-						})
+					createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
+						let seatsSummaryArray = getArray($el)
+						expect(defaultSelectedSeatsArray).to.deep.eq(seatsSummaryArray)
 					})
-			}
+				})
 		});
 
-		it('AT_04.30.02 | Total price is correct', () => {
+		it('AT_04.30.11 | Displayed seats match default seat selection from seat selection section for 150 passengers', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.nominalValue)
+			createBookingPage.getSelectedSeats().then(($el) => {
+					let defaultSelectedSeatsArray = getArray($el)
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.nominalValue))
+
+					createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
+						let seatsSummaryArray = getArray($el)
+						expect(defaultSelectedSeatsArray).to.deep.eq(seatsSummaryArray)
+					})
+				})
+		});
+
+		it('AT_04.30.12 | Displayed seats match default seat selection from seat selection section for 300 passengers', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.maximum)
+			createBookingPage.getSelectedSeats().then(($el) => {
+					let defaultSelectedSeatsArray = getArray($el)
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.maximum))
+
+					createBookingPage.getSeatsNumberColumnSummary().then(($el) => {
+						let seatsSummaryArray = getArray($el)
+						expect(defaultSelectedSeatsArray).to.deep.eq(seatsSummaryArray)
+					})
+				})
+		});
+
+		it('AT_04.30.03 | Verify total number of rows equals number of chosen passengers (2 passengers) from dropdown menu', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.aboveMinimum)
+			createBookingPage.getSelectedSeats().then(($el) => {
+					let defaultSelectedSeatsArray = getArray($el)
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.aboveMinimum))
+
+					createBookingPage.getRowsSummary().then(($el) => {
+						let numberOfRows = $el
+						expect(parseInt(this.bookingData.validBoundaryValues.aboveMinimum)).to.eq(numberOfRows.length)
+					})
+				})
+		});
+
+		it('AT_04.30.13 | Verify total number of rows equals number of chosen passengers (150 passengers) for dropdown menu', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.nominalValue)
+			createBookingPage.getSelectedSeats().then(($el) => {
+					let defaultSelectedSeatsArray = getArray($el)
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.nominalValue))
+
+					createBookingPage.getRowsSummary().then(($el) => {
+						let numberOfRows = $el
+						expect(parseInt(this.bookingData.validBoundaryValues.nominalValue)).to.eq(numberOfRows.length)
+					})
+				})
+		});
+
+		it('AT_04.30.14 | Verify total number of rows equals number of chosen passengers ( 299 passengers) from passenger dropdown menu', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.validBoundaryValues.belowMaximum)
+			createBookingPage.getSelectedSeats().then(($el) => {
+					let defaultSelectedSeatsArray = getArray($el)
+					expect(defaultSelectedSeatsArray.length).to.eq(parseInt(this.bookingData.validBoundaryValues.belowMaximum))
+
+					createBookingPage.getRowsSummary().then(($el) => {
+						let numberOfRows = $el
+						expect(parseInt(this.bookingData.validBoundaryValues.belowMaximum)).to.eq(numberOfRows.length)
+					})
+				})
+		});
+
+		it('AT_04.30.02 | Total price is correct', { tags: ['smoke'] }, () => {
 			createBookingPage.getPassengersDetailsDropdownList().then(($el) => {
 				let arrayOfSeats = $el
 					.toArray()
@@ -108,106 +148,112 @@ describe('US_04.30 | Summary UI', () => {
 			})
 		});
 
-		it('AT_04.30.05 | Verify total price for 6 passengers with custom fare types (2 "Adult", 2 "Child", 2 "Elder") is correct', function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown('6 passengers')
-			createBookingPage.getFareTypeDropdown().each(($el, index) => {
-				if (index <= 1) {
-					cy.wrap($el).click()
-					createBookingPage.selectAdultFare()
-				} else if (index <= 3) {
-					cy.wrap($el).click()
-					createBookingPage.selectChildFare()
-				} else {
-					cy.wrap($el).click()
-					createBookingPage.selectElderFare()
-				}
-			})
+		it('AT_04.30.05 | Verify total price for 6 passengers with custom fare types (2 "Adult", 2 "Child", 2 "Elder") is correct', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.numberOfPassengers.sixPassengers)
+
+			let fareTypes = [this.bookingData.dropdowns.fareType.fareTypesNames[0], this.bookingData.dropdowns.fareType.fareTypesNames[0],
+			                this.bookingData.dropdowns.fareType.fareTypesNames[1], this.bookingData.dropdowns.fareType.fareTypesNames[1],
+				            this.bookingData.dropdowns.fareType.fareTypesNames[2], this.bookingData.dropdowns.fareType.fareTypesNames[2]]
 			
-			createBookingPage.getPricesSummary().then(($el) => {
-				const prices = getArray($el)
+			createBookingPage.selectFareTypes(fareTypes)
+			createBookingPage.getFareTypeColumnSummary().each(($el, i) => {
+				expect($el.text()).to.include(fareTypes[i])
+				
+				createBookingPage.getPricesSummary().then(($el) => {
+					const prices = getArray($el)
 
-				const finalPrice = "USD" + " " + sumOfArray(prices)
+					const finalPrice = "USD" + " " + sumOfArray(prices)
 
-				createBookingPage.getTotalPriceSummary().then(($el) => {
-					let totalPrice = $el.text()
-					expect(finalPrice).to.deep.eq(totalPrice)
+					createBookingPage.getTotalPriceSummary().then(($el) => {
+						let totalPrice = $el.text()
+						expect(finalPrice).to.deep.eq(totalPrice)
+					})
 				})
 			})
 		});
-	
-		it('AT_04.30.08 | Verify price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
-			createBookingPage.selectAmountPassengersDetailsDropdown(this.createBookingPage.numberOfPassengers.passengerDefault)
-			let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
-	
+
+		it('AT_04.30.08 | Verify price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.numberOfPassengers.passengerDefault)
+			let fareTypesArray = this.bookingData.dropdowns.fareType.fareTypesNames
+
 			for (let i = 0; i < fareTypesArray.length; i++) {
 				createBookingPage.selectFareTypeMainPassenger(fareTypesArray[i])
 				createBookingPage.getFareTypeColumnSummary().should('include.text', fareTypesArray[i])
 
 				createBookingPage.getPricesSummary().then(($el) => {
 					let actualPrice = $el.text()
-					expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
+					expect(actualPrice).to.eq(this.bookingData.pricesForFerryAdultChildElder[i])
 				})
 			}
 		});
-	
-		it('AT_04.30.09 | Verify total price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', function () {
-			createBookingPage.getPassengersDetailsDropdown().select(this.createBookingPage.numberOfPassengers.passengerDefault)
-			let fareTypesArray = this.createBookingPage.dropdowns.fareType.fareTypesNames
+
+		it('AT_04.30.09 | Verify total price for ticket for one passenger for each fare type (Elder, Child, Adult) matches expected price', { tags: ['regression'] }, function () {
+			createBookingPage.selectAmountPassengersDetailsDropdown(this.bookingData.numberOfPassengers.passengerDefault)
+			let fareTypesArray = this.bookingData.dropdowns.fareType.fareTypesNames
 
 			for (let i = 0; i < fareTypesArray.length; i++) {
-				createBookingPage.getMainPassengerFareTypeDropdownSelect().select(fareTypesArray[i], { force: true })
+				createBookingPage.selectFareTypeMainPassenger(fareTypesArray[i])
 				createBookingPage.getFareTypeColumnSummary().should('include.text', fareTypesArray[i])
 
 				createBookingPage.getTotalPriceSummary().then(($el) => {
 					let actualPrice = $el.text()
-					expect(actualPrice).to.eq(this.createBookingPage.pricesForFerryAdultChildElder[i])
+					expect(actualPrice).to.eq(this.bookingData.pricesForFerryAdultChildElder[i])
 				})
 			}
 		});
 
-		it('AT_04.30.10 | Text "Total" is displayed and visible', function () {
+		it('AT_04.30.10 | Text "Total" is displayed and visible', { tags: ['smoke'] }, function () {
 			createBookingPage.getTotalSummaryLabel().should('be.visible');
 		});
 	});
-		
-	describe.skip('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', () => {
+
+	describe('AT_04.30.04 AT_04.30.06 AT_04.30.07| Verify that selected passenger fare type matches the amount on Booking Popup (Adult, Child, Elder)', { tags: ['regression'] }, () => {
 		beforeEach(() => {
-			cy.visit('/')
+			cy.cleanData()
 			cy.loginWithSession(AGENT.email, AGENT.password)
+			cy.visit('/')
+			cy.intercept('/tools/**').as('getToolsPing')
+			cy.wait('@getToolsPing')
 			createBookingPage.clickCalendarNextButton()
+			cy.wait('@getToolsPing')
 			createBookingPage.clickFridayButton()
-			waitForToolsPing()
-			createBookingPage.clickSecondTripCard()
+			cy.wait('@getToolsPing')
+			createBookingPage.clickOnLastAvailiableTripCard()
+			cy.wait('@getToolsPing')
 		});
 
 		it('AT_04.30.04 | Verify that selected passenger fare type "Adult" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
-			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.typeIntoMainPassengerNameField(this.bookingData.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Adult')
 			createBookingPage.clickBookTicketsBtn();
+			cy.intercept('/tools/**').as('getPopUp')
+			cy.wait('@getPopUp')
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.adultFare)
-			cy.cleanData()
+
 		});
 
 		it('AT_04.30.06 | Verify that selected passenger fare type "Child" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
-			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.typeIntoMainPassengerNameField(this.bookingData.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Child')
 			createBookingPage.clickBookTicketsBtn();
+			cy.intercept('/tools/**').as('getPopUp')
+			cy.wait('@getPopUp')
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.childFare)
-			cy.cleanData()
 		});
 
 		it('AT_04.30.07 | Verify that selected passenger fare type "Elder" matches the amount on Booking Popup', function () {
 			createBookingPage.getPassengersDetailsDropdown().select('1 passenger')
-			createBookingPage.typeIntoMainPassengerNameField(this.createBookingPage.inputField.main_passenger.name)
+			createBookingPage.typeIntoMainPassengerNameField(this.bookingData.inputField.main_passenger.name)
 			createBookingPage.getFareTypeDropdown().click()
 			createBookingPage.selectFareType('Elder')
 			createBookingPage.clickBookTicketsBtn();
+			cy.intercept('/tools/**').as('getPopUp')
+			cy.wait('@getPopUp')
 			bookingPopup.getFirstFareType().should('have.text', 1 + this.bookingPopup.passengerPrice.passengerFareTypes.elderFare)
-			cy.cleanData()
 		});
 	})
 });

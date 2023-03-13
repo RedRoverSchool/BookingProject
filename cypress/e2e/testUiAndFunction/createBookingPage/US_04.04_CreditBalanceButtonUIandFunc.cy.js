@@ -9,12 +9,12 @@ const createBookingPage = new CreateBookingPage();
 const leftMenuPanel = new LeftMenuPanel();
 const accountManagementPage = new AccountManagementPage();
 
-describe("US_04.04 | Credit balance button UI and functionality", () => {
+describe("US_04.04 | Credit balance button UI and functionality", { tags: ['regression'] }, () => {
   const AGENT = Cypress.env("agent");
 
   beforeEach(function () {
-    cy.fixture("createBookingPage").then((createBookingPage) => {
-      this.createBookingPage = createBookingPage;
+    cy.fixture("createBookingPage").then((bookingData) => {
+      this.bookingData = bookingData;
     });
     cy.loginWithSession(AGENT.email, AGENT.password);
     cy.visit('/');
@@ -74,7 +74,7 @@ describe("US_04.04 | Credit balance button UI and functionality", () => {
     createBookingPage
       .getBalanceOnBookingPage()
       .should("be.visible")
-      .and("contains.text", this.createBookingPage.headers.creditBalance);
+      .and("contains.text", this.bookingData.headers.creditBalance);
     waitForToolsPing();
     createBookingPage.clickBalanceOnBookingPage();
     createBookingPage.getSpinner().should("be.visible");

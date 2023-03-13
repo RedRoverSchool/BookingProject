@@ -6,7 +6,7 @@ import waitForToolsPing from "../../../support/utilities/waitForToolsPing";
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
 
-describe('US_04.27 | Passengers dropdown UI', () => {
+describe('US_04.27 | Passengers dropdown UI', { tags: ['smoke'] }, () => {
     
     before(() => {
         cy.loginWithSession(AGENT.email, AGENT.password);

@@ -43,13 +43,14 @@
 
         "dialCode": {
             "byDefault": "+66"
-        },
+        } 
+    },
 
-        "tripClass": [
-            "VIP bus 24",
-            "Ferry 300",
-            "Economy bus 300"
-        ]
+    "tripClass": {
+       "VIP_Bus": "VIP bus 24",
+        "ferry": "Ferry 300",
+        "economyBus" :"Economy bus 300",
+        "economBusTitle": "Economy bus"
     },
     
     "headers": {
@@ -134,22 +135,42 @@
 
    "passengers": [
         {
-            "name": "Main Passenger Adult",
+            "name": "Liam",
             "fareType": "adult",
             "phone": "phone",
             "email": "email"
         },
+
+        {
+            "name": "Isabella",
+            "fareType": "child"
+        },
+
+        {
+            "name": "Noah",
+            "fareType": "adult"
+        },
+
+        {
+            "name": "Sophia",
+            "fareType": "child"
+        },
     
         {
-            "name": "Elder Extra Passenger",
+            "name": "Mia",
             "fareType": "elder"
         },
 
         {
-            "name": "Child Extra Passenger",
+            "name": "Oliver",
             "fareType": "child"
+        },
+
+        {
+            "name": "Ava",
+            "fareType": "elder"
         }
-        
+
    ],
 
     "validBoundaryValues": {
@@ -173,5 +194,55 @@
 
     "labelArrivalStationFont": "15px",
        
-    "labelArrivalStationMargin": "0px 0px 5px"
+    "labelArrivalStationMargin": "0px 0px 5px",
+
+    "oct2023": "Oct 2023",
+
+    "oct": "2023-10",
+
+    "bookingDetails" : [
+        {
+            "departureStationName" : "Bangkok Khao San",
+            "arrivalStationName" : "Chonburi",
+            "passengerName" : "Paul Townsend",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+        }, 
+        {
+            "departureStationName" : "Naka Island",
+            "arrivalStationName" : "Ao Por Pier",
+            "passengerName" : "Shanna Lester",
+            "passengerAmount" : "1",
+            "fareType" : "Adult"
+          }
+    ],
+
+    "bookingDetailsTest1" : {
+        "departureStationName" : "Rassada Pier",
+        "arrivalStationName" : "Naka Island",
+        "passengerName" : "Betty Hardy",
+        "passengerAmount" : "1",
+        "fareType" : "Adult"
+    },
+
+    "bookingDetailsTest2" : {
+        "departureStationName" : "Phuket Town",
+        "arrivalStationName" : "Bangkok Khao San",
+        "passengerName" : "Clinton Cain",
+        "passengerAmount" : "1",
+        "fareType" : "Elder"
+      },
+
+      "octWeek": "2 Oct - 8 Oct",
+
+      "alerts": {
+        "invalidEmail" : "Email isn`t correct\nPlease try again"
+      },
+
+      "invalidEmail": {
+        "emailWithoutAt" : "emailgmail.com",
+        "emailWithoutDot" : "select@gmailcom",
+        "emailWithWrongDomen" : "email@gmail.123",
+        "emailTooLong75Symbl" : "SUPER.LONG.STRING.SUPER.LONG.STRING.SUPER.LONG.STRING.SUPER.LON75@gmail.com"
+      } 
 }

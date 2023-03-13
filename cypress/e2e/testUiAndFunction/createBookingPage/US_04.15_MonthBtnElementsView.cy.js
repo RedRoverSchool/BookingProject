@@ -4,7 +4,7 @@ import CreateBookingPage from "../../../pageObjects/CreateBookingPage";
 
 const createBookingPage = new CreateBookingPage();
 const AGENT = Cypress.env('agent');
-describe('US_04.15 | Create booking page > Month button elements view', () => {
+describe('US_04.15 | Create booking page > Month button elements view', { tags: ['smoke'] }, () => {
 
     before(function () {
         cy.loginWithSession(AGENT.email, AGENT.password);
@@ -13,8 +13,8 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
     })
 
     beforeEach(function () {
-        cy.fixture('createBookingPage.json').then(createBookingPage => {
-            this.createBookingPage = createBookingPage;
+        cy.fixture('createBookingPage.json').then(bookingData => {
+            this.bookingData = bookingData;
         });
 
         cy.fixture('colors').then(colors => {
@@ -53,7 +53,7 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
             .and('have.text', createBookingPage.getFirstAvailableForBookingDefaultMonthYear());
     })
 
-    it('AT_04.15.06 | Calendar-day-selection block (under the calendar label) is visible and has at least 28 days', function () {
+    it('AT_04.15.06 | Calendar-day-selection block (under the calendar label) is visible and has at least 28 days', { tags: ['regression'] }, function () {
         createBookingPage.getCalendarDays().each($el => {
             cy.wrap($el).should('be.visible');
         });
@@ -65,10 +65,10 @@ describe('US_04.15 | Create booking page > Month button elements view', () => {
     })
 
     it('AT_04.15.04| Departure date section has the label "Departure date"', function () {
-        createBookingPage.getLableDepartureDate().should('have.text', this.createBookingPage.departureDate);
+        createBookingPage.getLableDepartureDate().should('have.text', this.bookingData.departureDate);
     });
 
-    it('AT_04.15.07 | Selected day by default is according to requirements (current date by (GMT+7) + 2 days)', function () {
+    it('AT_04.15.07 | Selected day by default is according to requirements (current date by (GMT+7) + 2 days)', { tags: ['regression'] }, function () {
         let requiredDay = createBookingPage.getFirstAvailableForBookingDefaultDay()
         createBookingPage.getDaySelected()
             .invoke('text')
