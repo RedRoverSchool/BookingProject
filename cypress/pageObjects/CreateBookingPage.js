@@ -663,10 +663,6 @@ class CreateBookingPage {
         this.clickReservationTicketArrow();
 
         this.clickReservationTicketButton();
-    }
-
-    clickResetButton() {
-        this.getResetButton().click();
     }    
 
     getValidBoundaryValuesMonthDropdownMinNomMax() {
