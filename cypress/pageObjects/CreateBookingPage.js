@@ -238,6 +238,10 @@ class CreateBookingPage {
         this.getBtnErliest().click({ force: true })
     };
 
+    clickResetButton() {
+        this.getResetButton().click()
+    };
+
     getRandomIndexOfMonth() {
 
         return this.getMonthDropdownList().then($el => {
